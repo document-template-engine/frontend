@@ -27,7 +27,12 @@ git clone  git@github.com:document-template-engine/frontend.git
 
 ### Разворачивание среды React
 
-//@TODO kaleon612@gmail.com; kukucapl@yandex.ru: развернуть платформу у себя локально, дать описание в Readme.md (теория Яндекс Практикума в помощь)
+#### Установка и запуск проекта:
+```
+npm i
+npm start
+```
+Проект запустится на 3000 порту: [http://localhost:3000](http://localhost:3000).
 
 ### Настройки линтинга и форматирования
 
@@ -38,18 +43,9 @@ git clone  git@github.com:document-template-engine/frontend.git
 
 //@TODO krolik14121975@yandex.ru: настроить инструмент для комитов локально, дать описание в Readme.md (лекция по настройкам Гитхаб для фронта)
 
-### Установка и настройка препроцессора css - sass
-
-//@TODO seyelich@yandex.ru: установить и настроить препроцессор sass локально, дать описание в Readme. (Есть лекция от ментора, Лиза, если нужно отпишись, дам ссылку)
-
 ### Установка и настройка Storybook
 #### Установка и настройка Storybook
-
-//@TODO seyelich@yandex.ru; dmitshash@yandex.ru: Установить и настроить Storybook локально, дать описание в Readme.md
-
-#### Установка и настройка плагина для Storybook для работы с препроцессором SASS
-
-//@TODO seyelich@yandex.ru; dmitshash@yandex.ru: Установить и настроить плагин локально, дать описание в Readme.md
+Запуск Storybook: `npm run storybook`
 
 #### Настройка среды для прохождения туториалов по Storybook
 1. Нужен отдельный репозиторий, предлагаю свой, уже создал
@@ -58,7 +54,7 @@ git clone  git@github.com:document-template-engine/frontend.git
 //@TODO seyelich@yandex.ru; dmitshash@yandex.ru: Настроить среду для прохождения туториалов по Storybook локально, дать описание в Readme.md
 
 ### Установить и настроить gh-pages и дополнительные необходимые инструменты
- 
+
 //@TODO dmitshash@yandex.ru: установить и настроить утилиту gh-pages локально, дать описание в Readme.md
 
 ### Сценарии запуска React-проекта:
