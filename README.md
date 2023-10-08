@@ -56,6 +56,31 @@ git branch -M main // переименовываем ветку из "master" в
 git remote add origin <сюда_ставить_адрес_репозитория_куда_склонировать_готовую_финальную_сборку>
 git push -u origin main
 ```
+### 2.1.3 Настройки линтинга и форматирования
+#### 2.1.3.1 Инициализация и настройка .editorconfig
+Установите плагин editorconfig (если не установлен)
+Щелкните в редакторе VS Code по папке проекта, выберите "создать .editorconfig"
+Скопируйте и вставьте туда следующую конфигурацию
+```
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js}]
+charset = utf-8
+indent_style = tab
+indent_size = 2
+```
+
+//@TODO krolik14121975@yandex.ru: настроить линтинг и форматирование локально, придерживаться рекомендаций ментора в последовательности установки и конфигурации инструментов, дать описание  в Readme.md (лекция по настройкам Гитхаб для фронта)
 
 ## 2.2 Вариант №2
 **Развертывание готового (уже собранного) проекта у себя из общего репозитория**
@@ -84,9 +109,7 @@ git clone  git@github.com:document-template-engine/frontend.git
 npm install
 ```
 
-### Настройки линтинга и форматирования
 
-//@TODO krolik14121975@yandex.ru: настроить линтинг и форматирование локально, придерживаться рекомендаций ментора в последовательности установки и конфигурации инструментов, дать описание  в Readme.md (лекция по настройкам Гитхаб для фронта)
 
 ### Настройка инструмента для комитов
 Для поддержания единого формата комитов
