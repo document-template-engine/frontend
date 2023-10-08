@@ -21,10 +21,10 @@
 ```
 node -v
 ```
-2. Для обновления версии node.js cледуйте инструкциям, находящимся по адресу:
-```
-https://infosharing.net/bez-rubriki/kak-obnovit-node-js-do-poslednej-versii-linux-windows-i-macos/
-```
+2. Для обновления версии node.js cледуйте инструкциям, находящимся по ссылке ниже:
+
+[Как обновить node.js](https://infosharing.net/bez-rubriki/kak-obnovit-node-js-do-poslednej-versii-linux-windows-i-macos/)
+
 или выполните следующие команды в терминале:
 ```
 npm cache clean -f // очистить кэш менеждера пакетов npm
