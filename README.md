@@ -86,6 +86,7 @@ indent_size = 2
 npm init @eslint/config
 ```
 Установка дополнительных конфигураций линтера
+
 Плагин для **ESLint**, который помогает проверять и исправлять импорты в **JavaScript**
 ```
 npm install eslint-plugin-import --save-dev
@@ -148,6 +149,30 @@ npm install --save-dev eslint-config-prettier
 	"singleQuote": true,
 	"endOfLine": "lf"
 }
+```
+#### 2.1.3.4 Установка и настройка husky и lint-staged для линтинга перед комитом
+**husky** - создает хуки для запуска разных сценариев по событиям гита (пре/пост-комиты, пре/пост-пуши/пулы и.т.п.)
+```
+npx husky-init && npm install
+```
+**lint-staged** - запускает линтер для файлов находящихся у гита в стадии *"staged"*
+```
+npm install --save-dev lint-staged
+```
+Прописываем ручками пункт *lint-staged* в *package.json*
+```
+"lint-staged": {
+  "*.{js,jsx}": "npm run lint",
+  "*.{js,jsx,css,md,html,json}": "npm run format"
+},
+```
+Заходим в директорию *.husky* редактируем файл *pre-commit*
+Удаляем запись *npm test*, прописываем *npx lint-staged*
+```
+. "$(dirname -- "$0")/_/husky.sh"
+
+- npm test
++ npx lint-staged
 ```
 ## 2.2 Вариант №2
 **Развертывание готового (уже собранного) проекта у себя из общего репозитория**
