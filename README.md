@@ -211,7 +211,7 @@ npm install --save-dev lint-staged
   },
   ...
 ```
-### 2.1.4 Настройки единого формата комитов - comitizen
+### 2.1.4 Настройки единого формата комитов - commitizen
 Установка commitizen
 ```
 npm install --save-dev commitizen
