@@ -158,13 +158,13 @@ npm install --save-dev eslint-config-prettier
 Создать в корне проекта файл *.prettierrc.json*, скопировать туда следующую конфигурацию
 ```
 {
-	"tabWidth": 2,
-	"useTabs": true,
-	"printWidth": 80,
-	"semi": true,
-	"trailingComma": "es5",
-	"singleQuote": true,
-	"endOfLine": "lf"
+  "tabWidth": 2,
+  "useTabs": true,
+  "printWidth": 80,
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "endOfLine": "lf"
 }
 ```
 #### 2.1.3.4 Установка и настройка husky и lint-staged для линтинга перед комитом
