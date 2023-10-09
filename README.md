@@ -13,7 +13,7 @@
       - [2.1.3.2 Установка и настройка линтера](#2132-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BB%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0)
       - [2.1.3.3 Установка и настройка инструмента форматирования - prettier](#2133-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F---prettier)
       - [2.1.3.4 Установка и настройка husky и lint-staged для линтинга перед комитом](#2134-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-husky-%D0%B8-lint-staged-%D0%B4%D0%BB%D1%8F-%D0%BB%D0%B8%D0%BD%D1%82%D0%B8%D0%BD%D0%B3%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%BE%D0%BC)
-    * [Настройки единого формата комитов - comitizen]()
+    * [Настройки единого формата комитов - comitizen](#214-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B5%D0%B4%D0%B8%D0%BD%D0%BE%D0%B3%D0%BE-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B0-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%BE%D0%B2---comitizen)
   + [2.2 Вариант №2]()
 
 //@TODO dmitshash@yandex.ru: сделать оглавление
@@ -111,7 +111,7 @@ npm install eslint-plugin-import --save-dev
 ```
 npm install --save-dev eslint-config-airbnb
 ```
-Задействовать линтер - прописать в файле *.eslint.rc* или *.eslintrc.json*
+Задействовать конфигурацию **airbnb** - прописать в файле *.eslint.rc* или *.eslintrc.json*
 ```
 "extends": [
   "airbnb",
