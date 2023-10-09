@@ -195,20 +195,20 @@ npm install --save-dev lint-staged
 Прописать в файле *eslint.rc* или *eslintrc.json*
 ```
   ...,
-	"rules": {
-		"react/jsx-filename-extension": [
-			1,
-			{
-				"extensions": [".js", ".jsx"]
-			}
-		],
-		"react/react-in-jsx-scope": "off",
-		"import/prefer-default-export": "off",
-		"react/function-component-definition": "off",
-		"react/jsx-props-no-spreading": "off",
-		"react/no-unescaped-entities": "off",
-		"react/button-has-type": "off"
-	},
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unescaped-entities": "off",
+    "react/button-has-type": "off"
+  },
   ...
 ```
 ### 2.1.4 Настройки единого формата комитов - comitizen
