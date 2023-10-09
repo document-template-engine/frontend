@@ -212,6 +212,23 @@ npm install --save-dev lint-staged
   ...
 ```
 ### 2.1.4 Настройки единого формата комитов - comitizen
+Установка commitizen
+```
+npm install --save-dev commitizen
+```
+Установка *conventional changelog adapter*
+```
+npx commitizen init cz-conventional-changelog --save-dev --save-exact
+```
+Добавить в *package.json*
+```
+  ...,
+  "scripts": {
+    "cz-commit": "cz"
+  },
+  ...
+```
+
 ## 2.2 Вариант №2
 **Развертывание готового (уже собранного) проекта у себя из общего репозитория**
 ### 2.2.1 Проверка установленной версии node.js
