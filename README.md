@@ -191,6 +191,26 @@ npm install --save-dev lint-staged
 - npm test
 + npx lint-staged
 ```
+#### 2.1.3.5 Настройка правил-исключений для линтера
+Прописать в файле *eslint.rc* или *eslintrc.json*
+```
+  ...,
+	"rules": {
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [".js", ".jsx"]
+			}
+		],
+		"react/react-in-jsx-scope": "off",
+		"import/prefer-default-export": "off",
+		"react/function-component-definition": "off",
+		"react/jsx-props-no-spreading": "off",
+		"react/no-unescaped-entities": "off",
+		"react/button-has-type": "off"
+	},
+  ...
+```
 ### 2.1.4 Настройки единого формата комитов - comitizen
 ## 2.2 Вариант №2
 **Развертывание готового (уже собранного) проекта у себя из общего репозитория**
