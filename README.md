@@ -212,11 +212,11 @@ npm install --save-dev lint-staged
   ...
 ```
 ### 2.1.4 Настройки единого формата комитов - commitizen
-Установка commitizen
+Установка **commitizen**
 ```
 npm install --save-dev commitizen
 ```
-Установка *conventional changelog adapter*
+Установка **conventional changelog adapter**
 ```
 npx commitizen init cz-conventional-changelog --save-dev --save-exact
 ```
