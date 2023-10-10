@@ -228,7 +228,23 @@ npx commitizen init cz-conventional-changelog --save-dev --save-exact
   },
   ...
 ```
-
+### 2.1.5 Установка и настройка препроцессора CSS - SASS
+```
+npm install --save-dev sass
+```
+### 2.1.6 Установка и настройка Storybook
+#### 2.1.6.1 Установка Storybook
+```
+npx storybook@latest init
+```
+#### 2.1.6.2 Интеграция Storybook с SASS
+С помощью пакета @storybook/addon-styling-webpack разработчики могут легко включать таблицы стилей Sass в свои компоненты Storybook
+Перед установкой сделайте **commit** изменений, утилита все равно потребует этого при инсталляции
+Установка дополнения
+```
+npx storybook@latest add @storybook/addon-styling-webpack
+```
+Во время установки нужно будет указать утилите, поддержку каких модулей следует установить, в нашем случае нужно отметить пункт **SASS**
 ## 2.2 Вариант №2
 **Развертывание готового (уже собранного) проекта у себя из общего репозитория**
 ### 2.2.1 Проверка установленной версии node.js
@@ -310,4 +326,7 @@ stash{2} ...
 ```
 git stash apply --index stash@{0}
 ```
+
+<Дать пояснение по sass - если не запускается как sass, запускать через npx - npx sass >
+
 //@TODO dmitshash@yandex.ru: описать в Readme.md
