@@ -69,7 +69,27 @@ npm run build
 
 ### Установка и настройка Storybook
 #### Установка и настройка Storybook
-Запуск Storybook: `npm run storybook`
+Установите Storybook командой:
+```
+npx storybook@latest init
+```
+
+Для работы с препроцессором Sass необходимо скачать пакет:
+```
+npm i sass
+```
+Дополнительно настаривать Storybook не нужно.
+
+Далее переменовать файл index.css в index.scss. В .storybook/preview.js в начале файла прописать
+```
+import '../src/index.scss'
+```
+
+Запуск Storybook:
+```
+npm run storybook
+```
+Storybook запустится на 6006 порту.
 
 #### Настройка среды для прохождения туториалов по Storybook
 1. Нужен отдельный репозиторий, предлагаю свой, уже создал
