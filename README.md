@@ -386,6 +386,7 @@ npm run cz-commit
 npm run storybook
 ```
 #### 3.1.7 Запуск Storybook в режиме сборки
+*"storybook build"*
 ```
 npm run build-storybook
 ```
