@@ -62,7 +62,8 @@ npx create-react-app <project_name>
         └── setupTests.js
 ```
 В корневой папке (где находятся файлы конфигурации и гита) дополнительно создайте папку *"docs"*
-### 2.1.2 Инициализация гита
+### 2.1.2 Инициализация и настройка гита
+#### 2.1.2.1 Инициализация гита
 ```
 echo "# <project_name>" >> README.md
 git init
@@ -71,6 +72,32 @@ git commit -m "first commit"
 git branch -M main // переименовываем ветку из "master" в "main"
 git remote add origin <сюда_ставить_адрес_репозитория_куда_склонировать_готовую_финальную_сборку>
 git push -u origin main
+```
+#### 2.1.2.2 Настройка гита
+Вести в файл *.gitignore* следующую инфромацию
+```
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
+npm-debug.log*
 ```
 ### 2.1.3 Настройки линтинга и форматирования
 #### 2.1.3.1 Инициализация и настройка .editorconfig
