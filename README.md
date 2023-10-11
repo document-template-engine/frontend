@@ -241,6 +241,12 @@ npm install --save-dev sass
 npx storybook@latest init
 ```
 #### 2.1.6.2 Интеграция Storybook с SASS
+**!!! ВАЖНО !!!**
+
+**Этот модуль не установлен, после установки все время выдает *Module build failed (from ./node_modules/postcss-loader/...* *SyntaxError* *button.css Unknown word***
+
+**Ошибку победить пока не удалось**
+
 С помощью пакета @storybook/addon-styling-webpack разработчики могут легко включать таблицы стилей Sass в свои компоненты Storybook
 
 Перед установкой сделайте **commit** изменений, утилита потребует этого при инсталляции
