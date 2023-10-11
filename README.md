@@ -242,7 +242,9 @@ npx storybook@latest init
 ```
 #### 2.1.6.2 Интеграция Storybook с SASS
 С помощью пакета @storybook/addon-styling-webpack разработчики могут легко включать таблицы стилей Sass в свои компоненты Storybook
-Перед установкой сделайте **commit** изменений, утилита все равно потребует этого при инсталляции
+
+Перед установкой сделайте **commit** изменений, утилита потребует этого при инсталляции
+
 Установка дополнения
 ```
 npx storybook@latest add @storybook/addon-styling-webpack
