@@ -288,7 +288,7 @@ npx storybook@latest add @storybook/addon-styling-webpack
 ```
 npm install --save-dev gh-pages
 ```
-#### 2.1.7.1 Настройка
+#### 2.1.7.2 Настройка
 В *package.json* прописать
 ```
 "scripts": {
