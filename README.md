@@ -315,9 +315,17 @@ npm cache clean -f // очистить кэш менеждера пакетов 
 npm install -g n // установить модуль "n", нужен для установки node.js
 sudo n 18 // установка 18ой версии node.js
 ```
-### 2.2.3 Клонирование репозитория и установка зависимостей
+### 2.2.3 Клонирование всего репозитория и установка зависимостей
 ```
 git clone  git@github.com:document-template-engine/frontend.git
+```
+В корне проекта (где файлы конфигурации), выполните:
+```
+npm install
+```
+### 2.2.4 Клонирование определенной ветки репозитория и установка зависимостей
+```
+git clone --single-branch -b develop-react-environment git@github.com:document-template-engine/frontend.git
 ```
 В корне проекта (где файлы конфигурации), выполните:
 ```
