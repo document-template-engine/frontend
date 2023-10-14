@@ -14,6 +14,7 @@
       - [2.1.3.3 Установка и настройка инструмента форматирования - prettier](#2133-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F---prettier)
       - [2.1.3.4 Установка и настройка husky и lint-staged для линтинга перед комитом](#2134-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-husky-%D0%B8-lint-staged-%D0%B4%D0%BB%D1%8F-%D0%BB%D0%B8%D0%BD%D1%82%D0%B8%D0%BD%D0%B3%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%BE%D0%BC)
     * [2.1.4 Настройки единого формата комитов - comitizen](#214-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B5%D0%B4%D0%B8%D0%BD%D0%BE%D0%B3%D0%BE-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B0-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%BE%D0%B2---commitizen)
+    * [2.1.5 Установка и настройка препроцессора CSS - SASS](#215-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%BE%D1%80%D0%B0-css---sass)
   + [2.2 Вариант №2](#22-%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82-2)
 
 //@TODO dmitshash@yandex.ru: сделать оглавление
