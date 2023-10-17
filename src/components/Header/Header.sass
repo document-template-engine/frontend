@@ -1,0 +1,114 @@
+.header 
+    $height: 80px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    margin: auto
+        top: 0
+        bottom: 0
+    padding: auto
+        left: 20px
+        right: 20px
+    width: calc(100% - 40px) 
+    max-width: 1900px
+    height: $height
+    border-bottom: 1px solid rgb(222, 222, 222)
+
+.header__icon 
+    background-image: url(../../images/Header_logo.svg)
+    width: 163px
+    height: 65px
+    margin: auto
+        left: 0
+        right: 0
+
+
+.header__form 
+    margin: auto
+        left: 195px
+
+
+.header__search-form
+    width: 355px
+    height: 38px
+    display: flex
+    flex-direction: row
+    column-gap: 4px
+    margin: 0
+    padding: 0
+    border-radius: 24px
+    border: 1px solid #BABABA
+
+/* вот здесь должен быть стиль для формы в фокусе */    
+
+.header__search-icon
+    background-image: url(../../images/search_icon.svg)
+    margin: auto
+        left: 13px
+        right: 0
+    width: 24px
+    height: 24px
+
+.header__input
+    margin:auto
+    padding: 0
+        top: 4px
+    border: none
+    width: 83%
+    font-size: 16px
+    font-weight: 500
+    line-height: 20px
+
+    &::placeholder
+        color: #BABABA
+    
+/* вот здесь нужно снять видимый фокус с инпута и стилизовать саму форму*/
+
+
+.header__user-container
+    margin: auto
+        left: 0
+        right: 0
+    display: flex
+    flex-direction: row
+    align-items: center
+    column-gap: 12px
+
+.header__info-button
+    background-image: url(../../images/faq_icon.svg)
+    width: 32px
+    height: 32px
+    border: none
+    padding: 0
+    background-color: transparent
+
+.header__user-button
+    width: 52px
+    height: 52px
+    border-radius: 50%
+    padding: 0
+    border: none
+    background-color: #0941D2
+    overflow: hidden
+    color: #FFF
+    font-size: 20px
+    font-style: normal
+    font-weight: 400
+    line-height: normal
+
+.header__login-button 
+    height: 52px
+    padding: 12px 32px
+    border-radius: 24px
+    border: 1px solid #131313
+    background-color: transparent
+    font-size: 24px
+    font-weight: 400
+    line-height: 28px 
+    cursour: pointer
+
+    &:hover 
+        background-color: #666
+        color: white
+    
+/* вот здесь должен быть еще стиль для нажатой кнопки */
