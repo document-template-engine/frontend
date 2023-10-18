@@ -22,12 +22,14 @@
 				"extensions": [".js", ".jsx"]
 			}
 		],
+		"no-unused-vars": "off", // пока что отключила это правило, т.к. оно мешает в работе с хуками К.Л.
 		"react/react-in-jsx-scope": "off",
 		"import/prefer-default-export": "off",
 		"react/function-component-definition": "off",
 		"react/jsx-props-no-spreading": "off",
 		"react/no-unescaped-entities": "off",
 		"react/button-has-type": "off",
-		"import/no-extraneous-dependencies": "off"
+		"import/no-extraneous-dependencies": "off",
+		"react/destructuring-assignment": "off"
 	}
 }

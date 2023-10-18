@@ -1,7 +1,6 @@
 import './Header.sass';
 
 export default function Header() {
-	// здесь должен быть пропс, но линт не хочет его пропускать бес ничего. Ему еще и комменты мои не нравятся
 	return (
 		<header className="header">
 			<div className="header__icon" />
