@@ -16,6 +16,14 @@
 	},
 	"plugins": ["react"],
 	"rules": {
+		"react/jsx-no-bind": [
+			"warn",
+			//смягчил правило с error на warn
+			{
+				"allowArrowFunctions": true
+			}
+		],
+		//разрешил стрелочные функции Ivan
 		"react/jsx-filename-extension": [
 			1,
 			{

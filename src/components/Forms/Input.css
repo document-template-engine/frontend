@@ -1,0 +1,56 @@
+.custom-graph {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.custom-graph__label {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.custom-graph__title {
+	padding: 0;
+	margin: 0 0 0 15px;
+
+	color: #000;
+
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 22px;
+}
+
+.custom-graph__input {
+	box-sizing: border-box;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 20px;
+
+	height: 56px;
+
+	padding: 18px 20px;
+
+	border-radius: 20px;
+	border: 1px solid #d1d1d1;
+	transition: all 0.01s linear;
+}
+
+.custom-graph__input:hover {
+	border: 1px solid #7a7a7a;
+}
+
+.custom-graph__input:focus {
+	outline: 2px solid #0019ff;
+	border: none;
+}
+
+.custom-graph__notation {
+	padding: 0;
+	margin: 0 0 0 15px;
+
+	color: #9d9d9d;
+
+	font-size: 16px;
+	font-weight: 500;
+}
