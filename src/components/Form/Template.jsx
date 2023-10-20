@@ -8,6 +8,7 @@ import {
 } from '../../utils/renderData';
 
 function Template() {
+
 	return (
 
 		<>
