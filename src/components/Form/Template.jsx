@@ -9,6 +9,7 @@ import {
 
 function Template() {
 	return (
+
 		<>
 			<CustomSection data={residentialRentalAgreement} />
 			<CustomSection data={applicationToKindergarten} />
