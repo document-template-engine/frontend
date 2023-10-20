@@ -1,7 +1,10 @@
 import './Header.sass';
 
 export default function Header() {
+<<<<<<< HEAD
 	// здесь должен быть пропс, но линт не хочет его пропускать бес ничего. Ему еще и комменты мои не нравятся
+=======
+>>>>>>> Feature/navbar (#36)
 	return (
 		<header className="header">
 			<div className="header__icon" />
