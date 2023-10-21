@@ -1,5 +1,4 @@
 .header 
-    $height: 80px
     display: flex
     flex-direction: row
     justify-content: space-between
@@ -11,7 +10,7 @@
         right: 20px
     width: calc(100% - 40px) 
     max-width: 1900px
-    height: $height
+    height: height
     border-bottom: 1px solid rgb(222, 222, 222)
 
 .header__icon 
@@ -36,10 +35,8 @@
     column-gap: 4px
     margin: 0
     padding: 0
-    border-radius: 24px
-    border: 1px solid #BABABA
-
-/* вот здесь должен быть стиль для формы в фокусе */    
+    border: none
+    posotoin: relative
 
 .header__search-icon
     background-image: url(../../images/search_icon.svg)
@@ -50,20 +47,36 @@
     height: 24px
 
 .header__input
-    margin:auto
+    position: absolute
+    width: 310px
+    height: 32px
+    border-radius: 24px
+    border: 1px solid #7A7A7A
+    background-color: transparent
+    margin:0
     padding: 0
-        top: 4px
-    border: none
-    width: 83%
+        left: 41px
+        top: 3px
+    cursor: pointer
+   
+    font-family: SF Pro Display
     font-size: 16px
     font-weight: 500
     line-height: 20px
 
+    opacity: .5
+
+
     &::placeholder
         color: #BABABA
     
-/* вот здесь нужно снять видимый фокус с инпута и стилизовать саму форму*/
-
+    &:hover
+        opacity: 1
+    
+    &:focus
+        outline-color: #0019FF
+        outline-width: 2px
+    
 
 .header__user-container
     margin: auto
@@ -74,13 +87,13 @@
     align-items: center
     column-gap: 12px
 
-.header__info-button
-    background-image: url(../../images/faq_icon.svg)
-    width: 32px
-    height: 32px
-    border: none
-    padding: 0
-    background-color: transparent
+// .header__info-button
+//     background-image: url(../../images/faq_icon.svg)
+//     width: 32px
+//     height: 32px
+//     border: none
+//     padding: 0
+//     background-color: transparent
 
 .header__user-button
     width: 52px
@@ -95,20 +108,61 @@
     font-style: normal
     font-weight: 400
     line-height: normal
+    cursor: pointer
 
 .header__login-button 
-    height: 52px
-    padding: 12px 32px
+    width: 117px
+    height: 51px
+    padding: 12px 31px
     border-radius: 24px
     border: 1px solid #131313
     background-color: transparent
-    font-size: 24px
+    font-family: SF Pro Display
+    font-size: 23px
     font-weight: 400
     line-height: 28px 
-    cursour: pointer
+    cursor: pointer
 
     &:hover 
         background-color: #666
         color: white
     
-/* вот здесь должен быть еще стиль для нажатой кнопки */
+    &:focus 
+        background-color: black
+        color: transparent
+        background-image: url(../../images/load_icon.svg)
+        background-repeat: no-repeat
+        background-position: center
+
+
+#react-modals 
+    position: fixed
+    top: 77px
+    left: 80.5%
+    width: 100%
+
+.header__modal-container
+    display: grid
+    grid-template-columns: 30px 210px
+    grid-template-rows: 30px 1px 30px
+    column-gap: 4px
+    row-gap: 8px
+    padding: 20px 16px
+    border: 1px solid #0014C7
+    border-radius: 12px
+    opacity: .7
+
+.header__modal-info
+    margin: 0
+    font-family: Inter
+    font-size: 16px
+    font-style: normal
+    font-weight: 400
+    line-height: normal
+  
+.header__modal-divider
+     grid-column: 1/-1
+     height: 1px
+     background-color: #EAEAEA
+
+
