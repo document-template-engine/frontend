@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import { Route, Routes } from 'react-router';
 import './App.css';
 import { useState } from 'react';
 import NotFound from '../../pages/NotFound/NotFound';
+=======
+import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import './App.css';
+import NotFound from '../NotFound/NotFound';
+
+>>>>>>> feature/fix (#43)
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 
@@ -11,7 +19,7 @@ function App() {
 	return (
 		<>
 			<Header isLoggedIn={loggedIn} />
-			<Navbar isLoggedIn={loggedIn} isTemplatePage />
+			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage/>
       <Routes>
         <Route element={<p>Здесь главная стр</p>} path="/" />
         <Route path="*" element={<NotFound />} />
