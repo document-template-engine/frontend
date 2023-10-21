@@ -1,21 +1,21 @@
 import './Navbar.sass';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function Navbar(props) {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
-	// function goToTemplates () {
-	// 		navigate('/templates', { replace: true }); // здесь будут происаны марщруты когда у нас будут маршруты
-	// }
+	function goToTemplates() {
+		navigate('/templates', { replace: true });
+	}
 
-	// function goToSelected () {
-	// 		navigate('/selected', { replace: true });
-	// }
+	function goToSelected() {
+		navigate('/selected', { replace: true });
+	}
 
-	// function goToDrafts () {
-	// 		navigate('/drafts', { replace: true });
-	// }
+	function goToDrafts() {
+		navigate('/drafts', { replace: true });
+	}
 
 	return (
 		<nav className="navbar">
@@ -24,7 +24,7 @@ export default function Navbar(props) {
 					className={`navbar__item ${
 						props.isTemplatePage && 'navbar__item_active'
 					}`}
-					// onClick={goToTemplates} - закоменченно таким дурацким способом, потому что lint
+					onClick={goToTemplates}
 				>
 					Шаблоны
 				</button>
@@ -33,7 +33,7 @@ export default function Navbar(props) {
 						className={`navbar__item ${
 							props.isSelectedPage && 'navbar__item_active'
 						}`}
-						// onClick={goToSelected}
+						onClick={goToSelected}
 					>
 						Избранное
 					</button>
@@ -43,7 +43,7 @@ export default function Navbar(props) {
 						className={`navbar__item ${
 							props.isDraftPage && 'navbar__item_active'
 						}`}
-						// onClick={goToDrafts}
+						onClick={goToDrafts}
 					>
 						Черновики
 					</button>

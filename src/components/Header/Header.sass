@@ -59,7 +59,7 @@
         top: 3px
     cursor: pointer
    
-    font-family: SF Pro Display
+    font-family: SF-Pro
     font-size: 16px
     font-weight: 500
     line-height: 20px
@@ -110,6 +110,9 @@
     line-height: normal
     cursor: pointer
 
+    &:focus 
+        outline: none
+
 .header__login-button 
     width: 117px
     height: 51px
@@ -117,7 +120,7 @@
     border-radius: 24px
     border: 1px solid #131313
     background-color: transparent
-    font-family: SF Pro Display
+    font-family: SF-Pro
     font-size: 23px
     font-weight: 400
     line-height: 28px 
@@ -147,10 +150,12 @@
     grid-template-rows: 30px 1px 30px
     column-gap: 4px
     row-gap: 8px
+    align-items: center
     padding: 20px 16px
     border: 1px solid #0014C7
     border-radius: 12px
     opacity: .7
+    cursor: default
 
 .header__modal-info
     margin: 0
@@ -159,10 +164,18 @@
     font-style: normal
     font-weight: 400
     line-height: normal
-  
+
+.header__modal-exit-button
+    background-color: transparent
+    border: none
+    padding: 0
+    text-align: left
+    cursor: pointer
+
+    &:focus-visible
+        outline: none
+
 .header__modal-divider
      grid-column: 1/-1
      height: 1px
      background-color: #EAEAEA
-
-

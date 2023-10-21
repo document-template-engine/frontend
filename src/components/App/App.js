@@ -6,16 +6,16 @@ import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 
 function App() {
-	const [loggedIn, setLoggedIn] = useState(true);
+	const [loggedIn, setLoggedIn] = useState(true); // этот стейт пробрасывается в Header и Navbar
 
 	return (
 		<>
 			<Header isLoggedIn={loggedIn} />
-			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage/>
-      <Routes>
-        <Route element={<p>Здесь главная стр</p>} path="/" />
-        <Route path="*" element={<NotFound />} />
-		  </Routes>
+			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage />
+			<Routes>
+				<Route element={<p>Здесь главная стр</p>} path="/" />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
 		</>
 	);
 }

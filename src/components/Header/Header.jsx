@@ -8,6 +8,15 @@ import exitIcon from '../../images/arrow-bar-left.svg';
 export default function Header({ isLogged, email }) {
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState();
 
+	function toggleUserButtonState() {
+		if (isUserMenuVisible === true) {
+			setIsUserMenuVisible(false);
+		} else {
+			setIsUserMenuVisible(true);
+		}
+		return isUserMenuVisible;
+	}
+
 	return (
 		<header className="header">
 			<div className="header__icon" />
@@ -23,12 +32,12 @@ export default function Header({ isLogged, email }) {
 				</fieldset>
 			</form>
 			<div className="header__user-container">
-				{!isLogged ? (
+				{isLogged ? (
 					<button
 						type="button"
 						className="header__user-button"
 						aria-label="Save"
-						onClick={() => setIsUserMenuVisible(true)}
+						onClick={toggleUserButtonState}
 					>
 						{email[0]}
 					</button>
@@ -47,7 +56,9 @@ export default function Header({ isLogged, email }) {
 						<p className="header__modal-info">{email}</p>
 						<div className="header__modal-divider" />
 						<img className="header__modal-image" src={exitIcon} alt="exit" />
-						<p className="header__modal-info">Выйти</p>
+						<button className="header__modal-info header__modal-exit-button">
+							Выйти
+						</button>
 					</div>
 				</Modal>
 			)}
