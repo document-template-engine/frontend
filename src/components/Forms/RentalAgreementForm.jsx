@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Form.css';
 import CustomInput from './CustomInput';
 
-// eslint-disable-next-line react/prop-types
 const RentalAgreement = ({ form }) => (
 	<form className="form">
 		<ul className="form__list">
@@ -241,5 +241,7 @@ const RentalAgreement = ({ form }) => (
 		</ul>
 	</form>
 );
+
+RentalAgreement.propTypes = { form: PropTypes.string.isRequired };
 
 export default RentalAgreement;
