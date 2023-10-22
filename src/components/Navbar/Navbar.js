@@ -34,6 +34,7 @@ export default function Navbar(props) {
 							props.isSelectedPage && 'navbar__item_active'
 						}`}
 						onClick={goToSelected}
+					>
 						Избранное
 					</button>
 				)}
