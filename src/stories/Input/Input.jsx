@@ -27,7 +27,7 @@ export default function Input({ type, label, name, error, placeholder }) {
 			<div className={styles.inputContainer}>
 				<input
 					name={name}
-					className={styles.input}
+					className={`${styles.input} ${error && styles.inputError}`}
 					type={setType()}
 					placeholder={placeholder}
 				/>
@@ -43,7 +43,7 @@ export default function Input({ type, label, name, error, placeholder }) {
 }
 
 Input.propTypes = {
-	type: PropTypes.string.isRequired,
+	type: PropTypes.oneOf(['text', 'password']).isRequired,
 	label: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	error: PropTypes.string,

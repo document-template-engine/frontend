@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 export default function Logo({ type, extraClass }) {
 	return (
 		<div className={extraClass}>
-			{type === 's' ? (
+			{type === 'small' ? (
 				<svg
 					width="163"
 					height="65"
 					viewBox="0 0 163 65"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					className={extraClass}
 				>
 					<path
 						fillRule="evenodd"
@@ -47,11 +46,11 @@ export default function Logo({ type, extraClass }) {
 }
 
 Logo.propTypes = {
-	type: PropTypes.string,
+	type: PropTypes.oneOf(['small', 'default']),
 	extraClass: PropTypes.string,
 };
 
 Logo.defaultProps = {
-	type: undefined,
+	type: 'default',
 	extraClass: undefined,
 };
