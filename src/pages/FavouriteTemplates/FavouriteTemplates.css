@@ -1,0 +1,96 @@
+.templates {
+	margin-left: 60px;
+	margin-top: 60px;
+	display: flex;
+	flex-direction: column;
+	gap: 27px;
+
+	width: 100%;
+	border-bottom: 1px solid #dedede;
+
+	max-height: 349px;
+}
+
+.templates__title {
+	padding: 0;
+	margin: 0;
+
+	color: #000;
+
+	font-family: Inter, sans-serif;
+	font-size: 32px;
+	font-weight: 500;
+	line-height: 39px;
+}
+
+.templates__list {
+	max-height: fit-content;
+	display: flex;
+	gap: 20px;
+
+	list-style: none;
+
+	padding: 0;
+	margin: 0;
+}
+
+.templates__item {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 249px;
+	height: 245px;
+	border-radius: 12px;
+	border: 1px solid #dedede;
+}
+
+.templates__wrapper {
+	overflow: clip;
+	height: 147px;
+
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+
+	background: #eaeaea;
+}
+
+.templates__fav-btn {
+	position: absolute;
+	top: 13.3px;
+	right: 13.3px;
+	cursor: pointer;
+}
+
+.templates__template-name {
+	cursor: pointer;
+	transition: all 0.1ms linear;
+	text-decoration: none;
+	color: black;
+	padding: 0;
+	margin: 0 0 0 16px;
+	font-family: Inter;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 22px;
+	text-align: left;
+
+	max-width: 201px;
+}
+
+.templates__template-name:hover {
+	opacity: 0.8;
+}
+
+.templates__fav-btn_stroke {
+	stroke: black;
+}
+
+.templates__fav-btn:hover .templates__fav-btn_stroke {
+	stroke: #0019ff;
+}
+
+.templates__fav-btn:active .templates__fav-btn_stroke {
+	stroke: #0415af;
+}

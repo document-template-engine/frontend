@@ -1,22 +1,35 @@
-import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import './App.css';
+import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import NotFound from '../NotFound/NotFound';
-
 import Header from '../Header/Header';
-import Navbar from '../Navbar/Navbar';
+import Templates from '../../pages/Templates';
+import FavouriteTemplates from '../../pages/FavouriteTemplates/FavouriteTemplates';
+import Drafts from '../../pages/Drafts/Drafts';
+import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKindergarten';
 
 function App() {
-	const [loggedIn, setLoggedIn] = useState(true);
-
 	return (
 		<>
+<<<<<<< HEAD
 			<Header isLoggedIn={loggedIn} />
 			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage />
 			<Routes>
 				<Route element={<p>Здесь главная стр</p>} path="/" />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
+=======
+			<Header />
+			<main className="pages">
+				<Routes>
+					<Route element={<Templates />} path="/templates" />
+					<Route path="/kindergarten" element={<ApplicationToKindergarten />} />
+					<Route element={<FavouriteTemplates />} path="favourite" />
+					<Route element={<Drafts />} path="drafts" />
+					<Route element={<Templates />} path="/" />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</main>
+>>>>>>> b734542fbc6315fc857e386e4f12648cf8510940
 		</>
 	);
 }

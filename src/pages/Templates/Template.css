@@ -1,5 +1,7 @@
 .template {
 	padding: 60px;
+	display: flex;
+	gap: 5%;
 }
 
 .template__title {

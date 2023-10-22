@@ -1,0 +1,107 @@
+$color-link: rgba(4, 21, 175, 1);
+$color-link-l: rgba(0, 25, 255, 1);
+
+.back {
+	font-size: 24px;
+	line-height: 29px;
+	color: $color-link;
+	position: absolute;
+	top: 32px;
+	left: 32px;
+	text-decoration: none;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.title {
+	font-size: 35px;
+	font-weight: 500;
+	line-height: 39px;
+}
+
+.checkboxContainer {
+	display: flex;
+}
+
+.checkbox {
+	width: 24px;
+	height: 24px;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-right: 9px;
+	background-color: inherit;
+	padding: 0;
+	cursor: pointer;
+	text-align: center;
+	&Checked {
+		background-color: rgba(0, 0, 0, 1);
+	}
+}
+
+.link {
+	color: $color-link;
+	font-size: 16px;
+	line-height: 19px;
+	text-decoration: none;
+	margin-left: auto;
+}
+
+.largeLink {
+	color: $color-link-l;
+	font-family: 'SF-Pro', 'Inter', sans-serif;
+	font-size: 24px;
+	line-height: 28px;
+	text-decoration: none;
+	text-align: center;
+	margin: 14px 0 18px 0;
+}
+
+.orPar {
+	margin: 0;
+	font-size: 16px;
+	line-height: 19.36px;
+	text-align: center;
+	margin-top: 8px;
+	position: relative;
+}
+
+.orPar span {
+	position: relative;
+	background-color: white;
+	padding: 0 8px;
+	z-index: 2;
+}
+
+.orPar:after {
+	content: '';
+	width: 100%;
+	border-bottom: 1px solid rgba(234, 234, 234, 1);
+	position: absolute;
+	left: 0;
+	top: 50%;
+	z-index: 1;
+}
+
+.parCheck {
+	width: 507px;
+	margin: 0 0 12px 0;
+	font-size: 20px;
+	line-height: 24px;
+	&:last-of-type {
+		margin: 0;
+	}
+	& span {
+		color: $color-link-l;
+	}
+}
+
+.parForget {
+	margin: 12px 0 28px 0;
+	font-size: 16px;
+	line-height: 19px;
+	width: 449px;
+}
