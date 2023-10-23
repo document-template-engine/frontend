@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import Header from '../Header/Header';
-import Templates from '../pages/Templates';
+import Templates from '../../pages/Templates';
 import NotFound from '../NotFound/NotFound';
 import Navbar from '../Navbar/Navbar';
-import ApplicationToKindergarten from '../Templates/ApplicationToKindergarten';
+import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKindergarten';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(true);
