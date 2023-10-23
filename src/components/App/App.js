@@ -1,13 +1,13 @@
-import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
-import './App.css';
-import NotFound from '../NotFound/NotFound';
 
+import { Route, Routes } from 'react-router';
+import './App.css';
+import { useState } from 'react';
+import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 
 function App() {
-	const [loggedIn, setLoggedIn] = useState(true);
+	const [loggedIn, setLoggedIn] = useState(true); // этот стейт пробрасывается в Header и Navbar
 
 	return (
 		<>
