@@ -1,10 +1,12 @@
-
-import { Route, Routes } from 'react-router';
+import React, { useState } from 'react';
 import './App.css';
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
+import Templates from '../../pages/Templates';
+import NotFound from '../NotFound/NotFound';
 import Navbar from '../Navbar/Navbar';
+import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKindergarten';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(true); // этот стейт пробрасывается в Header и Navbar
@@ -12,11 +14,21 @@ function App() {
 	return (
 		<>
 			<Header isLoggedIn={loggedIn} />
-			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage />
-			<Routes>
-				<Route element={<p>Здесь главная стр</p>} path="/" />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
+			<div className="pages">
+				<Navbar
+					isLoggedIn={loggedIn}
+					isTemplatePage
+					isDraftPage
+					isSelectedPage
+				/>
+
+				<Routes>
+					<Route element={<Templates />} path="/templates" />
+					<Route path="/kindergarten" element={<ApplicationToKindergarten />} />
+					<Route element={<h1>Main is not ready</h1>} path="/" />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</div>
 		</>
 	);
 }
