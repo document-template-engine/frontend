@@ -1,7 +1,7 @@
 import React from 'react';
-import KindergartenForm from '../Forms/KindergartenForm';
+import KindergartenForm from '../../components/Forms/KindergartenForm';
 import './Template.css';
-import ActionBar from '../ActionBar/ActionBar';
+import ActionBar from '../../components/ActionBar/ActionBar';
 
 const ApplicationToKindergarten = () => (
 	<div className="template">
