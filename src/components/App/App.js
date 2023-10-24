@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom'; // Импортируйте Ou
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Templates from '../../pages/Templates';
-import NotFound from '../NotFound/NotFound';
 import Navbar from '../Navbar/Navbar';
 import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKindergarten';
 

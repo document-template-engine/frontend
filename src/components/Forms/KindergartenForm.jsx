@@ -10,13 +10,13 @@ const KindergartenForm = ({ form }) => (
 				<h2 className="form__item-title">Данные о детском саде</h2>
 				<div className="form__item-wrapper">
 					<CustomInput
-						width="481px"
+						width="100%"
 						form={form}
 						type="text"
 						text="Номер детского сада"
 					/>
 					<CustomInput
-						width="481px"
+						width="100%"
 						form={form}
 						type="text"
 						text="Название детского сада"
@@ -26,7 +26,7 @@ const KindergartenForm = ({ form }) => (
 			<li className="form__item form__item_2  form__item_not-success">
 				<h2 className="form__item-title">Адресат</h2>
 				<CustomInput
-					width="982px"
+					width="100%"
 					form={form}
 					type="text"
 					text="ФИО заведующего в дательном падеже"
@@ -37,14 +37,14 @@ const KindergartenForm = ({ form }) => (
 				<h2 className="form__item-title">Отправитель</h2>
 				<div className="form__item-wrapper form__item-wrapper_y">
 					<CustomInput
-						width="982px"
+						width="100%"
 						form={form}
 						type="text"
 						text="ФИО родителя/законного представителя в родительном падеже"
 						notation="Иванова Алексея Дмитриевича"
 					/>
 					<CustomInput
-						width="640px"
+						width="100%"
 						form={form}
 						type="text"
 						text="Почтовый адрес"
@@ -56,14 +56,14 @@ const KindergartenForm = ({ form }) => (
 				<h2 className="form__item-title">Ребенок</h2>
 				<div className="form__item-wrapper form__item-wrapper_y">
 					<CustomInput
-						width="982px"
+						width="100%"
 						form={form}
 						type="text"
 						text="ФИО ребенка в творительном падеже"
 						notation="Иванову Алексею Дмитриевичу"
 					/>
 					<CustomInput
-						width="640px"
+						width="100%"
 						form={form}
 						type="text"
 						text="Номер или название группы в детском саду"
@@ -74,21 +74,21 @@ const KindergartenForm = ({ form }) => (
 				<h2 className="form__item-title">Даты</h2>
 				<div className="form__item-wrapper">
 					<CustomInput
-						width="314px"
+						width="100%"
 						form={form}
 						type="text"
 						notation="ДД.ММ.ГГГГ"
 						text="Дата начала отпуска"
 					/>
 					<CustomInput
-						width="314px"
+						width="100%"
 						form={form}
 						type="text"
 						notation="ДД.ММ.ГГГГ"
 						text="Дата окончания отпуска"
 					/>
 					<CustomInput
-						width="314px"
+						width="100%"
 						form={form}
 						type="text"
 						notation="ДД.ММ.ГГГГ"
