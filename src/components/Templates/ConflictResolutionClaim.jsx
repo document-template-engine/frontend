@@ -1,6 +1,5 @@
 import React from 'react';
 import ConflictResolutionClaimForm from '../Forms/ConflictResolutionClaimForm';
-import './Template.css';
 import ActionBar from '../ActionBar/ActionBar';
 
 const ConflictResolutionClaim = () => (

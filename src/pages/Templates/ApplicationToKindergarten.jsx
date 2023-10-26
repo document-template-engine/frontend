@@ -16,7 +16,7 @@ const ApplicationToKindergarten = () => (
 				</p>
 			</div>
 
-			<KindergartenForm form="kindergarten-form" />
+			<KindergartenForm />
 		</div>
 		<ActionBar />
 	</div>
