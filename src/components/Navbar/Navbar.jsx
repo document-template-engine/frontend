@@ -10,7 +10,7 @@ export default function Navbar(props) {
 	}
 
 	function goToSelected() {
-		navigate('/selected', { replace: true });
+		navigate('/favourite', { replace: true });
 	}
 
 	function goToDrafts() {
@@ -31,7 +31,7 @@ export default function Navbar(props) {
 				{props.isLoggedIn && (
 					<button
 						className={`navbar__item ${
-							props.isSelectedPage && 'navbar__item_active'
+							props.isFavouriteTamplatesPage && 'navbar__item_active'
 						}`}
 						onClick={goToSelected}
 					>
@@ -41,7 +41,7 @@ export default function Navbar(props) {
 				{props.isLoggedIn && (
 					<button
 						className={`navbar__item ${
-							props.isDraftPage && 'navbar__item_active'
+							props.isDraftsPage && 'navbar__item_active'
 						}`}
 						onClick={goToDrafts}
 					>
@@ -55,7 +55,7 @@ export default function Navbar(props) {
 
 Navbar.propTypes = {
 	isTemplatePage: PropTypes.bool.isRequired,
-	isSelectedPage: PropTypes.bool.isRequired,
-	isDraftPage: PropTypes.bool.isRequired,
+	isFavouriteTamplatesPage: PropTypes.bool.isRequired,
+	isDraftsPage: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 };

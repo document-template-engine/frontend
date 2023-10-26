@@ -5,7 +5,11 @@ import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 
-export default function Header({ isLogged, email }) {
+export default function Header({
+	isLoggedIn,
+	email,
+	handleEntranceButtonClick,
+}) {
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState();
 
 	function toggleUserButtonState() {
@@ -32,7 +36,7 @@ export default function Header({ isLogged, email }) {
 				</fieldset>
 			</form>
 			<div className="header__user-container">
-				{isLogged ? (
+				{isLoggedIn ? (
 					<button
 						type="button"
 						className="header__user-button"
@@ -42,7 +46,13 @@ export default function Header({ isLogged, email }) {
 						{email[0]}
 					</button>
 				) : (
-					<button className="header__login-button">Вход</button>
+					<button
+						type="button"
+						className="header__login-button"
+						onClick={handleEntranceButtonClick}
+					>
+						Вход
+					</button>
 				)}
 			</div>
 			{isUserMenuVisible && (
@@ -67,8 +77,9 @@ export default function Header({ isLogged, email }) {
 }
 
 Header.propTypes = {
-	isLogged: PropTypes.bool.isRequired,
+	isLoggedIn: PropTypes.bool.isRequired,
 	email: PropTypes.string,
+	handleEntranceButtonClick: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {

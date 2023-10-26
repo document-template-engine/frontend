@@ -1,7 +1,7 @@
 import React from 'react';
-import ConflictResolutionClaimForm from '../Forms/ConflictResolutionClaimForm';
-import '../../pages/Templates/Template.css';
-import ActionBar from '../ActionBar/ActionBar';
+import ConflictResolutionClaimForm from '../../components/Forms/ConflictResolutionClaimForm';
+import './Template.css';
+import ActionBar from '../../components/ActionBar/ActionBar';
 
 const ConflictResolutionClaim = () => (
 	<div className="template">
