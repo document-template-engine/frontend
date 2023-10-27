@@ -1,9 +1,11 @@
 import './Navbar.sass';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 export default function Navbar(props) {
 	const navigate = useNavigate();
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
 	function goToTemplates() {
 		navigate('/templates', { replace: true });
@@ -28,7 +30,7 @@ export default function Navbar(props) {
 				>
 					Шаблоны
 				</button>
-				{props.isLoggedIn && (
+				{isLoggedIn && (
 					<button
 						className={`navbar__item ${
 							props.isFavouriteTamplatesPage && 'navbar__item_active'
@@ -38,7 +40,7 @@ export default function Navbar(props) {
 						Избранное
 					</button>
 				)}
-				{props.isLoggedIn && (
+				{isLoggedIn && (
 					<button
 						className={`navbar__item ${
 							props.isDraftsPage && 'navbar__item_active'
@@ -57,5 +59,4 @@ Navbar.propTypes = {
 	isTemplatePage: PropTypes.bool.isRequired,
 	isFavouriteTamplatesPage: PropTypes.bool.isRequired,
 	isDraftsPage: PropTypes.bool.isRequired,
-	isLoggedIn: PropTypes.bool.isRequired,
 };

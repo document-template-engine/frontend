@@ -1,15 +1,16 @@
-import PropTypes from 'prop-types';
 import './Header.sass';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { signIn } from '../../store/auth/authSlice';
 import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 
-export default function Header({
-	isLoggedIn,
-	email,
-	handleEntranceButtonClick,
-}) {
+export default function Header() {
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const email = useSelector((state) => state.user.email);
+	const dispatch = useDispatch();
+
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState();
 
 	function toggleUserButtonState() {
@@ -49,7 +50,7 @@ export default function Header({
 					<button
 						type="button"
 						className="header__login-button"
-						onClick={handleEntranceButtonClick}
+						onClick={() => dispatch(signIn())}
 					>
 						Вход
 					</button>
@@ -75,13 +76,3 @@ export default function Header({
 		</header>
 	);
 }
-
-Header.propTypes = {
-	isLoggedIn: PropTypes.bool.isRequired,
-	email: PropTypes.string,
-	handleEntranceButtonClick: PropTypes.func.isRequired,
-};
-
-Header.defaultProps = {
-	email: 'elizavarz@gmail.com',
-};

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import NotFound from '../NotFound/NotFound';
@@ -9,34 +8,16 @@ import Drafts from '../../pages/Drafts/Drafts';
 import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKindergarten';
 
 function App() {
-	const [isLoggedIn, setLoggedIn] = useState(false);
-
-	function enterMainPage() {
-		setLoggedIn(true);
-		return isLoggedIn;
-	}
 	return (
 		<>
-			<Header
-				isLoggedIn={isLoggedIn}
-				handleEntranceButtonClick={enterMainPage}
-			/>
+			<Header />
 			<main className="pages">
 				<Routes>
-					<Route
-						element={<Templates isLoggedIn={isLoggedIn} />}
-						path="/templates"
-					/>
-					<Route
-						path="/kindergarten"
-						element={<ApplicationToKindergarten isLoggedIn={isLoggedIn} />}
-					/>
-					<Route
-						element={<FavouriteTemplates isLoggedIn={isLoggedIn} />}
-						path="favourite"
-					/>
-					<Route element={<Drafts isLoggedIn={isLoggedIn} />} path="drafts" />
-					<Route element={<Templates isLoggedIn={isLoggedIn} />} path="/" />
+					<Route element={<Templates />} path="/templates" />
+					<Route path="/kindergarten" element={<ApplicationToKindergarten />} />
+					<Route element={<FavouriteTemplates />} path="favourite" />
+					<Route element={<Drafts />} path="drafts" />
+					<Route element={<Templates />} path="/" />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</main>
