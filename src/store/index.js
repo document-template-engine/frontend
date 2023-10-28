@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './user/userSlice';
 import authReducer from './auth/authSlice';
+import { popupReducer } from './popup/popup.slice';
 
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
 		auth: authReducer,
-		// здесь будут ваши редюсеры popup:popupReducer, user:userReducer
+		popup: popupReducer,
 	},
 });
