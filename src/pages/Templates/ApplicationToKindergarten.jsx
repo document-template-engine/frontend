@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import KindergartenForm from '../../components/Forms/KindergartenForm';
 import './Template.css';
 import ActionBar from '../../components/ActionBar/ActionBar';
 import Navbar from '../../components/Navbar/Navbar';
 
-const ApplicationToKindergarten = (props) => (
+const ApplicationToKindergarten = () => (
 	<>
-		<Navbar isLoggedIn={props.isLoggedIn} />
+		<Navbar />
 		<div className="template">
 			<div className="template__main-wrapper">
 				<div className="template__title-wrapper">
@@ -27,7 +26,4 @@ const ApplicationToKindergarten = (props) => (
 	</>
 );
 
-ApplicationToKindergarten.propTypes = {
-	isLoggedIn: PropTypes.bool.isRequired,
-};
 export default ApplicationToKindergarten;

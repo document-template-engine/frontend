@@ -31,6 +31,7 @@
 			}
 		],
 		"no-unused-vars": "off", // пока что отключила это правило, т.к. оно мешает в работе с хуками К.Л.
+		"no-param-reassign": "off", // отключила это правило, потому что мешает в работе с Redux
 		"react/react-in-jsx-scope": "off",
 		"import/prefer-default-export": "off",
 		"react/function-component-definition": "off",

@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './FavouriteTemplates.css';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 
 const FavouriteTemplates = (props) => (
 	<>
-		<Navbar isFavouriteTamplatesPage isLoggedIn={props.isLoggedIn} />
+		<Navbar isFavouriteTamplatesPage />
 		<div className="templates">
 			<h1 className="templates__title">Избранное</h1>
 			<ul className="templates__list">
@@ -150,9 +149,5 @@ const FavouriteTemplates = (props) => (
 		</div>
 	</>
 );
-
-FavouriteTemplates.propTypes = {
-	isLoggedIn: PropTypes.bool.isRequired,
-};
 
 export default FavouriteTemplates;
