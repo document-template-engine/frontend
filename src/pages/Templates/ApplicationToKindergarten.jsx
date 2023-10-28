@@ -3,9 +3,11 @@ import KindergartenForm from '../../components/Forms/KindergartenForm';
 import './Template.css';
 import ActionBar from '../../components/ActionBar/ActionBar';
 import Navbar from '../../components/Navbar/Navbar';
+import Header from '../../components/Header/Header';
 
 const ApplicationToKindergarten = () => (
 	<>
+		<Header />
 		<Navbar />
 		<div className="template">
 			<div className="template__main-wrapper">

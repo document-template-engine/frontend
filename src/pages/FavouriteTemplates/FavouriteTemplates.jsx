@@ -2,9 +2,11 @@ import React from 'react';
 import './FavouriteTemplates.css';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
+import Header from '../../components/Header/Header';
 
 const FavouriteTemplates = (props) => (
 	<>
+		<Header />
 		<Navbar isFavouriteTamplatesPage />
 		<div className="templates">
 			<h1 className="templates__title">Избранное</h1>

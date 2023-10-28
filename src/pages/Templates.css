@@ -3,13 +3,13 @@
 }
 
 .templates {
+	grid-area: main;
 	margin-left: 60px;
 	margin-top: 60px;
 	display: flex;
 	flex-direction: column;
 	gap: 27px;
 
-	width: 100%;
 	border-bottom: 1px solid #dedede;
 
 	max-height: 349px;

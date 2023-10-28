@@ -1,6 +1,7 @@
 import './Header.sass';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { signIn } from '../../store/auth/authSlice';
 import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
@@ -24,7 +25,7 @@ export default function Header() {
 
 	return (
 		<header className="header">
-			<div className="header__icon" />
+			<Link className="header__icon" to="/" />
 			<form className="header__form">
 				<fieldset className="header__search-form">
 					<div className="header__search-icon" />
@@ -58,7 +59,7 @@ export default function Header() {
 			</div>
 			{isUserMenuVisible && (
 				<Modal
-					className="header__user-modal"
+					extraClass="header__user-modal"
 					handleClose={() => setIsUserMenuVisible(false)}
 					isOverlay={false}
 				>

@@ -1,6 +1,15 @@
 .App {
+	display: flex;
 }
 
 .pages {
-	display: flex;
+	display: grid;
+	grid-template-columns: 317px 1fr;
+	grid-template-rows: 80px 1fr;
+	grid-template-areas:
+		'header header header'
+		'navbar main main ';
+	max-width: 1920px;
+	width: 100%;
+	margin: auto;
 }

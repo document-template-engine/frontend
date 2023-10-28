@@ -2,9 +2,11 @@ import React from 'react';
 import './Templates.css';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
+import Header from '../components/Header/Header';
 
 const Templates = () => (
 	<>
+		<Header />
 		<Navbar isTemplatePage />
 		<div className="templates">
 			<h1 className="templates__title">Шаблоны</h1>
