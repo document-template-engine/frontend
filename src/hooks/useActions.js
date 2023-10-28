@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
+import { popupActions } from '../store/popup/popup.slice';
 
 const actions = {
-	// Здесь будут ваши экшены через запятую ...popup, ...users
+	...popupActions,
 };
 
 export const useActions = () => {
