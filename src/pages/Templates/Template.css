@@ -1,0 +1,42 @@
+.template {
+	padding: 60px;
+	display: flex;
+	gap: 5%;
+}
+
+.template__title {
+	margin: 0;
+	padding: 0;
+
+	font-size: 38px;
+	font-weight: 700;
+	line-height: 48px;
+}
+
+.template__subtitle {
+	margin: 0;
+	padding: 0;
+
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 28px;
+}
+
+.template__main-wrapper {
+	max-width: 1050px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.template__title-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.template {
+	display: flex;
+	gap: 146px;
+}

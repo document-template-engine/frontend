@@ -1,0 +1,35 @@
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('Inter/Inter-Regular.woff2') format('woff2'),
+		url('Inter/Inter-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	src:
+		url('Inter/Inter-Medium.woff2') format('woff2'),
+		url('Inter/Inter-Medium.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SF-Pro';
+	src:
+		url('SFProDisplay/SFProDisplay-Regular.woff2') format('woff2'),
+		url('SFProDisplay/SFProDisplay-Regular.woff') format('woff'),
+		url('SFProDisplay/SFProDisplay-Regular.ttf') format('truetype');
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'SF-Pro';
+	src:
+		url('SFProDisplay/SFProDisplay-Medium.woff2') format('woff2'),
+		url('SFProDisplay/SFProDisplay-Medium.woff') format('woff'),
+		url('SFProDisplay/SFProDisplay-Medium.ttf') format('truetype');
+	font-weight: 500;
+}

@@ -1,0 +1,66 @@
+.action-bar {
+	padding: 20px 16px;
+	margin: 0;
+
+	min-width: 287px;
+	max-height: 136px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	list-style: none;
+	border: 1px solid #0014c7;
+	border-radius: 20px;
+}
+
+.action-bar__item {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.action-bar__text {
+	padding: 0;
+	margin: 0;
+
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.action-bar__icon {
+	transition: all 0.1ms linear;
+}
+
+.action-bar__icon_stroke {
+	stroke: black;
+}
+
+.action-bar__icon_fill {
+	fill: black;
+}
+
+.action-bar__item:hover {
+	color: #0019ff;
+}
+
+.action-bar__item:active {
+	color: #0415af;
+}
+
+.action-bar__item:hover .action-bar__icon_stroke {
+	stroke: #0019ff;
+}
+
+.action-bar__item:hover .action-bar__icon_fill {
+	fill: #0019ff;
+}
+
+.action-bar__item:active .action-bar__icon_stroke {
+	stroke: #0415af;
+}
+
+.action-bar__item:active .action-bar__icon_fill {
+	fill: #0415af;
+}
