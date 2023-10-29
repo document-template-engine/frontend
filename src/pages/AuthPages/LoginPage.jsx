@@ -36,11 +36,7 @@ export default function LoginPage() {
 				<AuthForm title="Вход">
 					<form className={styles.form} onSubmit={handleSubmit}>
 						<Input type="text" name="email" label="Электронная почта" />
-						<Input
-							type="password"
-							name="pw"
-							label="Пароль"
-						/>
+						<Input type="password" name="pw" label="Пароль" />
 						<div className={styles.checkboxContainer}>
 							<button
 								className={`${styles.checkbox} ${
@@ -60,6 +56,7 @@ export default function LoginPage() {
 								Я не помню пароль
 							</Link>
 						</div>
+						<Button type="submit" text="Продолжить" />
 						<Button type="submit" text="Продолжить" />
 						<p className={styles.orPar}>
 							<span>или</span>
