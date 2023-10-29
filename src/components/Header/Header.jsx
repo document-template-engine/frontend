@@ -1,47 +1,58 @@
-import './Header.sass';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signIn } from '../../store/auth/authSlice';
+import styles from './Header.module.sass';
 import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
+import { signOut } from '../../store/auth/authSlice';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const email = useSelector((state) => state.user.email);
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 
-	const [isUserMenuVisible, setIsUserMenuVisible] = useState();
-
-	function toggleUserButtonState() {
-		if (isUserMenuVisible === true) {
-			setIsUserMenuVisible(false);
+	const toggleUserButtonState = (e) => {
+		e.stopPropagation();
+		if (isLoggedIn) {
+			setIsUserMenuVisible(!isUserMenuVisible);
 		} else {
-			setIsUserMenuVisible(true);
+			navigate('/signin');
 		}
-		return isUserMenuVisible;
-	}
+	};
+
+	const handleExit = () => {
+		dispatch(signOut());
+		setIsUserMenuVisible(false);
+		navigate('/signin');
+	};
+
+	const handleClick = () => {
+		setIsUserMenuVisible(false);
+	};
 
 	return (
-		<header className="header">
-			<Link className="header__icon" to="/" />
-			<form className="header__form">
-				<fieldset className="header__search-form">
-					<div className="header__search-icon" />
+		<header className={styles.header}>
+			<Link className={styles.header__icon} to="/" />
+			<form className={styles.header__form}>
+				<fieldset className={styles['header__search-form']}>
+					<div className={styles['header__search-icon']} />
 					<input
-						className="header__input"
+						className={styles.header__input}
 						type="text"
 						name="search"
 						placeholder="Поиск..."
 					/>
 				</fieldset>
 			</form>
-			<div className="header__user-container">
+			<div className={styles['header__user-container']}>
 				{isLoggedIn ? (
 					<button
 						type="button"
-						className="header__user-button"
+						className={styles['header__user-button']}
 						aria-label="Save"
 						onClick={toggleUserButtonState}
 					>
@@ -50,28 +61,37 @@ export default function Header() {
 				) : (
 					<button
 						type="button"
-						className="header__login-button"
-						onClick={() => dispatch(signIn())}
+						className={styles['header__login-button']}
+						onClick={toggleUserButtonState}
 					>
 						Вход
 					</button>
 				)}
 			</div>
-			{isUserMenuVisible && (
+			{isLoggedIn && isUserMenuVisible && (
 				<Modal
-					extraClass="header__user-modal"
-					handleClose={() => setIsUserMenuVisible(false)}
+					extraClass={styles['header__modal-container']}
+					handleClose={handleClick}
 					isOverlay={false}
 				>
-					<div className="header__modal-container">
-						<img className="header__modal-image" src={profile} alt="email" />
-						<p className="header__modal-info">{email}</p>
-						<div className="header__modal-divider" />
-						<img className="header__modal-image" src={exitIcon} alt="exit" />
-						<button className="header__modal-info header__modal-exit-button">
-							Выйти
-						</button>
-					</div>
+					<img
+						className={styles['header__modal-image']}
+						src={profile}
+						alt="email"
+					/>
+					<p className={styles['header__modal-info']}>{email}</p>
+					<div className={styles['header__modal-divider']} />
+					<img
+						className={styles['header__modal-image']}
+						src={exitIcon}
+						alt="exit"
+					/>
+					<button
+						className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
+						onClick={handleExit}
+					>
+						Выйти
+					</button>
 				</Modal>
 			)}
 		</header>

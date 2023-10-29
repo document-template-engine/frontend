@@ -1,16 +1,16 @@
 .header 
-    grid-area: header
     display: flex
     flex-direction: row
     justify-content: space-between
     margin: auto
         top: 0
         bottom: 0
-    padding: 
+    padding: auto
         left: 20px
         right: 20px
     width: calc(100% - 40px) 
     max-width: 1920px
+    height: height
     border-bottom: 1px solid rgb(222, 222, 222)
 
 .header__icon 
@@ -21,8 +21,6 @@
         left: 0
         right: 0
 
-    &:hover 
-        opacity: .8
 
 .header__form 
     margin: auto
@@ -139,18 +137,7 @@
         background-repeat: no-repeat
         background-position: center
 
-
-#react-modals 
-    position: fixed
-    top: 85px
-    left: 80.5%
-    width: 100%
-
-.header__user-modal 
-        border-radius: 12px
-
-
-.header__modal-container
+div.header__modal-container
     display: grid
     grid-template-columns: 30px 210px
     grid-template-rows: 30px 1px 30px
@@ -160,8 +147,8 @@
     padding: 20px 16px
     border: 1px solid #0014C7
     border-radius: 12px
-    opacity: .7
-    cursor: default
+    right: 20px
+    top: 70px
 
 .header__modal-info
     margin: 0

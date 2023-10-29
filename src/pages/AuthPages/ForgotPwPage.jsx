@@ -12,7 +12,7 @@ export default function ForgotPwPage() {
 
 	const handleClose = () => {
 		setVisible(false);
-		navigate('/');
+		navigate('/templates');
 	};
 
 	const handleSubmit = (e) => {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { modalRoot } from '../../utils/constants';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import styles from './Modal.module.scss';
@@ -11,29 +11,33 @@ export default function Modal({
 	children,
 	extraClass,
 }) {
-	const handleKeydown = useCallback(
+	const ref = useRef(null);
+
+	const handleClick = useCallback(
 		(e) => {
-			if (e.key === 'Escape') return handleClose();
+			if (e.target !== ref?.current && !hasOverlay) return handleClose();
 			return undefined;
 		},
-		[handleClose]
+		[hasOverlay, handleClose]
 	);
 
 	useEffect(() => {
-		document.addEventListener('keydown', handleKeydown);
+		document.addEventListener('click', handleClick);
 
 		return () => {
-			document.removeEventListener('keydown', handleKeydown);
+			document.removeEventListener('click', handleClick);
 		};
-	}, [handleKeydown]);
+	}, [handleClick]);
 
 	return createPortal(
 		<>
 			{hasOverlay && <ModalOverlay handleClose={handleClose} />}
+			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 			<div
 				className={`${styles.modal} ${
 					hasOverlay && styles.modalWithOverlay
 				} ${extraClass}`}
+				ref={ref}
 			>
 				{hasOverlay && (
 					<button
@@ -51,7 +55,11 @@ export default function Modal({
 
 Modal.propTypes = {
 	handleClose: PropTypes.func.isRequired,
-	hasOverlay: PropTypes.bool.isRequired,
+	hasOverlay: PropTypes.bool,
 	children: PropTypes.node.isRequired,
 	extraClass: PropTypes.string,
+};
+
+Modal.defaultProps = {
+	hasOverlay: false,
 };
