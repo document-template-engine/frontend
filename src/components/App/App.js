@@ -8,6 +8,9 @@ import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKinder
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
 import Landing from '../Landing/Landing';
+import CheckAccountPage from '../../pages/AuthPages/CheckAccount';
+import ForgotPwPage from '../../pages/AuthPages/ForgotPwPage';
+import ChangePassword from '../../pages/AuthPages/ChangePassword';
 
 function App() {
 	return (
@@ -20,6 +23,9 @@ function App() {
 				<Route element={<Landing />} path="/" />
 				<Route element={<LoginPage />} path="/signin" exact />
 				<Route element={<LogupPage />} path="/signup" exact />
+				<Route element={<CheckAccountPage />} path="/check-account" exact />
+				<Route element={<ForgotPwPage />} path="/forgot-password" exact />
+				<Route element={<ChangePassword />} path="/change-password" exact />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>
