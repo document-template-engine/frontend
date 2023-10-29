@@ -92,24 +92,6 @@ export default function Header() {
 					>
 						Выйти
 					</button>
-					<img
-						className={styles['header__modal-image']}
-						src={profile}
-						alt="email"
-					/>
-					<p className={styles['header__modal-info']}>{email}</p>
-					<div className={styles['header__modal-divider']} />
-					<img
-						className={styles['header__modal-image']}
-						src={exitIcon}
-						alt="exit"
-					/>
-					<button
-						className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
-						onClick={handleExit}
-					>
-						Выйти
-					</button>
 				</Modal>
 			)}
 		</header>

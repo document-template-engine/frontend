@@ -57,7 +57,6 @@ export default function LoginPage() {
 							</Link>
 						</div>
 						<Button type="submit" text="Продолжить" />
-						<Button type="submit" text="Продолжить" />
 						<p className={styles.orPar}>
 							<span>или</span>
 						</p>
