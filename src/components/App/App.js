@@ -12,11 +12,11 @@ function App() {
 	return (
 		<>
 			<Header isLoggedIn={loggedIn} />
-			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage/>
-      <Routes>
-        <Route element={<p>Здесь главная стр</p>} path="/" />
-        <Route path="*" element={<NotFound />} />
-		  </Routes>
+			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage />
+			<Routes>
+				<Route element={<p>Здесь главная стр</p>} path="/" />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
 		</>
 	);
 }
