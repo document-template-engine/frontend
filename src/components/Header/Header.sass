@@ -1,16 +1,16 @@
 .header 
+    grid-area: header
     display: flex
     flex-direction: row
     justify-content: space-between
     margin: auto
         top: 0
         bottom: 0
-    padding: auto
+    padding: 
         left: 20px
         right: 20px
     width: calc(100% - 40px) 
     max-width: 1920px
-    height: height
     border-bottom: 1px solid rgb(222, 222, 222)
 
 .header__icon 
@@ -21,6 +21,8 @@
         left: 0
         right: 0
 
+    &:hover 
+        opacity: .8
 
 .header__form 
     margin: auto
@@ -140,9 +142,13 @@
 
 #react-modals 
     position: fixed
-    top: 77px
+    top: 85px
     left: 80.5%
     width: 100%
+
+.header__user-modal 
+        border-radius: 12px
+
 
 .header__modal-container
     display: grid
