@@ -10,14 +10,6 @@ import ApplicationToKindergarten from '../../pages/Templates/ApplicationToKinder
 function App() {
 	return (
 		<>
-<<<<<<< HEAD
-			<Header isLoggedIn={loggedIn} />
-			<Navbar isLoggedIn={loggedIn} isTemplatePage isDraftPage isSelectedPage />
-			<Routes>
-				<Route element={<p>Здесь главная стр</p>} path="/" />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
-=======
 			<Header />
 			<main className="pages">
 				<Routes>
@@ -29,7 +21,6 @@ function App() {
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</main>
->>>>>>> b734542fbc6315fc857e386e4f12648cf8510940
 		</>
 	);
 }

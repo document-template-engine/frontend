@@ -2,6 +2,7 @@ import './Advantages.sass';
 import windowIcon from '../../../images/card1.svg';
 import archiveIcon from '../../../images/card2.svg';
 import formIcon from '../../../images/card3.svg';
+import LinkToStart from '../Link/LinkToStart';
 
 export default function Advantages() {
 	return (
@@ -31,7 +32,7 @@ export default function Advantages() {
 					</figcaption>
 				</figure>
 			</div>
-			<button className="advantages__button">default</button>
+			<LinkToStart />
 		</section>
 	);
 }
