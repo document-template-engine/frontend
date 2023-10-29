@@ -1,10 +1,12 @@
 import React from 'react';
 import './Form.css';
 import CustomInput from './miscs/CustomInput';
+import ActionBar from '../ActionBar/ActionBar';
 
 // eslint-disable-next-line react/prop-types
 const KindergartenForm = ({ form }) => (
 	<form className="form">
+		<ActionBar />
 		<ul className="form__list">
 			<li className="form__item form__item_1 form__item_not-success">
 				<h2 className="form__item-title">Данные о детском саде</h2>

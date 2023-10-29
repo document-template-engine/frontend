@@ -1,7 +1,6 @@
 import React from 'react';
 import KindergartenForm from '../../components/Forms/KindergartenForm';
 import './Template.css';
-import ActionBar from '../../components/ActionBar/ActionBar';
 import Navbar from '../../components/Navbar/Navbar';
 
 const ApplicationToKindergarten = () => (
@@ -21,7 +20,6 @@ const ApplicationToKindergarten = () => (
 
 				<KindergartenForm form="kindergarten-form" />
 			</div>
-			<ActionBar />
 		</div>
 	</>
 );
