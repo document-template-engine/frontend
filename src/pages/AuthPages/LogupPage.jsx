@@ -14,7 +14,7 @@ export default function LogupPage() {
 
 	const handleClose = () => {
 		setVisible(false);
-		navigate('/');
+		navigate('/templates');
 	};
 
 	const toggleBtn = () => {

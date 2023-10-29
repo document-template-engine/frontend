@@ -12,12 +12,12 @@ export default function ChangePasswordPage() {
 
 	const handleClose = () => {
 		setVisible(false);
-		navigate('/');
+		navigate('/templates');
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		navigate('/');
+		navigate('/templates');
 	};
 
 	return (
