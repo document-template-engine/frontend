@@ -1,9 +1,10 @@
 import './About.sass';
 import notebookImg from '../../../images/about_illustration.svg';
+import LinkToStart from '../Link/LinkToStart';
 
 export default function About() {
 	return (
-		<section className="about">
+		<section className="about" id="about">
 			<div className="about__logo" />
 			<div className="about__circle" />
 			<div className="about__container">
@@ -18,7 +19,7 @@ export default function About() {
 					<p className="about__description">
 						Система шаблонизирования и заполнения типовых документов онлайн.
 					</p>
-					<button className="about__button">Попробовать бесплатно</button>
+					<LinkToStart />
 				</div>
 			</div>
 		</section>

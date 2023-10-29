@@ -10,7 +10,7 @@ export default function CheckAccountPage() {
 
 	const handleClose = () => {
 		setVisible(false);
-		navigate('/');
+		navigate('/templates');
 	};
 
 	return (

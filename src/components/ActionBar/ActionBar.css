@@ -1,9 +1,16 @@
 .action-bar {
+	position: fixed;
 	padding: 20px 16px;
 	margin: 0;
 
-	min-width: 287px;
-	max-height: 136px;
+	box-sizing: border-box;
+
+	top: 117px;
+
+	width: 287px;
+	height: 136px;
+
+	right: 60px;
 
 	display: flex;
 	flex-direction: column;

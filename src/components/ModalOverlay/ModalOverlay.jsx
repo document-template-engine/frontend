@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import styles from './ModalOverlay.module.scss';
 
 export default function ModalOverlay({ handleClose }) {
@@ -10,12 +10,28 @@ export default function ModalOverlay({ handleClose }) {
 		return undefined;
 	}
 
+	const handleKeydown = useCallback(
+		(e) => {
+			if (e.key === 'Escape') return handleClose();
+			return undefined;
+		},
+		[handleClose]
+	);
+
+	useEffect(() => {
+		document.addEventListener('keydown', handleKeydown);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeydown);
+		};
+	}, [handleKeydown]);
+
 	return (
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<div
 			ref={ref}
 			onClick={handleClick}
-			onKeyDown={handleClick}
+			onKeyDown={handleKeydown}
 			className={styles.overlay}
 		/>
 	);
