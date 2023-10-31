@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const BASE_URL = 'https://documents-template.site/api/';
+import { BASE_URL } from '../../utils/constants';
 
 export const authApi = createApi({
 	reducerPath: 'auth/api',
@@ -14,7 +13,7 @@ export const authApi = createApi({
 	endpoints: (build) => ({
 		login: build.query({
 			query: (credentials) => ({
-				url: `/auth/token/login/`,
+				url: `auth/token/login/`,
 				method: 'POST',
 				body: credentials,
 				headers: {
@@ -24,13 +23,13 @@ export const authApi = createApi({
 		}),
 		logout: build.query({
 			query: () => ({
-				url: `/auth/token/logout`,
+				url: `auth/token/logout`,
 				method: 'POST',
 			}),
 		}),
 		register: build.query({
 			query: (credentials) => ({
-				url: `/auth/token/logout`,
+				url: `auth/token/logout`,
 				method: 'POST',
 				body: credentials,
 				headers: {
