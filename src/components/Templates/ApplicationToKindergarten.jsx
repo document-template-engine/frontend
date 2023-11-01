@@ -1,8 +1,7 @@
 import React from 'react';
-import KindergartenForm from '../../components/Forms/KindergartenForm';
-import './Template.css';
-import Navbar from '../../components/Navbar/Navbar';
-import Header from '../../components/Header/Header';
+import KindergartenForm from '../Forms/KindergartenForm';
+import Navbar from '../Navbar/Navbar';
+import Header from '../Header/Header';
 
 const ApplicationToKindergarten = () => (
 	<>
