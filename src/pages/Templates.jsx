@@ -2,7 +2,7 @@ import React from 'react';
 import './Templates.css';
 import Navbar from '../components/Navbar/Navbar';
 import Header from '../components/Header/Header';
-import Template from './Templates/Template/Template';
+import Template from '../components/Template/Template';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 
 const Templates = () => {
@@ -20,9 +20,14 @@ const Templates = () => {
 					<Template
 						title="Договор найма жилого помещения"
 						link="/kindergarten"
+						isFav
 					/>
-					<Template title="Заявление в детсад" link="/kindergarten" />
-					<Template title="Претензия" link="/kindergarten" />
+					<Template
+						title="Заявление в детсад"
+						link="/kindergarten"
+						isFav={false}
+					/>
+					<Template title="Претензия" link="/kindergarten" isFav={false} />
 				</ul>
 			</div>
 		</>
