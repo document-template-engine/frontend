@@ -5,6 +5,8 @@ import ActionBar from '../ActionBar/ActionBar';
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 import {useGetTemplateQuery} from '../../store/templates-api/templates.api';
+import {templateTest} from '../../utils/testData';
+import TemplateForm from '../../pages/Forms/TemplateForm';
 
 // eslint-disable-next-line react/prop-types
 const TemplatePage = () => {
@@ -18,9 +20,10 @@ const TemplatePage = () => {
 			<form className={styles.form}>
 				<div className={styles.mainWrapper}>
 					<div className={styles.titleWrapper}>
-						<h1 className={styles.title}>title</h1>
-						<p className={styles.subtitle}>subtitle</p>
+						<h1 className={styles.title}>{templateTest.name}</h1>
+						<p className={styles.subtitle}>{templateTest.description}</p>
 					</div>
+					<TemplateForm data={templateTest} />
 				</div>
 				<ActionBar />
 			</form>

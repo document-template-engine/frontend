@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-
 import Templates from '../components/Templates/Templates';
 import Template from '../components/Templates/Template/Template';
 import { templatesData } from '../utils/testData';
