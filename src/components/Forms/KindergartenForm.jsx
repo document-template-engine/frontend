@@ -5,9 +5,9 @@ import styles from './Form.module.sass';
 
 // eslint-disable-next-line react/prop-types
 const KindergartenForm = ({ form }) => {
-	const largeSize = '60vw';
-	const midSize = '40vw';
-	const smallSize = '19vw';
+	const largeSize = '51vw';
+	const midSize = '25vw';
+	const smallSize = '16vw';
 
 	return (
 		<form className={styles.form}>

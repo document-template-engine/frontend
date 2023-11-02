@@ -5,9 +5,10 @@
   display: flex
 
   box-sizing: border-box
+  justify-content: space-between
 
 .mainWrapper
-  max-width: 50vw
+  max-width: 55vw
   display: flex
   flex-direction: column
   gap: 40px
@@ -36,6 +37,7 @@
   font-weight: 400
   line-height: 28px
   max-width: 1050px
+
 
 .list
   counter-reset: list-item
@@ -71,7 +73,8 @@
   content: ''
   display: flex
   background-position: center
-  background-image: url("../../images/check_mark.svg")
+  background-image: url("../../images/checkmark.svg")
+  background-repeat: no-repeat
   position: absolute
   left: -15px
   border-radius: 50%
@@ -118,7 +121,6 @@
 
 .wrapper
   display: flex
-  max-width: 70vw
   flex-wrap: wrap
   gap: 16px
 
