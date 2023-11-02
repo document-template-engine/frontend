@@ -15,6 +15,7 @@
 
 .header__icon 
     background-image: url(../../images/Header_logo.svg)
+    background-repeat: no-repeat
     width: 163px
     height: 65px
     margin: auto
@@ -172,3 +173,16 @@ div.header__modal-container
      grid-column: 1/-1
      height: 1px
      background-color: #EAEAEA
+
+@media screen and (max-width: 1000px)
+    .header__form 
+        margin: auto
+            left: 75px
+    
+    .header__login-button 
+        width: 107px
+        height: 41px
+        margin-left: 20px
+        display: flex
+        justify-content: center
+        align-items: center
