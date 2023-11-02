@@ -5,7 +5,9 @@ import './Input.css';
 const CustomInput = ({ form, width, type, text, notation }) => (
 	<div className="custom-graph">
 		<label htmlFor={form} className="custom-graph__label">
-			<p className="custom-graph__title">{text}</p>
+			<p className="custom-graph__title" style={{ width }}>
+				{text}
+			</p>
 			<input
 				type={type}
 				placeholder=""

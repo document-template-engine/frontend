@@ -1,6 +1,5 @@
 import React from 'react';
-import './Form.css';
-import CustomInput from './miscs/CustomInput';
+import CustomInput from '../UI/CustomInput';
 
 // eslint-disable-next-line react/prop-types
 const ConflictResolutionClaimForm = ({ form }) => (

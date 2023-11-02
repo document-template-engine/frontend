@@ -4,7 +4,7 @@ import Templates from '../components/Templates/Templates';
 
 const FavoriteTemplates = () => (
 	<Templates title="Избранное">
-		<Template title="Заявление в детсад" link="/kindergarten" />
+		<Template title="Заявление в детсад" link="/kindergarten" isFav />
 	</Templates>
 );
 

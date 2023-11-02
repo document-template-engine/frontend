@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Form.css';
-import CustomInput from './miscs/CustomInput';
+import CustomInput from '../UI/CustomInput';
 
 const RentalAgreement = ({ form }) => (
 	<form className="form">
