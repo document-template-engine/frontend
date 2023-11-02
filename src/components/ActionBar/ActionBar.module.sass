@@ -1,0 +1,74 @@
+.main
+  font-family: Inter,sans-serif
+  padding: 20px 16px
+  margin: 0
+
+  box-sizing: border-box
+
+  top: 117px
+
+  width: 287px
+  height: 136px
+
+  right: 60px
+
+  display: flex
+  flex-direction: column
+  gap: 12px
+
+  list-style: none
+  border: 1px solid #0014c7
+  border-radius: 20px
+
+
+.item
+  padding-left: 30px
+  position: relative
+  display: flex
+  gap: 5px
+  align-items: center
+  cursor: pointer
+
+
+.text
+  padding: 0
+  margin: 0
+
+  font-size: 18px
+  font-weight: 400
+  transition: all .1ms linear
+
+  color: #000000
+
+.text:hover
+  color: #0D23E9
+
+.icon::after
+  content: ''
+  position: absolute
+  left: 0
+  background-image: url("../../images/actionBarStart.svg")
+  background-repeat: no-repeat
+  width: 22px
+  height: 22px
+
+.iconStar:after
+  background-image: url("../../images/actionBarStart.svg")
+
+.iconDoc:after
+  background-image: url("../../images/actionBarDoc.svg")
+
+
+.iconFolder:after
+  background-image: url("../../images/actionBarFolder.svg")
+
+
+
+@media screen and (max-width: 1919px)
+  .main
+    gap: 10px
+    padding: 20px 8px
+    width: 271px
+    height: 136px
+  .title
+    font-size: 18px

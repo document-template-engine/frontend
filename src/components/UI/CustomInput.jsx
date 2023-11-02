@@ -1,21 +1,21 @@
 import React from 'react';
-import './Input.css';
+import styles from './CustomInput.module.sass';
 
 // eslint-disable-next-line react/prop-types
 const CustomInput = ({ form, width, type, text, notation }) => (
-	<div className="custom-graph">
-		<label htmlFor={form} className="custom-graph__label">
-			<p className="custom-graph__title" style={{ width }}>
+	<div className={styles.graph}>
+		<label htmlFor={form} className={styles.label}>
+			<p className={styles.title} style={{ width }}>
 				{text}
 			</p>
 			<input
 				type={type}
 				placeholder=""
-				className="custom-graph__input"
+				className={styles.input}
 				style={{ width }}
 			/>
 		</label>
-		{notation && <p className="custom-graph__notation">{notation}</p>}
+		{notation && <p className={styles.notation}>{notation}</p>}
 	</div>
 );
 
