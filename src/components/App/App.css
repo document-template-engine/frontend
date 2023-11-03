@@ -13,3 +13,9 @@
 	width: 100%;
 	margin: auto;
 }
+
+@media screen and (max-width: 1370px) {
+	.pages {
+		grid-template-rows: 60px 1fr;
+	}
+}
