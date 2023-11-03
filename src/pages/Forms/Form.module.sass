@@ -61,6 +61,32 @@
 
   gap: 16px
 
+  &:last-child
+    border: none
+    padding-bottom: 0
+
+  &::before
+    background-color: white
+    content: counters(list-item, ".") " "
+    position: absolute
+    border: 1px solid #0D23E9
+    left: -15px
+    border-radius: 50%
+    width: 30px
+    height: 30px
+
+    color: #5C5C5C
+
+    text-align: center
+    font-family: Inter, sans-serif
+    font-size: 16px
+    font-weight: 700
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+
 .itemSuccess
   counter-increment: list-item
   border-left: 1px solid #15D434
@@ -71,44 +97,19 @@
   flex-direction: column
   padding-bottom: 32px
 
+  &::before
+    content: ''
+    display: flex
+    background-position: center
+    background-image: url("../../images/checkmark.svg")
+    background-repeat: no-repeat
+    position: absolute
+    left: -15px
+    border-radius: 50%
+    width: 30px
+    height: 30px
+    background-color: #15D434
 
-.itemSuccess::before
-  content: ''
-  display: flex
-  background-position: center
-  background-image: url("../../images/checkmark.svg")
-  background-repeat: no-repeat
-  position: absolute
-  left: -15px
-  border-radius: 50%
-  width: 30px
-  height: 30px
-  background-color: #15D434
-
-.item:last-child
-  border: none
-  padding-bottom: 0
-
-.item::before
-  background-color: white
-  content: counters(list-item, ".") " "
-  position: absolute
-  border: 1px solid #0D23E9
-  left: -15px
-  border-radius: 50%
-  width: 30px
-  height: 30px
-
-  color: #5C5C5C
-
-  text-align: center
-  font-family: Inter, sans-serif
-  font-size: 16px
-  font-weight: 700
-
-  display: flex
-  justify-content: center
-  align-items: center
 
 .title
   padding: 0

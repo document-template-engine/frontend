@@ -15,8 +15,8 @@ const Templates = ({ title, children }) => {
 			<Header />
 			<Navbar isTemplatePage />
 			<div className={styles.templates}>
-				<h1 className={styles.templates__title}>{title}</h1>
-				<ul className={styles.templates__list}>{children}</ul>
+				<h1 className={styles.title}>{title}</h1>
+				<ul className={styles.list}>{children}</ul>
 			</div>
 		</>
 	);
