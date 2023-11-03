@@ -9,16 +9,31 @@
 
   overflow: clip
 
+@media screen and (max-width: 1700px)
+  .item
+    height: 214px
+    width: 218px
+
 .img
   width: 249px
   height: 149px
   background: #eaeaea
 
+@media screen and (max-width: 1700px)
+  .img
+    width: 218px
+    height: 135px
+
 .imgWrapper
   position: relative
 
+
 .linkWrapper
   padding: 8px 16px
+
+@media screen and (max-width: 1700px)
+  .linkWrapper
+    padding: 8px 8px
 
 .link
   color: #000
@@ -29,5 +44,32 @@
   line-height: 22px
   transition: all .1ms linear
 
-.link:hover
-  opacity: .8
+  & :hover
+    color: #0D23E9
+
+@media screen and (max-width: 1700px)
+  .link
+    font-size: 15px
+    line-height: 18px
+
+
+.favIcon
+  top: 12px
+  right: 12px
+  position: absolute
+  background-image: url("../../../images/template-icon.svg")
+  background-repeat: no-repeat
+  background-size: contain
+  background-color: transparent
+
+  width: 29.333px
+  height: 29.333px
+  border: none
+
+.favIcon
+  cursor: pointer
+  transition: all 0.1ms linear
+
+  &:hover
+    opacity: .8
+

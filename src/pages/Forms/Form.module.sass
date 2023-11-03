@@ -1,0 +1,154 @@
+.form
+  padding: 60px
+  margin: 0
+
+  display: flex
+
+  box-sizing: border-box
+  justify-content: space-between
+
+.mainWrapper
+  max-width: 60vw
+  display: flex
+  flex-direction: column
+  gap: 40px
+
+.titleWrapper
+  display: flex
+  flex-direction: column
+
+  gap: 20px
+
+.title
+  margin: 0
+  padding: 0
+
+  color: #000
+
+  font-family: Inter, sans-serif
+  font-size: 38px
+  font-weight: 700
+  line-height: 48px
+
+
+.subtitle
+  margin: 0
+  padding: 0
+
+  font-family: SF Pro Display, sans-serif
+  font-size: 24px
+  font-weight: 400
+  line-height: 28px
+  max-width: 1050px
+
+
+.list
+  counter-reset: list-item
+  display: flex
+  flex-direction: column
+  position: relative
+  margin: 0
+  list-style-type: none
+  padding: 0
+
+.item
+  counter-increment: list-item
+  border-left: 1px solid #0D23E9
+  padding-left: 39px
+  display: flex
+  flex-direction: column
+  padding-bottom: 32px
+
+  gap: 16px
+
+  &:last-child
+    border: none
+    padding-bottom: 0
+
+  &::before
+    background-color: white
+    content: counters(list-item, ".") " "
+    position: absolute
+    border: 1px solid #0D23E9
+    left: -15px
+    border-radius: 50%
+    width: 30px
+    height: 30px
+
+    color: #5C5C5C
+
+    text-align: center
+    font-family: Inter, sans-serif
+    font-size: 16px
+    font-weight: 700
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+
+.itemSuccess
+  counter-increment: list-item
+  border-left: 1px solid #15D434
+  padding-left: 39px
+  display: flex
+
+  gap: 16px
+  flex-direction: column
+  padding-bottom: 32px
+
+  &::before
+    content: ''
+    display: flex
+    background-position: center
+    background-image: url("../../images/checkmark.svg")
+    background-repeat: no-repeat
+    position: absolute
+    left: -15px
+    border-radius: 50%
+    width: 30px
+    height: 30px
+    background-color: #15D434
+
+
+.title
+  padding: 0
+  margin: 0
+
+  color: #000
+
+  font-family: Inter, sans-serif
+  font-size: 28px
+  font-style: normal
+  font-weight: 600
+  line-height: 34px
+
+.wrapper
+  display: flex
+  flex-wrap: wrap
+  gap: 16px
+
+  align-items: center
+
+
+@media screen and (max-width: 1919px)
+  .form
+    padding: 20px 28px
+
+  .title
+    font-size: 28px
+    line-height: 34px
+
+  .titleWrapper
+    width: 739px
+
+  .mainWrapper
+    max-width: 739px
+  .subtitle
+    font-size: 20px
+    line-height: 24px
+    max-width: 739px
+  .item
+    padding-bottom: 16px
+
+

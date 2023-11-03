@@ -1,8 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
-import NotFound from '../NotFound/NotFound';
 import DraftsTemplates from '../../pages/DraftsTemplates';
-import ApplicationToKindergarten from '../Templates/ApplicationToKindergarten';
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
 import Landing from '../Landing/Landing';
@@ -11,13 +9,16 @@ import ForgotPwPage from '../../pages/AuthPages/ForgotPwPage';
 import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
+import NotFound from '../NotFound/NotFound';
+import TemplatePage from '../Templates/TemplatePage';
 
 function App() {
 	return (
 		<div className="pages">
 			<Routes>
-				<Route element={<TemplatesMain />} path="/templates" />
-				<Route path="/kindergarten" element={<ApplicationToKindergarten />} />
+				<Route element={<TemplatesMain />} path="/templates">
+					<Route path=":id" element={<TemplatePage />} />
+				</Route>
 				<Route element={<FavoriteTemplates />} path="favourite" />
 				<Route element={<DraftsTemplates />} path="drafts" />
 				<Route element={<Landing />} path="/" />

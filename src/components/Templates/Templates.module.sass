@@ -5,18 +5,26 @@
   flex-direction: column
   gap: 28px
 
+  @media screen and (max-width: 1700px)
+    padding: 28px
+    gap: 20px
 
-.templates__title
+.title
   margin: 0
   color: #000
-  font-family: 'Inter', sans-serif
+  font-family: Inter, sans-serif
+
+  max-width: 201px
 
   font-size: 32px
   font-style: normal
   font-weight: 500
   line-height: 39px
 
-.templates__list
+  @media screen and (max-width: 1700px)
+    font-size: 28px
+
+.list
   margin: 0
   padding: 0 0 37px
 
@@ -27,5 +35,8 @@
   //width: fit-content Мне кажется так лучше
 
   border-bottom: 1px solid #DEDEDE
+
+  @media screen and (max-width: 1700px)
+    padding-bottom: 16px
 
 
