@@ -11,7 +11,6 @@
   - [2.2 Обновление node.js](#22-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-nodejs)
   - [2.3 Клонирование всего репозитория и установка зависимостей](#23-%D0%BA%D0%BB%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2%D1%81%D0%B5%D0%B3%D0%BE-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B5%D0%B9)
   - [2.4 Клонирование определенной ветки репозитория и установка зависимостей](#24-%D0%BA%D0%BB%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D0%B2%D0%B5%D1%82%D0%BA%D0%B8-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B5%D0%B9)
-
 - [3 Работа со средой React-CRA](#3-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81%D0%BE-%D1%81%D1%80%D0%B5%D0%B4%D0%BE%D0%B9-react-cra)
   - [3.1 Доступные сценарии запуска проекта](#31-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D1%8B%D0%B5-%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
     - [3.1.1 Режим разработки](#311-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8)
@@ -28,16 +27,20 @@
   - [3.2 Возможные проблемы при работе и способы их устранения](#32-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D1%8B-%D0%BF%D1%80%D0%B8-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5-%D0%B8-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1%D1%8B-%D0%B8%D1%85-%D1%83%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F)
     - [3.2.1 Возможные проблемы при выполнении комита](#321-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D1%8B-%D0%BF%D1%80%D0%B8-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B8-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%B0)
     - [3.2.2 Возможные проблемы при выполнении команды sass](#322-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D1%8B-%D0%BF%D1%80%D0%B8-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B8-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B-sass)
-- [4 Дополнительно](#4-%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE)
-  - [4.1 Особенности командной работы с Git-ом](#41-%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-git-%D0%BE%D0%BC)
-    - [4.1.1 Краткое описание веток в репозитории](#411-%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D1%82%D0%BE%D0%BA-%D0%B2-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8)
-      - [4.1.1.1 Main (Master)](#4111-main-master)
-      - [4.1.1.2 Develop](#4112-develop)
-      - [4.1.1.3 Feature](#4113-feature)
-      - [4.1.1.4 Fix](#4114-fix)
-    - [4.1.2 Процесс командной работы с Git-ом](#412-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-git-%D0%BE%D0%BC)
-
-//@TODO dmitshash@yandex.ru: сделать оглавление
+- [4 Особенности командной работы с Git](#4-%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-git)
+  - [4.1 Краткое описание веток в репозитории](#41-%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D1%82%D0%BE%D0%BA-%D0%B2-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8)
+    - [4.1.1 Main (Master)](#411-main-master)
+    - [4.1.2 Develop](#412-develop)
+    - [4.1.3 Feature](#413-feature)
+    - [4.1.4 Fix](#414-fix)
+  - [4.2 Процесс командной работы с Git-ом](#42-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-git-%D0%BE%D0%BC)
+    - [4.2.1 Копирование проекта](#421-%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
+    - [4.2.2 Переход в ветку develop](#422-%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%BE%D0%B4-%D0%B2-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-develop)
+    - [4.2.3 Подтягивание последних изменений](#423-%D0%BF%D0%BE%D0%B4%D1%82%D1%8F%D0%B3%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D1%85-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9)
+    - [4.2.4 Cоздаем свою ветку feature или fix на основе develop (находясь в ветке develop)](#424-c%D0%BE%D0%B7%D0%B4%D0%B0%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D1%8E-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-feature-%D0%B8%D0%BB%D0%B8-fix-%D0%BD%D0%B0-%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B5-develop-%D0%BD%D0%B0%D1%85%D0%BE%D0%B4%D1%8F%D1%81%D1%8C-%D0%B2-%D0%B2%D0%B5%D1%82%D0%BA%D0%B5-develop)
+    - [4.2.5 Правила работы в своей ветке](#425-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B2-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B2%D0%B5%D1%82%D0%BA%D0%B5)
+    - [4.2.6 Слияние своей ветки в ветку develop](#426-%D1%81%D0%BB%D0%B8%D1%8F%D0%BD%D0%B8%D0%B5-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B2%D0%B5%D1%82%D0%BA%D0%B8-%D0%B2-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-develop)
+    - [4.2.7 Апрувы и ревью пулл-реквеста](#427-%D0%B0%D0%BF%D1%80%D1%83%D0%B2%D1%8B-%D0%B8-%D1%80%D0%B5%D0%B2%D1%8C%D1%8E-%D0%BF%D1%83%D0%BB%D0%BB-%D1%80%D0%B5%D0%BA%D0%B2%D0%B5%D1%81%D1%82%D0%B0)
 
 ## 1 Описание
 
