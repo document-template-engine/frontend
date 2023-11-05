@@ -5,7 +5,13 @@
     padding: 20px 10px 0
     border-right: 1px solid #DEDEDE
 
-.navbar__container
+    @media screen and (max-width: 1400px)
+       width: 204px
+       padding: 
+            left: 12px
+            right: 12px 
+
+.container
     border-bottom: 1px solid #DEDEDE
     display: flex
     flex-direction: column
@@ -14,10 +20,10 @@
     padding: 0
         bottom: 8px
 
-.navbar__item
+.item
     width: 297px
     color: #1A1A1A
-    font-family: Inter
+    font-family: Inter, sans-serif
     font-size: 20px
     font-style: normal
     font-weight: 500
@@ -29,6 +35,12 @@
     border: none
     cursor: pointer
 
-.navbar__item_active 
+    @media screen and (max-width: 1400px)
+        width: 204px
+        padding: 10px 12px 11px
+
+
+
+.itemActive 
     background-color: #F2F2F2
     border-radius: 8px
