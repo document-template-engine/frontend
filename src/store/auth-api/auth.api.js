@@ -29,7 +29,7 @@ export const authApi = createApi({
 		}),
 		register: build.query({
 			query: (credentials) => ({
-				url: `auth/token/logout`,
+				url: `users/`,
 				method: 'POST',
 				body: credentials,
 				headers: {
