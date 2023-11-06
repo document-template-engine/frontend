@@ -8,11 +8,17 @@ import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../stories/Button/Button';
 import InputForm from '../../stories/InputForm/InputForm';
+import { useRegisterMutation } from '../../store/auth-api/auth.api';
+import { useActions } from '../../hooks/useActions';
 
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
 	const [checked, setChecked] = useState(false);
 	const navigate = useNavigate();
+
+// отправляем запрос на регистрацию пользователя	
+	const [fetchRepos, {error, isLoading, data: repos}] = useRegisterMutation()
+	const {regActions} = useActions();
 
 	const {
 		register,
@@ -24,9 +30,7 @@ export default function LogupPage() {
 	  });
 	
 	  const onSubmit = (data) => {
-
-		// navigate('/check-account')
-		// registrationUser(data);
+		fetchRepos(data)
 	  };
 	
 	  useEffect(() => {
@@ -35,6 +39,14 @@ export default function LogupPage() {
 		  password: "",
 		});
 	  }, [reset]);
+
+	  useEffect(() => {
+		if (repos) {
+			console.log(repos)
+			regActions(repos.email)
+			navigate('/check-account')
+		}
+	  }, [repos, regActions, navigate]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -45,19 +57,19 @@ export default function LogupPage() {
 		setChecked(!checked);
 	};
 
-	/* const handleSubmit = (e) => {
-		e.preventDefault();
-		navigate('/check-account');
-	}; */
+	const setTitle = () => {
+		if (isLoading) {return "Создаём аккаунт..."}
+		if (error) {return "Упс... Что-то пошло не так. Перезагрузите страницу"}
+		return "Создание аккаунта"
+	}
 
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
-				<AuthForm title="Создание аккаунта">
+				<AuthForm title={setTitle()}>
 					<form 
 						className={styles.form} 
 						onSubmit={handleSubmit(onSubmit)}
-						/* isValid={isValid} */
 					>
 						<InputForm
 							type="text"
@@ -111,8 +123,8 @@ export default function LogupPage() {
 						</div>
 						<Button 
 							type="submit" 
-							text="Продолжить" 
-							disabled={!isValid || !checked}
+							text={isLoading? "Загрузка..." : "Продолжить"} 
+							disabled={!isValid || !checked || isLoading}
 						/>
 						<p className={styles.orPar}>
 							<span>или</span>
