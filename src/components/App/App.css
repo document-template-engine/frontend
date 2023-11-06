@@ -16,6 +16,7 @@
 
 @media screen and (max-width: 1370px) {
 	.pages {
+		grid-template-columns: 228px 1fr;
 		grid-template-rows: 60px 1fr;
 	}
 }
