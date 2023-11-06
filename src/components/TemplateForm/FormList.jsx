@@ -9,7 +9,7 @@ const FormList = ({ data }) => {
 	// Первым циклом он рендерит секции с инпутами, вложенный в них цикл рендерит сами инпуты
 
 	// TODO: Разделить циклы, когда это будет возможно
-	const a = 123;
+	const a = 12;
 	return (
 		<ol className={styles.list}>
 			{/* eslint-disable-next-line react/prop-types */}
