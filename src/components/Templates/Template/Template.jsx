@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import styles from './Template.module.sass'; // eslint-disable-next-line react/prop-types
+import styles from './Template.module.sass';
 import image from '../../../images/template-cross.svg';
 
 // eslint-disable-next-line react/prop-types
