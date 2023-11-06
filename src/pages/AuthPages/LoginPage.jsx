@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
+import InputForm from '../../stories/InputForm/InputForm';
 import Input from '../../stories/Input/Input';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
@@ -15,6 +17,29 @@ export default function LoginPage() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const {
+		register,
+		formState: { errors, isValid },
+		handleSubmit,
+		reset,
+	  } = useForm({
+		mode: "onChange",
+	  });
+	
+	  const onSubmit = (data) => {
+
+		// navigate('/check-account')
+		// registrationUser(data);
+	  };
+	
+	  useEffect(() => {
+		reset({
+		  email: "",
+		  password: "",
+		});
+	  }, [reset]);
+
+
 	const handleClose = () => {
 		setVisible(false);
 		navigate('/templates');
@@ -24,19 +49,45 @@ export default function LoginPage() {
 		setChecked(!checked);
 	};
 
-	const handleSubmit = (e) => {
+/* 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(signIn());
 		navigate('/templates');
-	};
+	}; */
 
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
 				<AuthForm title="Вход">
-					<form className={styles.form} onSubmit={handleSubmit}>
-						<Input type="text" name="email" label="Электронная почта" />
-						<Input type="password" name="pw" label="Пароль" />
+				<form 
+						className={styles.form} 
+						onSubmit={handleSubmit(onSubmit)}
+						/* isValid={isValid} */
+				>
+						<InputForm
+							type="text"
+							{...register('email', {
+								required: 'Напишите ваш email',
+								pattern: {
+									value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+									message: 'Напишите правильный адрес электронной почты',
+								},
+							})}
+							name="email"
+							errors={errors}
+							label="Электронная почта"
+						/>
+						<InputForm
+							type="password"
+							{...register('password', {
+								required: 'Введите пароль',
+							})}
+							name="password"
+							span
+							errors={errors}
+							autoComplete="on"
+							label="Пароль"
+						/>
 						<div className={styles.checkboxContainer}>
 							<button
 								className={`${styles.checkbox} ${
@@ -56,7 +107,11 @@ export default function LoginPage() {
 								Я не помню пароль
 							</Link>
 						</div>
-						<Button type="submit" text="Продолжить" />
+						<Button 
+							type="submit" 
+							text="Продолжить" 
+							disabled={!isValid}
+						/>
 						<p className={styles.orPar}>
 							<span>или</span>
 						</p>

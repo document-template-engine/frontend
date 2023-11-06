@@ -25,7 +25,7 @@ export default function LogupPage() {
 	
 	  const onSubmit = (data) => {
 
-		navigate('/check-account')
+		// navigate('/check-account')
 		// registrationUser(data);
 	  };
 	
@@ -54,7 +54,11 @@ export default function LogupPage() {
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
 				<AuthForm title="Создание аккаунта">
-					<form className={styles.form} onSubmit={onSubmit}>
+					<form 
+						className={styles.form} 
+						onSubmit={handleSubmit(onSubmit)}
+						/* isValid={isValid} */
+					>
 						<InputForm
 							type="text"
 							{...register('email', {
@@ -105,7 +109,11 @@ export default function LogupPage() {
 								</Link>
 							</p>
 						</div>
-						<Button type="submit" text="Продолжить" />
+						<Button 
+							type="submit" 
+							text="Продолжить" 
+							disabled={!isValid || !checked}
+						/>
 						<p className={styles.orPar}>
 							<span>или</span>
 						</p>

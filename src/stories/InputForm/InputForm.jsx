@@ -50,7 +50,7 @@ const InputForm = forwardRef(
                         onChange={onChange}
                         autoComplete={autoComplete}
                         className={`${styles.input}
-                            ${errors[name]? styles.inputError : ""}`}
+                            ${errors[name] && styles.input_error}`}
 
                     />
                     {type === 'password' && (
@@ -58,12 +58,11 @@ const InputForm = forwardRef(
                             <img src={isShowed ? eyeHidden : eye} alt="hide" />
                         </button>
                     )}
-                    
-                    {errors &&
-                    <span className={`${styles.error} input-error-${name}`}>
+                                 
+                    <p className={`${styles.error} ${errors && styles.error_active} input-error-${name}`}>
                         {errors[name]?.message || ""}
-                    </span>
-                    }
+                    </p>
+                
                 </div>
             </div>
         )
