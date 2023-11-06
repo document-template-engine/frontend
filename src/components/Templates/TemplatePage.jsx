@@ -12,8 +12,6 @@ const TemplatePage = () => {
 	const { id } = useParams();
 	const { data, isLoading, isError } = useGetTemplateQuery(id);
 
-	console.log(data);
-
 	return (
 		<>
 			<Header />
