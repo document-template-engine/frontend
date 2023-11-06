@@ -1,11 +1,11 @@
 import React from 'react';
-import Template from '../components/Templates/Template/Template';
-import Templates from '../components/Templates/Templates';
+import TemplateItem from '../components/Templates/TemplateItem';
+import TemplateList from '../components/Templates/TemplateList';
 
 const FavoriteTemplates = () => (
-	<Templates title="Избранное">
-		<Template title="Заявление в детсад" link="/kindergarten" isFav />
-	</Templates>
+	<TemplateList title="Избранное">
+		<TemplateItem title="Заявление в детсад" link="/kindergarten" isFav />
+	</TemplateList>
 );
 
 export default FavoriteTemplates;

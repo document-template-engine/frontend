@@ -1,28 +1,15 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Templates from '../components/Templates/Templates';
-import Template from '../components/Templates/Template/Template';
-import { templatesData } from '../utils/testData';
+import TemplateList from '../components/Templates/TemplateList';
 
 const TemplatesMain = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-
+	// Если страничка главная - то он показывает список
 	if (currentPath === '/templates') {
-		return (
-			<Templates title="Шаблоны">
-				{templatesData.map((item) => (
-					<Template
-						title={item.name}
-						link={item.id.toString()}
-						isFav={item.is_favorited}
-						img={item.img}
-						key={item.id}
-					/>
-				))}
-			</Templates>
-		);
+		return <TemplateList title="Шаблоны" />;
 	}
+	// Если не главная - показывает форму соответствующей странички
 	return <Outlet />;
 };
 

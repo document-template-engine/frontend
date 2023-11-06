@@ -1,11 +1,11 @@
 import React from 'react';
-import Templates from '../components/Templates/Templates';
-import Template from '../components/Templates/Template/Template';
+import TemplateList from '../components/Templates/TemplateList';
+import TemplateItem from '../components/Templates/TemplateItem';
 
 const DraftsTemplates = () => (
-	<Templates title="Черновики">
-		<Template title="Заявление в детсад" link="/kindergarten" />
-	</Templates>
+	<TemplateList title="Черновики">
+		<TemplateItem title="Заявление в детсад" link="/kindergarten" />
+	</TemplateList>
 );
 
 export default DraftsTemplates;
