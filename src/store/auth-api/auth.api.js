@@ -28,8 +28,10 @@ export const authApi = createApi({
 			}),
 		}),
 		register: build.query({
+
 			query: (data) => ({
 				url: `api/v1/users/`,
+
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

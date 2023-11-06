@@ -1,7 +1,7 @@
-import './Navbar.sass';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import styles from './Navbar.module.sass';
 
 export default function Navbar(props) {
 	const navigate = useNavigate();
@@ -20,21 +20,19 @@ export default function Navbar(props) {
 	}
 
 	return (
-		<nav className="navbar">
-			<div className="navbar__container">
+		<nav className={styles.navbar}>
+			<div className={styles.container}>
 				<button
-					className={`navbar__item ${
-						props.isTemplatePage && 'navbar__item_active'
-					}`}
+					className={`${styles.item} ${
+						props.isTemplatePage && styles.itemActive}`}
 					onClick={goToTemplates}
 				>
 					Шаблоны
 				</button>
 				{isLoggedIn && (
 					<button
-						className={`navbar__item ${
-							props.isFavouriteTamplatesPage && 'navbar__item_active'
-						}`}
+						className={`${styles.item} ${
+							props.isFavouriteTamplatesPage && styles.itemActive}`}
 						onClick={goToSelected}
 					>
 						Избранное
@@ -44,9 +42,8 @@ export default function Navbar(props) {
 				)}
 				{isLoggedIn && (
 					<button
-						className={`navbar__item ${
-							props.isDraftsPage && 'navbar__item_active'
-						}`}
+						className={`${styles.item} ${
+							props.isDraftsPage && styles.itemActive}`}
 						onClick={goToDrafts}
 					>
 						Черновики

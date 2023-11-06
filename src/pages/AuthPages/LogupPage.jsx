@@ -25,7 +25,9 @@ export default function LogupPage() {
 	
 	  const onSubmit = (data) => {
 
+
 		// navigate('/check-account')
+
 		// registrationUser(data);
 	  };
 	
@@ -59,6 +61,7 @@ export default function LogupPage() {
 						onSubmit={handleSubmit(onSubmit)}
 						/* isValid={isValid} */
 					>
+
 						<InputForm
 							type="text"
 							{...register('email', {
