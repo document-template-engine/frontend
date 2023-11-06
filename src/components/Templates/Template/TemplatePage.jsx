@@ -1,11 +1,11 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
-import styles from '../../pages/Forms/Form.module.sass';
-import ActionBar from '../ActionBar/ActionBar';
-import Header from '../Header/Header';
-import Navbar from '../Navbar/Navbar';
-import {useGetTemplateQuery} from '../../store/templates-api/templates.api';
-import TemplateForm from '../../pages/Forms/TemplateForm';
+import styles from '../../Forms/Form.module.sass';
+import ActionBar from '../../ActionBar/ActionBar';
+import Header from '../../Header/Header';
+import Navbar from '../../Navbar/Navbar';
+import {useGetTemplateQuery} from '../../../store/templates-api/templates.api';
+import TemplateForm from '../../Forms/TemplateForm';
 
 // eslint-disable-next-line react/prop-types
 const TemplatePage = () => {

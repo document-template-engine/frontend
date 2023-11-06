@@ -1,7 +1,7 @@
 import React from 'react';
 import {v4 as uuidv4} from 'uuid';
 import styles from './Form.module.sass';
-import CustomInput from '../../components/UI/CustomInput';
+import CustomInput from '../UI/CustomInput';
 import {largeSize} from '../../utils/constants';
 
 // eslint-disable-next-line react/prop-types

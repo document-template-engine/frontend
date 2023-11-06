@@ -10,7 +10,7 @@ import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
 import NotFound from '../NotFound/NotFound';
-import TemplatePage from '../Templates/TemplatePage';
+import TemplatePage from '../Templates/Template/TemplatePage';
 
 function App() {
 	return (
