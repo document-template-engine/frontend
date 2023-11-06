@@ -1,5 +1,5 @@
 import './Navbar.sass';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -39,6 +39,8 @@ export default function Navbar(props) {
 					>
 						Избранное
 					</button>
+
+
 				)}
 				{isLoggedIn && (
 					<button

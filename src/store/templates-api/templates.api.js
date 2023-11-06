@@ -9,7 +9,7 @@ export const templatesApi = createApi({
 	endpoints: (build) => ({
 		getTemplates: build.query({
 			query: () => ({
-				url: 'templates',
+				url: 'templates/',
 			}),
 		}),
 		getTemplate: build.query({
