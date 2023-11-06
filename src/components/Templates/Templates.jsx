@@ -2,15 +2,9 @@ import React from 'react';
 import styles from './Templates.module.sass';
 import Navbar from '../Navbar/Navbar';
 import Header from '../Header/Header';
-import {useGetTemplatesQuery} from '../../store/templates-api/templates.api';
 
 // eslint-disable-next-line react/prop-types
-const Templates = ({ title, children }) => {
-	const { error, data, isLoading } = useGetTemplatesQuery();
-	// fetch('127.0.0.1:8000').then((res) => res.json());
-	//
-	console.log(data);
-	return (
+const Templates = ({ title, children }) => (
 		<>
 			<Header />
 			<Navbar isTemplatePage />
@@ -20,6 +14,5 @@ const Templates = ({ title, children }) => {
 			</div>
 		</>
 	);
-};
 
 export default Templates;

@@ -37,6 +37,8 @@ export default function Navbar(props) {
 					>
 						Избранное
 					</button>
+
+
 				)}
 				{isLoggedIn && (
 					<button
