@@ -1,12 +1,15 @@
 import React from 'react';
 import {v4 as uuidv4} from 'uuid';
 import styles from './Form.module.sass';
-import CustomInput from '../../components/UI/CustomInput';
+import CustomInput from '../UI/CustomInput';
 import {largeSize} from '../../utils/constants';
 
 // eslint-disable-next-line react/prop-types
-const TemplateForm = ({ data }) => {
-	const a = 123;
+const FormList = ({ data }) => {
+	// Первым циклом он рендерит секции с инпутами, вложенный в них цикл рендерит сами инпуты
+
+	// TODO: Разделить циклы, когда это будет возможно
+	const a = 12;
 	return (
 		<ol className={styles.list}>
 			{/* eslint-disable-next-line react/prop-types */}
@@ -48,4 +51,4 @@ const TemplateForm = ({ data }) => {
 	);
 };
 
-export default TemplateForm;
+export default FormList;
