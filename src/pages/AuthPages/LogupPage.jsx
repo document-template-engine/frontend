@@ -8,13 +8,16 @@ import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../stories/Button/Button';
 import InputForm from '../../stories/InputForm/InputForm';
+
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
+
 
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
 	const [checked, setChecked] = useState(false);
 	const navigate = useNavigate();
+
 
 // отправляем запрос на регистрацию пользователя	
 	const [fetchRepos, {error, isLoading, data: repos}] = useRegisterMutation()
@@ -30,7 +33,9 @@ export default function LogupPage() {
 	  });
 	
 	  const onSubmit = (data) => {
+
 		fetchRepos(data)
+
 	  };
 	
 	  useEffect(() => {
@@ -57,20 +62,24 @@ export default function LogupPage() {
 		setChecked(!checked);
 	};
 
+
 	const setTitle = () => {
 		if (isLoading) {return "Создаём аккаунт..."}
 		if (error) {return "Упс... Что-то пошло не так. Перезагрузите страницу"}
 		return "Создание аккаунта"
 	}
 
+
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
+
 				<AuthForm title={setTitle()}>
 					<form 
 						className={styles.form} 
 						onSubmit={handleSubmit(onSubmit)}
 					>
+
 						<InputForm
 							type="text"
 							{...register('email', {

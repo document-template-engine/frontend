@@ -27,8 +27,10 @@ export const authApi = createApi({
 				method: 'POST',
 			}),
 		}),
+
 		register: build.mutation({
 			query: (data) => ({
+
 				url: `users/`,
 				method: 'POST',
 				headers: {
