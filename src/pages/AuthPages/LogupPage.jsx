@@ -19,22 +19,21 @@ export default function LogupPage() {
 		formState: { errors, isValid },
 		handleSubmit,
 		reset,
-	  } = useForm({
-		mode: "onChange",
-	  });
-	
-	  const onSubmit = (data) => {
+	} = useForm({
+		mode: 'onChange',
+	});
 
-		navigate('/check-account')
+	const onSubmit = (data) => {
+		navigate('/check-account');
 		// registrationUser(data);
-	  };
-	
-	  useEffect(() => {
+	};
+
+	useEffect(() => {
 		reset({
-		  email: "",
-		  password: "",
+			email: '',
+			password: '',
 		});
-	  }, [reset]);
+	}, [reset]);
 
 	const handleClose = () => {
 		setVisible(false);

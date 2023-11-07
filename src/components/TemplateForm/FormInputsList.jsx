@@ -1,15 +1,13 @@
 import React from 'react';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './Form.module.sass';
 import CustomInput from '../UI/CustomInput';
-import {largeSize} from '../../utils/constants';
+import { largeSize } from '../../utils/constants';
 
 // eslint-disable-next-line react/prop-types
-const FormList = ({ data }) => {
+const FormInputsList = ({ data }) => {
 	// Первым циклом он рендерит секции с инпутами, вложенный в них цикл рендерит сами инпуты
-
-	// TODO: Разделить циклы, когда это будет возможно
-	const a = 12;
+	const a = 123;
 	return (
 		<ol className={styles.list}>
 			{/* eslint-disable-next-line react/prop-types */}
@@ -34,4 +32,4 @@ const FormList = ({ data }) => {
 	);
 };
 
-export default FormList;
+export default FormInputsList;
