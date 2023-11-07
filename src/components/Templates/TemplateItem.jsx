@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './TemplateItem.module.sass';
 import zaglushka from '../../images/template-cross.svg';
 
