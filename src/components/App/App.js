@@ -19,8 +19,12 @@ function App() {
 				<Route element={<TemplatesMain />} path="/templates">
 					<Route path=":id" element={<FormPage />} />
 				</Route>
-				<Route element={<FavoriteTemplates />} path="favourite" />
-				<Route element={<DraftsTemplates />} path="drafts" />
+				<Route element={<FavoriteTemplates />} path="favorite">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
+				<Route element={<DraftsTemplates />} path="drafts">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
 				<Route element={<Landing />} path="/" />
 				<Route element={<LoginPage />} path="/signin" exact />
 				<Route element={<LogupPage />} path="/signup" exact />
