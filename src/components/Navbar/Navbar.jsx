@@ -33,7 +33,7 @@ export default function Navbar(props) {
 				{isLoggedIn && (
 					<button
 						className={`${styles.item} ${
-							props.isFavouriteTamplatesPage && styles.itemActive
+							props.isFavoriteTamplatesPage && styles.itemActive
 						}`}
 						onClick={goToSelected}
 					>
@@ -56,7 +56,7 @@ export default function Navbar(props) {
 }
 
 Navbar.propTypes = {
-	isTemplatePage: PropTypes.bool.isRequired,
-	isFavouriteTamplatesPage: PropTypes.bool.isRequired,
-	isDraftsPage: PropTypes.bool.isRequired,
+	isTemplatePage: PropTypes.bool,
+	isFavoriteTamplatesPage: PropTypes.bool,
+	isDraftsPage: PropTypes.bool,
 };

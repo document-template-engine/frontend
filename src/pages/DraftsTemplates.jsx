@@ -14,7 +14,7 @@ const DraftsTemplates = () => {
 		return (
 			<>
 				<Header />
-				<Navbar isTemplatePage />
+				<Navbar isDraftsPage />
 				<div className={styles.templates}>
 					<h1 className={styles.title}>Черновики</h1>
 					{/* <TemplateList data={data} /> */}
