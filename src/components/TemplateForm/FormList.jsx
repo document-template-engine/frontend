@@ -30,23 +30,6 @@ const FormList = ({ data }) => {
 					))}
 				</li>
 			))}
-			{/* eslint-disable-next-line react/prop-types */}
-			{data.ungrouped_fields && (
-				<li className={styles.item}>
-					{/* eslint-disable-next-line no-shadow,react/prop-types */}
-					{data.ungrouped_fields.map((item) => (
-						<CustomInput
-							width={largeSize}
-							form="kid-form"
-							type="text"
-							text={item.name}
-							notation={item.hint}
-							key={uuidv4()}
-							id={item.id}
-						/>
-					))}
-				</li>
-			)}
 		</ol>
 	);
 };
