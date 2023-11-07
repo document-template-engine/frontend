@@ -3,10 +3,7 @@ import styles from './TemplateList.module.sass';
 import TemplateItem from './TemplateItem';
 
 // eslint-disable-next-line react/prop-types
-const TemplateList = ({ data }) => {
-	console.log(data);
-
-	return (
+const TemplateList = ({ data }) => (
 		// Это список шаблонов(квадратики с названием формы)
 		// TODO: Тут есть проблема: "Пока что компонент невозможно переиспользовать для других страничек(черновики, избранное)
 		<ul className={styles.list}>
@@ -23,5 +20,4 @@ const TemplateList = ({ data }) => {
 				))}
 		</ul>
 	);
-};
 export default TemplateList;
