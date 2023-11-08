@@ -1,5 +1,8 @@
 .header 
     grid-area: header
+    position: fixed
+    z-index: 1
+    background-color: white
     display: flex
     flex-direction: row
     justify-content: space-between
@@ -14,9 +17,6 @@
     border-bottom: 1px solid rgb(222, 222, 222)
 
 .header__icon 
-    background-image: url(../../images/Header_logo.svg)
-    width: 163px
-    height: 65px
     margin: auto
         left: 0
         right: 0
@@ -172,3 +172,41 @@ div.header__modal-container
      grid-column: 1/-1
      height: 1px
      background-color: #EAEAEA
+
+@media screen and (max-width: 1368px)
+    .header__icon 
+        background-size: 112px 45px
+        width: 163px
+        height: 45px
+
+    .header__form 
+        margin: auto
+            left: 70px
+    
+    .header__search-form
+        width: 280px
+
+
+    .header__input
+        width: 240px
+
+    .header__login-button 
+        width: 90px
+        height: 40px
+        margin-left: 20px
+        display: flex
+        justify-content: center
+        align-items: center
+
+    .header__user-button
+        width: 40px
+        height: 40px
+
+@media screen and (max-width: 1000px)
+    .header__form 
+        margin: auto
+            left: 75px
+    
+    .header__login-button 
+        margin-left: 20px
+    

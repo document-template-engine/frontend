@@ -1,0 +1,85 @@
+.item
+  display: flex
+  flex-direction: column
+  height: 245px
+  width: 249px
+  border-radius: 12px
+  border: 1px solid #B4BBD7
+  box-shadow: 0 2px 20px 0 rgba(180, 187, 215, 0.10)
+
+  overflow: clip
+
+  &:hover .favIcon
+    visibility: visible
+
+@media screen and (max-width: 1700px)
+  .item
+    height: 214px
+    width: 218px
+
+.img
+  width: 249px
+  height: 149px
+  background: #eaeaea
+
+@media screen and (max-width: 1700px)
+  .img
+    width: 218px
+    height: 135px
+
+.imgWrapper
+  position: relative
+
+
+.linkWrapper
+  padding: 8px 16px
+
+@media screen and (max-width: 1700px)
+  .linkWrapper
+    padding: 8px 8px
+
+.link
+  color: #000
+  text-decoration: none
+  font-family: Inter, sans-serif
+  font-size: 18px
+  font-weight: 600
+  line-height: 22px
+  transition: all .1ms linear
+
+  & :hover
+    color: #0D23E9
+
+@media screen and (max-width: 1700px)
+  .link
+    font-size: 15px
+    line-height: 18px
+
+
+.favIcon
+  visibility: hidden
+  top: 12px
+  right: 12px
+  position: absolute
+  background-repeat: no-repeat
+  background-size: contain
+  background-color: transparent
+
+  width: 29.333px
+  height: 29.333px
+  border: none
+
+.favIconLiked
+  visibility: visible
+  background-image: url("../../images/template-icon.svg")
+
+.favIconNotLiked
+  background-image: url("../../images/template-icon-liked.svg")
+
+.favIcon
+  cursor: pointer
+  transition: all 0.1ms linear
+
+  &:hover
+    opacity: .8
+

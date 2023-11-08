@@ -1,7 +1,7 @@
-import './Navbar.sass';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import styles from './Navbar.module.sass';
 
 export default function Navbar(props) {
 	const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function Navbar(props) {
 	}
 
 	function goToSelected() {
-		navigate('/favourite', { replace: true });
+		navigate('/favorite', { replace: true });
 	}
 
 	function goToDrafts() {
@@ -20,11 +20,11 @@ export default function Navbar(props) {
 	}
 
 	return (
-		<nav className="navbar">
-			<div className="navbar__container">
+		<nav className={styles.navbar}>
+			<div className={styles.container}>
 				<button
-					className={`navbar__item ${
-						props.isTemplatePage && 'navbar__item_active'
+					className={`${styles.item} ${
+						props.isTemplatePage && styles.itemActive
 					}`}
 					onClick={goToTemplates}
 				>
@@ -32,8 +32,8 @@ export default function Navbar(props) {
 				</button>
 				{isLoggedIn && (
 					<button
-						className={`navbar__item ${
-							props.isFavouriteTamplatesPage && 'navbar__item_active'
+						className={`${styles.item} ${
+							props.isFavoriteTamplatesPage && styles.itemActive
 						}`}
 						onClick={goToSelected}
 					>
@@ -42,8 +42,8 @@ export default function Navbar(props) {
 				)}
 				{isLoggedIn && (
 					<button
-						className={`navbar__item ${
-							props.isDraftsPage && 'navbar__item_active'
+						className={`${styles.item} ${
+							props.isDraftsPage && styles.itemActive
 						}`}
 						onClick={goToDrafts}
 					>
@@ -56,7 +56,7 @@ export default function Navbar(props) {
 }
 
 Navbar.propTypes = {
-	isTemplatePage: PropTypes.bool.isRequired,
-	isFavouriteTamplatesPage: PropTypes.bool.isRequired,
-	isDraftsPage: PropTypes.bool.isRequired,
+	isTemplatePage: PropTypes.bool,
+	isFavoriteTamplatesPage: PropTypes.bool,
+	isDraftsPage: PropTypes.bool,
 };
