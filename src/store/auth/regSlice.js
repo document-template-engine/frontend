@@ -6,12 +6,12 @@ export const regSlice = createSlice({
 		email: '',
 	},
 	reducers: {
-		addEmail (state, actions) {
-			state.email = actions
+		addEmail (state, action) {
+			state.email = action.payload
 		}
 	}
 
 })
 
-export const regActions = regSlice.actions;
+export const {regActions} = regSlice.actions;
 export const regReducer = regSlice.reducer;

@@ -1,24 +1,21 @@
+/* eslint-disable no-return-assign */
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
-import Input from '../../stories/Input/Input';
+// import Input from '../../stories/Input/Input';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../stories/Button/Button';
 import InputForm from '../../stories/InputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
-import { useActions } from '../../hooks/useActions';
+// import { useActions } from '../../hooks/useActions';
 
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
 	const [checked, setChecked] = useState(false);
 	const navigate = useNavigate();
-
-// отправляем запрос на регистрацию пользователя	
-	const [fetchRepos, {error, isLoading, data: repos}] = useRegisterMutation()
-	const {regActions} = useActions();
 
 	const {
 		register,
@@ -29,7 +26,11 @@ export default function LogupPage() {
 		mode: "onChange",
 	  });
 	
-	  const onSubmit = (data) => {
+// отправляем запрос на регистрацию пользователя	
+	const [fetchRepos, {error, isLoading, data: repos}] = useRegisterMutation();
+		// const {addEmail} = useActions();
+
+	const onSubmit = (data) => {
 		fetchRepos(data)
 	  };
 	
@@ -40,13 +41,24 @@ export default function LogupPage() {
 		});
 	  }, [reset]);
 
+
+// обработка ошибок с скрвера
+	const [errMsg, setErrMsg] = useState('')
+
 	  useEffect(() => {
 		if (repos) {
 			console.log(repos)
-			regActions(repos.email)
+			// addEmail(repos.email)
 			navigate('/check-account')
 		}
-	  }, [repos, regActions, navigate]);
+		if (error) {
+
+			const keys = Object.values(error.data);
+
+			setErrMsg(keys.join())
+			console.log(keys.join())
+		}
+	  }, [repos, error, /* addEmail, */ navigate]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -59,7 +71,6 @@ export default function LogupPage() {
 
 	const setTitle = () => {
 		if (isLoading) {return "Создаём аккаунт..."}
-		if (error) {return "Упс... Что-то пошло не так. Перезагрузите страницу"}
 		return "Создание аккаунта"
 	}
 
@@ -102,6 +113,7 @@ export default function LogupPage() {
 							errors={errors}
 							autoComplete="on"
 							label="Пароль"
+							error={errMsg}
 						/>
 						<div className={styles.checkboxContainer}>
 							<button

@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { forwardRef, useState } from 'react';
@@ -16,6 +17,7 @@ const InputForm = forwardRef(
       profile,
       autoComplete,
       label,
+      error,
       disabled
     },
       ref
@@ -34,6 +36,8 @@ const InputForm = forwardRef(
 		}
 		return type;
 	};
+
+    // const keys = Object.values(error?.data).join();
 
 
         return (
@@ -60,7 +64,7 @@ const InputForm = forwardRef(
                     )}
                                  
                     <p className={`${styles.error} ${errors && styles.error_active} input-error-${name}`}>
-                        {errors[name]?.message || ""}
+                        {errors[name]?.message || error || ""}
                     </p>
                 
                 </div>

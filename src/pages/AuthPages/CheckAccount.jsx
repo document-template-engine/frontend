@@ -14,7 +14,7 @@ export default function CheckAccountPage() {
 		navigate('/templates');
 	};
 
-	const {email} = useEmailSelector(state => state.regData)
+	// const {email} = useEmailSelector(state => state.regData)
 
 	return (
 		visible && (
@@ -23,7 +23,8 @@ export default function CheckAccountPage() {
 					Назад
 				</Link>
 				<AuthForm title="Подтверждение аккаунта">
-					<p className={styles.parCheck}>
+					<p className={styles.parCheck}> Вы успешно зарегестрированы</p>
+					{/* <p className={styles.parCheck}>
 						Для активации вашей учетной записи, пожалуйста, перейдите по ссылке
 						отправленной на почту
 						<span>&nbsp;{email}</span>
@@ -31,7 +32,7 @@ export default function CheckAccountPage() {
 					<p className={styles.parCheck}>
 						Ссылка действует сутки, если вы не подтвердите свою учетную запись
 						за это время - аккаунт будет автоматически удален{' '}
-					</p>
+					</p> */}
 				</AuthForm>
 			</Modal>
 		)

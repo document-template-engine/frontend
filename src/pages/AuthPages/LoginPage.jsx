@@ -5,17 +5,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 import InputForm from '../../stories/InputForm/InputForm';
-import Input from '../../stories/Input/Input';
+// import Input from '../../stories/Input/Input';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../stories/Button/Button';
 import { signIn } from '../../store/auth/authSlice';
+import { useLazyLoginQuery } from '../../store/auth-api/auth.api';
 
 export default function LoginPage() {
 	const [visible, setVisible] = useState(true);
 	const [checked, setChecked] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const [fetchRepos, {error, isLoading, data: repos}] = useLazyLoginQuery();
 
 	const {
 		register,
@@ -27,7 +30,7 @@ export default function LoginPage() {
 	  });
 	
 	  const onSubmit = (data) => {
-
+		fetchRepos(data)
 		// navigate('/check-account')
 		// registrationUser(data);
 	  };
@@ -40,6 +43,22 @@ export default function LoginPage() {
 	  }, [reset]);
 
 
+// обработка ошибок с скрвера
+	const [errMsg, setErrMsg] = useState('')
+
+	  useEffect(() => {
+		if (repos) {
+			console.log(repos)
+			dispatch(signIn());
+			navigate('/templates')
+		}
+		if (error) {
+			const keys = Object.values(error.data);
+			setErrMsg(keys.join())
+		}	
+	  }, [repos, error, dispatch, navigate]);
+
+
 	const handleClose = () => {
 		setVisible(false);
 		navigate('/templates');
@@ -49,12 +68,6 @@ export default function LoginPage() {
 		setChecked(!checked);
 	};
 
-/* 	const handleSubmit = (e) => {
-		e.preventDefault();
-		dispatch(signIn());
-		navigate('/templates');
-	}; */
-
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
@@ -62,7 +75,6 @@ export default function LoginPage() {
 				<form 
 						className={styles.form} 
 						onSubmit={handleSubmit(onSubmit)}
-						/* isValid={isValid} */
 				>
 						<InputForm
 							type="text"
@@ -83,10 +95,10 @@ export default function LoginPage() {
 								required: 'Введите пароль',
 							})}
 							name="password"
-							span
 							errors={errors}
 							autoComplete="on"
 							label="Пароль"
+							error={errMsg}
 						/>
 						<div className={styles.checkboxContainer}>
 							<button
@@ -109,8 +121,8 @@ export default function LoginPage() {
 						</div>
 						<Button 
 							type="submit" 
-							text="Продолжить" 
-							disabled={!isValid}
+							text={isLoading? "Загрузка..." : "Продолжить"}
+							disabled={!isValid || isLoading}
 						/>
 						<p className={styles.orPar}>
 							<span>или</span>
