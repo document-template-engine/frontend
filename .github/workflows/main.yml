@@ -23,10 +23,9 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.PROJECT_NAME }}_frontend:latest
-
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,6 +55,7 @@ jobs:
             sudo docker compose -f docker-compose.production.yml pull
             sudo docker compose -f docker-compose.production.yml down
             sudo docker compose -f docker-compose.production.yml up -d
+            sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
             sudo docker system prune -af
                     
   send_message:
