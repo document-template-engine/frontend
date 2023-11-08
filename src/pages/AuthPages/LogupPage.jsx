@@ -12,6 +12,7 @@ import InputForm from '../../stories/InputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
 // import { useActions } from '../../hooks/useActions';
 
+
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
 	const [checked, setChecked] = useState(false);
@@ -74,6 +75,7 @@ export default function LogupPage() {
 		return "Создание аккаунта"
 	}
 
+
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
@@ -82,6 +84,7 @@ export default function LogupPage() {
 						className={styles.form} 
 						onSubmit={handleSubmit(onSubmit)}
 					>
+
 						<InputForm
 							type="text"
 							{...register('email', {

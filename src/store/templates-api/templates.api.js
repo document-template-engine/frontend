@@ -14,7 +14,17 @@ export const templatesApi = createApi({
 		}),
 		getTemplate: build.query({
 			query: (id) => ({
-				url: `templates/${id}`,
+				url: `templates/${id}/`,
+			}),
+		}),
+		// getFavorites: build.query({
+		// 	query: () => ({
+		// 		url: '/favorite',
+		// 	}),
+		// }),
+		getFavorite: build.query({
+			query: (id) => ({
+				url: `/documents/${id}/favorite/`,
 			}),
 		}),
 	}),

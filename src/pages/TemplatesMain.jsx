@@ -1,28 +1,30 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Templates from '../components/Templates/Templates';
-import Template from '../components/Templates/Template/Template';
-import { templatesData } from '../utils/testData';
+import TemplateList from '../components/Templates/TemplateList';
+import Header from '../components/Header/Header';
+import Navbar from '../components/Navbar/Navbar';
+import styles from '../components/Templates/TemplateList.module.sass';
+import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 
 const TemplatesMain = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
+	const { data } = useGetTemplatesQuery();
 
+	// Если страничка главная - то он показывает список
 	if (currentPath === '/templates') {
 		return (
-			<Templates title="Шаблоны">
-				{templatesData.map((item) => (
-					<Template
-						title={item.name}
-						link={item.id.toString()}
-						isFav={item.is_favorited}
-						img={item.img}
-						key={item.id}
-					/>
-				))}
-			</Templates>
+			<>
+				<Header />
+				<Navbar isTemplatePage />
+				<div className={styles.templates}>
+					<h1 className={styles.title}>Шаблоны</h1>
+					<TemplateList data={data} />
+				</div>
+			</>
 		);
 	}
+	// Если не главная - показывает форму соответствующей странички
 	return <Outlet />;
 };
 

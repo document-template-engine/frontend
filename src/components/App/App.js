@@ -10,17 +10,21 @@ import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
 import NotFound from '../NotFound/NotFound';
-import TemplatePage from '../Templates/TemplatePage';
+import FormPage from '../../pages/FormPage';
 
 function App() {
 	return (
 		<div className="pages">
 			<Routes>
 				<Route element={<TemplatesMain />} path="/templates">
-					<Route path=":id" element={<TemplatePage />} />
+					<Route path=":id" element={<FormPage />} />
 				</Route>
-				<Route element={<FavoriteTemplates />} path="favourite" />
-				<Route element={<DraftsTemplates />} path="drafts" />
+				<Route element={<FavoriteTemplates />} path="favorite">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
+				<Route element={<DraftsTemplates />} path="drafts">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
 				<Route element={<Landing />} path="/" />
 				<Route element={<LoginPage />} path="/signin" exact />
 				<Route element={<LogupPage />} path="/signup" exact />

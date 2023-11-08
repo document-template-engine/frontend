@@ -7,6 +7,7 @@ import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
+import Logo from '../Logo/Logo';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -36,7 +37,9 @@ export default function Header() {
 
 	return (
 		<header className={styles.header}>
-			<Link className={styles.header__icon} to="/" />
+			<Link className={styles.header__icon} to="/">
+				<Logo variant="Default" />
+			</Link>
 			<form className={styles.header__form}>
 				<fieldset className={styles['header__search-form']}>
 					<div className={styles['header__search-icon']} />

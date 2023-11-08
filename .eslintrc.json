@@ -39,6 +39,7 @@
 		"react/no-unescaped-entities": "off",
 		"react/button-has-type": "off",
 		"import/no-extraneous-dependencies": "off",
-		"react/destructuring-assignment": "off"
+		"react/destructuring-assignment": "off",
+		"react/require-default-props": "off"
 	}
 }

@@ -9,6 +9,9 @@
 
   overflow: clip
 
+  &:hover .favIcon
+    visibility: visible
+
 @media screen and (max-width: 1700px)
   .item
     height: 214px
@@ -54,10 +57,10 @@
 
 
 .favIcon
+  visibility: hidden
   top: 12px
   right: 12px
   position: absolute
-  background-image: url("../../../images/template-icon.svg")
   background-repeat: no-repeat
   background-size: contain
   background-color: transparent
@@ -65,6 +68,13 @@
   width: 29.333px
   height: 29.333px
   border: none
+
+.favIconLiked
+  visibility: visible
+  background-image: url("../../images/template-icon.svg")
+
+.favIconNotLiked
+  background-image: url("../../images/template-icon-liked.svg")
 
 .favIcon
   cursor: pointer
