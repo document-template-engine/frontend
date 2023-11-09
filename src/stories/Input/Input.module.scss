@@ -36,9 +36,27 @@ $red: rgba(235, 27, 27, 1);
 		font-weight: 500;
 		line-height: 20px;
 	}
-	&Error {
-		border-color: $red;
-	}
+}
+.input_error {
+	border-color: $red;
+}
+
+.error {
+	margin: 0;
+	margin: 4px 0 0 14px;
+	max-width: 100%;
+	font-family: 'SF-Pro', Arial, Helvetica, sans-serif;
+	color: inherit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	box-sizing: border-box;
+	height: 15px;
+  }
+
+.error_active {
+	color: $red;
 }
 
 .error {

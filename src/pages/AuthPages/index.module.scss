@@ -24,7 +24,9 @@ $color-link-l: rgba(0, 25, 255, 1);
 }
 
 .checkboxContainer {
+	margin: 0;
 	display: flex;
+	align-items: center;
 }
 
 .checkbox {
