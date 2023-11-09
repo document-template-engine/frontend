@@ -48,7 +48,6 @@ export default function LogupPage() {
 
 	  useEffect(() => {
 		if (repos) {
-			console.log(repos)
 			// addEmail(repos.email)
 			navigate('/check-account')
 		}
@@ -57,7 +56,6 @@ export default function LogupPage() {
 			const keys = Object.values(error.data);
 
 			setErrMsg(keys.join())
-			console.log(keys.join())
 		}
 	  }, [repos, error, /* addEmail, */ navigate]);
 
