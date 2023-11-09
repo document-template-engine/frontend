@@ -6,9 +6,9 @@ const ActionBar = () => (
 		<li className={`${styles.item} ${styles.iconStar} ${styles.icon}`}>
 			<p className={styles.text}>В избранное</p>
 		</li>
-		<li className={`${styles.item} ${styles.iconDoc} ${styles.icon}`}>
+		<button className={`${styles.item} ${styles.iconDoc} ${styles.icon}`}>
 			<p className={styles.text}>Сохранить в DOC</p>
-		</li>
+		</button>
 		<li className={`${styles.item} ${styles.iconFolder} ${styles.icon}`}>
 			<p className={styles.text}>Сохранить как черновик</p>
 		</li>

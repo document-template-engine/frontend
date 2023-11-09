@@ -5,7 +5,7 @@ import CustomInput from '../UI/CustomInput';
 import { largeSize } from '../../utils/constants';
 
 // eslint-disable-next-line react/prop-types
-const FormInputsList = ({ data }) => {
+const FormInputsList = ({ data, handleChange, setValues, values }) => {
 	// Первым циклом он рендерит секции с инпутами, вложенный в них цикл рендерит сами инпуты
 	const a = 123;
 	return (
@@ -24,6 +24,11 @@ const FormInputsList = ({ data }) => {
 							notation={item.hint}
 							key={uuidv4()}
 							id={item.id}
+							placeholder=""
+							name={[item.id.toString()]}
+							value={values[item.id.toString()]}
+							onChange={handleChange}
+							setValues={setValues}
 						/>
 					))}
 				</li>
