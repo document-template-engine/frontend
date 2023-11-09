@@ -6,10 +6,9 @@ import ActionBar from '../ActionBar/ActionBar';
 import { useGetTemplateQuery } from '../../store/templates-api/templates.api';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-const TemplateForm = () => {
+export default function TemplateForm() {
 	const { id } = useParams();
 	const { data } = useGetTemplateQuery(id);
-
 	const {
 		values,
 		setValues,
@@ -22,7 +21,7 @@ const TemplateForm = () => {
 	} = useFormAndValidation();
 
 	const handleSubmit = () => {
-		console.log(values);
+		console.log({ formId: data.id, fields: values });
 	};
 
 	return (
@@ -40,9 +39,12 @@ const TemplateForm = () => {
 						<p className={styles.subtitle}>{data.description}</p>
 					</div>
 					<FormInputsList
+						form={data.name}
 						data={data}
 						values={values}
 						setValues={setValues}
+						isValid={isValid}
+						errors={errors}
 						handleChange={handleChange}
 					/>
 				</div>
@@ -50,6 +52,4 @@ const TemplateForm = () => {
 			</form>
 		)
 	);
-};
-
-export default TemplateForm;
+}

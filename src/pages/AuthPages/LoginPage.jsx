@@ -18,46 +18,44 @@ export default function LoginPage() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchRepos, {error, isLoading, data: repos}] = useLazyLoginQuery();
+	const [fetchRepos, { error, isLoading, data: repos }] = useLazyLoginQuery();
 
 	const {
 		register,
 		formState: { errors, isValid },
 		handleSubmit,
 		reset,
-	  } = useForm({
-		mode: "onChange",
-	  });
-	
-	  const onSubmit = (data) => {
-		fetchRepos(data)
+	} = useForm({
+		mode: 'onChange',
+	});
+
+	const onSubmit = (data) => {
+		fetchRepos(data);
 		// navigate('/check-account')
 		// registrationUser(data);
-	  };
-	
-	  useEffect(() => {
+	};
+
+	useEffect(() => {
 		reset({
-		  email: "",
-		  password: "",
+			email: '',
+			password: '',
 		});
-	  }, [reset]);
+	}, [reset]);
 
+	// обработка ошибок с скрвера
+	const [errMsg, setErrMsg] = useState('');
 
-// обработка ошибок с скрвера
-	const [errMsg, setErrMsg] = useState('')
-
-	  useEffect(() => {
+	useEffect(() => {
 		if (repos) {
-			console.log(repos)
+			console.log(repos);
 			dispatch(signIn());
-			navigate('/templates')
+			navigate('/templates');
 		}
 		if (error) {
 			const keys = Object.values(error.data);
-			setErrMsg(keys.join())
-		}	
-	  }, [repos, error, dispatch, navigate]);
-
+			setErrMsg(keys.join());
+		}
+	}, [repos, error, dispatch, navigate]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -72,10 +70,7 @@ export default function LoginPage() {
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
 				<AuthForm title="Вход">
-				<form 
-						className={styles.form} 
-						onSubmit={handleSubmit(onSubmit)}
-				>
+					<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 						<InputForm
 							type="text"
 							{...register('email', {
@@ -119,9 +114,9 @@ export default function LoginPage() {
 								Я не помню пароль
 							</Link>
 						</div>
-						<Button 
-							type="submit" 
-							text={isLoading? "Загрузка..." : "Продолжить"}
+						<Button
+							type="submit"
+							text={isLoading ? 'Загрузка...' : 'Продолжить'}
 							disabled={!isValid || isLoading}
 						/>
 						<p className={styles.orPar}>

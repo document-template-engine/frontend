@@ -18,7 +18,7 @@ export const authApi = createApi({
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(data)
+				body: JSON.stringify(data),
 			}),
 		}),
 		logout: build.query({
@@ -29,16 +29,14 @@ export const authApi = createApi({
 		}),
 		register: build.mutation({
 			query: (data) => ({
-
 				url: `users/`,
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(data)
+				body: JSON.stringify(data),
 			}),
 		}),
-
 	}),
 });
 
