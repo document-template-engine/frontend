@@ -1,13 +1,16 @@
+/* eslint-disable no-return-assign */
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
-import Input from '../../stories/Input/Input';
+// import Input from '../../stories/Input/Input';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../stories/Button/Button';
 import InputForm from '../../stories/InputForm/InputForm';
+import { useRegisterMutation } from '../../store/auth-api/auth.api';
+// import { useActions } from '../../hooks/useActions';
 
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
@@ -19,24 +22,41 @@ export default function LogupPage() {
 		formState: { errors, isValid },
 		handleSubmit,
 		reset,
-	  } = useForm({
-		mode: "onChange",
-	  });
-	
-	  const onSubmit = (data) => {
+	} = useForm({
+		mode: 'onChange',
+	});
 
+	// отправляем запрос на регистрацию пользователя
+	const [fetchRepos, { error, isLoading, data: repos }] = useRegisterMutation();
+	// const {addEmail} = useActions();
 
-		// navigate('/check-account')
+	const onSubmit = (data) => {
+		fetchRepos(data);
+	};
 
-		// registrationUser(data);
-	  };
-	
-	  useEffect(() => {
+	useEffect(() => {
 		reset({
-		  email: "",
-		  password: "",
+			email: '',
+			password: '',
 		});
-	  }, [reset]);
+	}, [reset]);
+
+	// обработка ошибок с скрвера
+	const [errMsg, setErrMsg] = useState('');
+
+	useEffect(() => {
+		if (repos) {
+			console.log(repos);
+			// addEmail(repos.email)
+			navigate('/check-account');
+		}
+		if (error) {
+			const keys = Object.values(error.data);
+
+			setErrMsg(keys.join());
+			console.log(keys.join());
+		}
+	}, [repos, error, /* addEmail, */ navigate]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -47,21 +67,18 @@ export default function LogupPage() {
 		setChecked(!checked);
 	};
 
-	/* const handleSubmit = (e) => {
-		e.preventDefault();
-		navigate('/check-account');
-	}; */
+	const setTitle = () => {
+		if (isLoading) {
+			return 'Создаём аккаунт...';
+		}
+		return 'Создание аккаунта';
+	};
 
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
-				<AuthForm title="Создание аккаунта">
-					<form 
-						className={styles.form} 
-						onSubmit={handleSubmit(onSubmit)}
-						/* isValid={isValid} */
-					>
-
+				<AuthForm title={setTitle()}>
+					<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 						<InputForm
 							type="text"
 							{...register('email', {
@@ -93,6 +110,7 @@ export default function LogupPage() {
 							errors={errors}
 							autoComplete="on"
 							label="Пароль"
+							error={errMsg}
 						/>
 						<div className={styles.checkboxContainer}>
 							<button
@@ -112,10 +130,10 @@ export default function LogupPage() {
 								</Link>
 							</p>
 						</div>
-						<Button 
-							type="submit" 
-							text="Продолжить" 
-							disabled={!isValid || !checked}
+						<Button
+							type="submit"
+							text={isLoading ? 'Загрузка...' : 'Продолжить'}
+							disabled={!isValid || !checked || isLoading}
 						/>
 						<p className={styles.orPar}>
 							<span>или</span>

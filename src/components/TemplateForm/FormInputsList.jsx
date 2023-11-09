@@ -1,11 +1,12 @@
 import React from 'react';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './Form.module.sass';
-import CustomInput from '../../components/UI/CustomInput';
-import {largeSize} from '../../utils/constants';
+import CustomInput from '../UI/CustomInput';
+import { largeSize } from '../../utils/constants';
 
 // eslint-disable-next-line react/prop-types
-const TemplateForm = ({ data }) => {
+const FormInputsList = ({ data }) => {
+	// Первым циклом он рендерит секции с инпутами, вложенный в них цикл рендерит сами инпуты
 	const a = 123;
 	return (
 		<ol className={styles.list}>
@@ -27,25 +28,8 @@ const TemplateForm = ({ data }) => {
 					))}
 				</li>
 			))}
-			{/* eslint-disable-next-line react/prop-types */}
-			{data.ungrouped_fields && (
-				<li className={styles.item}>
-					{/* eslint-disable-next-line no-shadow,react/prop-types */}
-					{data.ungrouped_fields.map((item) => (
-						<CustomInput
-							width={largeSize}
-							form="kid-form"
-							type="text"
-							text={item.name}
-							notation={item.hint}
-							key={uuidv4()}
-							id={item.id}
-						/>
-					))}
-				</li>
-			)}
 		</ol>
 	);
 };
 
-export default TemplateForm;
+export default FormInputsList;

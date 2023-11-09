@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './CustomInput.module.sass';
 
 // eslint-disable-next-line react/prop-types

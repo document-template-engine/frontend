@@ -12,7 +12,7 @@ export default function Navbar(props) {
 	}
 
 	function goToSelected() {
-		navigate('/favourite', { replace: true });
+		navigate('/favorite', { replace: true });
 	}
 
 	function goToDrafts() {
@@ -24,7 +24,8 @@ export default function Navbar(props) {
 			<div className={styles.container}>
 				<button
 					className={`${styles.item} ${
-						props.isTemplatePage && styles.itemActive}`}
+						props.isTemplatePage && styles.itemActive
+					}`}
 					onClick={goToTemplates}
 				>
 					Шаблоны
@@ -32,18 +33,18 @@ export default function Navbar(props) {
 				{isLoggedIn && (
 					<button
 						className={`${styles.item} ${
-							props.isFavouriteTamplatesPage && styles.itemActive}`}
+							props.isFavoriteTamplatesPage && styles.itemActive
+						}`}
 						onClick={goToSelected}
 					>
 						Избранное
 					</button>
-
-
 				)}
 				{isLoggedIn && (
 					<button
 						className={`${styles.item} ${
-							props.isDraftsPage && styles.itemActive}`}
+							props.isDraftsPage && styles.itemActive
+						}`}
 						onClick={goToDrafts}
 					>
 						Черновики
@@ -55,7 +56,7 @@ export default function Navbar(props) {
 }
 
 Navbar.propTypes = {
-	isTemplatePage: PropTypes.bool.isRequired,
-	isFavouriteTamplatesPage: PropTypes.bool.isRequired,
-	isDraftsPage: PropTypes.bool.isRequired,
+	isTemplatePage: PropTypes.bool,
+	isFavoriteTamplatesPage: PropTypes.bool,
+	isDraftsPage: PropTypes.bool,
 };

@@ -1,15 +1,21 @@
 .navbar 
     grid-area: navbar
+    position: fixed
+    top: 60px
+    z-index: 0
+    background-color: white
     width: 297px
-    height: calc(100vh - 101px)
+    height: calc(100vh - 85px)
     padding: 20px 10px 0
     border-right: 1px solid #DEDEDE
 
-    @media screen and (max-width: 1400px)
+    @media screen and (max-width: 1370px)
        width: 204px
        padding: 
             left: 12px
             right: 12px 
+       position: fixed
+       top: 45px
 
 .container
     border-bottom: 1px solid #DEDEDE
