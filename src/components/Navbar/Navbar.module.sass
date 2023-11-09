@@ -1,6 +1,6 @@
 .navbar 
     grid-area: navbar
-    position: fixed
+    // position: fixed Больше не нужно
     top: 60px
     z-index: 0
     background-color: white
@@ -14,8 +14,10 @@
        padding: 
             left: 12px
             right: 12px 
-       position: fixed
-       top: 45px
+    //    position: fixed Больше не нужно
+    //    top: 45px
+    @media (max-width:992px) 
+        display: none
 
 .container
     border-bottom: 1px solid #DEDEDE
@@ -27,7 +29,7 @@
         bottom: 8px
 
 .item
-    width: 297px
+    max-width: 100%
     color: #1A1A1A
     font-family: Inter, sans-serif
     font-size: 20px
@@ -42,7 +44,7 @@
     cursor: pointer
 
     @media screen and (max-width: 1400px)
-        width: 204px
+        // max-width: 204px Больше не нужно
         padding: 10px 12px 11px
 
 

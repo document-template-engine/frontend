@@ -1,5 +1,3 @@
-/* eslint-disable no-return-assign */
-
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { forwardRef, useState } from 'react';
@@ -19,7 +17,6 @@ const InputForm = forwardRef(
 			profile,
 			autoComplete,
 			label,
-			error,
 			disabled,
 		},
 		ref
@@ -38,8 +35,6 @@ const InputForm = forwardRef(
 			return type;
 		};
 
-		// const keys = Object.values(error?.data).join();
-
 		return (
 			<div className={styles.container}>
 				<label htmlFor={name} className={styles.label}>
@@ -54,8 +49,7 @@ const InputForm = forwardRef(
 						onChange={onChange}
 						autoComplete={autoComplete}
 						className={`${styles.input}
-
-                            ${errors[name] && styles.input_error}`}
+                            ${errors[name] ? styles.inputError : ''}`}
 					/>
 					{type === 'password' && (
 						<button className={styles.eye} type="button" onClick={handleClick}>
@@ -63,13 +57,11 @@ const InputForm = forwardRef(
 						</button>
 					)}
 
-					<p
-						className={`${styles.error} ${
-							errors && styles.error_active
-						} input-error-${name}`}
-					>
-						{errors[name]?.message || error || ''}
-					</p>
+					{errors && (
+						<span className={`${styles.error} input-error-${name}`}>
+							{errors[name]?.message || ''}
+						</span>
+					)}
 				</div>
 			</div>
 		);
