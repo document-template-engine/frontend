@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import styles from './AuthTemplate.module.scss';
 
 export default function AuthForm({ title, children }) {
 	return (
 		<div className={styles.container}>
-			<Logo variant="Mini" />
+			<Link to="/">
+				<Logo variant="Mini" />
+			</Link>
 			<h1 className={styles.title}>{title}</h1>
 			{children}
 		</div>
