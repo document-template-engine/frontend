@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import styles from './Form.module.sass';
 import FormInputsList from './FormInputsList';
 import ActionBar from '../ActionBar/ActionBar';
-import { useGetTemplateQuery } from '../../store/templates-api/templates.api';
+import {
+	useGetTemplateQuery,
+	useLazyPostTemplateQuery,
+} from '../../store/templates-api/templates.api';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 export default function TemplateForm() {
@@ -19,9 +22,13 @@ export default function TemplateForm() {
 		setIsValid,
 		handleChange,
 	} = useFormAndValidation();
-
+	const [fetch, obj] = useLazyPostTemplateQuery();
 	const handleSubmit = () => {
-		console.log({ formId: data.id, fields: values });
+		fetch({
+			description: data.description,
+			template: data.id,
+			document_fields: values,
+		}).then(console.log);
 	};
 
 	return (
