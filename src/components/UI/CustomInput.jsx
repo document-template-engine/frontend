@@ -47,6 +47,7 @@ export const CustomInput = ({
 					}}
 					name={name.toString()}
 					className={styles.input}
+					pattern={mask} // использование mask в pattern
 				/>
 			</label>
 			<p className={styles.notation}>{errorState}</p>
