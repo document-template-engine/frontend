@@ -106,7 +106,7 @@ export default function LoginPage() {
 							>
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
-							<p style={{ margin: 0 }}>Запомнить пароль</p>
+							<p className={styles.password}>Запомнить пароль</p>
 							<Link
 								to={{ pathname: '/forgot-password' }}
 								className={styles.link}

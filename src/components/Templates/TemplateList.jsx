@@ -1,4 +1,5 @@
 import React from 'react';
+import { useGetTemplatesQuery } from '../../store/templates-api/templates.api';
 import styles from './TemplateList.module.sass';
 import TemplateItem from './TemplateItem';
 
