@@ -7,7 +7,6 @@ import { authApi } from './auth-api/auth.api';
 import { templatesApi } from './templates-api/templates.api';
 import windowWidth from './window-width/windowWidthSlice';
 import { regReducer } from './auth/regSlice';
-import windowWidth from './window-width/windowWidthSlice';
 
 export const store = configureStore({
 	reducer: {
