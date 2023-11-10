@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './CustomInput.module.sass';
 
 // eslint-disable-next-line react/prop-types
-const CustomInput = ({ form, width = 'L', type, text, notation }) => {
+const CustomInput = ({ form, width = 'L', type, text, notation, reg }) => {
 	const [values, setValues] = useState();
 
 	return (
