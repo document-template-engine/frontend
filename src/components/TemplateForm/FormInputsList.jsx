@@ -42,6 +42,7 @@ const FormInputsList = ({ data }) => {
 							notation={item.hint}
 							key={uuidv4()}
 							id={item.id}
+							reg={item.mask}
 						/>
 					))}
 				</li>
