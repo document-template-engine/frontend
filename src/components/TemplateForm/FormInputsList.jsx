@@ -1,55 +1,69 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Form.module.sass';
-import CustomInput from '../UI/CustomInput';
-import { desctopSize, largeSize, midSize } from '../../utils/constants';
-import { changeWindowWidth } from '../../store/window-width/windowWidthSlice';
+import { CustomInput } from '../UI/CustomInput';
 
-// eslint-disable-next-line react/prop-types
-const FormInputsList = ({ data }) => {
-	// Первым циклом он рендерит секции с инпутами, вложенный в них цикл рендерит сами инпуты
-	let a;
-	const windowWidth = useSelector((state) => state.windowWidth.window);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		const handleResize = (event) => {
-			dispatch(changeWindowWidth(event.target.innerWidth));
-		};
-
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
+export default function FormInputsList({
+	data,
+	handleChange,
+	setValues,
+	values,
+	form,
+	isValid,
+	errors,
+}) {
+	const a = 123;
 	return (
 		<ol className={styles.list}>
 			{/* eslint-disable-next-line react/prop-types */}
 			{data.grouped_fields.map((item) => (
-				<li className={styles.item} key={uuidv4()}>
+				<li className={styles.item} key={item.id}>
 					<h2 className={styles.title}>{item.group_name}</h2>
 					{/* eslint-disable-next-line no-shadow */}
 					{item.fields.map((item) => (
 						<CustomInput
-							width={windowWidth > 1400 ? largeSize : desctopSize}
-							form="kid-form"
+							form={form}
 							type="text"
 							text={item.name}
-							notation={item.hint}
-							key={uuidv4()}
+							key={item.id}
 							id={item.id}
-							tag={item.tag}
-							reg={item.mask}
+							mask={item.mask}
+							placeholder={item.hint}
+							name={item.id}
+							value={values[item.id]}
+							onChange={handleChange}
+							setValues={setValues}
+							error={errors}
 						/>
 					))}
 				</li>
 			))}
 		</ol>
 	);
-};
+}
 
-export default FormInputsList;
+FormInputsList.propTypes = {
+	data: PropTypes.shape({
+		grouped_fields: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number,
+				group_name: PropTypes.string,
+				fields: PropTypes.arrayOf(
+					PropTypes.shape({
+						id: PropTypes.number,
+						name: PropTypes.string,
+						hint: PropTypes.string,
+					})
+				).isRequired,
+			})
+		).isRequired,
+	}).isRequired,
+	handleChange: PropTypes.func.isRequired,
+	setValues: PropTypes.func.isRequired,
+	values: PropTypes.shape({}).isRequired,
+	form: PropTypes.string.isRequired,
+	isValid: PropTypes.bool.isRequired,
+	errors: PropTypes.shape({
+		id: PropTypes.string,
+	}).isRequired,
+};

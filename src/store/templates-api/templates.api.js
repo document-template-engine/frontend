@@ -27,7 +27,21 @@ export const templatesApi = createApi({
 				url: `/documents/${id}/favorite/`,
 			}),
 		}),
+		postTemplate: build.query({
+			query: (data) => ({
+				url: `/documents/`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			}),
+		}),
 	}),
 });
 
-export const { useGetTemplatesQuery, useGetTemplateQuery } = templatesApi;
+export const {
+	useGetTemplatesQuery,
+	useGetTemplateQuery,
+	useLazyPostTemplateQuery,
+} = templatesApi;

@@ -1,26 +1,69 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './CustomInput.module.sass';
 
-// eslint-disable-next-line react/prop-types
-const CustomInput = ({ form, width = 'L', type, text, notation }) => {
-	const [values, setValues] = useState();
+export const CustomInput = ({
+	form,
+	type,
+	text,
+	placeholder,
+	value,
+	name,
+	onChange,
+	id,
+	setValues,
+	error,
+	mask,
+}) => {
+	const [errorState, setErrorState] = useState('');
+
+	const applyMask = (inputValue) => {
+		if (mask) {
+			try {
+				const regex = new RegExp(mask);
+				const isValid = regex.test(inputValue);
+				setErrorState(isValid ? '' : 'Введите значение в формате ###-###');
+				return isValid ? inputValue : '';
+			} catch (err) {
+				console.error('Ошибка в регулярном выражении:', err);
+				return inputValue; // или обработайте ошибку так, как вам нужно
+			}
+		}
+		return inputValue;
+	};
 
 	return (
 		<div className={styles.graph}>
 			<label htmlFor={form} className={styles.label}>
-				<p className={styles.title} style={{ width }}>
-					{text}
-				</p>
+				<p className={styles.title}>{text}</p>
 				<input
 					type={type}
-					placeholder=""
+					placeholder={placeholder}
+					value={value || ''}
+					onChange={(e) => {
+						const { value: inputValue } = e.target;
+						const maskedValue = applyMask(inputValue);
+						onChange({ target: { value: maskedValue, name } });
+					}}
+					name={name.toString()}
 					className={styles.input}
-					style={{ width }}
 				/>
 			</label>
-			{notation && <p className={styles.notation}>{notation}</p>}
+			<p className={styles.notation}>{errorState}</p>
 		</div>
 	);
 };
 
-export default CustomInput;
+CustomInput.propTypes = {
+	form: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
+	text: PropTypes.string.isRequired,
+	placeholder: PropTypes.string.isRequired,
+	value: PropTypes.string,
+	name: PropTypes.number.isRequired,
+	onChange: PropTypes.func.isRequired,
+	id: PropTypes.number.isRequired,
+	setValues: PropTypes.func.isRequired,
+	error: PropTypes.shape({}),
+	mask: PropTypes.string,
+};
