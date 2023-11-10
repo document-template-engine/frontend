@@ -10,7 +10,7 @@ const TemplateForm = () => {
 	const { data } = useGetTemplateQuery(id);
 	return (
 		data && (
-			<form className={styles.form}>
+			<div className={styles.form}>
 				<div className={styles.mainWrapper}>
 					<div className={styles.titleWrapper}>
 						<h1 className={styles.title}>{data.name}</h1>
@@ -19,7 +19,7 @@ const TemplateForm = () => {
 					<FormInputsList data={data} />
 				</div>
 				<ActionBar />
-			</form>
+			</div>
 		)
 	);
 };
