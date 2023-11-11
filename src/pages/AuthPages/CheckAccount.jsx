@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 import Modal from '../../components/Modal/Modal';
 import styles from './index.module.scss';
-import { useEmailSelector } from '../../hooks/useAppSelectors';
 
 export default function CheckAccountPage() {
 	const [visible, setVisible] = useState(true);
 	const navigate = useNavigate();
 
+	const emailReducer = useSelector((state) => state.emailReducer);
+
 	const handleClose = () => {
 		setVisible(false);
 		navigate('/templates');
 	};
-
-	// const {email} = useEmailSelector(state => state.regData)
 
 	return (
 		visible && (
@@ -23,7 +23,9 @@ export default function CheckAccountPage() {
 					Назад
 				</Link>
 				<AuthForm title="Подтверждение аккаунта">
-					<p className={styles.parCheck}> Вы успешно зарегестрированы</p>
+					<p
+						className={styles.parCheck}
+					>{`Вы успешно зарегестрированы c почтой ${emailReducer.emailUser}`}</p>
 					{/* <p className={styles.parCheck}>
 						Для активации вашей учетной записи, пожалуйста, перейдите по ссылке
 						отправленной на почту

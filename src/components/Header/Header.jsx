@@ -8,6 +8,7 @@ import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
 import Logo from '../Logo/Logo';
+import { useLogoutMutation } from '../../store/auth-api/auth.api';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -25,10 +26,16 @@ export default function Header() {
 		}
 	};
 
+	// выход из учётной записи
+
+	const [fetchRepos, { error, isLoading, data: repos }] = useLogoutMutation();
+
 	const handleExit = () => {
+		fetchRepos();
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
 		navigate('/signin');
+		localStorage.removeItem('token');
 	};
 
 	const handleClick = () => {

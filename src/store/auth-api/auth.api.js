@@ -5,10 +5,6 @@ export const authApi = createApi({
 	reducerPath: 'auth/api',
 	baseQuery: fetchBaseQuery({
 		baseUrl: BASE_URL,
-		/* prepareHeaders: (headers) => {
-			headers.set('credentials', 'include');
-			return headers;
-		}, */
 	}),
 	endpoints: (build) => ({
 		login: build.query({
@@ -21,9 +17,9 @@ export const authApi = createApi({
 				body: JSON.stringify(data),
 			}),
 		}),
-		logout: build.query({
+		logout: build.mutation({
 			query: () => ({
-				url: `auth/token/logout`,
+				url: `auth/token/logout/`,
 				method: 'POST',
 			}),
 		}),
@@ -37,13 +33,26 @@ export const authApi = createApi({
 				body: JSON.stringify(data),
 			}),
 		}),
+		getUserData: build.query({
+			query: (token) => ({
+				url: `users/me/`,
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: `Token ${token}`,
+				},
+				// body: JSON.stringify(token),
+			}),
+		}),
 	}),
 });
 
 export const {
 	useLoginQuery,
 	useLazyLoginQuery,
-	useLogoutQuery,
-	useLazyLogoutQuery,
+	useGetUserDataQuery,
+	useLazyGetUserDataQuery,
 	useRegisterMutation,
+	useLogoutMutation,
 } = authApi;
