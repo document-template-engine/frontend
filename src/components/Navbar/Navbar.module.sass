@@ -1,54 +1,51 @@
-.navbar 
-    grid-area: navbar
-    // position: fixed Больше не нужно
-    top: 60px
-    z-index: 0
-    background-color: white
-    width: 297px
-    height: calc(100vh - 85px)
-    padding: 20px 10px 0
-    border-right: 1px solid #DEDEDE
+.navbar
+  grid-area: navbar
+  position: fixed
+  top: 60px
+  z-index: 0
+  background-color: white
+  width: 297px
+  height: calc(100vh - 85px)
+  padding: 20px 10px 0
 
-    @media screen and (max-width: 1370px)
-       width: 204px
-       padding: 
-            left: 12px
-            right: 12px 
-    //    position: fixed Больше не нужно
-    //    top: 45px
-    @media (max-width:992px) 
-        display: none
+
+  @media screen and (max-width: 1370px)
+    width: 204px
+    //padding:
+    left: 12px
+    right: 12px
+    top: 45px
+  @media (max-width: 992px)
+    display: none
 
 .container
-    border-bottom: 1px solid #DEDEDE
-    display: flex
-    flex-direction: column
-    row-gap: 4px
-    margin: 0
-    padding: 0
-        bottom: 8px
+  display: flex
+  flex-direction: column
+  row-gap: 4px
+  margin: 0
+  padding: 0
+  bottom: 8px
 
 .item
-    max-width: 100%
-    color: #1A1A1A
-    font-family: Inter, sans-serif
-    font-size: 20px
-    font-style: normal
-    font-weight: 500
-    line-height: 24px
-    text-align: left
-    padding: 10px
-        right: 0
-    background-color: white
-    border: none
-    cursor: pointer
+  max-width: 100%
+  color: #1A1A1A
+  font-family: Inter, sans-serif
+  font-size: 20px
+  font-style: normal
+  font-weight: 500
+  line-height: 24px
+  text-align: left
+  padding: 10px
+  right: 0
+  background-color: white
+  border: none
+  cursor: pointer
 
-    @media screen and (max-width: 1400px)
-        // max-width: 204px Больше не нужно
-        padding: 10px 12px 11px
+  @media screen and (max-width: 1400px)
+    // max-width: 204px Больше не нужно
+    padding: 10px 12px 11px
 
 
-
-.itemActive 
-    background-color: #F2F2F2
-    border-radius: 8px
+.itemActive
+  border-radius: 12px
+  background: rgba(180, 187, 215, 0.10)
