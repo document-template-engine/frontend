@@ -8,6 +8,7 @@ import { useGetTemplateQuery } from '../../store/templates-api/templates.api';
 const TemplateForm = () => {
 	const { id } = useParams();
 	const { data } = useGetTemplateQuery(id);
+
 	return (
 		data && (
 			<div className={styles.form}>

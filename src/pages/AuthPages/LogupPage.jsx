@@ -12,7 +12,6 @@ import InputForm from '../../stories/InputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
 // import { useActions } from '../../hooks/useActions';
 
-
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
 	const [checked, setChecked] = useState(false);
@@ -23,41 +22,39 @@ export default function LogupPage() {
 		formState: { errors, isValid },
 		handleSubmit,
 		reset,
-	  } = useForm({
-		mode: "onChange",
-	  });
-	
-// отправляем запрос на регистрацию пользователя	
-	const [fetchRepos, {error, isLoading, data: repos}] = useRegisterMutation();
-		// const {addEmail} = useActions();
+	} = useForm({
+		mode: 'onChange',
+	});
+
+	// отправляем запрос на регистрацию пользователя
+	const [fetchRepos, { error, isLoading, data: repos }] = useRegisterMutation();
+	// const {addEmail} = useActions();
 
 	const onSubmit = (data) => {
-		fetchRepos(data)
-	  };
-	
-	  useEffect(() => {
+		fetchRepos(data);
+	};
+
+	useEffect(() => {
 		reset({
-		  email: "",
-		  password: "",
+			email: '',
+			password: '',
 		});
-	  }, [reset]);
+	}, [reset]);
 
+	// обработка ошибок с скрвера
+	const [errMsg, setErrMsg] = useState('');
 
-// обработка ошибок с скрвера
-	const [errMsg, setErrMsg] = useState('')
-
-	  useEffect(() => {
+	useEffect(() => {
 		if (repos) {
 			// addEmail(repos.email)
-			navigate('/check-account')
+			navigate('/check-account');
 		}
 		if (error) {
-
 			const keys = Object.values(error.data);
 
-			setErrMsg(keys.join())
+			setErrMsg(keys.join());
 		}
-	  }, [repos, error, /* addEmail, */ navigate]);
+	}, [repos, error, /* addEmail, */ navigate]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -69,20 +66,17 @@ export default function LogupPage() {
 	};
 
 	const setTitle = () => {
-		if (isLoading) {return "Создаём аккаунт..."}
-		return "Создание аккаунта"
-	}
-
+		if (isLoading) {
+			return 'Создаём аккаунт...';
+		}
+		return 'Создание аккаунта';
+	};
 
 	return (
 		visible && (
 			<Modal hasOverlay handleClose={handleClose}>
 				<AuthForm title={setTitle()}>
-					<form 
-						className={styles.form} 
-						onSubmit={handleSubmit(onSubmit)}
-					>
-
+					<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 						<InputForm
 							type="text"
 							{...register('email', {
@@ -134,9 +128,9 @@ export default function LogupPage() {
 								</Link>
 							</p>
 						</div>
-						<Button 
-							type="submit" 
-							text={isLoading? "Загрузка..." : "Продолжить"} 
+						<Button
+							type="submit"
+							text={isLoading ? 'Загрузка...' : 'Продолжить'}
 							disabled={!isValid || !checked || isLoading}
 						/>
 						<p className={styles.orPar}>
