@@ -7,6 +7,8 @@ import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
+import { useActions } from '../../hooks/useActions';
+// import {change} from '../../store/search-query/search-query.slice'
 import Logo from '../Logo/Logo';
 
 export default function Header() {
@@ -15,6 +17,7 @@ export default function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
+	const { changeSearchQuery } = useActions();
 
 	const toggleUserButtonState = (e) => {
 		e.stopPropagation();
@@ -35,6 +38,10 @@ export default function Header() {
 		setIsUserMenuVisible(false);
 	};
 
+	function changeInputValue(e) {
+		dispatch(changeSearchQuery(e.target.value));
+	}
+
 	return (
 		<header className={styles.header}>
 			<Link className={styles.header__icon} to="/">
@@ -48,6 +55,7 @@ export default function Header() {
 						type="text"
 						name="search"
 						placeholder="Поиск..."
+						onChange={changeInputValue}
 					/>
 				</fieldset>
 			</form>
