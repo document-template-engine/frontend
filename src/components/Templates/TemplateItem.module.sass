@@ -7,6 +7,8 @@
   border: 1px solid #B4BBD7
   box-shadow: 0 2px 20px 0 rgba(180, 187, 215, 0.10)
   overflow: clip
+  //background-color: #EAEAEA
+
   &:hover .favIcon
     visibility: visible
 
@@ -14,7 +16,8 @@
   .item
     height: 214px
     width: 218px
-@media (max-width:550px) 
+
+@media (max-width: 550px)
   .item
     flex: 0 1 162px
 
@@ -29,11 +32,12 @@
   .img
     // width: 218px
     height: 135px
-@media (max-width:768px) 
+
+@media (max-width: 768px)
   .img
     max-width: 100%
     flex: 1 1 100%
- 
+
 
 .imgWrapper
   position: relative
@@ -79,10 +83,10 @@
 
 .favIconLiked
   visibility: visible
-  background-image: url("../../images/template-icon.svg")
+  background-image: url("../../images/template-icon-liked.svg")
 
 .favIconNotLiked
-  background-image: url("../../images/template-icon-liked.svg")
+  background-image: url("../../images/template-icon-not-liked.svg")
 
 .favIcon
   cursor: pointer

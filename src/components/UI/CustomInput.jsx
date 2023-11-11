@@ -58,7 +58,10 @@ export const CustomInput = ({
 	return (
 		<div className={styles.graph}>
 			<label htmlFor={form} className={styles.label}>
-				<p className={styles.title}>{text}</p>
+				<div className={styles.textWrapper}>
+					<p className={styles.title}>{text}</p>
+					<p className={styles.notation}>{placeholder}</p>
+				</div>
 				<input
 					type={type}
 					placeholder=""
@@ -70,7 +73,6 @@ export const CustomInput = ({
 					className={getInputStyle(length)}
 				/>
 			</label>
-			<p className={styles.notation}>{placeholder}</p>
 		</div>
 	);
 };
