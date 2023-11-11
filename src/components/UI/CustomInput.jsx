@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './CustomInput.module.sass';
 
@@ -15,23 +15,10 @@ export const CustomInput = ({
 	error,
 	mask,
 }) => {
-	const [errorState, setErrorState] = useState('');
-
-	const applyMask = (inputValue) => {
-		if (mask) {
-			try {
-				const regex = new RegExp(mask);
-				const isValid = regex.test(inputValue);
-				setErrorState(isValid ? '' : 'Введите значение в формате ###-###');
-				return isValid ? inputValue : '';
-			} catch (err) {
-				console.error('Ошибка в регулярном выражении:', err);
-				return inputValue; // или обработайте ошибку так, как вам нужно
-			}
-		}
-		return inputValue;
-	};
-
+	const a = 123;
+	if (mask) {
+		console.log(placeholder, mask);
+	}
 	return (
 		<div className={styles.graph}>
 			<label htmlFor={form} className={styles.label}>
@@ -41,16 +28,14 @@ export const CustomInput = ({
 					placeholder={placeholder}
 					value={value || ''}
 					onChange={(e) => {
-						const { value: inputValue } = e.target;
-						const maskedValue = applyMask(inputValue);
-						onChange({ target: { value: maskedValue, name } });
+						onChange(e);
 					}}
 					name={name.toString()}
 					className={styles.input}
-					pattern={mask} // использование mask в pattern
+					pattern={mask}
 				/>
 			</label>
-			<p className={styles.notation}>{errorState}</p>
+			<p className={styles.notation}>Здесь будет ошибка</p>
 		</div>
 	);
 };

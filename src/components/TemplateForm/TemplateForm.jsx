@@ -21,6 +21,7 @@ export default function TemplateForm() {
 		isValid,
 		setIsValid,
 		handleChange,
+		formRef,
 	} = useFormAndValidation();
 	const [fetch, obj] = useLazyPostTemplateQuery();
 	const handleSubmit = () => {
@@ -39,6 +40,7 @@ export default function TemplateForm() {
 					e.preventDefault();
 					handleSubmit();
 				}}
+				ref={formRef}
 			>
 				<div className={styles.mainWrapper}>
 					<div className={styles.titleWrapper}>
