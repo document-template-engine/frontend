@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,11 @@ export default function Header() {
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 	const { changeSearchQuery } = useActions();
+
+	useEffect(() => {
+		changeSearchQuery('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const toggleUserButtonState = (e) => {
 		e.stopPropagation();
@@ -39,7 +44,7 @@ export default function Header() {
 	};
 
 	function changeInputValue(e) {
-		dispatch(changeSearchQuery(e.target.value));
+		changeSearchQuery(e.target.value);
 	}
 
 	return (

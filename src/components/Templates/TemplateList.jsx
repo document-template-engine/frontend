@@ -34,6 +34,7 @@ const TemplateList = ({ data }) => {
 						isFav={item.is_favorited}
 						image={item.image}
 						key={item.id}
+						id={item.id}
 					/>
 				))}
 		</ul>
