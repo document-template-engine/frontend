@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import styles from './CustomInput.module.sass';
 
 export const CustomInput = ({
@@ -14,10 +15,45 @@ export const CustomInput = ({
 	setValues,
 	error,
 	mask,
+	length,
 }) => {
 	const a = 123;
+
+	const getInputStyle = (symbols) => {
+		if (!symbols) {
+			return styles.input;
+		}
+		if (symbols > 90) {
+			return clsx(styles.input, styles.inputLarge);
+		}
+		if (symbols > 40) {
+			return clsx(styles.input, styles.inputMid);
+		}
+		if (symbols > 1) {
+			return clsx(styles.input, styles.inputShort);
+		}
+		return clsx(styles.input, styles.inputMid);
+	};
 	if (mask) {
-		console.log(placeholder, mask);
+		return (
+			<div className={styles.graph}>
+				<label htmlFor={form} className={styles.label}>
+					<p className={styles.title}>{text}</p>
+					<input
+						type={type}
+						placeholder={placeholder}
+						value={value || ''}
+						onChange={(e) => {
+							onChange(e);
+						}}
+						name={name.toString()}
+						className={getInputStyle(length)}
+						pattern={mask}
+					/>
+				</label>
+				<p className={styles.notation}>Здесь будет ошибка</p>
+			</div>
+		);
 	}
 	return (
 		<div className={styles.graph}>
@@ -25,17 +61,16 @@ export const CustomInput = ({
 				<p className={styles.title}>{text}</p>
 				<input
 					type={type}
-					placeholder={placeholder}
+					placeholder=""
 					value={value || ''}
 					onChange={(e) => {
 						onChange(e);
 					}}
 					name={name.toString()}
-					className={styles.input}
-					pattern={mask}
+					className={getInputStyle(length)}
 				/>
 			</label>
-			<p className={styles.notation}>Здесь будет ошибка</p>
+			<p className={styles.notation}>{placeholder}</p>
 		</div>
 	);
 };
@@ -52,4 +87,5 @@ CustomInput.propTypes = {
 	setValues: PropTypes.func.isRequired,
 	error: PropTypes.shape({}),
 	mask: PropTypes.string,
+	length: PropTypes.number,
 };
