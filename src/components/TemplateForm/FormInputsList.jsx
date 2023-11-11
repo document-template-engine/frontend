@@ -13,12 +13,13 @@ export default function FormInputsList({
 	errors,
 }) {
 	const a = 123;
+
 	return (
 		<ol className={styles.list}>
 			{/* eslint-disable-next-line react/prop-types */}
 			{data.grouped_fields.map((item) => (
 				<li className={styles.item} key={item.id}>
-					<h2 className={styles.title}>{item.group_name}</h2>
+					<h2 className={styles.title}>{item.name}</h2>
 					{/* eslint-disable-next-line no-shadow */}
 					{item.fields.map((item) => (
 						<CustomInput
@@ -34,6 +35,7 @@ export default function FormInputsList({
 							onChange={handleChange}
 							setValues={setValues}
 							error={errors}
+							length={item.length}
 						/>
 					))}
 				</li>
