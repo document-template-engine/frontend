@@ -24,11 +24,21 @@ export default function TemplateForm() {
 		formRef,
 	} = useFormAndValidation();
 	const [fetch, obj] = useLazyPostTemplateQuery();
+
+	const sortValues = (valuesObject) => {
+		const keys = Object.keys(valuesObject);
+		const result = keys.map((item) => ({
+			value: valuesObject[item],
+			field: item,
+		}));
+		return result;
+	};
 	const handleSubmit = () => {
 		fetch({
 			description: data.description,
+			completed: true,
 			template: data.id,
-			document_fields: values,
+			document_fields: sortValues(values),
 		}).then(console.log);
 	};
 
