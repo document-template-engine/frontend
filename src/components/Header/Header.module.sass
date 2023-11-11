@@ -1,91 +1,91 @@
-.header 
-    grid-area: header
-    position: fixed
-    z-index: 1
-    background-color: white
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    margin: auto
-        top: 0
-        bottom: 0
-    padding: auto
-        left: 20px
-        right: 20px
-    width: calc(100% - 40px) 
-    max-width: 1920px
-    border-bottom: 1px solid rgb(222, 222, 222)
+.header
+  grid-area: header
+  position: fixed
+  z-index: 1
+  background-color: white
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  margin: auto
+    top: 0
+    bottom: 0
+    left: 20px
+    right: 20px
+  width: calc(100% - 40px)
+  max-width: 1920px
+//border-bottom: 1px solid rgb(222, 222, 222)
 
-.header__icon 
-    margin: auto
-        left: 0
-        right: 0
+.header__icon
+  margin: auto
+    left: 0
+    right: 0
 
 
-.header__form 
-    margin: auto
-        left: 195px
+.header__form
+  margin: auto
+    left: 195px
 
 
 .header__search-form
-    width: 355px
-    height: 38px
-    display: flex
-    flex-direction: row
-    column-gap: 4px
-    margin: 0
-    padding: 0
-    border: none
-    posotoin: relative
+  width: 355px
+  height: 38px
+  display: flex
+  flex-direction: row
+  column-gap: 4px
+  margin: 0
+  padding: 0
+  border: none
+  position: relative
 
 .header__search-icon
-    background-image: url(../../images/search_icon.svg)
-    margin: auto
-        left: 13px
-        right: 0
-    width: 24px
-    height: 24px
+  background-image: url(../../images/search_icon.svg)
+  margin: auto
+    left: 13px
+    right: 0
+  width: 24px
+  height: 24px
 
 .header__input
-    position: absolute
-    width: 310px
-    height: 32px
-    border-radius: 24px
-    border: 1px solid #7A7A7A
-    background-color: transparent
-    margin:0
-    padding: 0
-        left: 41px
-        top: 3px
-    cursor: pointer
-   
-    font-family: SF-Pro
-    font-size: 16px
-    font-weight: 500
-    line-height: 20px
+  position: absolute
+  width: 310px
+  height: 32px
+  border-radius: 24px
+  border: 1px solid #7A7A7A
+  background-color: transparent
+  margin: 0
+  padding: 0
+    left: 41px
+    top: 3px
+  cursor: pointer
 
-    opacity: .5
+  font-family: SF-Pro, sans-serif
+  font-size: 16px
+  font-weight: 500
+  line-height: 20px
+
+  opacity: .5
 
 
-    &::placeholder
-        color: #BABABA
-    
-    &:hover
-        opacity: 1
-    
-    &:focus
-        outline-color: #0019FF
-        outline-width: 2px
-    
+  &::placeholder
+    color: #BABABA
+
+  &:hover
+    opacity: 1
+
+  &:focus
+    outline-color: #0019FF
+    outline-width: 2px
+
 
 .header__user-container
-    margin: auto
-        left: 0
-        right: 0
-    display: flex
-    flex-direction: row
-    align-items: center
-    column-gap: 12px
+  margin: auto
+    left: 0
+    right: 0
+  display: flex
+  flex-direction: row
+  align-items: center
+  column-gap: 12px
 
 // .header__info-button - на случай возвращения кнопки помощи 
 //     background-image: url(../../images/faq_icon.svg)
@@ -96,129 +96,129 @@
 //     background-color: transparent
 
 .header__user-button
-    width: 52px
-    height: 52px
-    border-radius: 50%
-    padding: 0
-    border: none
-    background-color: #0941D2
-    overflow: hidden
-    color: #FFF
-    font-size: 20px
-    font-style: normal
-    font-weight: 400
-    line-height: normal
-    cursor: pointer
+  width: 52px
+  height: 52px
+  border-radius: 50%
+  padding: 0
+  border: none
+  background-color: #0941D2
+  overflow: hidden
+  color: #FFF
+  font-size: 20px
+  font-style: normal
+  font-weight: 400
+  line-height: normal
+  cursor: pointer
 
-    &:focus 
-        outline: none
+  &:focus
+    outline: none
 
-.header__login-button 
-    width: 117px
-    height: 51px
-    padding: 12px 31px
-    border-radius: 24px
-    border: 1px solid #131313
-    background-color: transparent
-    font-family: SF-Pro
-    font-size: 23px
-    font-weight: 400
-    line-height: 28px 
-    cursor: pointer
+.header__login-button
+  width: 117px
+  height: 51px
+  padding: 12px 31px
+  border-radius: 24px
+  border: 1px solid #131313
+  background-color: transparent
+  font-family: SF-Pro, sans-serif
+  font-size: 23px
+  font-weight: 400
+  line-height: 28px
+  cursor: pointer
 
-    &:hover 
-        background-color: #666
-        color: white
-    
-    &:focus 
-        background-color: black
-        color: transparent
-        background-image: url(../../images/load_icon.svg)
-        background-repeat: no-repeat
-        background-position: center
+  &:hover
+    background-color: #666
+    color: white
+
+  &:focus
+    background-color: black
+    color: transparent
+    background-image: url(../../images/load_icon.svg)
+    background-repeat: no-repeat
+    background-position: center
 
 div.header__modal-container
-    display: grid
-    grid-template-columns: 30px 210px
-    grid-template-rows: 30px 1px 30px
-    column-gap: 4px
-    row-gap: 8px
-    align-items: center
-    padding: 20px 16px
-    border: 1px solid #0014C7
-    border-radius: 12px
-    right: 20px
-    top: 85px
+  display: grid
+  grid-template-columns: 30px 210px
+  grid-template-rows: 30px 1px 30px
+  column-gap: 4px
+  row-gap: 8px
+  align-items: center
+  padding: 20px 16px
+  border: 1px solid #0014C7
+  border-radius: 12px
+  right: 20px
+  top: 85px
 
 .header__modal-info
-    margin: 0
-    font-family: Inter
-    font-size: 16px
-    font-style: normal
-    font-weight: 400
-    line-height: normal
+  margin: 0
+  font-family: Inter, sans-serif
+  font-size: 16px
+  font-style: normal
+  font-weight: 400
+  line-height: normal
 
 .header__modal-exit-button
-    background-color: transparent
-    border: none
-    padding: 0
-    text-align: left
-    cursor: pointer
+  background-color: transparent
+  border: none
+  padding: 0
+  text-align: left
+  cursor: pointer
 
-    &:focus-visible
-        outline: none
+  &:focus-visible
+    outline: none
 
 .header__modal-divider
-     grid-column: 1/-1
-     height: 1px
-     background-color: #EAEAEA
+  grid-column: 1/-1
+  height: 1px
+  background-color: #EAEAEA
 
 @media screen and (max-width: 1368px)
-    .header
-        padding: 10px 20px
+  .header
+    padding: 10px 20px
 
-    .header__icon 
-        background-size: 112px 45px
-        width: 163px
-        height: 45px
+  .header__icon
+    background-size: 112px 45px
+    width: 163px
+    height: 45px
 
-    .header__form 
-        margin: auto
-            left: 70px
-    
-    .header__search-form
-        width: 280px
+  .header__form
+    margin: auto
+      left: 70px
+
+  .header__search-form
+    width: 280px
 
 
-    .header__input
-        width: 240px
+  .header__input
+    width: 240px
 
-    .header__login-button 
-        width: 90px
-        height: 40px
-        margin-left: 20px
-        display: flex
-        justify-content: center
-        align-items: center
+  .header__login-button
+    width: 90px
+    height: 40px
+    margin-left: 20px
+    display: flex
+    justify-content: center
+    align-items: center
 
-    .header__user-button
-        width: 40px
-        height: 40px
+  .header__user-button
+    width: 40px
+    height: 40px
 
 @media screen and (max-width: 1000px)
-    .header__form 
-        margin: auto
-            left: 75px
-    
-    .header__login-button 
-        margin-left: 20px
+  .header__form
+    margin: auto
+      left: 75px
 
-@media (max-width:682px) 
-    .header__form 
-        display: none
-    
-    .header__login-button 
-        font-size: 14px
-        width: 73px
-        height: 36px
+  .header__login-button
+    margin-left: 20px
+
+@media (max-width: 682px)
+  .header__form
+    display: none
+
+  .header__login-button
+    font-size: 14px
+    width: 73px
+    height: 36px
     
