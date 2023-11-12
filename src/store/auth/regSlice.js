@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const regSlice = createSlice({
-	name: 'regData',
-	initialState: {
-		email: '',
-	},
+export const emailSlice = createSlice({
+	name: 'authEmail',
+	initialState: {},
 	reducers: {
-		addEmail(state, action) {
-			state.email = action.payload;
+		addEmail: (state, action) => {
+			const email = action.payload;
+			state.emailUser = email;
 		},
 	},
 });
 
-export const { regActions } = regSlice.actions;
-export const regReducer = regSlice.reducer;
+export const emailActions = emailSlice.actions;
+export const emailReducer = emailSlice.reducer;

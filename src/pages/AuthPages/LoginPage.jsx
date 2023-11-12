@@ -31,8 +31,6 @@ export default function LoginPage() {
 
 	const onSubmit = (data) => {
 		fetchRepos(data);
-		// navigate('/check-account')
-		// registrationUser(data);
 	};
 
 	useEffect(() => {
@@ -50,6 +48,7 @@ export default function LoginPage() {
 			// localStorage.setItem('token', repos.auth_token)
 			console.log(repos);
 			dispatch(signIn());
+			localStorage.setItem('token', repos.auth_token);
 			navigate('/templates');
 		}
 		if (error) {

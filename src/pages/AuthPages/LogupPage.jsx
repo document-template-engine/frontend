@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 // import Input from '../../stories/Input/Input';
@@ -10,7 +11,7 @@ import styles from './index.module.scss';
 import Button from '../../stories/Button/Button';
 import InputForm from '../../stories/InputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
-// import { useActions } from '../../hooks/useActions';
+import { useActions } from '../../hooks/useActions';
 
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
@@ -28,7 +29,9 @@ export default function LogupPage() {
 
 	// отправляем запрос на регистрацию пользователя
 	const [fetchRepos, { error, isLoading, data: repos }] = useRegisterMutation();
-	// const {addEmail} = useActions();
+
+	// сохраняем почту в actions
+	const { addEmail } = useActions();
 
 	const onSubmit = (data) => {
 		fetchRepos(data);
@@ -41,20 +44,20 @@ export default function LogupPage() {
 		});
 	}, [reset]);
 
-	// обработка ошибок с скрвера
+	// обработка ошибок с сервера
 	const [errMsg, setErrMsg] = useState('');
 
 	useEffect(() => {
 		if (repos) {
-			// addEmail(repos.email)
 			navigate('/check-account');
+			addEmail(repos.email);
 		}
 		if (error) {
 			const keys = Object.values(error.data);
 
 			setErrMsg(keys.join());
 		}
-	}, [repos, error, /* addEmail, */ navigate]);
+	}, [repos, error, navigate, addEmail]);
 
 	const handleClose = () => {
 		setVisible(false);

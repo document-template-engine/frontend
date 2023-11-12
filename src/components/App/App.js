@@ -1,5 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
-import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
+import { useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
+import { useDispatch } from 'react-redux';
 import DraftsTemplates from '../../pages/DraftsTemplates';
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
@@ -11,8 +14,32 @@ import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
 import NotFound from '../NotFound/NotFound';
 import FormPage from '../../pages/FormPage';
+import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
+import { signIn } from '../../store/auth/authSlice';
 
 function App() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [fetchRepos, { error, isLoading, data: repos }] =
+		useLazyGetUserDataQuery();
+
+	const checkToken = () => {
+		const token = localStorage.getItem('token');
+		console.log(token);
+		if (token) {
+			fetchRepos(token);
+			dispatch(signIn());
+			navigate('/templates');
+		} else {
+			navigate('/');
+		}
+	};
+
+	useEffect(() => {
+		checkToken();
+	}, []);
+
 	return (
 		<div className="pages">
 			<Routes>

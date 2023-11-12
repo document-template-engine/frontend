@@ -8,6 +8,7 @@ const actions = {
 	...popupActions,
 	regActions,
 	...searchQueryActions,
+	...emailActions,
 };
 
 export const useActions = () => {

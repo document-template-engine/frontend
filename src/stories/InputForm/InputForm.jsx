@@ -58,7 +58,7 @@ const InputForm = forwardRef(
 					/>
 					{type === 'password' && (
 						<button className={styles.eye} type="button" onClick={handleClick}>
-							<img src={isShowed ? eyeHidden : eye} alt="hide" />
+							<img src={isShowed ? eye : eyeHidden} alt="hide" />
 						</button>
 					)}
 

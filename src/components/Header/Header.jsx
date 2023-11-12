@@ -10,6 +10,7 @@ import { signOut } from '../../store/auth/authSlice';
 import { useActions } from '../../hooks/useActions';
 // import {change} from '../../store/search-query/search-query.slice'
 import Logo from '../Logo/Logo';
+import { useLogoutMutation } from '../../store/auth-api/auth.api';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -33,10 +34,17 @@ export default function Header() {
 		}
 	};
 
+	// выход из учётной записи
+
+	const [fetchRepos, { error, isLoading, data: repos }] = useLogoutMutation();
+
 	const handleExit = () => {
+		const token = localStorage.getItem('token');
+		fetchRepos(token);
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
 		navigate('/signin');
+		localStorage.removeItem('token');
 	};
 
 	const handleClick = () => {
