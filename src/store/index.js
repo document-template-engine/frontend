@@ -3,6 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import userReducer from './user/userSlice';
 import authReducer from './auth/authSlice';
 import { popupReducer } from './popup/popup.slice';
+import { searchQueryReducer } from './search-query/search-query.slice';
 import { authApi } from './auth-api/auth.api';
 import { templatesApi } from './templates-api/templates.api';
 import windowWidth from './window-width/windowWidthSlice';
@@ -16,6 +17,8 @@ export const store = configureStore({
 		auth: authReducer,
 		popup: popupReducer,
 		windowWidth,
+		regEmail: regReducer,
+		search: searchQueryReducer,
 		emailReducer,
 	},
 	middleware: (getDefaultMiddleware) =>

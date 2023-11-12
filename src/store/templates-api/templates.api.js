@@ -17,6 +17,16 @@ export const templatesApi = createApi({
 				url: `templates/${id}/`,
 			}),
 		}),
+		// postTemplateFavorite: build.query({
+		// 	query: (id) => ({
+		// 		url: `templates/${id}/favorite/`,
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			'Authorization': localStorage.getItem('token')
+		// 		},
+		// 	}),
+		// }),
 		// getFavorites: build.query({
 		// 	query: () => ({
 		// 		url: '/favorite',
@@ -44,5 +54,5 @@ export const templatesApi = createApi({
 export const {
 	useGetTemplatesQuery,
 	useGetTemplateQuery,
-	useLazyPostTemplateQuery,
+	//useLazyPostTemplateFavoriteQuery,
 } = templatesApi;

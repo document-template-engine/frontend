@@ -45,6 +45,7 @@ export default function LoginPage() {
 
 	useEffect(() => {
 		if (repos) {
+			// localStorage.setItem('token', repos.auth_token)
 			console.log(repos);
 			dispatch(signIn());
 			localStorage.setItem('token', repos.auth_token);
