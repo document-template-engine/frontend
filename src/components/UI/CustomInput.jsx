@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import styles from './CustomInput.module.sass';
 
 export const CustomInput = ({
@@ -14,42 +15,64 @@ export const CustomInput = ({
 	setValues,
 	error,
 	mask,
+	length,
 }) => {
-	const [errorState, setErrorState] = useState('');
+	const a = 123;
 
-	const applyMask = (inputValue) => {
-		if (mask) {
-			try {
-				const regex = new RegExp(mask);
-				const isValid = regex.test(inputValue);
-				setErrorState(isValid ? '' : 'Введите значение в формате ###-###');
-				return isValid ? inputValue : '';
-			} catch (err) {
-				console.error('Ошибка в регулярном выражении:', err);
-				return inputValue; // или обработайте ошибку так, как вам нужно
-			}
+	const getInputStyle = (symbols) => {
+		if (!symbols) {
+			return styles.input;
 		}
-		return inputValue;
+		if (symbols > 90) {
+			return clsx(styles.input, styles.inputLarge);
+		}
+		if (symbols > 40) {
+			return clsx(styles.input, styles.inputMid);
+		}
+		if (symbols > 1) {
+			return clsx(styles.input, styles.inputShort);
+		}
+		return clsx(styles.input, styles.inputMid);
 	};
-
+	if (mask) {
+		return (
+			<div className={styles.graph}>
+				<label htmlFor={form} className={styles.label}>
+					<p className={styles.title}>{text}</p>
+					<input
+						type={type}
+						placeholder={placeholder}
+						value={value || ''}
+						onChange={(e) => {
+							onChange(e);
+						}}
+						name={name.toString()}
+						className={getInputStyle(length)}
+						pattern={mask}
+					/>
+				</label>
+				<p className={styles.notation}>Здесь будет ошибка</p>
+			</div>
+		);
+	}
 	return (
 		<div className={styles.graph}>
 			<label htmlFor={form} className={styles.label}>
-				<p className={styles.title}>{text}</p>
+				<div className={styles.textWrapper}>
+					<p className={styles.title}>{text}</p>
+					<p className={styles.notation}>{placeholder}</p>
+				</div>
 				<input
 					type={type}
-					placeholder={placeholder}
+					placeholder=""
 					value={value || ''}
 					onChange={(e) => {
-						const { value: inputValue } = e.target;
-						const maskedValue = applyMask(inputValue);
-						onChange({ target: { value: maskedValue, name } });
+						onChange(e);
 					}}
 					name={name.toString()}
-					className={styles.input}
+					className={getInputStyle(length)}
 				/>
 			</label>
-			<p className={styles.notation}>{errorState}</p>
 		</div>
 	);
 };
@@ -66,4 +89,5 @@ CustomInput.propTypes = {
 	setValues: PropTypes.func.isRequired,
 	error: PropTypes.shape({}),
 	mask: PropTypes.string,
+	length: PropTypes.number,
 };

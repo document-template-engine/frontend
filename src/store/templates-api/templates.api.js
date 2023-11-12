@@ -33,6 +33,7 @@ export const templatesApi = createApi({
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					Authorization: 'Token bb4f5dbedaafd2730f35803e7087e797479d68f5', // потом заменим на валидный токен, это тестовый
 				},
 				body: JSON.stringify(data),
 			}),
