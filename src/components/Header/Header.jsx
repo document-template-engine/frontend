@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,6 @@ import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
-import { useActions } from '../../hooks/useActions';
-// import {change} from '../../store/search-query/search-query.slice'
 import Logo from '../Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
 
@@ -18,12 +16,6 @@ export default function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
-	const { changeSearchQuery } = useActions();
-
-	useEffect(() => {
-		changeSearchQuery('');
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const toggleUserButtonState = (e) => {
 		e.stopPropagation();
@@ -51,10 +43,6 @@ export default function Header() {
 		setIsUserMenuVisible(false);
 	};
 
-	function changeInputValue(e) {
-		changeSearchQuery(e.target.value);
-	}
-
 	return (
 		<header className={styles.header}>
 			<Link className={styles.header__icon} to="/">
@@ -67,9 +55,7 @@ export default function Header() {
 						className={styles.header__input}
 						type="text"
 						name="search"
-						onChange={changeInputValue}
 						placeholder="Поиск"
-
 					/>
 				</fieldset>
 			</form>

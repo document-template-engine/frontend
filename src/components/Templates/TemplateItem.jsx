@@ -2,19 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './TemplateItem.module.sass';
 import zaglushka from '../../images/template-cross.svg';
-// import {useLazyPostTemplateFavoriteQuery} from '../../store/templates-api/templates.api'
 
 // eslint-disable-next-line react/prop-types
-const TemplateItem = ({ title, link, image, isFav, id }) => {
+const TemplateItem = ({ title, link, image, isFav }) => {
 	const [isFavorite, setIsFavorite] = useState(isFav);
 
-	// const [fetch] = useLazyPostTemplateFavoriteQuery()
-
 	const buttonStyle = isFavorite ? styles.favIconLiked : styles.favIconNotLiked;
-
-	// function asd () {
-	// 	fetch(id)
-	// }
 
 	return (
 		// Это элемент списка шаблонов(квадратик с названием)
