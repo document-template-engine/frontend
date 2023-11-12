@@ -8,10 +8,11 @@ import {
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import Preloader from '../UI/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();
-	const { data } = useGetTemplateQuery(id);
+	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
 	const {
 		values,
 		setValues,
@@ -42,6 +43,12 @@ export default function TemplateForm() {
 		}).then(console.log);
 	};
 
+	if (isLoading) {
+		return <Preloader />;
+	}
+	if (isError) {
+		return <h1>{error}</h1>;
+	}
 	return (
 		data && (
 			<form
