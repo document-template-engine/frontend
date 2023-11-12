@@ -27,7 +27,22 @@ export const templatesApi = createApi({
 				url: `/documents/${id}/favorite/`,
 			}),
 		}),
+		postTemplate: build.query({
+			query: (data) => ({
+				url: `/documents/`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Token bb4f5dbedaafd2730f35803e7087e797479d68f5', // потом заменим на валидный токен, это тестовый
+				},
+				body: JSON.stringify(data),
+			}),
+		}),
 	}),
 });
 
-export const { useGetTemplatesQuery, useGetTemplateQuery } = templatesApi;
+export const {
+	useGetTemplatesQuery,
+	useGetTemplateQuery,
+	useLazyPostTemplateQuery,
+} = templatesApi;

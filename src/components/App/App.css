@@ -7,8 +7,8 @@
 	grid-template-columns: 317px 1fr;
 	grid-template-rows: 80px 1fr;
 	grid-template-areas:
-		'header header header'
-		'navbar main main ';
+		'header header'
+		'navbar main';
 	max-width: 1920px;
 	width: 100%;
 	margin: auto;
@@ -18,5 +18,15 @@
 	.pages {
 		grid-template-columns: 228px 1fr;
 		grid-template-rows: 60px 1fr;
+	}
+}
+
+@media (max-width: 992px) {
+	.pages {
+		grid-template-columns: 1fr;
+		grid-template-rows: 60px 1fr;
+		grid-template-areas:
+			'header header'
+			'main main';
 	}
 }

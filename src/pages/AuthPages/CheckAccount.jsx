@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 import Modal from '../../components/Modal/Modal';
 import styles from './index.module.scss';
@@ -7,6 +8,8 @@ import styles from './index.module.scss';
 export default function CheckAccountPage() {
 	const [visible, setVisible] = useState(true);
 	const navigate = useNavigate();
+
+	const emailReducer = useSelector((state) => state.emailReducer);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -20,15 +23,18 @@ export default function CheckAccountPage() {
 					Назад
 				</Link>
 				<AuthForm title="Подтверждение аккаунта">
-					<p className={styles.parCheck}>
+					<p
+						className={styles.parCheck}
+					>{`Вы успешно зарегестрированы c почтой ${emailReducer.emailUser}`}</p>
+					{/* <p className={styles.parCheck}>
 						Для активации вашей учетной записи, пожалуйста, перейдите по ссылке
 						отправленной на почту
-						<span>&nbsp;elizavetavarz@gmail.com</span>
+						<span>&nbsp;{email}</span>
 					</p>
 					<p className={styles.parCheck}>
 						Ссылка действует сутки, если вы не подтвердите свою учетную запись
 						за это время - аккаунт будет автоматически удален{' '}
-					</p>
+					</p> */}
 				</AuthForm>
 			</Modal>
 		)

@@ -1,43 +1,41 @@
 .templates
   padding: 60px
   grid-area: main
-
   display: flex
   flex-direction: column
   gap: 28px
-
+  min-height: 60vh
   @media screen and (max-width: 1700px)
-    padding: 28px
-    gap: 20px
+    padding: 40px
+    gap: 16px
+  @media (max-width: 550px)
+    padding: 14px 12px
+
 
 .title
   margin: 0
   color: #000
   font-family: Inter, sans-serif
-
   max-width: 201px
-
   font-size: 32px
   font-style: normal
   font-weight: 500
   line-height: 39px
-
   @media screen and (max-width: 1700px)
     font-size: 28px
+  @media (max-width: 550px)
+    display: none
 
 .list
   margin: 0
   padding: 0 0 37px
-
   list-style: none
-
   display: flex
   gap: 20px
+  flex-wrap: wrap
   //width: fit-content Мне кажется так лучше
-
-  border-bottom: 1px solid #DEDEDE
-
   @media screen and (max-width: 1700px)
     padding-bottom: 16px
-
+  @media (max-width: 550px)
+    gap: 8px
 
