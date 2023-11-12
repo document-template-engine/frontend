@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
-import InputForm from '../../stories/InputForm/InputForm';
-// import Input from '../../stories/Input/Input';
+import InputForm from '../../components/UI/AuthInputForm/InputForm';
+// import Input from '../../component/UI/AuthInput/Input';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
-import Button from '../../stories/Button/Button';
+import Button from '../../components/UI/AuthButton/Button';
 import { signIn } from '../../store/auth/authSlice';
 import { useLazyLoginQuery } from '../../store/auth-api/auth.api';
 

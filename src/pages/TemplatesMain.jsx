@@ -5,7 +5,7 @@ import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
-import Preloader from '../components/UI/Preloader';
+import Preloader from '../components/UI/Preloader/Preloader';
 
 const TemplatesMain = () => {
 	const location = useLocation();

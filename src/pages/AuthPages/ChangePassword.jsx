@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 import Modal from '../../components/Modal/Modal';
-import Input from '../../stories/Input/Input';
+import Input from '../../components/UI/AuthInput/Input';
 import styles from './index.module.scss';
-import Button from '../../stories/Button/Button';
+import Button from '../../components/UI/AuthButton/Button';
 
 export default function ChangePasswordPage() {
 	const [visible, setVisible] = useState(true);

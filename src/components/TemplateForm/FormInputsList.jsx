@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Form.module.sass';
-import { CustomInput } from '../UI/CustomInput';
+import { CustomInput } from '../UI/CustomInput/CustomInput';
 
 export default function FormInputsList({
 	data,

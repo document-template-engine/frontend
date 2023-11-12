@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
-import Logo from '../Logo/Logo';
+import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
 
 export default function Header() {
