@@ -8,7 +8,7 @@ import {
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import Preloader from '../UI/Preloader';
+import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();

@@ -12,7 +12,7 @@ import ForgotPwPage from '../../pages/AuthPages/ForgotPwPage';
 import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
-import NotFound from '../NotFound/NotFound';
+import NotFound from '../../pages/NotFound';
 import FormPage from '../../pages/FormPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { signIn } from '../../store/auth/authSlice';

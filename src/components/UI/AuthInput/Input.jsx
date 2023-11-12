@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Input.module.scss';
-import eye from '../../images/eye-default.svg';
-import eyeHidden from '../../images/eye-hidden.svg';
+import eye from '../../../images/eye-default.svg';
+import eyeHidden from '../../../images/eye-hidden.svg';
 
 export default function Input({ type, label, name, error, placeholder }) {
 	const [isShowed, setIsShowed] = useState(false);

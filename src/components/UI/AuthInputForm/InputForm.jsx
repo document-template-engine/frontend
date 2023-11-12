@@ -3,9 +3,9 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { forwardRef, useState } from 'react';
-import styles from '../Input/Input.module.scss';
-import eye from '../../images/eye-default.svg';
-import eyeHidden from '../../images/eye-hidden.svg';
+import styles from '../AuthInput/Input.module.scss';
+import eye from '../../../images/eye-default.svg';
+import eyeHidden from '../../../images/eye-hidden.svg';
 
 const InputForm = forwardRef(
 	(

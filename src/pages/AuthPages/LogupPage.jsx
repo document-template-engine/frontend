@@ -8,8 +8,8 @@ import AuthForm from '../../components/AuthForm/AuthTemplate';
 // import Input from '../../stories/Input/Input';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
-import Button from '../../stories/Button/Button';
-import InputForm from '../../stories/InputForm/InputForm';
+import Button from '../../components/UI/AuthButton/Button';
+import InputForm from '../../components/UI/AuthInputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 
