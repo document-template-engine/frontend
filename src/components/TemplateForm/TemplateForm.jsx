@@ -13,7 +13,6 @@ import Preloader from '../UI/Preloader';
 export default function TemplateForm() {
 	const { id } = useParams();
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
-
 	const {
 		values,
 		setValues,
