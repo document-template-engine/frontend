@@ -3,36 +3,37 @@
   position: fixed
   z-index: 1
   background-color: white
+
+  min-height: 85px
+
   display: flex
   flex-direction: row
-  justify-content: space-between
+  //justify-content: space-between
   align-items: center
-  margin: auto
-    top: 0
-    bottom: 0
-    left: 20px
-    right: 20px
-  width: calc(100% - 40px)
-  max-width: 1920px
-  box-shadow: 0 4px 26px 0 rgba(180, 187, 215, 0.10)
-//border-bottom: 1px solid rgb(222, 222, 222)
 
-.header__icon
-  margin: auto
+  top: 0
+  left: 0
+  right: 0
+
+  padding: 0 20px
+
+  box-shadow: 0 4px 26px 0 rgba(180, 187, 215, 0.10)
+
+//.header__icon
+  //margin: auto
     left: 0
     right: 0
-
+// Пока у него нет собственных стилей
 
 .header__form
-  margin: auto
-    left: 195px
+  margin-left: 195px
 
 
 .header__search-form
   width: 355px
   height: 38px
   display: flex
-  flex-direction: row
+  align-items: center
   column-gap: 4px
   margin: 0
   padding: 0
@@ -48,11 +49,12 @@
   height: 24px
 
 .header__input
+  box-sizing: border-box
   position: absolute
-  width: 310px
-  height: 32px
-  border-radius: 24px
-  border: 1px solid #7A7A7A
+  width: 355px
+  height: 52px
+  border-radius: 16px
+  border: 1px solid #B4BBD7
   background-color: transparent
   margin: 0
   padding: 0
@@ -70,6 +72,10 @@
 
   &::placeholder
     color: #BABABA
+    font-family: SF Pro Display, sans-serif
+    font-size: 20px
+    font-weight: 400
+    line-height: 20px
 
   &:hover
     opacity: 1
@@ -87,6 +93,7 @@
   flex-direction: row
   align-items: center
   column-gap: 12px
+  margin-left: auto
 
 // .header__info-button - на случай возвращения кнопки помощи 
 //     background-image: url(../../images/faq_icon.svg)
@@ -121,7 +128,7 @@
   width: 117px
   height: 51px
   padding: 12px 31px
-  border-radius: 24px
+  border-radius: 16px
   border: 1px solid #A48DD3
   background-color: transparent
   font-family: SF-Pro, sans-serif
@@ -137,14 +144,14 @@
     border: 1px solid #A48DD3
     background: #A48DD3
     color: white
-  // ETO IS_LOADING
-  //&:focus
-  //  background-color: black
-  //  color: transparent
-  //  background-image: url(../../images/load_icon.svg)
-  //  background-repeat: no-repeat
-  //  background-position: center
-  // ETO IS_LOADING
+// ETO IS_LOADING
+//&:focus
+//  background-color: black
+//  color: transparent
+//  background-image: url(../../images/load_icon.svg)
+//  background-repeat: no-repeat
+//  background-position: center
+// ETO IS_LOADING
 
 div.header__modal-container
   display: grid

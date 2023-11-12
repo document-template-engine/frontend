@@ -47,7 +47,7 @@ export default function Header() {
 						className={styles.header__input}
 						type="text"
 						name="search"
-						placeholder="Поиск..."
+						placeholder="Поиск"
 					/>
 				</fieldset>
 			</form>
