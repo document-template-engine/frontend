@@ -18,9 +18,14 @@ export const authApi = createApi({
 			}),
 		}),
 		logout: build.mutation({
-			query: () => ({
+			query: (token) => ({
 				url: `auth/token/logout/`,
 				method: 'POST',
+				headers: {
+					/* 'Accept': 'application/json', */
+					'Content-Type': 'application/json',
+					Authorization: `Token ${token}`,
+				},
 			}),
 		}),
 		register: build.mutation({

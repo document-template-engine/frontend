@@ -31,7 +31,8 @@ export default function Header() {
 	const [fetchRepos, { error, isLoading, data: repos }] = useLogoutMutation();
 
 	const handleExit = () => {
-		fetchRepos();
+		const token = localStorage.getItem('token');
+		fetchRepos(token);
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
 		navigate('/signin');
