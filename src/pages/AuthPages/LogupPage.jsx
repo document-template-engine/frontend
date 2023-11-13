@@ -53,9 +53,11 @@ export default function LogupPage() {
 			addEmail(repos.email);
 		}
 		if (error) {
-			const keys = Object.values(error.data);
+			const keys = error.status
+				? 'упс... что-то пошло не так, попробуйте позже'
+				: Object.values(error.data).join();
 
-			setErrMsg(keys.join());
+			setErrMsg(keys);
 		}
 	}, [repos, error, navigate, addEmail]);
 
@@ -86,7 +88,7 @@ export default function LogupPage() {
 								required: 'Напишите ваш email',
 								pattern: {
 									value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-									message: 'Напишите правильный адрес электронной почты',
+									message: 'Некорректный формат почты',
 								},
 							})}
 							name="email"
@@ -97,13 +99,19 @@ export default function LogupPage() {
 							type="password"
 							{...register('password', {
 								required: 'Введите пароль',
-								minLength: {
-									value: 4,
-									message: 'Пароль - не менее четырёх символов',
+								/* minLength: {
+									value: 8,
+									message: 'Минимум восемь символов',
 								},
 								maxLength: {
 									value: 40,
 									message: 'Пароль - не более сорок символов',
+								}, */
+								pattern: {
+									value:
+										/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g,
+									message:
+										'Пароль должен состоять 8 символов, 1 спецсимвол, минимум 1 цифру',
 								},
 							})}
 							name="password"
