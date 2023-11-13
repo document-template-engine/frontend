@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './Form.module.sass';
 import FormInputsList from './FormInputsList';
 import ActionBar from '../ActionBar/ActionBar';
@@ -8,19 +9,18 @@ import {
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 /* eslint-disable */
 
 export default function TemplateForm() {
 	const { id } = useParams();
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
 	const [fetch, obj] = useLazyPostTemplateQuery();
-	const handleSubmit = () => {
-		// fetch({
-		// 	description: data.description,
-		// 	completed: true,
-		// 	template: data.id,
-		// 	document_fields: values,
-		// }).then(console.log);
+	const { values, formRef } = useFormAndValidation();
+	const { formData } = useSelector((state) => state.form);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(formData);
 	};
 
 	if (isLoading) {
@@ -32,11 +32,9 @@ export default function TemplateForm() {
 	return (
 		data && (
 			<form
+				ref={formRef}
 				className={styles.form}
-				onSubmit={(e) => {
-					e.preventDefault();
-					handleSubmit();
-				}}
+				onSubmit={handleSubmit}
 				noValidate
 			>
 				<div className={styles.mainWrapper}>
