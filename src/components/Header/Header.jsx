@@ -51,7 +51,6 @@ export default function Header() {
 			<div className={styles.content}>
 				<form className={styles.header__form}>
 					<fieldset className={styles['header__search-form']}>
-						<div className={styles['header__search-icon']} />
 						<input
 							className={styles.header__input}
 							type="text"
@@ -60,7 +59,7 @@ export default function Header() {
 						/>
 					</fieldset>
 				</form>
-				<div className={styles['header__user-container']}>
+				<div>
 					{isLoggedIn ? (
 						<button
 							type="button"
@@ -86,24 +85,28 @@ export default function Header() {
 						handleClose={handleClick}
 						isOverlay={false}
 					>
-						<img
-							className={styles['header__modal-image']}
-							src={profile}
-							alt="email"
-						/>
-						<p className={styles['header__modal-info']}>{email}</p>
+						<div className={styles.container}>
+							<img
+								className={styles['header__modal-image']}
+								src={profile}
+								alt="email"
+							/>
+							<p className={styles['header__modal-info']}>{email}</p>
+						</div>
 						<div className={styles['header__modal-divider']} />
-						<img
-							className={styles['header__modal-image']}
-							src={exitIcon}
-							alt="exit"
-						/>
-						<button
-							className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
-							onClick={handleExit}
-						>
-							Выйти
-						</button>
+						<div className={styles.container}>
+							<img
+								className={styles['header__modal-image']}
+								src={exitIcon}
+								alt="exit"
+							/>
+							<button
+								className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
+								onClick={handleExit}
+							>
+								Выйти
+							</button>
+						</div>
 					</Modal>
 				)}
 			</div>
