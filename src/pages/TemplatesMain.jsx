@@ -23,6 +23,7 @@ const TemplatesMain = () => {
 		);
 	}
 	if (isError) {
+		console.log(error);
 		return (
 			<>
 				<Header />
