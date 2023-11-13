@@ -1,93 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
 import styles from './CustomInput.module.sass';
 
-export const CustomInput = ({
-	form,
-	type,
-	text,
-	placeholder,
-	value,
-	name,
-	onChange,
-	id,
-	setValues,
-	error,
-	mask,
-	length,
-}) => {
-	const a = 123;
-
+/* eslint-disable */
+export const CustomInput = ({ form, data, errors, handleChange }) => {
+	const { name, hint, type, length, mask, id } = data;
+	const values = useSelector((state) => state.values);
 	const getInputStyle = (symbols) => {
-		if (!symbols) {
-			return styles.input;
-		}
-		if (symbols > 90) {
-			return clsx(styles.input, styles.inputLarge);
-		}
-		if (symbols > 40) {
-			return clsx(styles.input, styles.inputMid);
-		}
-		if (symbols > 1) {
-			return clsx(styles.input, styles.inputShort);
-		}
+		if (!symbols) return styles.input;
+		if (symbols > 90) return clsx(styles.input, styles.inputLarge);
+		if (symbols > 40) return clsx(styles.input, styles.inputMid);
+		if (symbols > 1) return clsx(styles.input, styles.inputShort);
 		return clsx(styles.input, styles.inputMid);
 	};
-	if (mask) {
-		return (
-			<div className={styles.graph}>
-				<label htmlFor={form} className={styles.label}>
-					<p className={styles.title}>{text}</p>
-					<input
-						type={type}
-						placeholder={placeholder}
-						value={value || ''}
-						onChange={(e) => {
-							onChange(e);
-						}}
-						name={name.toString()}
-						className={getInputStyle(length)}
-						pattern={mask}
-					/>
-				</label>
-				<p className={styles.notation}>Здесь будет ошибка</p>
-			</div>
-		);
-	}
+
+	// const fieldValue = values.find((item) => item.field === name);
+
 	return (
 		<div className={styles.graph}>
 			<label htmlFor={form} className={styles.label}>
 				<div className={styles.textWrapper}>
-					<p className={styles.title}>{text}</p>
-					<p className={styles.notation}>{placeholder}</p>
+					<p className={styles.title}>{name}</p>
+					{hint && <p className={styles.notation}>{hint}</p>}
 				</div>
 				<input
 					type={type}
 					placeholder=""
-					value={value || ''}
-					onChange={(e) => {
-						onChange(e);
-					}}
+					onChange={handleChange}
+					id={id}
 					name={name.toString()}
-					className={getInputStyle(length)}
+					className={clsx(getInputStyle(length))}
+					{...(mask && { pattern: mask })}
 				/>
 			</label>
+			{/* {errors && errors[name] && <p className={styles.errorText}>Например: {hint}</p>} */}
 		</div>
 	);
-};
-
-CustomInput.propTypes = {
-	form: PropTypes.string.isRequired,
-	type: PropTypes.string.isRequired,
-	text: PropTypes.string.isRequired,
-	placeholder: PropTypes.string.isRequired,
-	value: PropTypes.string,
-	name: PropTypes.number.isRequired,
-	onChange: PropTypes.func.isRequired,
-	id: PropTypes.number.isRequired,
-	setValues: PropTypes.func.isRequired,
-	error: PropTypes.shape({}),
-	mask: PropTypes.string,
-	length: PropTypes.number,
 };

@@ -6,11 +6,13 @@ import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 import Preloader from '../components/UI/Preloader/Preloader';
+import errorImg from '../images/error.jpeg';
 
 const TemplatesMain = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const { data, isLoading, isError, error } = useGetTemplatesQuery();
+
 	if (isLoading) {
 		return (
 			<>
@@ -28,7 +30,11 @@ const TemplatesMain = () => {
 				<Header />
 				<Navbar isTemplatePage />
 				<div className={styles.templates}>
-					<h1 className={styles.title}>{error}</h1>
+					<h1 className={styles.title}>
+						Ошибка:{typeof error.status === 'string' && error.status}
+					</h1>
+					<p>{typeof error.error === 'string' && error.error}</p>
+					<img src={errorImg} alt="error" style={{ maxWidth: '300px' }} />
 				</div>
 			</>
 		);

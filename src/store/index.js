@@ -7,6 +7,7 @@ import { authApi } from './auth-api/auth.api';
 import { templatesApi } from './templates-api/templates.api';
 import windowWidth from './window-width/windowWidthSlice';
 import { emailReducer } from './auth/regSlice';
+import { valuesReducer } from './values/values.slice';
 
 export const store = configureStore({
 	reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
 		popup: popupReducer,
 		windowWidth,
 		emailReducer,
+		values: valuesReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()
