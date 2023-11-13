@@ -5,10 +5,9 @@
   background-color: white
 
   min-height: 85px
-
+  gap: 195px
   display: flex
   flex-direction: row
-  //justify-content: space-between
   align-items: center
 
   top: 0
@@ -25,9 +24,12 @@
     right: 0
 // Пока у него нет собственных стилей
 
-.header__form
-  margin-left: 195px
 
+.content
+  display: flex
+  align-items: center
+  width: 100%
+  justify-content: space-between
 
 .header__search-form
   width: 355px
@@ -95,7 +97,7 @@
   column-gap: 12px
   margin-left: auto
 
-// .header__info-button - на случай возвращения кнопки помощи 
+// .header__info-button - на случай возвращения кнопки помощи
 //     background-image: url(../../images/faq_icon.svg)
 //     width: 32px
 //     height: 32px
@@ -144,6 +146,8 @@
     border: 1px solid #A48DD3
     background: #A48DD3
     color: white
+
+
 // ETO IS_LOADING
 //&:focus
 //  background-color: black
@@ -237,4 +241,4 @@ div.header__modal-container
     font-size: 14px
     width: 73px
     height: 36px
-    
+

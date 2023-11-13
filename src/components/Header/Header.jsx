@@ -48,63 +48,65 @@ export default function Header() {
 			<Link className={styles.header__icon} to="/">
 				<Logo variant="Default" />
 			</Link>
-			<form className={styles.header__form}>
-				<fieldset className={styles['header__search-form']}>
-					<div className={styles['header__search-icon']} />
-					<input
-						className={styles.header__input}
-						type="text"
-						name="search"
-						placeholder="Поиск"
-					/>
-				</fieldset>
-			</form>
-			<div className={styles['header__user-container']}>
-				{isLoggedIn ? (
-					<button
-						type="button"
-						className={styles['header__user-button']}
-						aria-label="Save"
-						onClick={toggleUserButtonState}
+			<div className={styles.content}>
+				<form className={styles.header__form}>
+					<fieldset className={styles['header__search-form']}>
+						<div className={styles['header__search-icon']} />
+						<input
+							className={styles.header__input}
+							type="text"
+							name="search"
+							placeholder="Поиск"
+						/>
+					</fieldset>
+				</form>
+				<div className={styles['header__user-container']}>
+					{isLoggedIn ? (
+						<button
+							type="button"
+							className={styles['header__user-button']}
+							aria-label="Save"
+							onClick={toggleUserButtonState}
+						>
+							{email[0]}
+						</button>
+					) : (
+						<button
+							type="button"
+							className={styles['header__login-button']}
+							onClick={toggleUserButtonState}
+						>
+							Вход
+						</button>
+					)}
+				</div>
+				{isLoggedIn && isUserMenuVisible && (
+					<Modal
+						extraClass={styles['header__modal-container']}
+						handleClose={handleClick}
+						isOverlay={false}
 					>
-						{email[0]}
-					</button>
-				) : (
-					<button
-						type="button"
-						className={styles['header__login-button']}
-						onClick={toggleUserButtonState}
-					>
-						Вход
-					</button>
+						<img
+							className={styles['header__modal-image']}
+							src={profile}
+							alt="email"
+						/>
+						<p className={styles['header__modal-info']}>{email}</p>
+						<div className={styles['header__modal-divider']} />
+						<img
+							className={styles['header__modal-image']}
+							src={exitIcon}
+							alt="exit"
+						/>
+						<button
+							className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
+							onClick={handleExit}
+						>
+							Выйти
+						</button>
+					</Modal>
 				)}
 			</div>
-			{isLoggedIn && isUserMenuVisible && (
-				<Modal
-					extraClass={styles['header__modal-container']}
-					handleClose={handleClick}
-					isOverlay={false}
-				>
-					<img
-						className={styles['header__modal-image']}
-						src={profile}
-						alt="email"
-					/>
-					<p className={styles['header__modal-info']}>{email}</p>
-					<div className={styles['header__modal-divider']} />
-					<img
-						className={styles['header__modal-image']}
-						src={exitIcon}
-						alt="exit"
-					/>
-					<button
-						className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
-						onClick={handleExit}
-					>
-						Выйти
-					</button>
-				</Modal>
-			)}
 		</header>
 	);
 }
