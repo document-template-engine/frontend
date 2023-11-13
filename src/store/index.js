@@ -7,6 +7,7 @@ import { authApi } from './auth-api/auth.api';
 import { templatesApi } from './templates-api/templates.api';
 import windowWidth from './window-width/windowWidthSlice';
 import { emailReducer } from './auth/regSlice';
+import { searchQueryReducer } from './search-query/search-query.slice';
 
 export const store = configureStore({
 	reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
 		user: userReducer,
 		auth: authReducer,
 		popup: popupReducer,
+		search: searchQueryReducer,
 		windowWidth,
 		emailReducer,
 	},
