@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
 import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
+import { useActions } from '../../hooks/useActions';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -16,6 +17,16 @@ export default function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
+	const { changeSearchQuery } = useActions();
+
+	useEffect(() => {
+		changeSearchQuery('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	function changeInputValue(e) {
+		changeSearchQuery(e.target.value);
+	}
 
 	const toggleUserButtonState = (e) => {
 		e.stopPropagation();
@@ -52,6 +63,7 @@ export default function Header() {
 				<form className={styles.header__form}>
 					<fieldset className={styles['header__search-form']}>
 						<input
+						onChange={changeInputValue}
 							className={styles.header__input}
 							type="text"
 							name="search"
