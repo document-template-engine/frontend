@@ -55,7 +55,6 @@ export const CustomInput = ({ data }) => {
 					{...(mask && { pattern: mask })}
 				/>
 			</label>
-			{/* {errors && errors[name] && <p className={styles.errorText}>Например: {hint}</p>} */}
 		</div>
 	);
 };
