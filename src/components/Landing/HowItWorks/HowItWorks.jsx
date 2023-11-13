@@ -1,88 +1,33 @@
 import './HowItWorks.sass';
-import Figure from './Figure/Figure';
-import templateIcon from '../../../images/landing-icon-1.svg';
-import documentIcon from '../../../images/landing-icon-2.svg';
-import selectedIcon from '../../../images/landing-icon-3.svg';
-import draftIcon from '../../../images/landing-icon-4.svg';
-import importIcon from '../../../images/landing-icon-5.svg';
-import printIcon from '../../../images/landing-icon-6.svg';
-import arrowIcon from '../../../images/arrow.svg';
+import hw1Img from '../../../images/lan-hw1.jpg';
+import hw2Img from '../../../images/lan-hw2.jpg';
+import hw3Img from '../../../images/lan-hw3.jpg';
+import arrowImg from '../../../images/lan-arrow.svg';
+import LinkToStart from '../Link/LinkToStart';
+
 
 export default function HowItWorks() {
-	return (
-		<section className="how-it-works">
-			<div className="how-it-works__textbox">
-				<h2 className="how-it-works__title">Как это работает?</h2>
-				<p className="how-it-works__subtitle">
-					<span className="how-it-works__subtitle_blue">Упростите </span>работу
-					с<span className="how-it-works__subtitle_blue"> документами </span>для
-					себя, коллег и партнеров
-				</p>
-			</div>
-			<div className="how-it-works__icons-box">
-				<Figure
-					image={templateIcon}
-					title="Шаблон"
-					subtitle="Создайте документ на основе готового шаблона"
-					sequenceNumber="1"
-				/>
-				<Figure
-					image={documentIcon}
-					title="Документ"
-					subtitle="Заболните шаблон своими данными"
-					sequenceNumber="2"
-				/>
-				<Figure
-					image={selectedIcon}
-					title="Избранное"
-					subtitle="Сохраняйте наиболее часто используемые шаблоны в избранное"
-					sequenceNumber="3"
-				/>
-				<Figure
-					image={draftIcon}
-					title="Черновики"
-					subtitle="Сохраняйте незаконченный черновики чтобы вернуться к ним позже"
-					sequenceNumber="4"
-				/>
-				<Figure
-					image={importIcon}
-					title="Импорт"
-					subtitle="Сохраняйте заполненные документы в .doc"
-					sequenceNumber="5"
-				/>
-				<Figure
-					image={printIcon}
-					title="Печать"
-					subtitle="Получите документ, готовый к печати"
-					sequenceNumber="6"
-				/>
-				<img
-					className="how-it-works__arrow how-it-works__arrow_1"
-					src={arrowIcon}
-					alt="Стрелочка"
-				/>
-				<img
-					className="how-it-works__arrow how-it-works__arrow_2"
-					src={arrowIcon}
-					alt="Стрелочка"
-				/>
-				<img
-					className="how-it-works__arrow how-it-works__arrow_3"
-					src={arrowIcon}
-					alt="Стрелочка"
-				/>
-				<img
-					className="how-it-works__arrow how-it-works__arrow_4"
-					src={arrowIcon}
-					alt="Стрелочка"
-				/>
-				<img
-					className="how-it-works__arrow how-it-works__arrow_5"
-					src={arrowIcon}
-					alt="Стрелочка"
-				/>
-			</div>
-			<div className="how-it-works__border" />
-		</section>
-	);
-}
+    return (
+        <section className='how-it-works'>
+            <h2 className='how-it-works__title'>Как это работает?</h2>
+            <p className='how-it-works__subtitle'>Упростите работу с документами для себя, коллег и партнеров</p>        
+            <div className='how-it-works__illustration-container'>
+                <figure className='how-it-works__figure'>
+                    <img className='how-it-works__img' src={hw1Img} alt='Шаблон'/>
+                    <figcaption className='how-it-works__figcaption'>Выберете шаблон из списка</figcaption>
+                </figure>
+                <img className='how-it-works__arrow' src={arrowImg} alt='Стрелочка'/>
+                <figure className='how-it-works__figure'>
+                    <img className='how-it-works__img' src={hw2Img} alt='Заполняемый шаблон'/>
+                    <figcaption className='how-it-works__figcaption'>Заполните шаблон</figcaption>
+                </figure>
+                <img className='how-it-works__arrow' src={arrowImg} alt='Стрелочка'/>
+                <figure className='how-it-works__figure'>
+                    <img className='how-it-works__img' src={hw3Img} alt='Кнопка сохранения'/>
+                    <figcaption className='how-it-works__figcaption'>Экспортируйте в .doc</figcaption>
+                </figure>
+            </div>
+            <LinkToStart />
+        </section>
+    );
+};
