@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 import Preloader from '../components/UI/Preloader/Preloader';
+import errorImg from '../images/error.jpeg';
 
 const TemplatesMain = () => {
 	const location = useLocation();
@@ -33,6 +34,7 @@ const TemplatesMain = () => {
 						Ошибка:{typeof error.status === 'string' && error.status}
 					</h1>
 					<p>{typeof error.error === 'string' && error.error}</p>
+					<img src={errorImg} alt="error" style={{ maxWidth: '300px' }} />
 				</div>
 			</>
 		);
