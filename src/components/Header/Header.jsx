@@ -68,6 +68,7 @@ export default function Header() {
 							type="text"
 							name="search"
 							placeholder="Поиск"
+              onChange={changeInputValue}
 						/>
 					</fieldset>
 				</form>
