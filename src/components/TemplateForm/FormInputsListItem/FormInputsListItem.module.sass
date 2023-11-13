@@ -1,10 +1,13 @@
 .item
   counter-increment: list-item
+
   border-left: 1px solid #0D23E9
-  padding-left: 39px
+
+  padding-left: 40px
+  padding-bottom: 40px
+
   display: flex
   flex-direction: column
-  padding-bottom: 32px
   gap: 20px
 
   &:last-child
@@ -12,16 +15,22 @@
     padding-bottom: 0
 
   &::before
-    background-color: white
     content: counters(list-item, ".") " "
+
     position: absolute
-    border: 1px solid #0D23E9
     left: -15px
+
     border-radius: 50%
+    border: 1px solid #0D23E9
+
     width: 30px
     height: 30px
+
     color: #5C5C5C
+    background-color: white
+
     text-align: center
+
     font-family: Inter, sans-serif
     font-size: 16px
     font-weight: 700
@@ -29,6 +38,9 @@
     justify-content: center
     align-items: center
 
+  @media screen and (max-width: 1920px)
+    gap: 16px
+    padding-bottom: 28px
 
 .itemSuccess
   counter-increment: list-item
@@ -54,11 +66,17 @@
 
 
 .title
-  padding: 0
   margin: 0
+
   color: #000
   font-family: Inter, sans-serif
   font-size: 28px
   font-style: normal
   font-weight: 600
   line-height: 34px
+  @media screen and (max-width: 1920px)
+    color: #000
+
+    font-family: SF Pro Display, sans-serif
+    font-size: 24px
+    line-height: 29px
