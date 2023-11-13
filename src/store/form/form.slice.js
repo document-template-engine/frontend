@@ -7,14 +7,14 @@ const initialState = {
 export const formSlice = createSlice({
 	name: 'form',
 	initialState: {
-		formData: {},
+		formData: [],
 	},
 	reducers: {
 		setFormData: (state, action) => {
 			state.formData = action.payload;
 		},
 		resetForm: (state) => {
-			state.formData = {};
+			state.formData = [];
 		},
 	},
 });

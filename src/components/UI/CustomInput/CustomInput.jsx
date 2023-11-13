@@ -20,7 +20,18 @@ export const CustomInput = ({ data }) => {
 
 	const handleChange = (e) => {
 		const { value } = e.target;
-		setFormData({ ...formData, [data.id]: value });
+
+		// Создаем новый массив с обновленными данными
+		const updatedFormData = formData.map((fieldData) =>
+			fieldData.field === data.id ? { field: data.id, value } : fieldData
+		);
+
+		// Если поле еще не существует в данных, добавляем новое поле
+		if (!formData.find((fieldData) => fieldData.field === data.id)) {
+			updatedFormData.push({ field: data.id, value });
+		}
+
+		setFormData(updatedFormData);
 	};
 
 	return (
@@ -31,7 +42,10 @@ export const CustomInput = ({ data }) => {
 					{hint && <p className={styles.notation}>{hint}</p>}
 				</div>
 				<input
-					value={formData[data.id] || ''}
+					value={
+						(formData.find((fieldData) => fieldData.field === data.id) || {})
+							.value || ''
+					}
 					type={type}
 					placeholder=""
 					onChange={handleChange}
