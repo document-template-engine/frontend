@@ -11,6 +11,7 @@ const TemplatesMain = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const { data, isLoading, isError, error } = useGetTemplatesQuery();
+
 	if (isLoading) {
 		return (
 			<>
@@ -23,13 +24,15 @@ const TemplatesMain = () => {
 		);
 	}
 	if (isError) {
-		console.log(error);
 		return (
 			<>
 				<Header />
 				<Navbar isTemplatePage />
 				<div className={styles.templates}>
-					<h1 className={styles.title}>{error}</h1>
+					<h1 className={styles.title}>
+						Ошибка:{typeof error.status === 'string' && error.status}
+					</h1>
+					<p>{typeof error.error === 'string' && error.error}</p>
 				</div>
 			</>
 		);
