@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './FormInputsList.module.sass';
-import FormInputsListItem from './FormInputsListItem';
+import FormInputsListItem from '../FormInputsListItem/FormInputsListItem';
 /* eslint-disable */
 
 export default function FormInputsList({ data }) {

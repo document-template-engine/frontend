@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import styles from './Form.module.sass';
-import FormInputsList from './FormInputsList';
+import styles from './TemplateForm.module.sass';
+import FormInputsList from './FormInputsList/FormInputsList';
 import ActionBar from '../ActionBar/ActionBar';
 import {
 	useGetTemplateQuery,

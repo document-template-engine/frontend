@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './FormInputsListItem.module.sass';
-import { CustomInput } from '../UI/CustomInput/CustomInput';
-import { useActions } from '../../hooks/useActions';
+import { CustomInput } from '../../UI/CustomInput/CustomInput';
+import { useActions } from '../../../hooks/useActions';
 
 /* eslint-disable */
 
