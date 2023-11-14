@@ -9,6 +9,7 @@ import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
 import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
+import EntranceButtonPreloader from '../UI/EntranceButtonPreloader/EntranceButtonPreloader';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -16,8 +17,10 @@ export default function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
+	const [isEntranceButtonLoading, setIsEntranceButtonLoading] = useState(false);
 
 	const toggleUserButtonState = (e) => {
+		setIsEntranceButtonLoading(true);
 		e.stopPropagation();
 		if (isLoggedIn) {
 			setIsUserMenuVisible(!isUserMenuVisible);
@@ -75,7 +78,7 @@ export default function Header() {
 							className={styles['header__login-button']}
 							onClick={toggleUserButtonState}
 						>
-							Вход
+							{isEntranceButtonLoading ? EntranceButtonPreloader : 'Вход'}
 						</button>
 					)}
 				</div>

@@ -13,6 +13,11 @@
   margin: 0 auto
   padding: 0 20px
 
+  @media screen and (max-width:1920px) 
+    min-height: 60px
+    gap: 125px
+  
+
 //.header__icon
   //margin: auto
     // left: 0
@@ -42,7 +47,7 @@
     position: absolute
     z-index: 2
     top: 50%
-    left: 20px
+    left: 15px
     transform: translate(0, -50%)
 
   @media (max-width: 768px)
@@ -52,12 +57,12 @@
 .header__input
   box-sizing: border-box
   width: clamp(280px, 20vw, 355px)
-  height: 52px
+  height: clamp(40px, 3vw, 52px)
   border-radius: 16px
   border: 1px solid #B4BBD7
   margin: 0
   padding: 0
-    left: 41px
+    left: 42px
   cursor: pointer
   font-family: SF Pro Display, sans-serif
   font-size: 20px
@@ -76,6 +81,13 @@
   &:focus
     color: #262626
     border: 2px solid #550FDA
+
+  @media screen and (max-width: 1920px)
+    border-radius: 14px
+  
+  @media (max-width: 768px)
+    display: none
+  
 
 // .header__info-button - на случай возвращения кнопки помощи
 //     background-image: url(../../images/faq_icon.svg)
