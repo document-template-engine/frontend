@@ -38,7 +38,7 @@ const InputForm = forwardRef(
 			return type;
 		};
 
-		// const keys = Object.form(error?.data).join();
+		// const keys = Object.values(error?.data).join();
 
 		return (
 			<div className={styles.container}>
