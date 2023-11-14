@@ -8,15 +8,13 @@ import {
 	useGetTemplateQuery,
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
-import Preloader from '../UI/Preloader/Preloader'; /* eslint-disable */
-/* eslint-disable */
+import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
 	const [fetch, obj] = useLazyPostTemplateQuery();
 	const { formData } = useSelector((state) => state.form);
-
 	const [isChecked, setIsChecked] = useState(false);
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -50,7 +48,7 @@ export default function TemplateForm() {
 					</div>
 					<FormInputsList form={data.name} data={data} />
 					<div className={styles.extraWrapper}>
-						<label className={styles.checkBoxWrapper}>
+						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
 							<input
 								type="checkbox"
 								className={styles.checkbox}
@@ -68,7 +66,6 @@ export default function TemplateForm() {
 							) : (
 								<div className={styles.btnIsloading} />
 							)}
-							{/*Тут логика isLoading не работает, но предусмотрена*/}
 						</button>
 					</div>
 				</div>

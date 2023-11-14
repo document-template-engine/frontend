@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styles from './FormInputsListItem.module.sass';
 import { CustomInput } from '../../UI/CustomInput/CustomInput';
 import { useActions } from '../../../hooks/useActions';
-
-/* eslint-disable */
 
 const FormInputsListItem = ({ group }) => {
 	const { setFormData } = useActions();
@@ -28,6 +27,18 @@ const FormInputsListItem = ({ group }) => {
 			))}
 		</li>
 	);
+};
+
+FormInputsListItem.propTypes = {
+	group: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		fields: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.string.isRequired,
+			})
+		).isRequired,
+		id: PropTypes.string.isRequired,
+	}).isRequired,
 };
 
 export default FormInputsListItem;
