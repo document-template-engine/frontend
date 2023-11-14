@@ -25,7 +25,7 @@ export default function Header() {
 		if (isLoggedIn) {
 			setIsUserMenuVisible(!isUserMenuVisible);
 		} else {
-			// navigate('/signin');
+			navigate('/signin');
 		}
 	};
 
