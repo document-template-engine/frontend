@@ -2,12 +2,12 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { popupActions } from '../store/popup/popup.slice';
 import { emailActions } from '../store/auth/regSlice';
-import { formActions } from '../store/form/form.slice';
+import { valuesActions } from '../store/values/values.slice';
 
 const actions = {
 	...popupActions,
 	...emailActions,
-	...formActions,
+	...valuesActions,
 };
 
 export const useActions = () => {
