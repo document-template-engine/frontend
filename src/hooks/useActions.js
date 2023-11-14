@@ -4,7 +4,6 @@ import { popupActions } from '../store/popup/popup.slice';
 import { emailActions } from '../store/auth/regSlice';
 import { searchQueryActions } from '../store/search-query/search-query.slice';
 
-
 const actions = {
 	...popupActions,
 	...emailActions,

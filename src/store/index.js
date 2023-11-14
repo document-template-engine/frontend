@@ -19,7 +19,6 @@ export const store = configureStore({
 		search: searchQueryReducer,
 		windowWidth,
 		emailReducer,
-		values: valuesReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()
