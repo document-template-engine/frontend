@@ -7,40 +7,20 @@ import {
 	useGetTemplateQuery,
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
 import Preloader from '../UI/Preloader/Preloader';
+/* eslint-disable */
 
 export default function TemplateForm() {
 	const { id } = useParams();
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
-	const {
-		values,
-		setValues,
-		setErrors,
-		errors,
-		resetForm,
-		isValid,
-		setIsValid,
-		handleChange,
-		formRef,
-	} = useFormAndValidation();
 	const [fetch, obj] = useLazyPostTemplateQuery();
-
-	const sortValues = (valuesObject) => {
-		const keys = Object.keys(valuesObject);
-		const result = keys.map((item) => ({
-			value: valuesObject[item],
-			field: item,
-		}));
-		return result;
-	};
 	const handleSubmit = () => {
-		fetch({
-			description: data.description,
-			completed: true,
-			template: data.id,
-			document_fields: sortValues(values),
-		}).then(console.log);
+		// fetch({
+		// 	description: data.description,
+		// 	completed: true,
+		// 	template: data.id,
+		// 	document_fields: values,
+		// }).then(console.log);
 	};
 
 	if (isLoading) {
@@ -57,22 +37,14 @@ export default function TemplateForm() {
 					e.preventDefault();
 					handleSubmit();
 				}}
-				ref={formRef}
+				noValidate
 			>
 				<div className={styles.mainWrapper}>
 					<div className={styles.titleWrapper}>
 						<h1 className={styles.title}>{data.name}</h1>
 						<p className={styles.subtitle}>{data.description}</p>
 					</div>
-					<FormInputsList
-						form={data.name}
-						data={data}
-						values={values}
-						setValues={setValues}
-						isValid={isValid}
-						errors={errors}
-						handleChange={handleChange}
-					/>
+					<FormInputsList form={data.name} data={data} />
 				</div>
 				<ActionBar />
 			</form>
