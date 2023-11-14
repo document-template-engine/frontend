@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
@@ -8,7 +8,7 @@ import {
 	useGetTemplateQuery,
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
-import Preloader from '../UI/Preloader/Preloader';
+import Preloader from '../UI/Preloader/Preloader'; /* eslint-disable */
 /* eslint-disable */
 
 export default function TemplateForm() {
@@ -16,6 +16,8 @@ export default function TemplateForm() {
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
 	const [fetch, obj] = useLazyPostTemplateQuery();
 	const { formData } = useSelector((state) => state.form);
+
+	const [isChecked, setIsChecked] = useState(false);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		fetch({
@@ -47,6 +49,28 @@ export default function TemplateForm() {
 						<p className={styles.subtitle}>{data.description}</p>
 					</div>
 					<FormInputsList form={data.name} data={data} />
+					<div className={styles.extraWrapper}>
+						<label className={styles.checkBoxWrapper}>
+							<input
+								type="checkbox"
+								className={styles.checkbox}
+								value={isChecked}
+								onChange={() => setIsChecked(!isChecked)}
+							/>
+							<p className={styles.notation}>
+								Я обязуюсь внимательно изучить созданный документ и принимаю на
+								себя ответственность за его содержание перед подписанием
+							</p>
+						</label>
+						<button className={styles.btn} disabled={!isChecked} type="submit">
+							{!isLoading ? (
+								<p className={styles.btnText}>Создать документ</p>
+							) : (
+								<div className={styles.btnIsloading} />
+							)}
+							{/*Тут логика isLoading не работает, но предусмотрена*/}
+						</button>
+					</div>
 				</div>
 				<ActionBar />
 			</form>

@@ -1,3 +1,11 @@
+@keyframes preloader-spin
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
+
+
 .form
   box-sizing: border-box
 
@@ -12,17 +20,25 @@
   margin: 0
   @media screen and (max-width: 1920px)
     padding: 40px
+  @media screen and (max-width: 1000px)
+    grid-area: none
+    margin-top: 56px
+    padding-bottom: 210px
+    margin-bottom: 65px
 
   @media screen and (max-width: 768px)
-    margin-top: 100px
-    margin-bottom: 100px
-    // временно, пока нет адаптива у хедера
-    padding: 24px 12px
+    padding: 24px 12px 210px
     justify-content: center
 
 .mainWrapper
   max-width: 60vw
-  padding: 0 10px 0 0
+  @media screen and (max-width: 1920px)
+    max-width: 50vw
+  @media screen and (max-width: 1366px)
+    max-width: 40vw
+  @media screen and (max-width: 1000px)
+    max-width: 100%
+
 
   display: flex
   flex-direction: column
@@ -67,8 +83,8 @@
   max-width: 1050px
   @media screen and (max-width: 1920px)
     font-family: SF Pro Text, sans-serif
-    font-size: 24px
-    line-height: 20px
+    font-size: 20px
+    line-height: 24px
   @media screen and (max-width: 768px)
     font-size: 16px
     line-height: 20px
@@ -79,3 +95,104 @@
 //  gap: 16px
 //  align-items: center
 
+.checkBoxWrapper
+  display: flex
+  gap: 8px
+  align-items: flex-start
+
+.checkbox
+  appearance: none
+  -webkit-appearance: none
+
+  width: 24px
+  height: 24px
+  border-radius: 4px
+  border: 1px solid #550FDA
+  outline: none
+
+
+  &:checked
+    background-color: #550FDA
+
+  &:focus:not(:checked)
+    border: 2px solid #550FDA
+
+
+  &:hover:not(:checked)
+    border: 2px solid #550FDA
+
+  &::before
+    content: url("../../images/check_mark.svg")
+    display: block
+    border-radius: 3px
+    opacity: 0
+    transition: opacity 0.3s
+
+  &:checked::before
+    opacity: 1
+
+
+.notation
+  margin: 0
+
+
+  color: #000
+  font-family: Inter, sans-serif
+  font-size: 20px
+  font-style: normal
+  font-weight: 400
+  line-height: 29px
+
+.extraWrapper
+  display: flex
+  flex-direction: column
+  gap: 20px
+  max-width: 525px
+  padding-left: 40px
+  @media screen and (max-width: 768px)
+    padding: 0
+    margin-left: auto
+    margin-right: auto
+    max-width: 100%
+
+.btn
+  box-sizing: border-box
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 13px
+  border: none
+  border-radius: 16px
+  background: #550FDA
+  max-height: 56px
+  transition: all 1.5ms ease-in
+  cursor: pointer
+
+  &:hover
+    background: #4104B4
+
+  &:active
+    background: #32018D
+
+  &:disabled
+    background: #DDCFF8
+    cursor: default
+
+.btnText
+  margin: 0
+  color: #FFF
+
+  font-family: SF Pro Display, sans-serif
+  font-size: 24px
+  font-style: normal
+  font-weight: 400
+  line-height: 28px
+
+.btnIsloading
+  width: 50px
+  height: 50px
+  background-image: url("../../images/load_icon.svg")
+  background-repeat: no-repeat
+  background-position: center
+
+  animation: preloader-spin 1.5s linear infinite
