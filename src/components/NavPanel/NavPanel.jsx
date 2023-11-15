@@ -24,7 +24,7 @@ function NavPanel(props) {
 	return (
 		<div className={styles.navPanel}>
 			<div className={styles.content}>
-				<Book className={styles.imgActive} />
+				<Book className={`${props.IsTemplatePage && styles.imgActive}`} />
 				<button
 					className={`${styles.btn} ${props.IsTemplatePage && styles.active}`}
 					onClick={goToTemplates}
@@ -33,7 +33,7 @@ function NavPanel(props) {
 				</button>
 			</div>
 			<div className={styles.content}>
-				<Folder />
+				<Folder className={`${props.isDraftsPage && styles.imgActive}`} />
 				<button
 					className={`${styles.btn} ${props.isDraftsPage && styles.active}`}
 					onClick={goToDrafts}
@@ -42,7 +42,9 @@ function NavPanel(props) {
 				</button>
 			</div>
 			<div className={styles.content}>
-				<Star />
+				<Star
+					className={`${props.isFavoriteTamplatesPage && styles.imgActive}`}
+				/>
 				<button
 					className={`${styles.btn} ${
 						props.isFavoriteTamplatesPage && styles.active

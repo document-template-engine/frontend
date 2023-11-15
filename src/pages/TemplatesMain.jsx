@@ -51,8 +51,8 @@ const TemplatesMain = () => {
 				<main className={styles.templates}>
 					<h1 className={styles.title}>Шаблоны</h1>
 					<TemplateList data={data} />
-					<NavPanel isTemplatePage />
 				</main>
+				<NavPanel IsTemplatePage />
 			</>
 		);
 	}

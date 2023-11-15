@@ -20,9 +20,11 @@ const FavoriteTemplates = () => {
 				<Navbar isFavoriteTamplatesPage />
 				<div className={styles.templates}>
 					<h1 className={styles.title}>Избранное</h1>
-					<TemplateList data={data.filter((item) => item.is_favorited)} />
+					<TemplateList
+					// data={data.filter((item) => item.is_favorited)}
+					/>
 				</div>
-				<NavPanel IsTemplatePage />
+				<NavPanel isFavoriteTamplatesPage />
 			</>
 		);
 	}
