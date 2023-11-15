@@ -21,15 +21,14 @@ function App() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchRepos, { error, isLoading, data: repos }] =
+	const [fetchUserMe, { error, isLoading, data: userMe }] =
 		useLazyGetUserDataQuery();
 
 	const checkToken = () => {
-		const token = localStorage.getItem('token');
-		console.log(token);
-		if (token) {
-			fetchRepos(token);
-			dispatch(signIn());
+		const token = localStorage.getItem('token'); // берём токен из localStorage
+		const authToken = fetchUserMe(token); // запрашиваем данным о пользователе передавая токен в запросе
+		if (authToken && token) {
+			dispatch(signIn()); // пользователь авторизован
 			navigate('/templates');
 		} else {
 			navigate('/');
