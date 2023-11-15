@@ -1,0 +1,202 @@
+@keyframes preloader-spin
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
+
+
+.form
+  box-sizing: border-box
+
+  position: relative
+  display: flex
+  justify-content: space-between
+
+  grid-area: main
+  width: calc(100% - 317px)
+
+  padding: 60px
+  margin: 80px 0 0 317px
+  @media screen and (max-width: 1920px)
+    width: calc(100% - 228px)
+    margin: 60px 0 0 228px
+    padding: 40px
+  @media screen and (max-width: 1000px)
+    width: 100%
+    grid-area: none
+    margin: 56px 0 65px 0
+    padding-bottom: 275px
+
+  @media screen and (max-width: 768px)
+    padding: 24px 12px 275px
+    justify-content: center
+
+.mainWrapper
+  max-width: 60vw
+  @media screen and (max-width: 1920px)
+    max-width: 50vw
+  @media screen and (max-width: 1366px)
+    max-width: 40vw
+  @media screen and (max-width: 1000px)
+    max-width: 100%
+
+
+  display: flex
+  flex-direction: column
+  gap: 40px
+  @media screen and (max-width: 768px)
+    max-width: 100%
+
+.titleWrapper
+  display: flex
+  flex-direction: column
+  gap: 20px
+  @media screen and (max-width: 768px)
+    gap: 8px
+
+.title
+  margin: 0
+
+  color: #000
+
+  font-family: Inter, sans-serif
+  font-size: 38px
+  font-weight: 700
+  line-height: 48px
+  @media screen and (max-width: 1920px)
+    font-size: 28px
+    line-height: 34px
+  @media screen and (max-width: 1366px)
+    font-size: 24px
+    line-height: 30px
+  @media screen and (max-width: 768px)
+    font-size: 28px
+    line-height: 34px
+
+.subtitle
+  margin: 0
+
+  font-family: SF Pro Display, sans-serif
+  font-size: 24px
+  font-weight: 400
+  line-height: 28px
+  color: #000
+
+
+  max-width: 1050px
+  @media screen and (max-width: 1920px)
+    font-family: SF Pro Text, sans-serif
+    font-size: 20px
+    line-height: 24px
+  @media screen and (max-width: 768px)
+    font-size: 16px
+    line-height: 20px
+
+//.wrapper
+//  display: flex
+//  flex-wrap: wrap
+//  gap: 16px
+//  align-items: center
+
+.checkBoxWrapper
+  display: flex
+  gap: 8px
+  align-items: flex-start
+
+.checkbox
+  appearance: none
+  -webkit-appearance: none
+
+  width: 24px
+  height: 24px
+  border-radius: 4px
+  border: 1px solid #550FDA
+  outline: none
+
+
+  &:checked
+    background-color: #550FDA
+
+  &:focus:not(:checked)
+    border: 2px solid #550FDA
+
+
+  &:hover:not(:checked)
+    border: 2px solid #550FDA
+
+  &::before
+    content: url("../../images/check_mark.svg")
+    display: block
+    border-radius: 3px
+    opacity: 0
+    transition: opacity 0.3s
+
+  &:checked::before
+    opacity: 1
+
+
+.notation
+  margin: 0
+
+
+  color: #000
+  font-family: Inter, sans-serif
+  font-size: 20px
+  font-style: normal
+  font-weight: 400
+  line-height: 29px
+
+.extraWrapper
+  display: flex
+  flex-direction: column
+  gap: 20px
+  max-width: 525px
+  padding-left: 40px
+  @media screen and (max-width: 768px)
+    padding: 0
+    margin-left: auto
+    margin-right: auto
+    max-width: 100%
+
+.btn
+  box-sizing: border-box
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 13px
+  border: none
+  border-radius: 16px
+  background: #550FDA
+  max-height: 56px
+  transition: all 1.5ms ease-in
+  cursor: pointer
+
+  &:hover
+    background: #4104B4
+
+  &:active
+    background: #32018D
+
+  &:disabled
+    background: #DDCFF8
+    cursor: default
+
+.btnText
+  margin: 0
+  color: #FFF
+
+  font-family: SF Pro Display, sans-serif
+  font-size: 24px
+  font-style: normal
+  font-weight: 400
+  line-height: 28px
+
+.btnIsloading
+  width: 50px
+  height: 50px
+  background-image: url("../../images/load_icon.svg")
+  background-repeat: no-repeat
+  background-position: center
+
+  animation: preloader-spin 1.5s linear infinite
