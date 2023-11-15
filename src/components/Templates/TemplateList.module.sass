@@ -2,13 +2,15 @@
   margin: 80px 0 0 0
   display: flex
   gap: 30px
-  // @media screen and (max-width: 1700px)
-  //   padding: 40px
-  //   gap: 16px
-  // @media (max-width: 550px)
-  //   padding: 14px 12px
+  @media screen and (max-width: 1920px)
+    margin-left: 317px
+  @media (max-width: 1366px)
+    margin-left: 228px
+  @media (max-width: 1000px)
+    margin-left: 0
+  @media (max-width: 768px)
 
-.templatesList 
+.templatesList
   padding: clamp(40px, 5vw, 60px) 0 0 0
 
 .title
@@ -32,7 +34,6 @@
   display: flex
   gap: 20px
   flex-wrap: wrap
-  //width: fit-content Мне кажется так лучше
   @media screen and (max-width: 1700px)
     padding-bottom: 16px
   @media (max-width: 550px)
