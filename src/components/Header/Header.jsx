@@ -38,7 +38,7 @@ export default function Header() {
 		fetchRepos(token);
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
-		navigate('/signin');
+		navigate('/templates');
 		localStorage.removeItem('token');
 	};
 

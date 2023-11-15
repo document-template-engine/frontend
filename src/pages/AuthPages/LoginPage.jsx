@@ -10,7 +10,10 @@ import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../components/UI/AuthButton/Button';
 import { signIn } from '../../store/auth/authSlice';
-import { useLazyLoginQuery } from '../../store/auth-api/auth.api';
+import {
+	useLazyLoginQuery,
+	useLazyGetUserDataQuery,
+} from '../../store/auth-api/auth.api';
 
 export default function LoginPage() {
 	const [visible, setVisible] = useState(true);
@@ -19,6 +22,9 @@ export default function LoginPage() {
 	const navigate = useNavigate();
 
 	const [fetchRepos, { error, isLoading, data: repos }] = useLazyLoginQuery();
+
+	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
+		useLazyGetUserDataQuery();
 
 	const {
 		register,
@@ -45,16 +51,18 @@ export default function LoginPage() {
 
 	useEffect(() => {
 		if (repos) {
-			console.log(repos);
-			dispatch(signIn());
-			localStorage.setItem('token', repos.auth_token);
+			dispatch(signIn()); // пользователь авторизован
+			localStorage.setItem('token', repos.auth_token); // записываем токен в localStorage
+			fetchUserMe(repos.auth_token); // запрос данных о пользователе
 			navigate('/templates');
 		}
 		if (error) {
-			const keys = Object.values(error.data);
-			setErrMsg(keys.join());
+			const keys = error.data
+				? Object.values(error.data).join()
+				: 'упс... что-то пошло не так, попробуйте позже';
+			setErrMsg(keys);
 		}
-	}, [repos, error, dispatch, navigate]);
+	}, [repos, error, dispatch, navigate, fetchUserMe]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -115,7 +123,9 @@ export default function LoginPage() {
 						</div>
 						<Button
 							type="submit"
-							text={isLoading ? 'Загрузка...' : 'Продолжить'}
+							text={
+								isLoading ? <div className={styles.preloader} /> : 'Продолжить'
+							}
 							disabled={!isValid || isLoading}
 						/>
 						<p className={styles.orPar}>
