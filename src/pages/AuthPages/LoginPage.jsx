@@ -123,7 +123,9 @@ export default function LoginPage() {
 						</div>
 						<Button
 							type="submit"
-							text={isLoading ? 'Загрузка...' : 'Продолжить'}
+							text={
+								isLoading ? <div className={styles.preloader} /> : 'Продолжить'
+							}
 							disabled={!isValid || isLoading}
 						/>
 						<p className={styles.orPar}>

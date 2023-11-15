@@ -145,7 +145,9 @@ export default function LogupPage() {
 						<ErrorPopup errors={errors} />
 						<Button
 							type="submit"
-							text={isLoading ? <Preloader /> : 'Продолжить'}
+							text={
+								isLoading ? <div className={styles.preloader} /> : 'Продолжить'
+							}
 							disabled={!isValid || !checked || isLoading}
 						/>
 						<p className={styles.orPar}>

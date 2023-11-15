@@ -1,6 +1,16 @@
 $color-link: rgba(4, 21, 175, 1);
 $color-link-l: rgba(0, 25, 255, 1);
 
+@keyframes preloader-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .back {
 	font-size: 24px;
 	line-height: 29px;
@@ -61,8 +71,8 @@ $color-link-l: rgba(0, 25, 255, 1);
 	border-radius: 24px;
 	text-align: center;
 	padding: 14px;
-	border: 1px solid #A48DD3;;
-	color: #550FDA;;
+	border: 1px solid #a48dd3;
+	color: #550fda;
 	font-size: 24px;
 	line-height: 28px;
 	overflow: hidden;
@@ -118,4 +128,31 @@ $color-link-l: rgba(0, 25, 255, 1);
 	font-size: 16px;
 	line-height: 19px;
 	width: 449px;
+}
+
+.preloader {
+	width: 35px;
+	height: 28px;
+	background-image: url('../../images/preloader.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	animation: preloader-spin 1.5s linear infinite;
+
+	/* & container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+	}
+
+	& gif {
+		width: 50px;
+		height: 50px;
+		background-image: url("../../images/preloader.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		animation: preloader-spin 1.5s linear infinite;
+	} */
 }

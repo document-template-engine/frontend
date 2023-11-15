@@ -1,9 +1,8 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable react/prop-types */
 import './ErrorPopup.scss';
 
 const ErrorPopup = ({ errors }) => {
-	console.log(errors);
-
 	return (
 		<div
 			className={`ErrorPopup ${errors.password ? 'ErrorPopup_visible' : ''}`}
