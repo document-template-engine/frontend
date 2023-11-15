@@ -6,24 +6,45 @@
   flex-direction: column
   align-items: center
   overflow: hidden
-  padding: 130px 0 119px
+  padding: 80px 0 285px
+  gap: 76px
+  @media screen and (max-width: 1920px)
+    padding: 80px 0 130px
 
 .advantages__title
+  font-family: Roboto, sans-serif
+
+  margin: 20px 0 28px 0
+  max-width: 1063px
+
   color: #1C1C1C
   font-size: 60px
   line-height: 74px
   font-weight: 700
-  margin-bottom: 68px
   text-align: center
+  @media screen and (max-width: 1920px)
+    font-size: 56px
+    line-height: 74px
+  @media screen and (max-width: 1366px)
+    max-width: 360px
+    font-size: 28px
+    line-height: 34px
+
+.advantages__content
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 60px
 
 .advantages__container
-  margin-bottom: 56px
+  position: relative
   display: flex
   flex-direction: column
   align-items: center
   justify-content: space-between
   max-width: 1336px
   width: 85%
+  gap: 186px
 
 .advantages__list-container
   display: flex
@@ -32,17 +53,30 @@
   max-width: 1164px
   width: 100%
   position: relative
-  @media screen and (max-width: 640px)
-    height: 508px
-    max-width: 358px
-    width: 91%
 
 .advantages__list
   display: flex
+  position: relative
   margin: 0
   padding: 0
   min-width: 100%
   justify-content: space-between
+
+  &::after
+    content: ''
+    width: 1000px
+    height: 186px
+    background: url("../../../images/lan-octopus.svg") no-repeat
+    position: absolute
+    top: 190px
+    left: 106px
+    @media screen and (max-width: 1920px)
+      left: 80px
+      top: 195px
+      background-size: cover
+      width: 850px
+    @media screen and (max-width: 1366px)
+      display: none
 
 .advantages__item-container
   border: 1px solid #6000ED
@@ -50,38 +84,13 @@
   box-sizing: border-box
   min-width: 130px
   min-height: 130px
-  width: 23%
-  height: 270px
+  height: 207px
+  width: 207px
   margin: 0
   display: flex
   align-items: center
   justify-content: center
-  @media screen and (max-width: 1336px)
-    height: calc(85vw * 0.23)
 
-  &_1
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 0
-      left: calc(50% - 195px)
-
-  &_2
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 94px
-      left: calc(50% - 10px)
-
-  &_3
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 226px
-      left: calc(50% - 174px)
-
-  &_4
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 289px
-      left: calc(50% + 28px)
 
 .advantages__item-text
   font-size: 28px
@@ -90,60 +99,44 @@
   margin: 0
   color: #6000ED
   text-align: center
-  @media screen and (max-width: 1336px)
-    font-size: 2vw
-    line-height: 2.6vw
-  @media screen and (max-width: 1000px)
-    font-size: 20px
-    line-height: 24px
-
-.advantages__lines-1
-  max-width: 920px
-  position: relative
-  top: -2px
-  @media screen and (max-width: 1600px)
-    width: 80%
-  @media screen and (max-width: 640px)
-    display: none
-
-.advantages__lines-2
-  width: 143px
-  position: absolute
-  bottom: 0
-  @media screen and (min-width: 641px)
-    display: none
 
 
 .advantages__illustration-container
   position: relative
   height: 1390px
-  margin-bottom: 60px
+  @media screen and (max-width: 1920px)
+    height: 1265px
 
 
 .advantages__illustration
   box-shadow: 0 4px 50px 0 #00000040
 
   &_1
-    width: 100%
+    width: 1366px
+    height: 768px
+    @media screen and (max-width: 1920px)
+      width: 1192px
+      height: 670px
 
   &_2
-    max-width: 411px
-    min-width: 194px
-    width: 30%
+    width: 411px
+    height: 982px
     position: absolute
-    top: calc(85vw * 0.3)
-    left: 8%
-    @media screen and (max-width: 640px)
-      top: calc(100vw * 0.4)
-      left: 4%
+    left: 110px
+    top: 408px
+    @media screen and (max-width: 1920px)
+      width: 390px
+      height: 931px
+      left: 85px
+      top: 335px
 
   &_3
-    max-width: 590px
-    min-width: 186px
-    width: 43%
+    width: 590px
+    height: 764px
     position: absolute
-    top: calc(85vw * 0.17)
-    right: 10%
-    @media screen and (max-width: 640px)
-      top: calc(100vw * 0.4)
-      right: 4%
+    right: 134px
+    top: 238px
+    @media screen and (max-width: 1920px)
+      height: 661px
+      width: 510px
+      right: 10px
