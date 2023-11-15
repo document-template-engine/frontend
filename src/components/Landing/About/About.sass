@@ -1,22 +1,38 @@
-.about 
-    background: linear-gradient(to bottom, #D5E2E4 65%, #FFFFFF 35%)
-    position: relative
-    padding: 96px 0 90px
-    box-sizing: border-box
-    display: flex
-    flex-direction: column
-    align-items: center
+.about
+  background: linear-gradient(to bottom, #D5E2E4 65%, #FFFFFF 35%)
+  position: relative
+  padding-top: 106px
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  align-items: center
+  @media screen and (max-width: 1920px)
+    padding-top: 125px
+  @media screen and (max-width: 1366px)
+    padding-top: 60px
 
- 
 .about__title
-    color: #003E47
-    font-size: 90px
-    line-height: 105px
-    font-weight: 600
-    margin: 0 0 77px
-    text-align: center
-    max-width: 1170px
+  font-family: Roboto, sans-serif
+  color: #003E47
+  font-size: 90px
+  line-height: 105px
+  font-weight: 600
+  margin: 0 0 77px
+  text-align: center
+  max-width: 1170px
+  @media screen and (max-width: 1920px)
+    font-size: 70px
+    line-height: normal
+    max-width: 836px
+  @media screen and (max-width: 1366px)
+    max-width: 342px
+    font-size: 36px
+    line-height: 43px
 
 .about__illustration
-    max-width: 1330px
-    width: 85%
+  max-width: 1330px
+  width: 85%
+  @media screen and (max-width: 1920px)
+    max-width: 1197px
+  @media screen and (max-width: 1366px)
+    max-width: 370px

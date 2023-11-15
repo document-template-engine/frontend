@@ -1,16 +1,36 @@
-.link-to-start
-    color: #FFFFFF
+.link-to-start__link
+  font-family: Roboto, sans-serif
+
+  color: #FFFFFF
+  font-size: 18px
+  line-height: 18px
+  letter-spacing: -0.24px
+  font-weight: 500
+
+  text-decoration: none
+  cursor: pointer
+  @media screen and (max-width: 1920px)
+    font-size: 16px
+    line-height: 24px
+  @media screen and (max-width: 1366px)
     font-size: 18px
     line-height: 18px
-    letter-spacing: -0.24px
-    font-weight: 500
-    border-radius: 14px
-    background: #6000ED
-    text-decoration: none
-    padding: 20px 40px
-    cursor: pointer
-    transition: background 0.3s
-    &:hover
-        background: #4104B4
-    &:active
-        background: #32018D
+
+.link-to-start__button
+  display: flex
+  justify-content: center
+  border: none
+  cursor: pointer
+
+  transition: background 0.3s
+
+  padding: 20px 40px
+
+  border-radius: 14px
+  background: #6000ED
+
+  &:hover
+    background: #4104B4
+
+  &:active
+    background: #32018D
