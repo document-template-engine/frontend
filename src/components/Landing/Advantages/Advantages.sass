@@ -1,46 +1,149 @@
-.advantages 
-    position: relative
-    padding: 112px 240px 144px
-    box-sizing: border-box
-    display: flex
-    flex-direction: column
-    align-items: center
-    overflow: hidden
-
-.advantages__circle
-    width: 346.47px
-    height: 346.47px
-    border-radius: 50%
-    background: linear-gradient(255deg, #04E3E0 0%, #087CEF 100%)
-    position: absolute
-    bottom: -159px
-    right: 370px
-    z-index: -1
-
-.advantages__container
-    margin-bottom: 56px
-    display: flex
-    align-items: center
-    justify-content: space-between
-    width: 1200px
-
-.advantages__figure
-    border: 1px solid #03CDFE
-    border-radius: 50px
-    padding: 32px
-    box-sizing: border-box
-    width: 368px
-    margin: 0
-    display: flex
-    flex-direction: column
-
-.advantages__icon
-    height: 150px
+.advantages
+  background: #D5E2E4
+  position: relative
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  align-items: center
+  overflow: hidden
+  padding: 130px 0 119px
 
 .advantages__title
-    color: #050525
-    font-size: 28px
-    line-height: 34px
-    font-weight: 700
-    margin: 24px 0 0
-    text-align: center
+  color: #1C1C1C
+  font-size: 60px
+  line-height: 74px
+  font-weight: 700
+  margin-bottom: 68px
+  text-align: center
+
+.advantages__container
+  margin-bottom: 56px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-between
+  max-width: 1336px
+  width: 85%
+
+.advantages__list-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  max-width: 1164px
+  width: 100%
+  position: relative
+  @media screen and (max-width: 640px)
+    height: 508px
+    max-width: 358px
+    width: 91%
+
+.advantages__list
+  display: flex
+  margin: 0
+  padding: 0
+  min-width: 100%
+  justify-content: space-between
+
+.advantages__item-container
+  border: 1px solid #6000ED
+  border-radius: 50%
+  box-sizing: border-box
+  min-width: 130px
+  min-height: 130px
+  width: 23%
+  height: 270px
+  margin: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  @media screen and (max-width: 1336px)
+    height: calc(85vw * 0.23)
+
+  &_1
+    @media screen and (max-width: 640px)
+      position: absolute
+      top: 0
+      left: calc(50% - 195px)
+
+  &_2
+    @media screen and (max-width: 640px)
+      position: absolute
+      top: 94px
+      left: calc(50% - 10px)
+
+  &_3
+    @media screen and (max-width: 640px)
+      position: absolute
+      top: 226px
+      left: calc(50% - 174px)
+
+  &_4
+    @media screen and (max-width: 640px)
+      position: absolute
+      top: 289px
+      left: calc(50% + 28px)
+
+.advantages__item-text
+  font-size: 28px
+  line-height: 36px
+  font-weight: 500
+  margin: 0
+  color: #6000ED
+  text-align: center
+  @media screen and (max-width: 1336px)
+    font-size: 2vw
+    line-height: 2.6vw
+  @media screen and (max-width: 1000px)
+    font-size: 20px
+    line-height: 24px
+
+.advantages__lines-1
+  max-width: 920px
+  position: relative
+  top: -2px
+  @media screen and (max-width: 1600px)
+    width: 80%
+  @media screen and (max-width: 640px)
+    display: none
+
+.advantages__lines-2
+  width: 143px
+  position: absolute
+  bottom: 0
+  @media screen and (min-width: 641px)
+    display: none
+
+
+.advantages__illustration-container
+  position: relative
+  height: 1390px
+  margin-bottom: 60px
+
+
+.advantages__illustration
+  box-shadow: 0 4px 50px 0 #00000040
+
+  &_1
+    width: 100%
+
+  &_2
+    max-width: 411px
+    min-width: 194px
+    width: 30%
+    position: absolute
+    top: calc(85vw * 0.3)
+    left: 8%
+    @media screen and (max-width: 640px)
+      top: calc(100vw * 0.4)
+      left: 4%
+
+  &_3
+    max-width: 590px
+    min-width: 186px
+    width: 43%
+    position: absolute
+    top: calc(85vw * 0.17)
+    right: 10%
+    @media screen and (max-width: 640px)
+      top: calc(100vw * 0.4)
+      right: 4%
