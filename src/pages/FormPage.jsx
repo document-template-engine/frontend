@@ -10,7 +10,7 @@ const FormPage = () => (
 		<Header />
 		<Navbar isTemplatePage />
 		<TemplateForm />
-		<NavPanel />
+		<NavPanel IsTemplatePage />
 	</>
 );
 
