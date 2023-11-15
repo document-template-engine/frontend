@@ -38,8 +38,6 @@ const InputForm = forwardRef(
 			return type;
 		};
 
-		// const keys = Object.values(error?.data).join();
-
 		return (
 			<div className={styles.container}>
 				<label htmlFor={name} className={styles.label}>
@@ -54,7 +52,7 @@ const InputForm = forwardRef(
 						onChange={onChange}
 						autoComplete={autoComplete}
 						className={`${styles.input}
-                            ${errors[name] && styles.input_error}`}
+							${errors[name] && styles.input_error}`}
 					/>
 					{type === 'password' && (
 						<button className={styles.eye} type="button" onClick={handleClick}>

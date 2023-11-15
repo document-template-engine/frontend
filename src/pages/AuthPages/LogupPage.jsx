@@ -12,6 +12,8 @@ import Button from '../../components/UI/AuthButton/Button';
 import InputForm from '../../components/UI/AuthInputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
+import Preloader from '../../components/UI/Preloader/Preloader';
+import ErrorPopup from '../../components/UI/ErrorPopup/ErrorPopup';
 
 export default function LogupPage() {
 	const [visible, setVisible] = useState(true);
@@ -53,9 +55,9 @@ export default function LogupPage() {
 			addEmail(repos.email);
 		}
 		if (error) {
-			const keys = error.status
-				? 'упс... что-то пошло не так, попробуйте позже'
-				: Object.values(error.data).join();
+			const keys = error.data
+				? Object.values(error.data).join()
+				: 'упс... что-то пошло не так, попробуйте позже';
 
 			setErrMsg(keys);
 		}
@@ -98,7 +100,7 @@ export default function LogupPage() {
 						<InputForm
 							type="password"
 							{...register('password', {
-								required: 'Введите пароль',
+								required: 'Придумайте пароль',
 								/* minLength: {
 									value: 8,
 									message: 'Минимум восемь символов',
@@ -111,7 +113,7 @@ export default function LogupPage() {
 									value:
 										/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g,
 									message:
-										'Пароль должен состоять 8 символов, 1 спецсимвол, минимум 1 цифру',
+										'латинские буквы, 1 заглавная, 8 символов, 1 спецсимвол, 1 цифра',
 								},
 							})}
 							name="password"
@@ -133,15 +135,17 @@ export default function LogupPage() {
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
 							<p style={{ margin: 0 }}>
-								Я согласен &nbsp;
-								<Link to={{ pathname: '/' }} className={styles.link}>
+								{/* временная загушка пока не появится текст согласия */}Я
+								согласен с политикой конфиденциальности&nbsp;
+								{/* <Link to={{ pathname: '/' }} className={styles.link}>
 									с политикой конфиденциальности
-								</Link>
+								</Link> */}
 							</p>
 						</div>
+						<ErrorPopup errors={errors} />
 						<Button
 							type="submit"
-							text={isLoading ? 'Загрузка...' : 'Продолжить'}
+							text={isLoading ? <Preloader /> : 'Продолжить'}
 							disabled={!isValid || !checked || isLoading}
 						/>
 						<p className={styles.orPar}>

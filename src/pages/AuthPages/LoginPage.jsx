@@ -51,16 +51,15 @@ export default function LoginPage() {
 
 	useEffect(() => {
 		if (repos) {
-			console.log(repos);
 			dispatch(signIn()); // пользователь авторизован
 			localStorage.setItem('token', repos.auth_token); // записываем токен в localStorage
 			fetchUserMe(repos.auth_token); // запрос данных о пользователе
 			navigate('/templates');
 		}
 		if (error) {
-			const keys = error.status
-				? 'упс... что-то пошло не так, попробуйте позже'
-				: Object.values(error.data).join();
+			const keys = error.data
+				? Object.values(error.data).join()
+				: 'упс... что-то пошло не так, попробуйте позже';
 			setErrMsg(keys);
 		}
 	}, [repos, error, dispatch, navigate, fetchUserMe]);
