@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
+import NavPanel from '../components/NavPanel/NavPanel';
 import styles from '../components/Templates/TemplateList.module.sass';
 
 const DraftsTemplates = () => {
@@ -19,6 +20,7 @@ const DraftsTemplates = () => {
 					<h1 className={styles.title}>Черновики</h1>
 					{/* <TemplateList data={data} /> */}
 				</div>
+				<NavPanel isDraftsPage />
 			</>
 		);
 	}

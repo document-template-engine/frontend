@@ -8,9 +8,9 @@ import NavPanel from '../components/NavPanel/NavPanel';
 const FormPage = () => (
 	<>
 		<Header />
-		<Navbar />
+		<Navbar isTemplatePage />
 		<TemplateForm />
-		<NavPanel />
+		<NavPanel isTemplatePage />
 	</>
 );
 

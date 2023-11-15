@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
+import NavPanel from '../components/NavPanel/NavPanel';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 import TemplateList from '../components/Templates/TemplateList';
@@ -21,6 +22,7 @@ const FavoriteTemplates = () => {
 					<h1 className={styles.title}>Избранное</h1>
 					<TemplateList data={data.filter((item) => item.is_favorited)} />
 				</div>
+				<NavPanel IsTemplatePage />
 			</>
 		);
 	}

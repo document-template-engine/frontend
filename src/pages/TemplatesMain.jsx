@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import TemplateList from '../components/Templates/TemplateList';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
+import NavPanel from '../components/NavPanel/NavPanel';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 import Preloader from '../components/UI/Preloader/Preloader';
@@ -17,6 +18,7 @@ const TemplatesMain = () => {
 		return (
 			<>
 				<Header />
+				<p>111</p>
 				<Navbar isTemplatePage />
 				<div className={styles.templates}>
 					<Preloader />
@@ -51,6 +53,7 @@ const TemplatesMain = () => {
 						<h1 className={styles.title}>Шаблоны</h1>
 						<TemplateList data={data} />
 					</div>
+					<NavPanel isTemplatePage />
 				</main>
 			</>
 		);
