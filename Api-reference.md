@@ -1,18 +1,19 @@
 # API Reference
 
+## Templates
 
 
-## Создание документа/черновика для авторизованных пользователей 
+- ### Создание документа/черновика для авторизованных пользователей 
 
 ```
    POST /api/documents/
 ```
 ##### Headers
 
-```js
+```json
 {
-  'Content-Type': 'application/json',
-  Authorization: 'Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794',
+  "Content-Type": "application/json",
+  "Authorization": "Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794",
 },
 ```
 #### В теле запроса необходимо передать валидную информацию по заполненным полям
@@ -23,16 +24,16 @@ document_fields : массив объектов полей
 value: значение поля
 field: айди поля
 
-```js
+```json
   {
-    "description": string,
-    "template": number,
-    "completed": boolean,
-    "document_fields" : {value:string, field:number}[]
+    "description": "string",
+    "template": "number",
+    "completed": "boolean",
+    "document_fields" : "{value:string, field:number}[]"
   }
 ```
 #### Пример
-```js
+```json
  {
       "description": "doc1",
       "template": 1,
@@ -85,7 +86,7 @@ field: айди поля
 
 id - необходим для дальнейших запросов на получение нужного документа
 
-```http
+```json
 {
     "id": 2,
     "created": "2023-11-16T17:48:25.415130Z",
@@ -98,31 +99,57 @@ id - необходим для дальнейших запросов на пол
 }
 ```
 
-### Для получения DOCX/PDF файла
+- ### Для получения DOCX/PDF файла
 
 id - айди из запроса выше
 
 
 #### DOCX
 
-```http
+```
   GET /api/documents/{id}/download_document/ 
 ```
 
 #### PDF
-```http
+```
   GET /api/documents/{id}/download_pdf/  
 ```
 
 ##### Headers
 
-```js
+```json
 {
-  'Content-Type': 'application/json',
-  Authorization: 'Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794',
+  "Content-Type": "application/json",
+  "Authorization": "Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794",
 },
 ```
 ### Пример ответа
 Ответ будет содержать файл, который невозможно прочесть - только скачать
 
 
+- ### Работа с избранным
+
+##### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794",
+},
+```
+
+#### Body должен быть пуст
+
+
+
+#### Добавить в избранное
+
+```
+POST /templates/{template_id}/favorite/
+```
+
+#### Удалить из избранного
+
+```
+DELETE /templates/{template_id}/favorite/
+```
