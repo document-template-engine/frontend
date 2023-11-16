@@ -28,14 +28,16 @@ const TemplatesMain = () => {
 		return (
 			<>
 				<Header />
-				<Navbar isTemplatePage />
-				<div className={styles.templates}>
-					<h1 className={styles.title}>
-						Ошибка:{typeof error.status === 'string' && error.status}
-					</h1>
-					<p>{typeof error.error === 'string' && error.error}</p>
-					<img src={errorImg} alt="error" style={{ maxWidth: '300px' }} />
-				</div>
+				<main className={styles.templates_wrapper}>
+					<Navbar isTemplatePage />
+					<div className={styles.templates}>
+						<h1 className={styles.title}>
+							Ошибка:{typeof error.status === 'string' && error.status}
+						</h1>
+						<p>{typeof error.error === 'string' && error.error}</p>
+						<img src={errorImg} alt="error" style={{ maxWidth: '300px' }} />
+					</div>
+				</main>
 			</>
 		);
 	}
