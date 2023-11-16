@@ -1,23 +1,28 @@
-
+.templates_wrapper 
+  display: flex
+  margin-top: clamp(60px, 6vw, 80px)
+  position: reletive
+  
 .templates
   display: flex
   flex-direction: column
   gap: 27px
-  margin-top: 80px
   padding: 60px
-  margin-left: 317px
+  // margin-left: 317px убрал потому что из за них ломается верстка
+  // margin-top: 80px
   justify-content: center
   max-width: fit-content
   min-width: 60vw
   @media screen and (max-width: 1920px)
-    margin-left: 228px
+    // margin-left: 228px 
+    // margin-top: 60px  убрал потому что из за них ломается верстка
     gap: 20px
-    margin-top: 60px
     padding: 40px
   @media screen and (max-width: 1000px)
     margin-left: auto
     margin-right: auto
     padding: 24px 12px 77px 12px
+
 
 
 .title

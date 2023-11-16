@@ -45,10 +45,12 @@ const TemplatesMain = () => {
 		return (
 			<>
 				<Header />
-				<Navbar isTemplatePage />
-				<main className={styles.templates}>
-					<h1 className={styles.title}>Шаблоны</h1>
-					<TemplateList data={data} />
+				<main className={styles.templates_wrapper}>
+					<Navbar isTemplatePage />
+					<div className={styles.templates}>
+						<h1 className={styles.title}>Шаблоны</h1>
+						<TemplateList data={data} />
+					</div>
 				</main>
 			</>
 		);
