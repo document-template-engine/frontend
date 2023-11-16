@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { signOut } from '../../store/auth/authSlice';
 import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
 import EntranceButtonPreloader from '../UI/EntranceButtonPreloader/EntranceButtonPreloader';
+import { useActions } from '../../hooks/useActions';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -19,6 +20,12 @@ export default function Header() {
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 	const [isEntranceButtonLoading, setIsEntranceButtonLoading] = useState(false);
+	const { changeSearchQuery } = useActions();
+
+	useEffect(() => {
+		changeSearchQuery('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const toggleUserButtonState = (e) => {
 		setIsEntranceButtonLoading(true);
@@ -48,6 +55,10 @@ export default function Header() {
 		setIsUserMenuVisible(false);
 	};
 
+	function changeInputValue(e) {
+		dispatch(changeSearchQuery(e.target.value));
+	}
+
 	return (
 		<header className={styles.header}>
 			<Link className={styles.header__icon} to="/">
@@ -61,6 +72,7 @@ export default function Header() {
 							type="text"
 							name="search"
 							placeholder="Поиск"
+							onChange={changeInputValue}
 						/>
 					</fieldset>
 				</form>
