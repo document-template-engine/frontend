@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Logo from '../Logo/Logo';
+import Logo from '../UI/Logo/Logo';
 import styles from './AuthTemplate.module.scss';
 
 export default function AuthForm({ title, children }) {

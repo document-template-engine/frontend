@@ -1,33 +1,19 @@
 .navbar
-  grid-area: navbar
   position: fixed
   top: 80px
   z-index: 0
-  background-color: white
-  width: 297px
-  height: calc(100vh - 85px)
-  padding: 20px 10px 0
-
-
-  @media screen and (max-width: 1370px)
-    width: 204px
-    //padding:
-    left: 12px
-    right: 12px
-    top: 45px
-  @media (max-width: 992px)
-    display: none
-
-.container
+  left: 0
+  width: clamp(228px, 16.5vw, 317px)
+  height: 100%
+  padding: 20px 10px
+  box-sizing: border-box
   display: flex
   flex-direction: column
   row-gap: 4px
-  margin: 0
-  padding: 0
-  bottom: 8px
+  @media (max-width: 1000px)
+    display: none
 
 .item
-  max-width: 100%
   color: #1A1A1A
   font-family: Inter, sans-serif
   font-size: 20px
@@ -36,15 +22,9 @@
   line-height: 24px
   text-align: left
   padding: 10px
-  right: 0
-  background-color: white
+  background-color: #fff
   border: none
   cursor: pointer
-
-  @media screen and (max-width: 1400px)
-    // max-width: 204px Больше не нужно
-    padding: 10px 12px 11px
-
 
 .itemActive
   border-radius: 12px

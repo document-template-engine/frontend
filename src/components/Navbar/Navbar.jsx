@@ -21,36 +21,34 @@ export default function Navbar(props) {
 
 	return (
 		<nav className={styles.navbar}>
-			<div className={styles.container}>
+			<button
+				className={`${styles.item} ${
+					props.isTemplatePage && styles.itemActive
+				}`}
+				onClick={goToTemplates}
+			>
+				Шаблоны
+			</button>
+			{isLoggedIn && (
 				<button
 					className={`${styles.item} ${
-						props.isTemplatePage && styles.itemActive
+						props.isFavoriteTamplatesPage && styles.itemActive
 					}`}
-					onClick={goToTemplates}
+					onClick={goToSelected}
 				>
-					Шаблоны
+					Избранное
 				</button>
-				{isLoggedIn && (
-					<button
-						className={`${styles.item} ${
-							props.isFavoriteTamplatesPage && styles.itemActive
-						}`}
-						onClick={goToSelected}
-					>
-						Избранное
-					</button>
-				)}
-				{isLoggedIn && (
-					<button
-						className={`${styles.item} ${
-							props.isDraftsPage && styles.itemActive
-						}`}
-						onClick={goToDrafts}
-					>
-						Черновики
-					</button>
-				)}
-			</div>
+			)}
+			{isLoggedIn && (
+				<button
+					className={`${styles.item} ${
+						props.isDraftsPage && styles.itemActive
+					}`}
+					onClick={goToDrafts}
+				>
+					Черновики
+				</button>
+			)}
 		</nav>
 	);
 }

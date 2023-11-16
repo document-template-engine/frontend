@@ -56,8 +56,7 @@ export const authApi = createApi({
 export const {
 	useLoginQuery,
 	useLazyLoginQuery,
-	useGetUserDataQuery,
-	useLazyGetUserDataQuery,
 	useRegisterMutation,
 	useLogoutMutation,
+	useLazyGetUserDataQuery,
 } = authApi;

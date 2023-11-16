@@ -6,38 +6,33 @@
   border-radius: 12px
   border: 1px solid #B4BBD7
   box-shadow: 0 2px 20px 0 rgba(180, 187, 215, 0.10)
-  overflow: clip
-  //background-color: #EAEAEA
+  overflow: hidden
+
+  &:hover
+    outline: 2px solid #550FDA
+    cursor: pointer
 
   &:hover .favIcon
     visibility: visible
 
-@media screen and (max-width: 1700px)
-  .item
-    height: 214px
-    width: 218px
-
-@media (max-width: 550px)
-  .item
-    flex: 0 1 162px
-
+  @media screen and (max-width: 1920px)
+    height: 218px
+    width: 214px
+  @media screen and (max-width: 1366px)
+  @media screen and (max-width: 1000px)
+  @media screen and (max-width: 768px)
+    height: 164px
+    width: 161px
 
 .img
-  max-width: 249px
+  width: 100%
   height: 149px
   background: #eaeaea
   object-fit: cover
-
-@media screen and (max-width: 1700px)
-  .img
-    // width: 218px
-    height: 135px
-
-@media (max-width: 768px)
-  .img
-    max-width: 100%
-    flex: 1 1 100%
-
+  @media screen and (max-width: 1920px)
+    height: 122px
+  @media screen and (max-width: 768px)
+    height: 88px
 
 .imgWrapper
   position: relative
@@ -46,10 +41,9 @@
 
 .linkWrapper
   padding: 8px 16px
-
-@media screen and (max-width: 1700px)
-  .linkWrapper
-    padding: 8px 8px
+  border-top: 1px solid #B4BBD7
+  @media screen and (max-width: 1920px)
+    padding: 8px
 
 .link
   color: #000
@@ -63,11 +57,12 @@
   & :hover
     color: #0D23E9
 
-@media screen and (max-width: 1700px)
-  .link
+  @media screen and (max-width: 1920px)
     font-size: 15px
     line-height: 18px
-
+  @media screen and (max-width: 768px)
+    font-size: 14px
+    line-height: 18px
 
 .favIcon
   visibility: hidden

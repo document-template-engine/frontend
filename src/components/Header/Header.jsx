@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,17 +7,28 @@ import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
-import Logo from '../Logo/Logo';
+import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
+import EntranceButtonPreloader from '../UI/EntranceButtonPreloader/EntranceButtonPreloader';
+import { useActions } from '../../hooks/useActions';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	const email = useSelector((state) => state.user.email);
+	const userData = useSelector((state) => state.userReducer);
+	// console.log(userData);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
+	const [isEntranceButtonLoading, setIsEntranceButtonLoading] = useState(false);
+	const { changeSearchQuery } = useActions();
+
+	useEffect(() => {
+		changeSearchQuery('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const toggleUserButtonState = (e) => {
+		setIsEntranceButtonLoading(true);
 		e.stopPropagation();
 		if (isLoggedIn) {
 			setIsUserMenuVisible(!isUserMenuVisible);
@@ -35,76 +46,87 @@ export default function Header() {
 		fetchRepos(token);
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
-		navigate('/signin');
+		navigate('/templates');
 		localStorage.removeItem('token');
+		setIsEntranceButtonLoading(false);
 	};
 
 	const handleClick = () => {
 		setIsUserMenuVisible(false);
 	};
 
+	function changeInputValue(e) {
+		dispatch(changeSearchQuery(e.target.value));
+	}
+
 	return (
 		<header className={styles.header}>
 			<Link className={styles.header__icon} to="/">
 				<Logo variant="Default" />
 			</Link>
-			<form className={styles.header__form}>
-				<fieldset className={styles['header__search-form']}>
-					<div className={styles['header__search-icon']} />
-					<input
-						className={styles.header__input}
-						type="text"
-						name="search"
-						placeholder="Поиск"
-					/>
-				</fieldset>
-			</form>
-			<div className={styles['header__user-container']}>
-				{isLoggedIn ? (
-					<button
-						type="button"
-						className={styles['header__user-button']}
-						aria-label="Save"
-						onClick={toggleUserButtonState}
+			<div className={styles.content}>
+				<form className={styles.header__form}>
+					<fieldset className={styles['header__search-form']}>
+						<input
+							className={styles.header__input}
+							type="text"
+							name="search"
+							placeholder="Поиск"
+							onChange={changeInputValue}
+						/>
+					</fieldset>
+				</form>
+				<div>
+					{isLoggedIn ? (
+						<button
+							type="button"
+							className={styles['header__user-button']}
+							aria-label="Save"
+							onClick={toggleUserButtonState}
+						>
+							{userData.mail}
+						</button>
+					) : (
+						<button
+							type="button"
+							className={styles['header__login-button']}
+							onClick={toggleUserButtonState}
+						>
+							{isEntranceButtonLoading ? EntranceButtonPreloader : 'Вход'}
+						</button>
+					)}
+				</div>
+				{isLoggedIn && isUserMenuVisible && (
+					<Modal
+						extraClass={styles['header__modal-container']}
+						handleClose={handleClick}
+						isOverlay={false}
 					>
-						{email[0]}
-					</button>
-				) : (
-					<button
-						type="button"
-						className={styles['header__login-button']}
-						onClick={toggleUserButtonState}
-					>
-						Вход
-					</button>
+						<div className={styles.container}>
+							<img
+								className={styles['header__modal-image']}
+								src={profile}
+								alt="email"
+							/>
+							{/* <p className={styles['header__modal-info']}>{userData.email}</p> */}
+						</div>
+						<div className={styles['header__modal-divider']} />
+						<div className={styles.container}>
+							<img
+								className={styles['header__modal-image']}
+								src={exitIcon}
+								alt="exit"
+							/>
+							<button
+								className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
+								onClick={handleExit}
+							>
+								Выйти
+							</button>
+						</div>
+					</Modal>
 				)}
 			</div>
-			{isLoggedIn && isUserMenuVisible && (
-				<Modal
-					extraClass={styles['header__modal-container']}
-					handleClose={handleClick}
-					isOverlay={false}
-				>
-					<img
-						className={styles['header__modal-image']}
-						src={profile}
-						alt="email"
-					/>
-					<p className={styles['header__modal-info']}>{email}</p>
-					<div className={styles['header__modal-divider']} />
-					<img
-						className={styles['header__modal-image']}
-						src={exitIcon}
-						alt="exit"
-					/>
-					<button
-						className={`${styles['header__modal-info']} ${styles['header__modal-exit-button']}`}
-						onClick={handleExit}
-					>
-						Выйти
-					</button>
-				</Modal>
-			)}
 		</header>
 	);
 }

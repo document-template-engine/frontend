@@ -12,7 +12,7 @@ import ForgotPwPage from '../../pages/AuthPages/ForgotPwPage';
 import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
-import NotFound from '../NotFound/NotFound';
+import NotFound from '../../pages/NotFound';
 import FormPage from '../../pages/FormPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { signIn } from '../../store/auth/authSlice';
@@ -21,15 +21,14 @@ function App() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchRepos, { error, isLoading, data: repos }] =
+	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 
 	const checkToken = () => {
-		const token = localStorage.getItem('token');
-		console.log(token);
-		if (token) {
-			fetchRepos(token);
-			dispatch(signIn());
+		const token = localStorage.getItem('token'); // берём токен из localStorage
+		const authToken = fetchUserMe(token); // запрашиваем данным о пользователе передавая токен в запросе
+		if (authToken && token) {
+			dispatch(signIn()); // пользователь авторизован
 			navigate('/templates');
 		} else {
 			navigate('/');
@@ -41,26 +40,24 @@ function App() {
 	}, []);
 
 	return (
-		<div className="pages">
-			<Routes>
-				<Route element={<TemplatesMain />} path="/templates">
-					<Route path=":id" element={<FormPage />} />
-				</Route>
-				<Route element={<FavoriteTemplates />} path="favorite">
-					<Route path=":id" element={<FormPage />} />
-				</Route>
-				<Route element={<DraftsTemplates />} path="drafts">
-					<Route path=":id" element={<FormPage />} />
-				</Route>
-				<Route element={<Landing />} path="/" />
-				<Route element={<LoginPage />} path="/signin" exact />
-				<Route element={<LogupPage />} path="/signup" exact />
-				<Route element={<CheckAccountPage />} path="/check-account" exact />
-				<Route element={<ForgotPwPage />} path="/forgot-password" exact />
-				<Route element={<ChangePassword />} path="/change-password" exact />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
-		</div>
+		<Routes>
+			<Route element={<TemplatesMain />} path="/templates">
+				<Route path=":id" element={<FormPage />} />
+			</Route>
+			<Route element={<FavoriteTemplates />} path="favorite">
+				<Route path=":id" element={<FormPage />} />
+			</Route>
+			<Route element={<DraftsTemplates />} path="drafts">
+				<Route path=":id" element={<FormPage />} />
+			</Route>
+			<Route element={<Landing />} path="/" />
+			<Route element={<LoginPage />} path="/signin" exact />
+			<Route element={<LogupPage />} path="/signup" exact />
+			<Route element={<CheckAccountPage />} path="/check-account" exact />
+			<Route element={<ForgotPwPage />} path="/forgot-password" exact />
+			<Route element={<ChangePassword />} path="/change-password" exact />
+			<Route path="*" element={<NotFound />} />
+		</Routes>
 	);
 }
 

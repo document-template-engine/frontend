@@ -1,32 +1,15 @@
-.App {
+html,
+body {
+	height: 100%;
+}
+
+.app {
 	display: flex;
-}
-
-.pages {
-	display: grid;
-	grid-template-columns: 317px 1fr;
-	grid-template-rows: 80px 1fr;
-	grid-template-areas:
-		'header header'
-		'navbar main';
+	flex-direction: column;
+	margin: 0 auto;
+	height: 100%;
+	color: #fff;
 	max-width: 1920px;
-	width: 100%;
-	margin: auto;
-}
-
-@media screen and (max-width: 1370px) {
-	.pages {
-		grid-template-columns: 228px 1fr;
-		grid-template-rows: 60px 1fr;
-	}
-}
-
-@media (max-width: 992px) {
-	.pages {
-		grid-template-columns: 1fr;
-		grid-template-rows: 60px 1fr;
-		grid-template-areas:
-			'header header'
-			'main main';
-	}
+	/*padding: 0 10px; мешает темплейтам*/
+	/* box-sizing: border-box */
 }
