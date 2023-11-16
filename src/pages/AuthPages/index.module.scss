@@ -138,21 +138,4 @@ $color-link-l: rgba(0, 25, 255, 1);
 	background-repeat: no-repeat;
 	background-position: center;
 	animation: preloader-spin 1.5s linear infinite;
-
-	/* & container {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 50px;
-		height: 50px;
-	}
-
-	& gif {
-		width: 50px;
-		height: 50px;
-		background-image: url("../../images/preloader.svg");
-		background-repeat: no-repeat;
-		background-position: center;
-		animation: preloader-spin 1.5s linear infinite;
-	} */
 }

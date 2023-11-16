@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -14,6 +15,7 @@ import {
 	useLazyLoginQuery,
 	useLazyGetUserDataQuery,
 } from '../../store/auth-api/auth.api';
+import { useActions } from '../../hooks/useActions';
 
 export default function LoginPage() {
 	const [visible, setVisible] = useState(true);
@@ -25,6 +27,9 @@ export default function LoginPage() {
 
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
+
+	// сохраняем почту зарегестрированного пользователя
+	const { changeEmail } = useActions();
 
 	const {
 		register,
@@ -46,8 +51,12 @@ export default function LoginPage() {
 		});
 	}, [reset]);
 
-	// обработка ошибок с скрвера
+	// обработка ошибок с сервера
 	const [errMsg, setErrMsg] = useState('');
+
+	/* 	const dataUser = () => {
+		changeEmail(userMe)
+	} */
 
 	useEffect(() => {
 		if (repos) {
@@ -55,6 +64,7 @@ export default function LoginPage() {
 			localStorage.setItem('token', repos.auth_token); // записываем токен в localStorage
 			fetchUserMe(repos.auth_token); // запрос данных о пользователе
 			navigate('/templates');
+			/* dataUser() */
 		}
 		if (error) {
 			const keys = error.data
@@ -62,7 +72,7 @@ export default function LoginPage() {
 				: 'упс... что-то пошло не так, попробуйте позже';
 			setErrMsg(keys);
 		}
-	}, [repos, error, dispatch, navigate, fetchUserMe]);
+	}, [repos, error, dispatch, navigate, fetchUserMe /* dataUser */]);
 
 	const handleClose = () => {
 		setVisible(false);
