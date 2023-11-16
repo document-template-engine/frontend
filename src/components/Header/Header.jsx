@@ -13,7 +13,8 @@ import EntranceButtonPreloader from '../UI/EntranceButtonPreloader/EntranceButto
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	const email = useSelector((state) => state.user.email);
+	const userData = useSelector((state) => state.userReducer);
+	// console.log(userData);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
@@ -40,6 +41,7 @@ export default function Header() {
 		setIsUserMenuVisible(false);
 		navigate('/templates');
 		localStorage.removeItem('token');
+		setIsEntranceButtonLoading(false);
 	};
 
 	const handleClick = () => {
@@ -70,7 +72,7 @@ export default function Header() {
 							aria-label="Save"
 							onClick={toggleUserButtonState}
 						>
-							{email[0]}
+							{userData.mail}
 						</button>
 					) : (
 						<button
@@ -94,7 +96,7 @@ export default function Header() {
 								src={profile}
 								alt="email"
 							/>
-							<p className={styles['header__modal-info']}>{email}</p>
+							{/* <p className={styles['header__modal-info']}>{userData.email}</p> */}
 						</div>
 						<div className={styles['header__modal-divider']} />
 						<div className={styles.container}>
