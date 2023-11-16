@@ -15,7 +15,7 @@ const ErrorPopup = ({ errors }) => {
 					<p className="ErrorPopup__text">
 						Минимум одна заглавная, одна строчная буква
 					</p>
-					<p className="ErrorPopup__text">Минимум одна цивра</p>
+					<p className="ErrorPopup__text">Минимум одна цифра</p>
 					<p className="ErrorPopup__text">Один специальный символ</p>
 				</div>
 			</div>

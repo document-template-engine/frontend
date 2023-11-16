@@ -21,7 +21,7 @@ function App() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchUserMe, { error, isLoading, data: userMe }] =
+	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 
 	const checkToken = () => {
