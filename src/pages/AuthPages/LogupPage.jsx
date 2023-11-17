@@ -101,7 +101,7 @@ export default function LogupPage() {
 							type="password"
 							{...register('password', {
 								required: 'Придумайте пароль',
-								/* minLength: {
+								/* 								minLength: {
 									value: 8,
 									message: 'Минимум восемь символов',
 								},

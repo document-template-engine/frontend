@@ -14,7 +14,7 @@ import { useActions } from '../../hooks/useActions';
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const userData = useSelector((state) => state.userReducer);
-	// console.log(userData);
+	const email = localStorage.getItem('email') || userData.email;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
@@ -49,7 +49,10 @@ export default function Header() {
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
 		navigate('/templates');
-		localStorage.removeItem('token');
+		// localStorage.removeItem('token');
+		localStorage.clear();
+		setIsEntranceButtonLoading(false);
+
 	};
 
 	const handleClick = () => {
@@ -85,7 +88,7 @@ export default function Header() {
 							aria-label="Save"
 							onClick={toggleUserButtonState}
 						>
-							{userData.mail}
+							{email?.charAt(0).toUpperCase()}
 						</button>
 					) : (
 						<button
@@ -113,7 +116,7 @@ export default function Header() {
 								src={profile}
 								alt="email"
 							/>
-							{/* <p className={styles['header__modal-info']}>{userData.email}</p> */}
+							<p className={styles['header__modal-info']}>{email}</p>
 						</div>
 						<div className={styles['header__modal-divider']} />
 						<div className={styles.container}>

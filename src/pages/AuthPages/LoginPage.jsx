@@ -23,7 +23,8 @@ export default function LoginPage() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchRepos, { error, isLoading, data: repos }] = useLazyLoginQuery();
+	const [fetchRepos, { error, isLoading /* data: repos */ }] =
+		useLazyLoginQuery();
 
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
@@ -40,8 +41,33 @@ export default function LoginPage() {
 		mode: 'onChange',
 	});
 
+	// обработка ошибок с сервера
+	const [errMsg, setErrMsg] = useState('');
+
 	const onSubmit = (data) => {
-		fetchRepos(data);
+		fetchRepos(data)
+			.then((respons) => {
+				if (respons.data) {
+					fetchUserMe(respons.data.auth_token) // запрос данных о пользователе
+						.then((res) => {
+							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
+							localStorage.setItem('email', res.data.email); // записываем email в localStorage
+							changeEmail(res.data.email);
+							dispatch(signIn()); // пользователь авторизован
+							navigate('/templates');
+						});
+				} else {
+					// сообщаем пользователю об ошибке
+					const keys = respons.error
+						? Object.values(respons.error.data).join()
+						: 'упс... что-то пошло не так, попробуйте позже';
+					setErrMsg(keys);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				setErrMsg('Произошло что-то странное, попробуйте позже');
+			});
 	};
 
 	useEffect(() => {
@@ -50,29 +76,6 @@ export default function LoginPage() {
 			password: '',
 		});
 	}, [reset]);
-
-	// обработка ошибок с сервера
-	const [errMsg, setErrMsg] = useState('');
-
-	/* 	const dataUser = () => {
-		changeEmail(userMe)
-	} */
-
-	useEffect(() => {
-		if (repos) {
-			dispatch(signIn()); // пользователь авторизован
-			localStorage.setItem('token', repos.auth_token); // записываем токен в localStorage
-			fetchUserMe(repos.auth_token); // запрос данных о пользователе
-			navigate('/templates');
-			/* dataUser() */
-		}
-		if (error) {
-			const keys = error.data
-				? Object.values(error.data).join()
-				: 'упс... что-то пошло не так, попробуйте позже';
-			setErrMsg(keys);
-		}
-	}, [repos, error, dispatch, navigate, fetchUserMe /* dataUser */]);
 
 	const handleClose = () => {
 		setVisible(false);
