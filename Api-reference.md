@@ -18,11 +18,11 @@
 ```
 #### В теле запроса необходимо передать валидную информацию по заполненным полям
 
-template : айди шаблона
-completed : false - черновик, true - документа
-document_fields : массив объектов полей
-value: значение поля
-field: айди поля
+- template : айди шаблона
+- completed : false - черновик, true - документа
+- document_fields : массив объектов полей
+- value: значение поля
+- field: айди поля
 
 ```json
   {
@@ -40,44 +40,40 @@ field: айди поля
       "completed": true,
       "document_fields": [
         {
-          "value": "66",
+          "value": "66 Непоседы",
           "field": 1
         },
         {
-          "value": "Непоседы",
+          "value": "Ивановой Ирине Петровне",
           "field": 2
         },
         {
-          "value": "Ивановой Ирине Петровне",
+          "value": "Иванова Ивана Ивановича",
           "field": 3
         },
         {
-          "value": "Иванова Ивана Ивановича",
+          "value": "город, улица, номер квартиры",
           "field": 4
         },
         {
-          "value": "город, улица, номер квартиры",
+          "value": "Сидоровым Данилой Игоревичем",
           "field": 5
         },
         {
-          "value": "Сидоровым Данилой Игоревичем",
+          "value": "№3",
           "field": 6
         },
         {
-          "value": "№3",
+          "value": "01.11.2023",
           "field": 7
         },
         {
-          "value": "01.11.2023",
+          "value": "20.11.2023",
           "field": 8
         },
         {
-          "value": "20.11.2023",
-          "field": 9
-        },
-        {
           "value": "30.10.2023",
-          "field": 10
+          "field": 9
         }
       ]
 }
@@ -153,3 +149,33 @@ POST /templates/{template_id}/favorite/
 ```
 DELETE /templates/{template_id}/favorite/
 ```
+
+### Получение всех черновиков пользователя (авторизованного)
+```
+GET /api/documents/draft/
+```
+##### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794",
+},
+```
+
+#### Body должен быть пуст
+
+### Получение всех недавних документов пользователя (авторизованного)
+```
+GET /api/documents/history/
+```
+##### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Token d10e0e0018f81633f27f1cdc3f0ca37094b1b794",
+},
+```
+
+#### Body должен быть пуст
