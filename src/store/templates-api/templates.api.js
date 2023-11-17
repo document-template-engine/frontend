@@ -33,9 +33,19 @@ export const templatesApi = createApi({
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: 'Token bb4f5dbedaafd2730f35803e7087e797479d68f5', // потом заменим на валидный токен, это тестовый
+					Authorization: `Token ${localStorage.getItem('token')}`,
 				},
 				body: JSON.stringify(data),
+			}),
+		}),
+		getDoc: build.query({
+			query: (id) => ({
+				url: `/documents/${id}/download_document/`,
+				method: 'GET',
+				headers: {
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+				responseHandler: (response) => response.text(),
 			}),
 		}),
 	}),
@@ -45,4 +55,5 @@ export const {
 	useGetTemplatesQuery,
 	useGetTemplateQuery,
 	useLazyPostTemplateQuery,
+	useLazyGetDocQuery,
 } = templatesApi;

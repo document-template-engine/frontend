@@ -6,6 +6,7 @@ import FormInputsList from './FormInputsList/FormInputsList';
 import ActionBar from '../ActionBar/ActionBar';
 import {
 	useGetTemplateQuery,
+	useLazyGetDocQuery,
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
@@ -13,23 +14,37 @@ import Preloader from '../UI/Preloader/Preloader';
 export default function TemplateForm() {
 	const { id } = useParams();
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
-	const [fetch, obj] = useLazyPostTemplateQuery();
+	const [fetchTemplate, dataTemplate] = useLazyPostTemplateQuery();
+	const [fetchDoc, dataDoc] = useLazyGetDocQuery();
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		fetch({
+
+		fetchTemplate({
 			description: data.description,
 			template: data.id,
 			completed: true,
 			document_fields: [...formData],
-		});
-		console.log({
-			description: data.description,
-			template: data.id,
-			completed: true,
-			document_fields: [...formData],
-		});
+		})
+			.then((response) => {
+				if (response.data && response.data.id) {
+					return fetchDoc(response.data.id);
+				}
+				throw new Error('Failed to create document');
+			})
+			.then((docResponse) => {
+				const a = document.createElement('a');
+				const blob = new Blob([docResponse.data], {
+					type: 'aapplication/vnd.openxmlformats-officedocument.wordprocessingml.document',
+				});
+				a.href = URL.createObjectURL(blob);
+				a.download = 'filename.doc';
+				a.click();
+			})
+			.catch((err) => {
+				console.error('Error while handling form submission:', err);
+			});
 	};
 
 	if (isLoading) {
