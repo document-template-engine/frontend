@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import styles from './Navbar.module.sass';
+import { ReactComponent as Template } from '../../images/actionBarBook.svg';
+import { ReactComponent as Folder } from '../../images/actionBarFolder.svg';
+import { ReactComponent as Star } from '../../images/actionBarStart.svg';
 
 export default function Navbar(props) {
 	const navigate = useNavigate();
@@ -20,35 +24,47 @@ export default function Navbar(props) {
 	}
 
 	return (
-		<nav className={styles.navbar}>
-			<button
-				className={`${styles.item} ${
-					props.isTemplatePage && styles.itemActive
-				}`}
-				onClick={goToTemplates}
-			>
-				Шаблоны
-			</button>
-			{isLoggedIn && (
+		<nav
+			className={clsx(styles.navbar, { [styles.navbar_noLogin]: !isLoggedIn })}
+		>
+			<div className={styles.container}>
 				<button
-					className={`${styles.item} ${
-						props.isFavoriteTamplatesPage && styles.itemActive
-					}`}
-					onClick={goToSelected}
+					className={clsx(
+						styles.item,
+						props.isTemplatePage && styles.itemActive
+					)}
+					onClick={goToTemplates}
 				>
-					Избранное
+					<Template className={styles.item_template} />
+					Шаблоны
 				</button>
-			)}
-			{isLoggedIn && (
-				<button
-					className={`${styles.item} ${
-						props.isDraftsPage && styles.itemActive
-					}`}
-					onClick={goToDrafts}
-				>
-					Черновики
-				</button>
-			)}
+				{isLoggedIn && (
+					<button
+						className={clsx(
+							styles.item,
+							styles.item_favorite,
+							props.isFavoriteTamplatesPage && styles.itemActive
+						)}
+						onClick={goToSelected}
+					>
+						<Folder className={styles.item_template} />
+						Избранное
+					</button>
+				)}
+				{isLoggedIn && (
+					<button
+						className={clsx(
+							styles.item,
+							styles.item_drafts,
+							props.isDraftsPage && styles.itemActive
+						)}
+						onClick={goToDrafts}
+					>
+						<Star className={styles.item_template} />
+						Черновики
+					</button>
+				)}
+			</div>
 		</nav>
 	);
 }

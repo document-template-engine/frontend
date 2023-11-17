@@ -6,17 +6,21 @@ import AndElse from './AndElse/AndElse';
 import Advantages from './Advantages/Advantages';
 import Footer from './Footer/Footer';
 import SaveItToDraft from './SaveItToDraft/SaveItToDraft';
+import LadningHeader from './LandingHeader/LadningHeader';
 
 export default function Landing() {
 	return (
-		<main className="landing">
-			<About />
-			<HowItWorks />
-			<AddItToFavorites />
-			<SaveItToDraft />
-			<AndElse />
-			<Advantages />
-			<Footer />
-		</main>
+		<>
+			<LadningHeader />
+			<main className="landing">
+				<About />
+				<HowItWorks />
+				<AddItToFavorites />
+				<SaveItToDraft />
+				<AndElse />
+				<Advantages />
+				<Footer />
+			</main>
+		</>
 	);
 }

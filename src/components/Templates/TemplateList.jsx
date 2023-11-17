@@ -1,24 +1,47 @@
-import React from 'react';
-import { useGetTemplatesQuery } from '../../store/templates-api/templates.api';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styles from './TemplateList.module.sass';
 import TemplateItem from './TemplateItem';
 
 // eslint-disable-next-line react/prop-types
-const TemplateList = ({ data }) => (
-	// Это список шаблонов(квадратики с названием формы)
-	// TODO: Тут есть проблема: "Пока что компонент невозможно переиспользовать для других страничек(черновики, избранное)
-	<ul className={styles.list}>
-		{data &&
+const TemplateList = ({ data }) => {
+	const search = useSelector((state) => state.search.search);
+
+	const filteredDocumentList = useMemo(() => {
+		if (data) {
 			// eslint-disable-next-line react/prop-types
-			data.map((item) => (
-				<TemplateItem
-					title={item.name}
-					link={item.id.toString()}
-					isFav={item.is_favorited}
-					image={item.image}
-					key={item.id}
-				/>
-			))}
-	</ul>
-);
+			const filteredDocument = data.slice();
+			// eslint-disable-next-line array-callback-return
+			return filteredDocument.filter((item) => {
+				if (item.name) {
+					return item.name.toLowerCase().includes(search.toLowerCase());
+				}
+				if (item.description) {
+					return item.description.toLowerCase().includes(search.toLowerCase());
+				}
+				return item;
+			});
+		}
+		return data;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, search]);
+
+	return (
+		<ul className={styles.list}>
+			{filteredDocumentList &&
+				// eslint-disable-next-line react/prop-types
+				filteredDocumentList.map((item) => (
+					<TemplateItem
+						title={item.name || item.description}
+						link={item.id.toString()}
+						isFav={item.is_favorited}
+						image={item.image}
+						key={item.id}
+					/>
+				))}
+		</ul>
+	);
+};
+
 export default TemplateList;
