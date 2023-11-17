@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
-import NavPanel from '../components/NavPanel/NavPanel';
 import TemplateList from '../components/Templates/TemplateList';
 import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
 import styles from '../components/Templates/TemplateList.module.sass';
@@ -40,7 +39,6 @@ const DraftsTemplates = () => {
 						)}{' '}
 					</div>
 				</main>
-				<NavPanel isDraftsPage />
 			</>
 		);
 	}

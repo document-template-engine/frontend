@@ -2,7 +2,6 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
-import NavPanel from '../components/NavPanel/NavPanel';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 import TemplateList from '../components/Templates/TemplateList';
@@ -37,7 +36,6 @@ const FavoriteTemplates = () => {
 							<TemplateList data={arrayFavoriteTemplates} />
 						)}
 					</div>
-					<NavPanel isFavoriteTamplatesPage />
 				</main>
 			</>
 		);
