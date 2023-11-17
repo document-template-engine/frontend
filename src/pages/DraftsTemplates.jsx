@@ -16,8 +16,6 @@ const DraftsTemplates = () => {
 		refetch();
 	}, [location.pathname, refetch]);
 
-	const arrayDraftTemplates = []; // сюда нужно положить отобранный массив данных. Пока непонятно, получаем ли мы черновики сразу с сервера или фильтруем, поэтому пока такая заглушка.
-
 	// Если страничка главная - то он показывает список
 	if (currentPath === '/drafts') {
 		return (
@@ -27,7 +25,7 @@ const DraftsTemplates = () => {
 					<Navbar isDraftsPage />
 					<div className={styles.templates}>
 						<h1 className={styles.title}>Черновики</h1>
-						{arrayDraftTemplates.length === 0 ? (
+						{data && data.length === 0 ? (
 							<div className={styles.BackgroundImageContainer}>
 								<EmptyPageState
 									figure="folder"
@@ -35,7 +33,7 @@ const DraftsTemplates = () => {
 								/>
 							</div>
 						) : (
-							<TemplateList data={arrayDraftTemplates} />
+							<TemplateList data={data} />
 						)}{' '}
 					</div>
 				</main>
