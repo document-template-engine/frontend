@@ -51,6 +51,42 @@ export const templatesApi = createApi({
 					),
 			}),
 		}),
+		getPDF: build.query({
+			query: (id) => ({
+				url: `/documents/${id}/download_pdf/`,
+				method: 'GET',
+				headers: {
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+				responseHandler: async (response) => {
+					const blob = await response.blob();
+
+					// Создаем ссылку для скачивания
+					const url = window.URL.createObjectURL(blob);
+
+					// Скачиваем файл
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = 'Заявление_на_отпуск.pdf';
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+				},
+			}),
+		}),
+		watchPDF: build.query({
+			query: (id) => ({
+				url: `/documents/${id}/download_pdf/`,
+				method: 'GET',
+				headers: {
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+				responseHandler: async (response) =>
+					window.location.assign(
+						window.URL.createObjectURL(await response.blob())
+					),
+			}),
+		}),
 	}),
 });
 
@@ -59,4 +95,6 @@ export const {
 	useGetTemplateQuery,
 	useLazyPostTemplateQuery,
 	useLazyGetDocQuery,
+	useLazyGetPDFQuery,
+	useLazyWatchPDFQuery,
 } = templatesApi;
