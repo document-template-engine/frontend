@@ -21,12 +21,13 @@ const DraftsTemplates = () => {
 		return (
 			<>
 				<Header />
-				<Navbar isDraftsPage />
-				<div className={styles.templates}>
-					<h1 className={styles.title}>Черновики</h1>
-					<TemplateList data={data} />
-				</div>
-				<NavPanel isDraftsPage />
+				<main className={styles.templates_wrapper}>
+					<Navbar isDraftsPage />
+					<div className={styles.templates}>
+						<h1 className={styles.title}>Черновики</h1>
+						<TemplateList data={data} />
+					</div>
+				</main>
 			</>
 		);
 	}
