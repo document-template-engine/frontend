@@ -34,13 +34,14 @@ export default function TemplateForm() {
 				throw new Error('Failed to create document');
 			})
 			.then((docResponse) => {
-				const a = document.createElement('a');
-				const blob = new Blob([docResponse.data], {
-					type: 'aapplication/vnd.openxmlformats-officedocument.wordprocessingml.document',
-				});
-				a.href = URL.createObjectURL(blob);
-				a.download = 'filename.doc';
-				a.click();
+				console.log(docResponse);
+				// const a = document.createElement('a');
+				// const blob = new Blob([docResponse], {
+				// 	type: 'aapplication/vnd.openxmlformats-officedocument.wordprocessingml.document',
+				// });
+				// a.href = URL.createObjectURL(blob);
+				// a.download = 'filename.doc';
+				// a.click();
 			})
 			.catch((err) => {
 				console.error('Error while handling form submission:', err);

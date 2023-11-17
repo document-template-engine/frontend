@@ -45,7 +45,10 @@ export const templatesApi = createApi({
 				headers: {
 					Authorization: `Token ${localStorage.getItem('token')}`,
 				},
-				responseHandler: (response) => response.text(),
+				responseHandler: async (response) =>
+					window.location.assign(
+						window.URL.createObjectURL(await response.blob())
+					),
 			}),
 		}),
 	}),
