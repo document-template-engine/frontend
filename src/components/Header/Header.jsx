@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,14 +10,22 @@ import { signOut } from '../../store/auth/authSlice';
 import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
 import EntranceButtonPreloader from '../UI/EntranceButtonPreloader/EntranceButtonPreloader';
+import { useActions } from '../../hooks/useActions';
 
 export default function Header() {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	const email = useSelector((state) => state.user.email);
+	const userData = useSelector((state) => state.userReducer);
+	// console.log(userData);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 	const [isEntranceButtonLoading, setIsEntranceButtonLoading] = useState(false);
+	const { changeSearchQuery } = useActions();
+
+	useEffect(() => {
+		changeSearchQuery('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const toggleUserButtonState = (e) => {
 		setIsEntranceButtonLoading(true);
@@ -40,11 +48,16 @@ export default function Header() {
 		setIsUserMenuVisible(false);
 		navigate('/templates');
 		localStorage.removeItem('token');
+		setIsEntranceButtonLoading(false);
 	};
 
 	const handleClick = () => {
 		setIsUserMenuVisible(false);
 	};
+
+	function changeInputValue(e) {
+		dispatch(changeSearchQuery(e.target.value));
+	}
 
 	return (
 		<header className={styles.header}>
@@ -59,6 +72,7 @@ export default function Header() {
 							type="text"
 							name="search"
 							placeholder="Поиск"
+							onChange={changeInputValue}
 						/>
 					</fieldset>
 				</form>
@@ -70,7 +84,7 @@ export default function Header() {
 							aria-label="Save"
 							onClick={toggleUserButtonState}
 						>
-							{email[0]}
+							{userData.mail}
 						</button>
 					) : (
 						<button
@@ -94,7 +108,7 @@ export default function Header() {
 								src={profile}
 								alt="email"
 							/>
-							<p className={styles['header__modal-info']}>{email}</p>
+							{/* <p className={styles['header__modal-info']}>{userData.email}</p> */}
 						</div>
 						<div className={styles['header__modal-divider']} />
 						<div className={styles.container}>
