@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
@@ -10,8 +10,12 @@ import TemplateList from '../components/Templates/TemplateList';
 const DraftsTemplates = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data } = useGetDraftsQuery();
-	console.log(data);
+	const { data, refetch } = useGetDraftsQuery();
+
+	useEffect(() => {
+		refetch();
+	}, [location.pathname, refetch]);
+
 	// Если страничка главная - то он показывает список
 	if (currentPath === '/drafts') {
 		return (
