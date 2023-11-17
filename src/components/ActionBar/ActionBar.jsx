@@ -1,11 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import styles from './ActionBar.module.sass';
 
-const ActionBar = () => (
+export const ActionBar = ({
+	downloadDocHandler,
+	downloadPDFHandler,
+	watchPDFHandler,
+}) => (
 	<ul className={styles.main}>
 		<li className={clsx(styles.item, styles.iconEye, styles.icon)}>
-			<button className={styles.btn}>
+			<button className={styles.btn} onClick={watchPDFHandler}>
 				<p className={styles.text}>Посмотреть</p>
 			</button>
 		</li>
@@ -15,12 +20,12 @@ const ActionBar = () => (
 			</button>
 		</li>
 		<li className={clsx(styles.item, styles.iconDoc, styles.icon)}>
-			<button className={styles.btn} type="submit">
+			<button className={styles.btn} type="button" onClick={downloadDocHandler}>
 				<p className={styles.text}>Сохранить в DOC</p>
 			</button>
 		</li>
 		<li className={clsx(styles.item, styles.iconPDF, styles.icon)}>
-			<button className={styles.btn} type="submit">
+			<button className={styles.btn} type="button" onClick={downloadPDFHandler}>
 				<p className={styles.text}>Сохранить в PDF</p>
 			</button>
 		</li>
@@ -32,4 +37,8 @@ const ActionBar = () => (
 	</ul>
 );
 
-export default ActionBar;
+ActionBar.propTypes = {
+	downloadDocHandler: PropTypes.func,
+	downloadPDFHandler: PropTypes.func,
+	watchPDFHandler: PropTypes.func,
+};

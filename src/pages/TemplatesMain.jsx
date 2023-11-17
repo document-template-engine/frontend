@@ -56,6 +56,7 @@ const TemplatesMain = () => {
 						<TemplateList data={data} />
 					</div>
 				</main>
+				<NavPanel IsTemplatePage />
 			</>
 		);
 	}

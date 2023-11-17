@@ -1,6 +1,16 @@
 $color-link: rgba(4, 21, 175, 1);
 $color-link-l: rgba(0, 25, 255, 1);
 
+@keyframes preloader-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .back {
 	font-size: 24px;
 	line-height: 29px;
@@ -15,6 +25,7 @@ $color-link-l: rgba(0, 25, 255, 1);
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+	position: relative;
 }
 
 .title {
@@ -57,7 +68,14 @@ $color-link-l: rgba(0, 25, 255, 1);
 }
 
 .largeLink {
-	color: $color-link-l;
+	border-radius: 24px;
+	text-align: center;
+	padding: 14px;
+	border: 1px solid #a48dd3;
+	color: #550fda;
+	font-size: 24px;
+	line-height: 28px;
+	overflow: hidden;
 	font-family: 'SF-Pro', 'Inter', sans-serif;
 	font-size: 24px;
 	line-height: 28px;
@@ -110,4 +128,14 @@ $color-link-l: rgba(0, 25, 255, 1);
 	font-size: 16px;
 	line-height: 19px;
 	width: 449px;
+}
+
+.preloader {
+	width: 35px;
+	height: 28px;
+	background-image: url('../../images/preloader.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	animation: preloader-spin 1.5s linear infinite;
 }
