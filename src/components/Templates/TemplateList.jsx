@@ -1,5 +1,4 @@
 import React from 'react';
-import { useGetTemplatesQuery } from '../../store/templates-api/templates.api';
 import styles from './TemplateList.module.sass';
 import TemplateItem from './TemplateItem';
 
@@ -12,7 +11,7 @@ const TemplateList = ({ data }) => (
 			// eslint-disable-next-line react/prop-types
 			data.map((item) => (
 				<TemplateItem
-					title={item.name}
+					title={item.name || item.description}
 					link={item.id.toString()}
 					isFav={item.is_favorited}
 					image={item.image}

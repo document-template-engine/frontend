@@ -8,7 +8,9 @@ import {
 	useGetTemplateQuery,
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
+	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
+	useLazyWatchPDFQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
 
@@ -18,26 +20,37 @@ export default function TemplateForm() {
 	const [fetchTemplate, dataTemplate] = useLazyPostTemplateQuery();
 	const [fetchDoc, dataDoc] = useLazyGetDocQuery();
 	const [fetchPDF, dataPDF] = useLazyGetPDFQuery();
+	const [fetchPDFForWatch, dataPDFForWatch] = useLazyWatchPDFQuery();
+
+	const [fetchPreview, dataPreview] = useLazyGetPreviewQuery();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
+	const token = localStorage.getItem('token');
 
 	const downloadDocHandler = () => {
-		fetchTemplate({
-			description: data.description,
-			template: data.id,
-			completed: true,
-			document_fields: [...formData],
-		})
-			.then((response) => {
-				if (response.data && response.data.id) {
-					return fetchDoc(response.data.id);
-				}
-				throw new Error('Failed to create document');
+		if (token) {
+			fetchTemplate({
+				description: data.description,
+				template: data.id,
+				completed: true,
+				document_fields: [...formData],
 			})
-			.catch((err) => {
-				console.error('Error while handling form submission:', err);
+				.then((response) => {
+					if (response.data && response.data.id) {
+						return fetchDoc(response.data.id);
+					}
+					throw new Error('Ошибка создания документа');
+				})
+				.catch((err) => {
+					console.error('Упс:', err);
+				});
+		} else {
+			fetchPreview({
+				id,
+				document_fields: [...formData],
 			});
+		}
 	};
 
 	const downloadPDFHandler = () => {
@@ -51,13 +64,22 @@ export default function TemplateForm() {
 				if (response.data && response.data.id) {
 					return fetchPDF(response.data.id);
 				}
-				throw new Error('Failed to create document');
+				throw new Error('Ошибка создания документа');
 			})
 			.catch((err) => {
-				console.error('Error while handling form submission:', err);
+				console.error('Ошибка:', err);
 			});
 	};
 	const watchPDFHandler = () => {};
+
+	const saveAsDraftHandler = () => {
+		fetchTemplate({
+			description: data.name,
+			template: data.id,
+			completed: false,
+			document_fields: [...formData],
+		});
+	};
 
 	if (isLoading) {
 		return <Preloader />;
@@ -71,7 +93,7 @@ export default function TemplateForm() {
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
-					downloadDocHandler();
+					// downloadDocHandler();
 				}}
 				noValidate
 			>
@@ -107,6 +129,7 @@ export default function TemplateForm() {
 					downloadDocHandler={downloadDocHandler}
 					downloadPDFHandler={downloadPDFHandler}
 					watchPDFHandler={watchPDFHandler}
+					saveAsDraftHandler={saveAsDraftHandler}
 				/>
 			</form>
 		)
