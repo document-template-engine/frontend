@@ -1,3 +1,10 @@
+@keyframes preloader-spin
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
+  
 .header
   position: fixed
   z-index: 1
@@ -127,6 +134,9 @@
   font-size: clamp(14px, 1.5vw, 20px)
   font-weight: 500
   cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
 
   &:hover
     border: 2px solid #A48DD3
@@ -135,15 +145,6 @@
     border: 1px solid #A48DD3
     background: #A48DD3
     color: white
-
-// ETO IS_LOADING
-//&:focus
-//  background-color: black
-//  color: transparent
-//  background-image: url(../../images/load_icon.svg)
-//  background-repeat: no-repeat
-//  background-position: center
-// ETO IS_LOADING
 
 div.header__modal-container
   padding: 20px 16px
@@ -184,3 +185,11 @@ div.header__modal-container
   height: 1px
   background-color: #EAEAEA
 
+.preloader 
+  width: 35px
+  height: 28px
+  background-image: url('../../images/preloader.svg')
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  animation: preloader-spin 1.5s linear infinite

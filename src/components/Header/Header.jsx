@@ -9,7 +9,6 @@ import exitIcon from '../../images/arrow-bar-left.svg';
 import { signOut } from '../../store/auth/authSlice';
 import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
-import EntranceButtonPreloader from '../UI/EntranceButtonPreloader/EntranceButtonPreloader';
 import { useActions } from '../../hooks/useActions';
 
 export default function Header() {
@@ -28,18 +27,21 @@ export default function Header() {
 	}, []);
 
 	const toggleUserButtonState = (e) => {
-		setIsEntranceButtonLoading(true);
 		e.stopPropagation();
 		if (isLoggedIn) {
 			setIsUserMenuVisible(!isUserMenuVisible);
 		} else {
-			navigate('/signin');
+			setIsEntranceButtonLoading((prevState) => !prevState);
+			setTimeout(() => {
+				navigate('/signin');
+				setIsEntranceButtonLoading(false);
+			}, 300);
 		}
 	};
 
 	// выход из учётной записи
 
-	const [fetchRepos, { error, isLoading, data: repos }] = useLogoutMutation();
+	const [fetchRepos, { error, data: repos }] = useLogoutMutation();
 
 	const handleExit = () => {
 		const token = localStorage.getItem('token');
@@ -48,7 +50,6 @@ export default function Header() {
 		setIsUserMenuVisible(false);
 		navigate('/templates');
 		localStorage.removeItem('token');
-		setIsEntranceButtonLoading(false);
 	};
 
 	const handleClick = () => {
@@ -92,7 +93,11 @@ export default function Header() {
 							className={styles['header__login-button']}
 							onClick={toggleUserButtonState}
 						>
-							{isEntranceButtonLoading ? EntranceButtonPreloader : 'Вход'}
+							{isEntranceButtonLoading ? (
+								<div className={styles.preloader} />
+							) : (
+								'Вход'
+							)}
 						</button>
 					)}
 				</div>
