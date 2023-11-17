@@ -75,16 +75,40 @@ export const templatesApi = createApi({
 			}),
 		}),
 		watchPDF: build.query({
-			query: (id) => ({
-				url: `/documents/${id}/download_pdf/`,
-				method: 'GET',
+			query: (args) => ({
+				url: `/documents/${args.id}/download_pdf/`,
+				method: 'POST',
 				headers: {
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					'Content-Type': 'application/json',
 				},
+				body: JSON.stringify({ document_fields: args.document_fields }),
 				responseHandler: async (response) =>
 					window.location.assign(
 						window.URL.createObjectURL(await response.blob())
 					),
+			}),
+		}),
+		getPreview: build.query({
+			query: (args) => ({
+				url: `/templates/${args.id}/download_preview/`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ document_fields: args.document_fields }),
+				responseHandler: async (response) =>
+					window.location.assign(
+						window.URL.createObjectURL(await response.blob())
+					),
+			}),
+		}),
+		getDrafts: build.query({
+			query: () => ({
+				url: `/documents/draft/`,
+				method: 'GET',
+				headers: {
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
 			}),
 		}),
 	}),
@@ -97,4 +121,6 @@ export const {
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
 	useLazyWatchPDFQuery,
+	useLazyGetPreviewQuery,
+	useGetDraftsQuery,
 } = templatesApi;
