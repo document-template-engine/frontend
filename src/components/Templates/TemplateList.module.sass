@@ -1,7 +1,9 @@
 .templates_wrapper 
   display: flex
-  margin-top: clamp(60px, 6vw, 80px)
+  margin-top: 70px 
   position: reletive
+  @media (max-width:1366px) 
+    margin-top: 60px
   
 .templates
   display: flex
@@ -17,7 +19,7 @@
     // margin-left: 228px 
     // margin-top: 60px  убрал потому что из за них ломается верстка
     gap: 20px
-    padding: 40px
+    padding: 40px 0 40px 40px
   @media screen and (max-width: 1000px)
     margin-left: auto
     margin-right: auto

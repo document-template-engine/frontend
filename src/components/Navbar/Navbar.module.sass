@@ -1,13 +1,12 @@
 .navbar
-  flex: 0 0 clamp(228px, 16.5vw, 317px)
+  width: clamp(204px, 16.5vw, 297px)
   height: 100%
   padding: 20px 0 20px 10px
   box-sizing: border-box
   @media (max-width: 1000px)
-    flex: none
+    flex:  0 1 0px
     padding: 0
     height: auto
-
 .navbar_noLogin
   @media (max-width: 1000px)
     display: none
@@ -15,7 +14,7 @@
 .container 
   position: fixed
   z-index: 2
-  width: clamp(228px, 16.5vw, 317px)
+  width: clamp(204px, 16.5vw, 297px)
   @media (max-width: 1000px)
     background: #fff
     width: 100%
@@ -40,6 +39,8 @@
   background-color: #fff
   border: none
   cursor: pointer
+  &:not(:last-child) 
+    margin: 0 0 5px
   @media (max-width: 1000px)
     padding: 0 0 6px
     width: auto

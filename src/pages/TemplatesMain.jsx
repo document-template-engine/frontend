@@ -17,10 +17,12 @@ const TemplatesMain = () => {
 		return (
 			<>
 				<Header />
-				<Navbar isTemplatePage />
-				<div className={styles.templates}>
-					<Preloader />
-				</div>
+				<main className={styles.templates_wrapper}>
+					<Navbar isTemplatePage />
+					<div className={styles.templates}>
+						<Preloader />
+					</div>
+				</main>
 			</>
 		);
 	}
