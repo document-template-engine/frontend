@@ -22,21 +22,23 @@ const FavoriteTemplates = () => {
 		return (
 			<>
 				<Header />
-				<Navbar isFavoriteTamplatesPage />
-				<div className={styles.templates}>
-					<h1 className={styles.title}>Избранное</h1>
-					{arrayFavoriteTemplates.length === 0 ? (
-						<div className={styles.BackgroundImageContainer}>
-							<EmptyPageState
-								figure="star"
-								text="В избранных пока ничего нет"
-							/>
-						</div>
-					) : (
-						<TemplateList data={arrayFavoriteTemplates} />
-					)}
-				</div>
-				<NavPanel isFavoriteTamplatesPage />
+				<main className={styles.templates_wrapper}>
+					<Navbar isFavoriteTamplatesPage />
+					<div className={styles.templates}>
+						<h1 className={styles.title}>Избранное</h1>
+						{arrayFavoriteTemplates.length === 0 ? (
+							<div className={styles.BackgroundImageContainer}>
+								<EmptyPageState
+									figure="star"
+									text="В избранных пока ничего нет"
+								/>
+							</div>
+						) : (
+							<TemplateList data={arrayFavoriteTemplates} />
+						)}
+					</div>
+					<NavPanel isFavoriteTamplatesPage />
+				</main>
 			</>
 		);
 	}
