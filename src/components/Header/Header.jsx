@@ -73,7 +73,7 @@ export default function Header() {
 							aria-label="Save"
 							onClick={toggleUserButtonState}
 						>
-							{email.charAt(0).toUpperCase()}
+							{email?.charAt(0).toUpperCase()}
 						</button>
 					) : (
 						<button
