@@ -9,7 +9,6 @@
   width: 100vw
   @media screen and (max-width: 768px)
     flex-direction: column-reverse
-    gap: 0
 
 .textWrapper
   max-width: clamp(248px, 30%, 525px)
@@ -73,8 +72,11 @@
     max-width: 100%
     font-size: 16px
   @media screen and (max-width: 768px)
+    position: fixed
+    bottom: 24px
+    max-width: 70%
     min-width: 320px
-    
+
 
 .image
   max-width: clamp(350px, 30vw, 600px)
