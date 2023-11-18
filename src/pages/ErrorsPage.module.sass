@@ -4,18 +4,19 @@
   align-items: center
   margin-left: auto
   margin-right: auto
-  gap: 60px
+  gap: clamp(20px, 1vw, 60px)
   height: 100vh
   width: 100vw
-  padding: 5%
   @media screen and (max-width: 768px)
     flex-direction: column-reverse
+    gap: 0
 
 .textWrapper
   max-width: clamp(248px, 30%, 525px)
   display: flex
   flex-direction: column
   align-items: center
+
 
 .title
   margin: 0
@@ -26,6 +27,8 @@
   font-style: normal
   font-weight: 500
   line-height: normal
+  @media screen and (max-width: 1366px)
+    font-size: 60px
 
 .subtitle
   margin: 8px 0 0
@@ -36,6 +39,9 @@
   font-style: normal
   font-weight: 500
   line-height: normal
+  max-width: 100%
+  @media screen and (max-width: 1366px)
+    font-size: 20px
 
 .link
   margin-top: 40px
@@ -63,5 +69,12 @@
   &:active
     background-color: #32018D
 
+  @media screen and (max-width: 1366px)
+    max-width: 100%
+    font-size: 16px
+  @media screen and (max-width: 768px)
+    min-width: 320px
+    
+
 .image
-  max-width: clamp(450px, 30vw, 600px)
+  max-width: clamp(350px, 30vw, 600px)
