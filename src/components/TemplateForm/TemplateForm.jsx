@@ -15,16 +15,51 @@ import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();
-	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
-	const [fetchTemplate, dataTemplate] = useLazyPostTemplateQuery();
-	const [fetchDoc, dataDoc] = useLazyGetDocQuery();
-	const [fetchPDF, dataPDF] = useLazyGetPDFQuery();
-	const [fetchPreview, dataPreview] = useLazyGetPreviewQuery();
+	const {
+		data,
+		isLoading: templateIsLoading,
+		isError: isTemplateFetchingError,
+		error,
+	} = useGetTemplateQuery(id);
+	const [
+		fetchTemplate,
+		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
+	] = useLazyPostTemplateQuery();
+	const [
+		fetchDoc,
+		{ isLoading: getDockIsLoading, isError: isGetDocFetchingError },
+	] = useLazyGetDocQuery();
+	const [
+		fetchPDF,
+		{ isLoading: getPDFIsLoading, isError: isGetPDFFetchingError },
+	] = useLazyGetPDFQuery();
+	const [
+		fetchPreview,
+		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
+	] = useLazyGetPreviewQuery();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const token = localStorage.getItem('token');
 
+	const isLoading = {
+		templateIsLoading,
+		isFetching: [
+			documentIsLoading,
+			getDockIsLoading,
+			getPDFIsLoading,
+			getPreviewIsLoading,
+		],
+	};
+	const isError = {
+		isTemplateFetchingError,
+		isError: [
+			isDocumentFetchingError,
+			isGetDocFetchingError,
+			isGetPDFFetchingError,
+			isGetPreviewFetchingError,
+		],
+	};
 	const downloadDocHandler = () => {
 		if (token) {
 			fetchTemplate({
@@ -70,10 +105,10 @@ export default function TemplateForm() {
 		});
 	};
 
-	if (isLoading) {
+	if (isLoading.templateIsLoading) {
 		return <Preloader />;
 	}
-	if (isError) {
+	if (isError.isTemplateFetchingError) {
 		return <h1>{error}</h1>;
 	}
 	return (
@@ -91,6 +126,7 @@ export default function TemplateForm() {
 						<h1 className={styles.title}>{data.name}</h1>
 						<p className={styles.subtitle}>{data.description}</p>
 					</div>
+					{isLoading.isFetching.some((item) => item) && <h1>Loading....</h1>}
 					<FormInputsList form={data.name} data={data} />
 					<div className={styles.extraWrapper}>
 						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
