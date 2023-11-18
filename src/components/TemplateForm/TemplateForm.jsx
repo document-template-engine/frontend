@@ -10,24 +10,56 @@ import {
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
-	useLazyWatchPDFQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();
-	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
-	const [fetchTemplate, dataTemplate] = useLazyPostTemplateQuery();
-	const [fetchDoc, dataDoc] = useLazyGetDocQuery();
-	const [fetchPDF, dataPDF] = useLazyGetPDFQuery();
-	const [fetchPDFForWatch, dataPDFForWatch] = useLazyWatchPDFQuery();
-
-	const [fetchPreview, dataPreview] = useLazyGetPreviewQuery();
+	const {
+		data,
+		isLoading: templateIsLoading,
+		isError: isTemplateFetchingError,
+		error,
+	} = useGetTemplateQuery(id);
+	const [
+		fetchTemplate,
+		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
+	] = useLazyPostTemplateQuery();
+	const [
+		fetchDoc,
+		{ isLoading: getDockIsLoading, isError: isGetDocFetchingError },
+	] = useLazyGetDocQuery();
+	const [
+		fetchPDF,
+		{ isLoading: getPDFIsLoading, isError: isGetPDFFetchingError },
+	] = useLazyGetPDFQuery();
+	const [
+		fetchPreview,
+		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
+	] = useLazyGetPreviewQuery();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const token = localStorage.getItem('token');
 
+	const isLoading = {
+		templateIsLoading,
+		isFetching: [
+			documentIsLoading,
+			getDockIsLoading,
+			getPDFIsLoading,
+			getPreviewIsLoading,
+		],
+	};
+	const isError = {
+		isTemplateFetchingError,
+		isError: [
+			isDocumentFetchingError,
+			isGetDocFetchingError,
+			isGetPDFFetchingError,
+			isGetPreviewFetchingError,
+		],
+	};
 	const downloadDocHandler = () => {
 		if (token) {
 			fetchTemplate({
@@ -36,12 +68,7 @@ export default function TemplateForm() {
 				completed: true,
 				document_fields: [...formData],
 			})
-				.then((response) => {
-					if (response.data && response.data.id) {
-						return fetchDoc(response.data.id);
-					}
-					throw new Error('Ошибка создания документа');
-				})
+				.then((response) => fetchDoc(response.data.id))
 				.catch((err) => {
 					console.error('Упс:', err);
 				});
@@ -54,24 +81,21 @@ export default function TemplateForm() {
 	};
 
 	const downloadPDFHandler = () => {
-		fetchTemplate({
-			description: data.description,
-			template: data.id,
-			completed: true,
-			document_fields: [...formData],
-		})
-			.then((response) => {
-				if (response.data && response.data.id) {
-					return fetchPDF(response.data.id);
-				}
-				throw new Error('Ошибка создания документа');
+		if (token) {
+			fetchTemplate({
+				description: data.description,
+				template: data.id,
+				completed: true,
+				document_fields: [...formData],
 			})
-			.catch((err) => {
-				console.error('Ошибка:', err);
-			});
+				.then((response) => fetchPDF(response.data.id))
+				.catch((err) => {
+					console.error('Ошибка:', err);
+				});
+		} else {
+			console.log('Пока нет такой возможности у анонимного пользователя');
+		}
 	};
-	const watchPDFHandler = () => {};
-
 	const saveAsDraftHandler = () => {
 		fetchTemplate({
 			description: data.name,
@@ -81,10 +105,10 @@ export default function TemplateForm() {
 		});
 	};
 
-	if (isLoading) {
+	if (isLoading.templateIsLoading) {
 		return <Preloader />;
 	}
-	if (isError) {
+	if (isError.isTemplateFetchingError) {
 		return <h1>{error}</h1>;
 	}
 	return (
@@ -93,7 +117,7 @@ export default function TemplateForm() {
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
-					// downloadDocHandler();
+					downloadDocHandler();
 				}}
 				noValidate
 			>
@@ -102,6 +126,7 @@ export default function TemplateForm() {
 						<h1 className={styles.title}>{data.name}</h1>
 						<p className={styles.subtitle}>{data.description}</p>
 					</div>
+					{isLoading.isFetching.some((item) => item) && <h1>Loading....</h1>}
 					<FormInputsList form={data.name} data={data} />
 					<div className={styles.extraWrapper}>
 						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
@@ -128,7 +153,6 @@ export default function TemplateForm() {
 				<ActionBar
 					downloadDocHandler={downloadDocHandler}
 					downloadPDFHandler={downloadPDFHandler}
-					watchPDFHandler={watchPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
 				/>
 			</form>
