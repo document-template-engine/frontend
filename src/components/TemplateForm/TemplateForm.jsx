@@ -1,3 +1,6 @@
+/* eslint-disable dot-notation */
+/* eslint-disable camelcase */
+/* eslint-disable no-undef */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -14,6 +17,7 @@ import {
 	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
 	useLazyGetDraftTemplateQuery,
+	useChangeDraftMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
@@ -25,7 +29,6 @@ export default function TemplateForm() {
 	const { id } = useParams();
 
 	// форма обычных шаблонов
-
 	const [
 		fetchTemplateClassic,
 		{
@@ -36,6 +39,7 @@ export default function TemplateForm() {
 		},
 	] = useLazyGetTemplateQuery();
 
+	// запрос формы черновика
 	const [
 		fetchDraft,
 		{
@@ -46,9 +50,20 @@ export default function TemplateForm() {
 		},
 	] = useLazyGetDraftTemplateQuery();
 
-	const temp = draftTemplate || template;
+	// запрос на изменение черновика
+	const [
+		changesDraft,
+		{
+			data: draftNew,
+			isLoading: draftChangeIsLoading,
+			isError: isDraftChangeError,
+			error: drafChangeError,
+		},
+	] = useChangeDraftMutation();
 
-	const loading = templateIsLoading || draftIsLoading;
+	const temp = draftTemplate || template || draftNew;
+
+	const loading = templateIsLoading || draftIsLoading || draftChangeIsLoading;
 
 	// const data = currentPath === "/drafts" ? draftTemplate : template
 
@@ -84,6 +99,7 @@ export default function TemplateForm() {
 	const isLoading = {
 		templateIsLoading,
 		draftIsLoading,
+		draftChangeIsLoading,
 		isFetching: [
 			documentIsLoading,
 			getDockIsLoading,
@@ -94,6 +110,7 @@ export default function TemplateForm() {
 	const isError = {
 		isTemplateFetchingError,
 		isDraftFetchingError,
+		isDraftChangeError,
 		isError: [
 			isDocumentFetchingError,
 			isGetDocFetchingError,
@@ -101,18 +118,36 @@ export default function TemplateForm() {
 			isGetPreviewFetchingError,
 		],
 	};
+
+	const dataReq = {
+		description: temp?.description,
+		completed: true,
+		document_fields: [...formData],
+		id,
+	};
+
 	const downloadDocHandler = () => {
 		if (token) {
-			fetchTemplate({
-				description: temp?.description,
-				template: temp?.id,
-				completed: true,
-				document_fields: [...formData],
-			})
-				.then((response) => fetchDoc(response.data.id))
-				.catch((err) => {
-					console.error('Упс:', err);
-				});
+			if (currentPath === `/drafts/${id}`) {
+				changesDraft(dataReq)
+					.then((response) => {
+						fetchDoc(response.data.id);
+					})
+					.catch((err) => {
+						console.error('Упс:', err);
+					});
+			} else {
+				fetchTemplate({
+					description: temp?.description,
+					template: temp?.id,
+					completed: true,
+					document_fields: [...formData],
+				})
+					.then((response) => fetchDoc(response.data.id))
+					.catch((err) => {
+						console.error('Упс:', err);
+					});
+			}
 		} else {
 			fetchPreview({
 				id,
@@ -150,7 +185,7 @@ export default function TemplateForm() {
 		return <Preloader />;
 	}
 	if (isError.isTemplateFetchingError) {
-		return <h1>{templateError || drafError}</h1>;
+		return <h1>{templateError || drafError || drafChangeError}</h1>;
 	}
 	return (
 		temp && (

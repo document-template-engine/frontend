@@ -115,6 +115,17 @@ export const templatesApi = createApi({
 				},
 			}),
 		}),
+		changeDraft: build.mutation({
+			query: (data) => ({
+				url: `/documents/${data.id}/`,
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+				body: JSON.stringify(data),
+			}),
+		}),
 	}),
 });
 
@@ -128,4 +139,5 @@ export const {
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
 	useLazyGetDraftTemplateQuery,
+	useChangeDraftMutation,
 } = templatesApi;
