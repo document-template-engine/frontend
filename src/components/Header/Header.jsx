@@ -52,7 +52,6 @@ export default function Header() {
 		// localStorage.removeItem('token');
 		localStorage.clear();
 		setIsEntranceButtonLoading(false);
-
 	};
 
 	const handleClick = () => {

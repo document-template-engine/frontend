@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './TemplateItem.module.sass';
 import zaglushka from '../../images/template-cross.svg';
+import CreationTime from '../СreationTime/CreationTime';
 
 // eslint-disable-next-line react/prop-types
-const TemplateItem = ({ title, link, image, isFav }) => {
+const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
+	const location = useLocation();
+	const currentPath = location.pathname;
+
 	const [isFavorite, setIsFavorite] = useState(isFav);
 
 	const buttonStyle = isFavorite ? styles.favIconLiked : styles.favIconNotLiked;
@@ -27,6 +31,7 @@ const TemplateItem = ({ title, link, image, isFav }) => {
 				<Link className={styles.link} to={link}>
 					{title}
 				</Link>
+				{currentPath === `/drafts` && <CreationTime creationTime={dateOwn} />}
 			</div>
 		</li>
 	);
