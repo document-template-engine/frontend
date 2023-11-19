@@ -12,6 +12,7 @@ import {
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
+import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();
@@ -106,7 +107,7 @@ export default function TemplateForm() {
 	};
 
 	if (isLoading.templateIsLoading) {
-		return <PreloaderWithOverlay />;
+		return <Preloader />;
 	}
 	if (isError.isTemplateFetchingError) {
 		return <h1>{error}</h1>;
