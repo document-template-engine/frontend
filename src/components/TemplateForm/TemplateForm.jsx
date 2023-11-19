@@ -167,11 +167,11 @@ export default function TemplateForm() {
 						<h1 className={styles.title}>{temp?.name}</h1>
 						<p className={styles.subtitle}>{temp?.description}</p>
 					</div>
+
 					{isLoading.isFetching.some((item) => item) && (
 						<PreloaderWithOverlay />
 					)}
-
-					<FormInputsList form={data.name} data={data} />
+					<FormInputsList form={temp?.name} data={temp} />
 					<div className={styles.extraWrapper}>
 						<label htmlFor={temp.name} className={styles.checkBoxWrapper}>
 							<input
