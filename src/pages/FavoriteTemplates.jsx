@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
-import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
+import { useGetFavoriteTemplatesQuery } from '../store/templates-api/templates.api';
 import TemplateList from '../components/Templates/TemplateList';
 import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
 
 const FavoriteTemplates = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data } = useGetTemplatesQuery();
+	const { data, refetch } = useGetFavoriteTemplatesQuery();
+	const [arrayFavoriteTemplates, setArrayFavoriteTemplates] = useState([]);
 
-	const arrayFavoriteTemplates = data
-		? data.filter((item) => item.is_favorited)
-		: [];
+	useEffect(() => {
+		if (data) {
+			const favorites = data.filter((item) => item.is_favorited);
+			setArrayFavoriteTemplates(favorites);
+		}
+	}, [data]);
+
+	useEffect(() => {
+		refetch();
+	}, [location.pathname, refetch]);
 
 	// Если страничка главная - то он показывает список
 	if (currentPath === '/favorite') {

@@ -22,11 +22,34 @@ export const templatesApi = createApi({
 		// 		url: '/favorite',
 		// 	}),
 		// }),
-		getFavorite: build.query({
-			query: (id) => ({
-				url: `/documents/${id}/favorite/`,
+		// getFavorite: build.query({
+		// 	query: (id) => ({
+		// 		url: `/documents/${id}/favorite/`,
+		// 	}),
+		// }),
+
+		postFavorite: build.mutation({
+			query: (TemplateId) => ({
+				url: `templates/${TemplateId}/favorite/`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
 			}),
 		}),
+
+		getFavoriteTemplates: build.query({
+			query: () => ({
+				url: 'templates/',
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+			}),
+		}),
+
 		postTemplate: build.query({
 			query: (data) => ({
 				url: `/documents/`,
@@ -123,4 +146,6 @@ export const {
 	useLazyWatchPDFQuery,
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
+	usePostFavoriteMutation,
+	useGetFavoriteTemplatesQuery,
 } = templatesApi;

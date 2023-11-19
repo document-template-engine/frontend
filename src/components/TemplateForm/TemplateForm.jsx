@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
-import { ActionBar } from '../ActionBar/ActionBar';
+import ActionBar from '../ActionBar/ActionBar';
 import {
 	useGetTemplateQuery,
 	useLazyGetDocQuery,
@@ -11,6 +11,7 @@ import {
 	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
+	usePostFavoriteMutation,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
 
@@ -18,6 +19,7 @@ export default function TemplateForm() {
 	const { id } = useParams();
 	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
 	const [fetchTemplate, dataTemplate] = useLazyPostTemplateQuery();
+	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
 	const [fetchDoc, dataDoc] = useLazyGetDocQuery();
 	const [fetchPDF, dataPDF] = useLazyGetPDFQuery();
 	const [fetchPDFForWatch, dataPDFForWatch] = useLazyWatchPDFQuery();
@@ -81,6 +83,10 @@ export default function TemplateForm() {
 		});
 	};
 
+	const saveAsFavouriteHandler = () => {
+		fetchFavorite(data.id);
+	};
+
 	if (isLoading) {
 		return <Preloader />;
 	}
@@ -130,6 +136,7 @@ export default function TemplateForm() {
 					downloadPDFHandler={downloadPDFHandler}
 					watchPDFHandler={watchPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
+					saveAsFavouriteHandler={saveAsFavouriteHandler}
 				/>
 			</form>
 		)
