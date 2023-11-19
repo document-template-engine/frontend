@@ -19,13 +19,13 @@ export const ActionBar = ({
 	return (
 		<ul className={styles.main}>
 			<li className={clsx(styles.item, styles.iconEye, styles.icon)}>
-				<button className={styles.btn} onClick={watchPDFHandler}>
+				<button className={styles.btn} onClick={watchPDFHandler} type="button">
 					<p className={styles.text}>Посмотреть</p>
 				</button>
 			</li>
 			{token && (
 				<li className={clsx(styles.item, styles.iconStar, styles.icon)}>
-					<button className={styles.btn}>
+					<button className={styles.btn} type="button">
 						<p className={styles.text}>В избранное</p>
 					</button>
 				</li>
