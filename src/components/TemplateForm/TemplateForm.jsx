@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
@@ -10,11 +10,17 @@ import {
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
+	useLazyWatchPDFQuery,
+	useLazyWatchPDFAnonimQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
+import { useActions } from '../../hooks/useActions';
 
 export default function TemplateForm() {
+	const { changePdfViewFile } = useActions();
+
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const {
 		data,
 		isLoading: templateIsLoading,
@@ -38,6 +44,11 @@ export default function TemplateForm() {
 		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
 	] = useLazyGetPreviewQuery();
 
+	const [
+		fetchPDFForWatch,
+		{ isLoading: getPdfViewIsLoading, isError: isPdfViewFetchingError },
+	] = useLazyWatchPDFQuery();
+
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const token = localStorage.getItem('token');
@@ -49,6 +60,7 @@ export default function TemplateForm() {
 			getDockIsLoading,
 			getPDFIsLoading,
 			getPreviewIsLoading,
+			getPdfViewIsLoading,
 		],
 	};
 	const isError = {
@@ -58,6 +70,7 @@ export default function TemplateForm() {
 			isGetDocFetchingError,
 			isGetPDFFetchingError,
 			isGetPreviewFetchingError,
+			isPdfViewFetchingError,
 		],
 	};
 	const downloadDocHandler = () => {
@@ -79,7 +92,6 @@ export default function TemplateForm() {
 			});
 		}
 	};
-
 	const downloadPDFHandler = () => {
 		if (token) {
 			fetchTemplate({
@@ -104,6 +116,25 @@ export default function TemplateForm() {
 			document_fields: [...formData],
 		});
 	};
+	const watchPDFHandler = async () => {
+		if (token) {
+			fetchTemplate({
+				description: data.description,
+				template: data.id,
+				completed: true,
+				document_fields: [...formData],
+			})
+				.then(async (response) => {
+					changePdfViewFile(await fetchPDFForWatch(response.data.id));
+					navigate('/look-file');
+				})
+				.catch((err) => {
+					console.error('Ошибка:', err);
+				});
+		} else {
+			console.log('Пока нет такой возможности у анонимного пользователя');
+		}
+	};
 
 	if (isLoading.templateIsLoading) {
 		return <Preloader />;
@@ -111,6 +142,7 @@ export default function TemplateForm() {
 	if (isError.isTemplateFetchingError) {
 		return <h1>{error}</h1>;
 	}
+
 	return (
 		data && (
 			<form
@@ -154,6 +186,7 @@ export default function TemplateForm() {
 					downloadDocHandler={downloadDocHandler}
 					downloadPDFHandler={downloadPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
+					watchPDFHandler={watchPDFHandler}
 				/>
 			</form>
 		)
