@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import styles from './ActionBar.module.sass';
@@ -8,8 +10,11 @@ export const ActionBar = ({
 	downloadPDFHandler,
 	watchPDFHandler,
 	saveAsDraftHandler,
+	idDraft,
 }) => {
 	const token = localStorage.getItem('token');
+	const location = useLocation();
+	const currentPath = location.pathname;
 
 	return (
 		<ul className={styles.main}>
@@ -43,7 +48,7 @@ export const ActionBar = ({
 					<p className={styles.text}>Сохранить в PDF</p>
 				</button>
 			</li>
-			{token && (
+			{token && currentPath !== `/drafts/${idDraft}` && (
 				<li className={clsx(styles.item, styles.iconFolder, styles.icon)}>
 					<button
 						className={styles.btn}

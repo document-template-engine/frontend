@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
@@ -201,6 +202,7 @@ export default function TemplateForm() {
 					downloadDocHandler={downloadDocHandler}
 					downloadPDFHandler={downloadPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
+					idDraft={id}
 				/>
 			</form>
 		)
