@@ -11,7 +11,6 @@ import {
 	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
-import Preloader from '../UI/Preloader/Preloader';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 
 export default function TemplateForm() {
@@ -107,7 +106,7 @@ export default function TemplateForm() {
 	};
 
 	if (isLoading.templateIsLoading) {
-		return <Preloader />;
+		return <PreloaderWithOverlay />;
 	}
 	if (isError.isTemplateFetchingError) {
 		return <h1>{error}</h1>;
