@@ -12,6 +12,7 @@ import {
 	useLazyPostTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
+import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 
 export default function TemplateForm() {
 	const { id } = useParams();
@@ -126,7 +127,10 @@ export default function TemplateForm() {
 						<h1 className={styles.title}>{data.name}</h1>
 						<p className={styles.subtitle}>{data.description}</p>
 					</div>
-					{isLoading.isFetching.some((item) => item) && <h1>Loading....</h1>}
+					{isLoading.isFetching.some((item) => item) && (
+						<PreloaderWithOverlay />
+					)}
+
 					<FormInputsList form={data.name} data={data} />
 					<div className={styles.extraWrapper}>
 						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
