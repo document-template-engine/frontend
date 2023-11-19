@@ -1,9 +1,7 @@
 import './Advantages.sass';
-import interfaceImg from '../../../images/lan-interface.jpg';
+import interfaceImg from '../../../images/lan-interface.png';
 import templateImg from '../../../images/lan-template.jpg';
 import docImg from '../../../images/lan-doc.jpg';
-import octopusImg from '../../../images/lan-octopus.svg';
-import snakeImg from '../../../images/lan-snake.svg';
 import LinkToStart from '../Link/LinkToStart';
 
 export default function Advantages() {
@@ -15,27 +13,27 @@ export default function Advantages() {
 			<div className="advantages__container">
 				<div className="advantages__list-container">
 					<ul className="advantages__list">
-						<li className="advantages__item-container advantages__item-container_1">
+						<li className="advantages__item-container">
 							<p className="advantages__item-text">
 								Удобный
 								<br />
 								интерфейс
 							</p>
 						</li>
-						<li className="advantages__item-container advantages__item-container_2">
+						<li className="advantages__item-container">
 							<p className="advantages__item-text">
 								Категории
 								<br />
 								Шаблонов
 							</p>
 						</li>
-						<li className="advantages__item-container advantages__item-container_3">
+						<li className="advantages__item-container">
 							<p className="advantages__item-text">
 								Быстро
 								<br />и удобно
 							</p>
 						</li>
-						<li className="advantages__item-container advantages__item-container_4">
+						<li className="advantages__item-container">
 							<p className="advantages__item-text">
 								Пригодно
 								<br />
@@ -43,33 +41,25 @@ export default function Advantages() {
 							</p>
 						</li>
 					</ul>
-					<img
-						className="advantages__lines-1"
-						src={octopusImg}
-						alt="Пунктирные линии"
-					/>
-					<img
-						className="advantages__lines-2"
-						src={snakeImg}
-						alt="Пунктирные линии"
-					/>
 				</div>
 				<div className="advantages__illustration-container">
 					<img
-						className="advantages__illustration advantages__illustration_1"
+						className="advantages__illustration advantages__illustration_main"
 						src={interfaceImg}
 						alt="Интерфейс приложения"
 					/>
-					<img
-						className="advantages__illustration advantages__illustration_2"
-						src={templateImg}
-						alt="Шаблон"
-					/>
-					<img
-						className="advantages__illustration advantages__illustration_3"
-						src={docImg}
-						alt="Готовый документ"
-					/>
+					<div className="advantages__illustration-container_child">
+						<img
+							className="advantages__illustration advantages__illustration_2"
+							src={templateImg}
+							alt="Шаблон"
+						/>
+						<img
+							className="advantages__illustration advantages__illustration_3"
+							src={docImg}
+							alt="Готовый документ"
+						/>
+					</div>
 				</div>
 			</div>
 			<LinkToStart />
