@@ -13,6 +13,7 @@ export const ActionBar = ({
 	idDraft,
 }) => {
 	const token = localStorage.getItem('token');
+
 	const location = useLocation();
 	const currentPath = location.pathname;
 
