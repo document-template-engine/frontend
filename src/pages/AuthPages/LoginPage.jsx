@@ -97,7 +97,7 @@ export default function LoginPage() {
 								required: 'Напишите ваш email',
 								pattern: {
 									value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-									message: 'Напишите правильный адрес электронной почты',
+									message: 'Некорректный формат почты',
 								},
 							})}
 							name="email"

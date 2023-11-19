@@ -17,11 +17,15 @@ export const templatesApi = createApi({
 				url: `templates/${id}/`,
 			}),
 		}),
-		// getFavorites: build.query({
-		// 	query: () => ({
-		// 		url: '/favorite',
-		// 	}),
-		// }),
+		getDraftTemplate: build.query({
+			query: (id) => ({
+				url: `/documents/${id}/`,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+			}),
+		}),
 		getFavorite: build.query({
 			query: (id) => ({
 				url: `/documents/${id}/favorite/`,
@@ -116,11 +120,12 @@ export const templatesApi = createApi({
 
 export const {
 	useGetTemplatesQuery,
-	useGetTemplateQuery,
+	useLazyGetTemplateQuery,
 	useLazyPostTemplateQuery,
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
 	useLazyWatchPDFQuery,
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
+	useLazyGetDraftTemplateQuery,
 } = templatesApi;

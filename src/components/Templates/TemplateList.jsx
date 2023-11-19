@@ -37,6 +37,7 @@ const TemplateList = ({ data }) => {
 						link={item.id.toString()}
 						isFav={item.is_favorited}
 						image={item.image}
+						dateOwn={item.updated}
 						key={item.id}
 					/>
 				))}
