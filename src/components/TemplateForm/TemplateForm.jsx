@@ -1,26 +1,63 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
 import { ActionBar } from '../ActionBar/ActionBar';
 import {
-	useGetTemplateQuery,
+	useLazyGetTemplateQuery,
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
+	useLazyGetDraftTemplateQuery,
 } from '../../store/templates-api/templates.api';
 import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
+	const location = useLocation();
+	const currentPath = location.pathname;
+
 	const { id } = useParams();
-	const {
-		data,
-		isLoading: templateIsLoading,
-		isError: isTemplateFetchingError,
-		error,
-	} = useGetTemplateQuery(id);
+
+	// форма обычных шаблонов
+
+	const [
+		fetchTemplateClassic,
+		{
+			data: template,
+			isLoading: templateIsLoading,
+			isError: isTemplateFetchingError,
+			error: templateError,
+		},
+	] = useLazyGetTemplateQuery();
+
+	const [
+		fetchDraft,
+		{
+			data: draftTemplate,
+			isLoading: draftIsLoading,
+			isError: isDraftFetchingError,
+			error: drafError,
+		},
+	] = useLazyGetDraftTemplateQuery();
+
+	const temp = draftTemplate || template;
+
+	const loading = templateIsLoading || draftIsLoading;
+
+	// const data = currentPath === "/drafts" ? draftTemplate : template
+
+	useEffect(() => {
+		if (currentPath === `/drafts/${id}`) {
+			fetchDraft(id);
+		} else {
+			fetchTemplateClassic(id);
+		}
+	}, []);
+
 	const [
 		fetchTemplate,
 		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
@@ -44,6 +81,7 @@ export default function TemplateForm() {
 
 	const isLoading = {
 		templateIsLoading,
+		draftIsLoading,
 		isFetching: [
 			documentIsLoading,
 			getDockIsLoading,
@@ -53,6 +91,7 @@ export default function TemplateForm() {
 	};
 	const isError = {
 		isTemplateFetchingError,
+		isDraftFetchingError,
 		isError: [
 			isDocumentFetchingError,
 			isGetDocFetchingError,
@@ -63,8 +102,8 @@ export default function TemplateForm() {
 	const downloadDocHandler = () => {
 		if (token) {
 			fetchTemplate({
-				description: data.description,
-				template: data.id,
+				description: temp?.description,
+				template: temp?.id,
 				completed: true,
 				document_fields: [...formData],
 			})
@@ -83,12 +122,12 @@ export default function TemplateForm() {
 	const downloadPDFHandler = () => {
 		if (token) {
 			fetchTemplate({
-				description: data.description,
-				template: data.id,
+				description: temp?.description,
+				template: temp?.id,
 				completed: true,
 				document_fields: [...formData],
 			})
-				.then((response) => fetchPDF(response.data.id))
+				.then((response) => fetchPDF(response.temp?.id))
 				.catch((err) => {
 					console.error('Ошибка:', err);
 				});
@@ -98,8 +137,8 @@ export default function TemplateForm() {
 	};
 	const saveAsDraftHandler = () => {
 		fetchTemplate({
-			description: data.name,
-			template: data.id,
+			description: temp?.name,
+			template: temp?.id,
 			completed: false,
 			document_fields: [...formData],
 		});
@@ -109,10 +148,10 @@ export default function TemplateForm() {
 		return <Preloader />;
 	}
 	if (isError.isTemplateFetchingError) {
-		return <h1>{error}</h1>;
+		return <h1>{templateError || drafError}</h1>;
 	}
 	return (
-		data && (
+		temp && (
 			<form
 				className={styles.form}
 				onSubmit={(e) => {
@@ -123,13 +162,13 @@ export default function TemplateForm() {
 			>
 				<div className={styles.mainWrapper}>
 					<div className={styles.titleWrapper}>
-						<h1 className={styles.title}>{data.name}</h1>
-						<p className={styles.subtitle}>{data.description}</p>
+						<h1 className={styles.title}>{temp?.name}</h1>
+						<p className={styles.subtitle}>{temp?.description}</p>
 					</div>
 					{isLoading.isFetching.some((item) => item) && <h1>Loading....</h1>}
-					<FormInputsList form={data.name} data={data} />
+					<FormInputsList form={temp?.name} data={temp} />
 					<div className={styles.extraWrapper}>
-						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
+						<label htmlFor={temp.name} className={styles.checkBoxWrapper}>
 							<input
 								type="checkbox"
 								className={styles.checkbox}
@@ -141,8 +180,12 @@ export default function TemplateForm() {
 								себя ответственность за его содержание перед подписанием
 							</p>
 						</label>
-						<button className={styles.btn} disabled={!isChecked} type="submit">
-							{!isLoading ? (
+						<button
+							className={styles.btn}
+							disabled={!isChecked || loading}
+							type="submit"
+						>
+							{!loading ? (
 								<p className={styles.btnText}>Создать документ</p>
 							) : (
 								<div className={styles.btnIsloading} />
