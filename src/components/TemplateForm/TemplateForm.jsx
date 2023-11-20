@@ -1,32 +1,37 @@
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 /* eslint-disable dot-notation */
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
 import { ActionBar } from '../ActionBar/ActionBar';
 import {
-	useLazyGetTemplateQuery,
+	useChangeDraftMutation,
 	useLazyGetDocQuery,
+	useLazyGetDraftTemplateQuery,
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
+	useLazyGetTemplateQuery,
 	useLazyPostTemplateQuery,
-	useLazyGetDraftTemplateQuery,
-	useChangeDraftMutation,
+	useLazyWatchPDFQuery,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
+import { useActions } from '../../hooks/useActions';
 
 export default function TemplateForm() {
+	const { changePdfViewFile } = useActions();
+
 	const location = useLocation();
 	const currentPath = location.pathname;
 
 	const { id } = useParams();
+	const navigate = useNavigate();
 
 	// форма обычных шаблонов
 	const [
@@ -79,6 +84,7 @@ export default function TemplateForm() {
 		fetchTemplate,
 		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
 	] = useLazyPostTemplateQuery();
+
 	const [
 		fetchDoc,
 		{ isLoading: getDockIsLoading, isError: isGetDocFetchingError },
@@ -91,6 +97,11 @@ export default function TemplateForm() {
 		fetchPreview,
 		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
 	] = useLazyGetPreviewQuery();
+
+	const [
+		fetchPDFForWatch,
+		{ isLoading: getPdfViewIsLoading, isError: isPdfViewFetchingError },
+	] = useLazyWatchPDFQuery();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
@@ -105,6 +116,7 @@ export default function TemplateForm() {
 			getDockIsLoading,
 			getPDFIsLoading,
 			getPreviewIsLoading,
+			getPdfViewIsLoading,
 		],
 	};
 	const isError = {
@@ -116,6 +128,7 @@ export default function TemplateForm() {
 			isGetDocFetchingError,
 			isGetPDFFetchingError,
 			isGetPreviewFetchingError,
+			isPdfViewFetchingError,
 		],
 	};
 
@@ -155,7 +168,6 @@ export default function TemplateForm() {
 			});
 		}
 	};
-
 	const downloadPDFHandler = () => {
 		if (token) {
 			fetchTemplate({
@@ -164,7 +176,7 @@ export default function TemplateForm() {
 				completed: true,
 				document_fields: [...formData],
 			})
-				.then((response) => fetchPDF(response.temp?.id))
+				.then((response) => fetchPDF(response.data?.id))
 				.catch((err) => {
 					console.error('Ошибка:', err);
 				});
@@ -180,6 +192,25 @@ export default function TemplateForm() {
 			document_fields: [...formData],
 		});
 	};
+	const watchPDFHandler = async () => {
+		if (token) {
+			fetchTemplate({
+				description: template.description,
+				template: template.id,
+				completed: true,
+				document_fields: [...formData],
+			})
+				.then(async (response) => {
+					changePdfViewFile(await fetchPDFForWatch(response.data.id));
+					navigate('/look-file');
+				})
+				.catch((err) => {
+					console.error('Ошибка:', err);
+				});
+		} else {
+			console.log('Пока нет такой возможности у анонимного пользователя');
+		}
+	};
 
 	if (isLoading.templateIsLoading) {
 		return <Preloader />;
@@ -187,6 +218,7 @@ export default function TemplateForm() {
 	if (isError.isTemplateFetchingError) {
 		return <h1>{templateError || drafError || drafChangeError}</h1>;
 	}
+
 	return (
 		temp && (
 			<form
@@ -237,6 +269,7 @@ export default function TemplateForm() {
 					downloadDocHandler={downloadDocHandler}
 					downloadPDFHandler={downloadPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
+					watchPDFHandler={watchPDFHandler}
 					idDraft={id}
 				/>
 			</form>

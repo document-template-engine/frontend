@@ -9,6 +9,7 @@ import windowWidth from './window-width/windowWidthSlice';
 import { emailReducer } from './auth/regSlice';
 import { formReducer } from './form/form.slice';
 import { searchQueryReducer } from './search-query/search-query.slice';
+import { pdfViewReducer } from './pdf-view/pdf-view.slice';
 
 export const store = configureStore({
 	reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
 		emailReducer,
 		form: formReducer,
 		search: searchQueryReducer,
+		pdfFile: pdfViewReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()

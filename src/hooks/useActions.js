@@ -5,6 +5,7 @@ import { emailActions } from '../store/auth/regSlice';
 import { formActions } from '../store/form/form.slice';
 import { searchQueryActions } from '../store/search-query/search-query.slice';
 import { changeEmail } from '../store/user/userSlice';
+import { pdfViewActions } from '../store/pdf-view/pdf-view.slice';
 
 const actions = {
 	...popupActions,
@@ -12,6 +13,7 @@ const actions = {
 	...formActions,
 	...searchQueryActions,
 	...changeEmail,
+	...pdfViewActions,
 };
 
 export const useActions = () => {

@@ -79,17 +79,16 @@ export const templatesApi = createApi({
 			}),
 		}),
 		watchPDF: build.query({
-			query: (args) => ({
-				url: `/documents/${args.id}/download_pdf/`,
-				method: 'POST',
+			query: (id) => ({
+				url: `/documents/${id}/download_pdf/`,
+				method: 'GET',
 				headers: {
-					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
 				},
-				body: JSON.stringify({ document_fields: args.document_fields }),
-				responseHandler: async (response) =>
-					window.location.assign(
-						window.URL.createObjectURL(await response.blob())
-					),
+				responseHandler: async (response) => {
+					const url = await response.blob();
+					return URL.createObjectURL(url);
+				},
 			}),
 		}),
 		getPreview: build.query({
@@ -136,6 +135,7 @@ export const {
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
 	useLazyWatchPDFQuery,
+	useLazyWatchPDFAnonimQuery,
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
 	useLazyGetDraftTemplateQuery,

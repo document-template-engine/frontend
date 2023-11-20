@@ -13,6 +13,7 @@ import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
 import NotFound from '../../pages/NotFound';
+import LookPdfFile from '../../pages/LookPdfFile';
 import FormPage from '../../pages/FormPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { signIn } from '../../store/auth/authSlice';
@@ -50,6 +51,7 @@ function App() {
 			<Route element={<DraftsTemplates />} path="drafts">
 				<Route path=":id" element={<FormPage />} />
 			</Route>
+			<Route element={<LookPdfFile />} path="/look-file" />
 			<Route element={<Landing />} path="/" />
 			<Route element={<LoginPage />} path="/signin" exact />
 			<Route element={<LogupPage />} path="/signup" exact />
