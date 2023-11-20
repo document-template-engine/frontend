@@ -38,6 +38,7 @@ const TemplateList = ({ data }) => {
 						isFav={item.is_favorited}
 						image={item.image}
 						dateOwn={item.updated}
+						id={item.id}
 						key={item.id}
 					/>
 				))}
