@@ -16,7 +16,7 @@
 	&_visible {
 		visibility: visible;
 	}
-	
+
 	@media screen and (max-width: 1298px) {
 		position: relative;
 		display: none;
@@ -29,7 +29,6 @@
 		&_visible {
 			display: block;
 		}
-
 	}
 
 	&__container {
@@ -59,7 +58,6 @@
 				display: none;
 			}
 		}
-		
 	}
 
 	&__text-container {
@@ -72,7 +70,7 @@
 		list-style-type: none;
 
 		@media screen and (max-width: 1298px) {
-			list-style-type:initial
+			list-style-type: initial;
 		}
 	}
 
