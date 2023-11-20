@@ -11,6 +11,12 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
 
 	const [isFavorite, setIsFavorite] = useState(isFav);
 
+	const desctiption =
+		// eslint-disable-next-line react/prop-types
+		title.length < 50
+			? title
+			: // eslint-disable-next-line react/prop-types
+			  title.slice(0, 50).concat('...');
 	const buttonStyle = isFavorite ? styles.favIconLiked : styles.favIconNotLiked;
 
 	return (
@@ -29,7 +35,7 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
-					{title}
+					{desctiption}
 				</Link>
 				{currentPath === `/drafts` && <CreationTime creationTime={dateOwn} />}
 			</div>

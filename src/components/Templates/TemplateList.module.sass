@@ -6,10 +6,11 @@
     margin-top: 60px
   
 .templates
+  // flex: 1 1 100%
   display: flex
   flex-direction: column
   gap: 27px
-  padding: 60px
+  padding: 60px 0 40px 40px
   // margin-left: 317px убрал потому что из за них ломается верстка
   // margin-top: 80px
   justify-content: center
@@ -18,32 +19,42 @@
   @media screen and (max-width: 1920px)
     // margin-left: 228px 
     // margin-top: 60px  убрал потому что из за них ломается верстка
-    gap: 20px
-    padding: 40px 0 40px 40px
+    // gap: 20px
   @media screen and (max-width: 1000px)
     margin-left: auto
     margin-right: auto
     padding: 24px 12px 77px 12px
 
 
-
 .title
   margin: 0
   color: #000
   font-family: Inter, sans-serif
-  max-width: 201px
-  font-size: 32px
+  max-width: 311px
   font-style: normal
   font-weight: 500
-  line-height: 39px
-  @media screen and (max-width: 1920px)
-    font-size: 28px
-    line-height: 34px
+  font-size: 28px
+  line-height: 34px
   @media screen and (max-width: 1366px)
   @media screen and (max-width: 1000px)
     display: none
   @media screen and (max-width: 768px)
 
+.title_recent
+  position: relative
+  &.active
+    &::before
+      transform: rotate(-180deg)
+  &::before
+    content: ''
+    position: absolute
+    transition: all 0.6s ease
+    top: 0
+    right: 0
+    background: url('../../images/arrow-recent.svg') no-repeat center
+    width: clamp(28px, 2vw, 32px)
+    height: clamp(28px, 2vw, 32px)
+  
 
 .list
   margin: 0
