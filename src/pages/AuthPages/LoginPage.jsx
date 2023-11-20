@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 import InputForm from '../../components/UI/AuthInputForm/InputForm';
@@ -12,8 +13,8 @@ import styles from './index.module.scss';
 import Button from '../../components/UI/AuthButton/Button';
 import { signIn } from '../../store/auth/authSlice';
 import {
-	useLazyLoginQuery,
 	useLazyGetUserDataQuery,
+	useLazyLoginQuery,
 } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 
@@ -147,6 +148,16 @@ export default function LoginPage() {
 						<Link to={{ pathname: '/signup' }} className={styles.largeLink}>
 							Регистрация
 						</Link>
+						<div className={styles.googleWrapper}>
+							<GoogleLogin
+								onSuccess={(credentialResponse) => {
+									console.log(credentialResponse);
+								}}
+								onError={() => {
+									console.log('Login Failed');
+								}}
+							/>
+						</div>
 					</form>
 				</AuthForm>
 			</Modal>

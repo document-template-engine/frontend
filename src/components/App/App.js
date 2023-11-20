@@ -3,6 +3,7 @@ import './App.css';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import { useDispatch } from 'react-redux';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import DraftsTemplates from '../../pages/DraftsTemplates';
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
@@ -40,24 +41,26 @@ function App() {
 	}, []);
 
 	return (
-		<Routes>
-			<Route element={<TemplatesMain />} path="/templates">
-				<Route path=":id" element={<FormPage />} />
-			</Route>
-			<Route element={<FavoriteTemplates />} path="favorite">
-				<Route path=":id" element={<FormPage />} />
-			</Route>
-			<Route element={<DraftsTemplates />} path="drafts">
-				<Route path=":id" element={<FormPage />} />
-			</Route>
-			<Route element={<Landing />} path="/" />
-			<Route element={<LoginPage />} path="/signin" exact />
-			<Route element={<LogupPage />} path="/signup" exact />
-			<Route element={<CheckAccountPage />} path="/check-account" exact />
-			<Route element={<ForgotPwPage />} path="/forgot-password" exact />
-			<Route element={<ChangePassword />} path="/change-password" exact />
-			<Route path="*" element={<NotFound />} />
-		</Routes>
+		<GoogleOAuthProvider clientId="530694045954-brqr228ph8n0ljt1i7qekec9dblhvie2.apps.googleusercontent.com">
+			<Routes>
+				<Route element={<TemplatesMain />} path="/templates">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
+				<Route element={<FavoriteTemplates />} path="favorite">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
+				<Route element={<DraftsTemplates />} path="drafts">
+					<Route path=":id" element={<FormPage />} />
+				</Route>
+				<Route element={<Landing />} path="/" />
+				<Route element={<LoginPage />} path="/signin" exact />
+				<Route element={<LogupPage />} path="/signup" exact />
+				<Route element={<CheckAccountPage />} path="/check-account" exact />
+				<Route element={<ForgotPwPage />} path="/forgot-password" exact />
+				<Route element={<ChangePassword />} path="/change-password" exact />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</GoogleOAuthProvider>
 	);
 }
 
