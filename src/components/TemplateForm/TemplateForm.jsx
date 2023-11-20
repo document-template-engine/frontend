@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 /* eslint-disable dot-notation */
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
@@ -11,14 +11,14 @@ import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
 import { ActionBar } from '../ActionBar/ActionBar';
 import {
-	useLazyGetTemplateQuery,
+	useChangeDraftMutation,
 	useLazyGetDocQuery,
+	useLazyGetDraftTemplateQuery,
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
+	useLazyGetTemplateQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
-	useLazyGetDraftTemplateQuery,
-	useChangeDraftMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
@@ -175,7 +175,7 @@ export default function TemplateForm() {
 				completed: true,
 				document_fields: [...formData],
 			})
-				.then((response) => fetchPDF(response.temp?.id))
+				.then((response) => fetchPDF(response.data?.id))
 				.catch((err) => {
 					console.error('Ошибка:', err);
 				});
