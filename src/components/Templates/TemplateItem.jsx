@@ -11,7 +11,7 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
 
 	const [isFavorite, setIsFavorite] = useState(isFav);
 
-	const desctiption =
+	const description =
 		// eslint-disable-next-line react/prop-types
 		title.length < 50
 			? title
@@ -35,7 +35,7 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
-					{desctiption}
+					{description}
 				</Link>
 				{currentPath === `/drafts` && <CreationTime creationTime={dateOwn} />}
 			</div>
