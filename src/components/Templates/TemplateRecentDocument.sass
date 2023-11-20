@@ -3,15 +3,16 @@
   max-width: 90%
   // padding: 0
   margin: 0
-  @media (max-width:1000px) 
+  @media (max-width: 1000px)
     display: none
- 
+
 
 .swiper-wrapper
   z-index: 1
-  // position: relative
+  padding: 5px
+// position: relative
 
-.slider-arrow 
+.slider-arrow
   background: url('../../images/arrow.svg') no-repeat center
   width: 32px
   height: 32px
@@ -19,12 +20,14 @@
   position: absolute
   top: 50%
   cursor: pointer
+
 .swiper-button-prev
   transform: rotate(-180deg) translateY(50%)
   left: 0
+
 .swiper-button-next
   transform: translateY(-50%)
   right: 0
-    
+
 .swiper-button-disabled
   display: none

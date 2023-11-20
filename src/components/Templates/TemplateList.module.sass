@@ -1,10 +1,10 @@
-.templates_wrapper 
+.templates_wrapper
   display: flex
-  margin-top: 70px 
-  position: reletive
-  @media (max-width:1366px) 
+  margin-top: 70px
+  position: relative
+  @media (max-width: 1366px)
     margin-top: 60px
-  
+
 .templates
   // flex: 1 1 100%
   display: flex
@@ -17,9 +17,9 @@
   max-width: fit-content
   min-width: 60vw
   @media screen and (max-width: 1920px)
-    // margin-left: 228px 
-    // margin-top: 60px  убрал потому что из за них ломается верстка
-    // gap: 20px
+  // margin-left: 228px
+  // margin-top: 60px  убрал потому что из за них ломается верстка
+  // gap: 20px
   @media screen and (max-width: 1000px)
     margin-left: auto
     margin-right: auto
@@ -42,9 +42,11 @@
 
 .title_recent
   position: relative
+
   &.active
     &::before
       transform: rotate(-180deg)
+
   &::before
     content: ''
     position: absolute
@@ -54,7 +56,7 @@
     background: url('../../images/arrow-recent.svg') no-repeat center
     width: clamp(28px, 2vw, 32px)
     height: clamp(28px, 2vw, 32px)
-  
+
 
 .list
   margin: 0
@@ -63,26 +65,26 @@
   display: flex
   gap: 20px
   flex-wrap: wrap
-  justify-content: start
+  justify-content: flex-start
   @media screen and (max-width: 1000px)
     justify-content: center
     gap: 8px
-  
-.BackgroundImageContainer
-    max-width: 1037px
-    width: 90%
-    height: 57vh
-    display: flex
-    align-items: center
-    justify-content: flex-end
-    
-    @media screen and (max-width: 1361px)
-      width: 83%
-      height: 37vh
 
-    @media screen and (max-width: 1000px)
-      width: 100%
-      height: 60vh
-      justify-content: center
+.BackgroundImageContainer
+  max-width: 1037px
+  width: 90%
+  height: 57vh
+  display: flex
+  align-items: center
+  justify-content: flex-end
+
+  @media screen and (max-width: 1361px)
+    width: 83%
+    height: 37vh
+
+  @media screen and (max-width: 1000px)
+    width: 100%
+    height: 60vh
+    justify-content: center
 
 
