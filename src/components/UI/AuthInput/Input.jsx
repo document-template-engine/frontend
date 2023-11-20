@@ -42,7 +42,7 @@ export default function Input({ type, label, name, error, placeholder }) {
 	);
 }
 
-Input.propTypes = {
+/* Input.propTypes = {
 	type: PropTypes.oneOf(['text', 'password']).isRequired,
 	label: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
@@ -53,4 +53,4 @@ Input.propTypes = {
 Input.defaultProps = {
 	error: undefined,
 	placeholder: '',
-};
+}; */
