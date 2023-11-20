@@ -49,10 +49,9 @@ export default function Header() {
 		dispatch(signOut());
 		setIsUserMenuVisible(false);
 		navigate('/templates');
-		// localStorage.removeItem('token');
+		localStorage.removeItem('token');
 		localStorage.clear();
 		setIsEntranceButtonLoading(false);
-
 	};
 
 	const handleClick = () => {

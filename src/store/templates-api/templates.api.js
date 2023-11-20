@@ -1,6 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '../../utils/constants';
 
+const preHeaders = localStorage.getItem('token')
+	? {
+			'Content-Type': 'application/json',
+			Authorization: `Token ${localStorage.getItem('token')}`,
+	  }
+	: {
+			'Content-Type': 'application/json',
+	  };
+
 export const templatesApi = createApi({
 	reducerPath: 'templates/api',
 	baseQuery: fetchBaseQuery({
@@ -10,6 +19,7 @@ export const templatesApi = createApi({
 		getTemplates: build.query({
 			query: () => ({
 				url: 'templates/',
+				headers: preHeaders,
 			}),
 		}),
 		getTemplate: build.query({
