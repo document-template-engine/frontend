@@ -1,87 +1,64 @@
 .advantages
   background: #D5E2E4
   position: relative
-  box-sizing: border-box
   display: flex
   flex-direction: column
   align-items: center
-  overflow: hidden
-  padding: 130px 0 119px
+  padding: 110px 0
+  @media (max-width:1000px)
+    padding: 80px 0 120px
 
 .advantages__title
   color: #1C1C1C
-  font-size: 60px
+  font-size: clamp(28px, 4vw, 60px)
   line-height: 74px
   font-weight: 700
-  margin-bottom: 68px
+  margin: 0 0 76px
   text-align: center
+  max-width: 1050px
+  letter-spacing: 0.2px
+  @media (max-width:768px)
+    max-width: 360px
+    line-height: 33.6px
+    margin: 0 0 40px
 
 .advantages__container
-  margin-bottom: 56px
+  box-sizing: content-box
   display: flex
   flex-direction: column
   align-items: center
   justify-content: space-between
   max-width: 1336px
-  width: 85%
 
 .advantages__list-container
+  width: 100%
   display: flex
   flex-direction: column
   align-items: center
-  max-width: 1164px
-  width: 100%
-  position: relative
-  @media screen and (max-width: 640px)
-    height: 508px
-    max-width: 358px
-    width: 91%
 
 .advantages__list
   display: flex
+  gap: 110px
   margin: 0
   padding: 0
-  min-width: 100%
-  justify-content: space-between
+  flex-wrap: wrap
+  @media (max-width:1000px)
+    gap: 50px
+  @media (max-width:768px)
+    justify-content: center
+    flex-wrap: wrap
+    gap: 20px
 
 .advantages__item-container
   border: 1px solid #6000ED
   border-radius: 50%
   box-sizing: border-box
-  min-width: 130px
-  min-height: 130px
-  width: 23%
-  height: 270px
+  width: clamp(150px, 15.5vw, 207px)
+  height: clamp(150px, 15.5vw, 207px)
   margin: 0
   display: flex
   align-items: center
   justify-content: center
-  @media screen and (max-width: 1336px)
-    height: calc(85vw * 0.23)
-
-  &_1
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 0
-      left: calc(50% - 195px)
-
-  &_2
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 94px
-      left: calc(50% - 10px)
-
-  &_3
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 226px
-      left: calc(50% - 174px)
-
-  &_4
-    @media screen and (max-width: 640px)
-      position: absolute
-      top: 289px
-      left: calc(50% + 28px)
 
 .advantages__item-text
   font-size: 28px
@@ -90,60 +67,46 @@
   margin: 0
   color: #6000ED
   text-align: center
-  @media screen and (max-width: 1336px)
-    font-size: 2vw
-    line-height: 2.6vw
+  letter-spacing: 0.2px
   @media screen and (max-width: 1000px)
     font-size: 20px
     line-height: 24px
 
-.advantages__lines-1
-  max-width: 920px
-  position: relative
-  top: -2px
-  @media screen and (max-width: 1600px)
-    width: 80%
-  @media screen and (max-width: 640px)
-    display: none
-
-.advantages__lines-2
-  width: 143px
-  position: absolute
-  bottom: 0
-  @media screen and (min-width: 641px)
-    display: none
-
-
-.advantages__illustration-container
-  position: relative
-  height: 1390px
-  margin-bottom: 60px
-
+.advantages__illustration-container_child
+  display: flex
+  gap: 121px
+  align-items: center
+  justify-content: center
+  margin: -300px 0 94px
+  @media (max-width:1366px)
+    gap: clamp(0px, 8vw, 197px)
+    margin: -300px 0 126px
+  @media (max-width:768px) 
+    margin: -100px 0 80px
+  @media (max-width:450px) 
+    gap: 0px
 
 .advantages__illustration
-  box-shadow: 0 4px 50px 0 #00000040
-
-  &_1
-    width: 100%
+  width: 100%
+  height: 100%
 
   &_2
-    max-width: 411px
-    min-width: 194px
-    width: 30%
-    position: absolute
-    top: calc(85vw * 0.3)
-    left: 8%
-    @media screen and (max-width: 640px)
-      top: calc(100vw * 0.4)
-      left: 4%
+    width: 411px
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.25)
+    @media (max-width: 1366px)
+      width: 390px
+    @media (max-width: 1000px)
+      width: 194px
 
   &_3
-    max-width: 590px
-    min-width: 186px
-    width: 43%
-    position: absolute
-    top: calc(85vw * 0.17)
-    right: 10%
-    @media screen and (max-width: 640px)
-      top: calc(100vw * 0.4)
-      right: 4%
+    width: 590px
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.25)
+    @media (max-width: 1366px)
+      width: 510px
+    @media (max-width: 1000px)
+      width: 186px
+    @media (max-width:450px) 
+      margin: 0 0 0 -20px
+  
+
+
