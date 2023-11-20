@@ -9,7 +9,7 @@ export default function CheckAccountPage() {
 	const [visible, setVisible] = useState(true);
 	const navigate = useNavigate();
 
-	const emailReducer = useSelector((state) => state.emailReducer);
+	const user = useSelector((state) => state.user);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -25,7 +25,7 @@ export default function CheckAccountPage() {
 				<AuthForm title="Подтверждение аккаунта">
 					<p
 						className={styles.parCheck}
-					>{`Вы успешно зарегестрированы c почтой ${emailReducer.emailUser}`}</p>
+					>{`Вы успешно зарегестрированы c почтой ${user.email}`}</p>
 					{/* <p className={styles.parCheck}>
 						Для активации вашей учетной записи, пожалуйста, перейдите по ссылке
 						отправленной на почту

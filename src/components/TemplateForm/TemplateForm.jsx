@@ -1,52 +1,173 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+/* eslint-disable dot-notation */
+/* eslint-disable camelcase */
+/* eslint-disable no-undef */
+/* eslint-disable consistent-return */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
 import ActionBar from '../ActionBar/ActionBar';
 import {
-	useGetTemplateQuery,
+	useChangeDraftMutation,
 	useLazyGetDocQuery,
+	useLazyGetDraftTemplateQuery,
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
+	useLazyGetTemplateQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
 	usePostFavoriteMutation,
 } from '../../store/templates-api/templates.api';
+import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
+import { useActions } from '../../hooks/useActions';
 
 export default function TemplateForm() {
-	const { id } = useParams();
-	const { data, isLoading, isError, error } = useGetTemplateQuery(id);
-	const [fetchTemplate, dataTemplate] = useLazyPostTemplateQuery();
-	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
-	const [fetchDoc, dataDoc] = useLazyGetDocQuery();
-	const [fetchPDF, dataPDF] = useLazyGetPDFQuery();
-	const [fetchPDFForWatch, dataPDFForWatch] = useLazyWatchPDFQuery();
+	const { changePdfViewFile, resetForm } = useActions();
 
-	const [fetchPreview, dataPreview] = useLazyGetPreviewQuery();
+	const location = useLocation();
+	const currentPath = location.pathname;
+
+	const { id } = useParams();
+	const navigate = useNavigate();
+
+	// форма обычных шаблонов
+	const [
+		fetchTemplateClassic,
+		{
+			data: template,
+			isLoading: templateIsLoading,
+			isError: isTemplateFetchingError,
+			error: templateError,
+		},
+	] = useLazyGetTemplateQuery();
+
+	// запрос формы черновика
+	const [
+		fetchDraft,
+		{
+			data: draftTemplate,
+			isLoading: draftIsLoading,
+			isError: isDraftFetchingError,
+			error: drafError,
+		},
+	] = useLazyGetDraftTemplateQuery();
+
+	// запрос на изменение черновика
+	const [
+		changesDraft,
+		{
+			data: draftNew,
+			isLoading: draftChangeIsLoading,
+			isError: isDraftChangeError,
+			error: drafChangeError,
+		},
+	] = useChangeDraftMutation();
+
+	const temp = draftTemplate || template || draftNew;
+
+	const loading = templateIsLoading || draftIsLoading || draftChangeIsLoading;
+
+	// const data = currentPath === "/drafts" ? draftTemplate : template
+
+	useEffect(() => {
+		if (currentPath === `/drafts/${id}`) {
+			fetchDraft(id);
+		} else {
+			fetchTemplateClassic(id);
+		}
+		return () => {
+			resetForm();
+		};
+	}, []);
+
+	const [
+		fetchTemplate,
+		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
+	] = useLazyPostTemplateQuery();
+
+	const [
+		fetchDoc,
+		{ isLoading: getDockIsLoading, isError: isGetDocFetchingError },
+	] = useLazyGetDocQuery();
+	const [
+		fetchPDF,
+		{ isLoading: getPDFIsLoading, isError: isGetPDFFetchingError },
+	] = useLazyGetPDFQuery();
+	const [
+		fetchPreview,
+		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
+	] = useLazyGetPreviewQuery();
+	const user = useSelector((state) => state.user);
+
+	const [
+		fetchPDFForWatch,
+		{ isLoading: getPdfViewIsLoading, isError: isPdfViewFetchingError },
+	] = useLazyWatchPDFQuery();
+
+	// запрос на добавление в избранное
+	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
-	const token = localStorage.getItem('token');
+
+	const isLoading = {
+		templateIsLoading,
+		draftIsLoading,
+		draftChangeIsLoading,
+		isFetching: [
+			documentIsLoading,
+			getDockIsLoading,
+			getPDFIsLoading,
+			getPreviewIsLoading,
+			getPdfViewIsLoading,
+		],
+	};
+	const isError = {
+		isTemplateFetchingError,
+		isDraftFetchingError,
+		isDraftChangeError,
+		isError: [
+			isDocumentFetchingError,
+			isGetDocFetchingError,
+			isGetPDFFetchingError,
+			isGetPreviewFetchingError,
+			isPdfViewFetchingError,
+		],
+	};
+
+	const dataReq = {
+		description: temp?.description,
+		completed: true,
+		document_fields: [...formData],
+		id,
+	};
 
 	const downloadDocHandler = () => {
-		if (token) {
-			fetchTemplate({
-				description: data.description,
-				template: data.id,
-				completed: true,
-				document_fields: [...formData],
-			})
-				.then((response) => {
-					if (response.data && response.data.id) {
-						return fetchDoc(response.data.id);
-					}
-					throw new Error('Ошибка создания документа');
+		if (user.id) {
+			if (currentPath === `/drafts/${id}`) {
+				changesDraft(dataReq)
+					.then((response) => {
+						fetchDoc(response.data.id);
+					})
+					.catch((err) => {
+						console.error('Упс:', err);
+					});
+			} else {
+				fetchTemplate({
+					description: temp?.description,
+					template: temp?.id,
+					completed: true,
+					document_fields: [...formData],
 				})
-				.catch((err) => {
-					console.error('Упс:', err);
-				});
+					.then((response) => fetchDoc(response.data.id))
+					.catch((err) => {
+						console.error('Упс:', err);
+					});
+			}
 		} else {
 			fetchPreview({
 				id,
@@ -54,63 +175,79 @@ export default function TemplateForm() {
 			});
 		}
 	};
-
 	const downloadPDFHandler = () => {
-		fetchTemplate({
-			description: data.description,
-			template: data.id,
-			completed: true,
-			document_fields: [...formData],
-		})
-			.then((response) => {
-				if (response.data && response.data.id) {
-					return fetchPDF(response.data.id);
-				}
-				throw new Error('Ошибка создания документа');
+		if (user.id) {
+			fetchTemplate({
+				description: temp?.description,
+				template: temp?.id,
+				completed: true,
+				document_fields: [...formData],
 			})
-			.catch((err) => {
-				console.error('Ошибка:', err);
-			});
+				.then((response) => fetchPDF(response.data?.id))
+				.catch((err) => {
+					console.error('Ошибка:', err);
+				});
+		} else {
+			console.log('Пока нет такой возможности у анонимного пользователя');
+		}
 	};
-	const watchPDFHandler = () => {};
-
 	const saveAsDraftHandler = () => {
 		fetchTemplate({
-			description: data.name,
-			template: data.id,
+			description: temp?.name,
+			template: temp?.id,
 			completed: false,
 			document_fields: [...formData],
 		});
 	};
-
-	const saveAsFavouriteHandler = () => {
-		fetchFavorite(data.id);
+	const watchPDFHandler = async () => {
+		if (user.id) {
+			fetchTemplate({
+				description: template.description,
+				template: template.id,
+				completed: true,
+				document_fields: [...formData],
+			})
+				.then(async (response) => {
+					changePdfViewFile(await fetchPDFForWatch(response.data.id));
+					navigate('/look-file');
+				})
+				.catch((err) => {
+					console.error('Ошибка:', err);
+				});
+		} else {
+			console.log('Пока нет такой возможности у анонимного пользователя');
+		}
 	};
 
-	if (isLoading) {
+	if (isLoading.templateIsLoading) {
 		return <Preloader />;
 	}
-	if (isError) {
-		return <h1>{error}</h1>;
+	if (isError.isTemplateFetchingError) {
+		return <h1>{templateError || drafError || drafChangeError}</h1>;
 	}
+
 	return (
-		data && (
+		temp && (
 			<form
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
-					// downloadDocHandler();
+					downloadDocHandler();
 				}}
 				noValidate
 			>
 				<div className={styles.mainWrapper}>
 					<div className={styles.titleWrapper}>
-						<h1 className={styles.title}>{data.name}</h1>
-						<p className={styles.subtitle}>{data.description}</p>
+						<h1 className={styles.title}>{temp?.name}</h1>
+						<p className={styles.subtitle}>{temp?.description}</p>
 					</div>
-					<FormInputsList form={data.name} data={data} />
+
+					{isLoading.isFetching.some((item) => item) && (
+						<PreloaderWithOverlay />
+					)}
+					<FormInputsList form={temp?.name} data={temp} />
 					<div className={styles.extraWrapper}>
-						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
+						<label htmlFor={temp.name} className={styles.checkBoxWrapper}>
 							<input
 								type="checkbox"
 								className={styles.checkbox}
@@ -122,8 +259,12 @@ export default function TemplateForm() {
 								себя ответственность за его содержание перед подписанием
 							</p>
 						</label>
-						<button className={styles.btn} disabled={!isChecked} type="submit">
-							{!isLoading ? (
+						<button
+							className={styles.btn}
+							disabled={!isChecked || loading}
+							type="submit"
+						>
+							{!loading ? (
 								<p className={styles.btnText}>Создать документ</p>
 							) : (
 								<div className={styles.btnIsloading} />
@@ -134,9 +275,9 @@ export default function TemplateForm() {
 				<ActionBar
 					downloadDocHandler={downloadDocHandler}
 					downloadPDFHandler={downloadPDFHandler}
-					watchPDFHandler={watchPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
-					saveAsFavouriteHandler={saveAsFavouriteHandler}
+					watchPDFHandler={watchPDFHandler}
+					idDraft={id}
 				/>
 			</form>
 		)
