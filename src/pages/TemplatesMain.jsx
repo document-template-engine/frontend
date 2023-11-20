@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
@@ -18,7 +18,7 @@ import TemplateRecentDocument from '../components/Templates/TemplateRecentDocume
 
 const TemplatesMain = () => {
 	const [recentPopup, setRecentPopup] = useState(true);
-	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const isLoggedIn = useSelector((state) => state.user.id);
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const { data, isLoading, isError, error } = useGetTemplatesQuery();

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,10 +10,9 @@ import InputForm from '../../components/UI/AuthInputForm/InputForm';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../components/UI/AuthButton/Button';
-import { signIn } from '../../store/auth/authSlice';
 import {
-	useLazyLoginQuery,
 	useLazyGetUserDataQuery,
+	useLazyLoginQuery,
 } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 
@@ -30,7 +29,7 @@ export default function LoginPage() {
 		useLazyGetUserDataQuery();
 
 	// сохраняем почту зарегестрированного пользователя
-	const { changeEmail } = useActions();
+	const { setUser } = useActions();
 
 	const {
 		register,
@@ -51,9 +50,7 @@ export default function LoginPage() {
 					fetchUserMe(respons.data.auth_token) // запрос данных о пользователе
 						.then((res) => {
 							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
-							localStorage.setItem('email', res.data.email); // записываем email в localStorage
-							changeEmail(res.data.email);
-							dispatch(signIn()); // пользователь авторизован
+							setUser({ ...res.data });
 							navigate('/templates');
 						});
 				} else {

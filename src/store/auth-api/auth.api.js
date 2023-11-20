@@ -47,7 +47,13 @@ export const authApi = createApi({
 					'Content-Type': 'application/json',
 					Authorization: `Token ${token}`,
 				},
-				// body: JSON.stringify(token),
+				// eslint-disable-next-line consistent-return
+				responseHandler: async (response) => {
+					if (!response.ok) {
+						localStorage.clear();
+					}
+					return response.json();
+				},
 			}),
 		}),
 	}),
