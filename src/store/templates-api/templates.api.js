@@ -126,6 +126,16 @@ export const templatesApi = createApi({
 				body: JSON.stringify(data),
 			}),
 		}),
+		getRecent: build.query({
+			query: () => ({
+				url: `/documents/`,
+				method: 'GET',
+				headers: {
+					Authorization: `Token ${localStorage.getItem('token')}`,
+					owner: `${localStorage.getItem('email')}`,
+				},
+			}),
+		}),
 	}),
 });
 
@@ -140,4 +150,5 @@ export const {
 	useGetDraftsQuery,
 	useLazyGetDraftTemplateQuery,
 	useChangeDraftMutation,
+	useLazyGetRecentQuery,
 } = templatesApi;
