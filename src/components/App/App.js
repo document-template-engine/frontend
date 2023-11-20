@@ -40,6 +40,9 @@ function App() {
 	useEffect(() => {
 		checkToken();
 	}, []);
+	useEffect(() => {
+		setUser(userMe);
+	}, [userMe]);
 	useEffect(() => {}, [user]);
 	return (
 		<Routes>
