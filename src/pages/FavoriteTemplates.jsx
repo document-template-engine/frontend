@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
+import Preloader from '../components/UI/Preloader/Preloader';
 import { useGetTemplatesQuery } from '../store/templates-api/templates.api';
 import TemplateList from '../components/Templates/TemplateList';
 import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
@@ -10,13 +11,32 @@ import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
 const FavoriteTemplates = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data } = useGetTemplatesQuery();
+	const { data, refetch, isFetching} = useGetTemplatesQuery();
+	const [arrayFavoriteTemplates, setArrayFavoriteTemplates] = useState([]);
 
-	const arrayFavoriteTemplates = data
-		? data.filter((item) => item.is_favorited)
-		: [];
+	useEffect(() => {
+		if (data) {
+			const favorites = data.filter((item) => item.is_favorited);
+			setArrayFavoriteTemplates(favorites);
+		}
+	}, [data]);
+
+	useEffect(() => {
+		refetch();
+	}, [location.pathname, refetch]);
 
 	// Если страничка главная - то он показывает список
+	if (isFetching) {
+		return (
+		<>	
+			<Header/>
+			<main className={styles.templates_wrapper}>
+				<Navbar isFavoriteTamplatesPage />
+				<Preloader/>
+			</main>
+		</>
+	)} 
+
 	if (currentPath === '/favorite') {
 		return (
 			<>

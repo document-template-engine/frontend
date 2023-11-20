@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styles from './ActionBar.module.sass';
 
@@ -11,6 +10,7 @@ export const ActionBar = ({
 	downloadPDFHandler,
 	watchPDFHandler,
 	saveAsDraftHandler,
+	saveAsFavouriteHandler,
 	idDraft,
 }) => {
 	const location = useLocation();
@@ -26,7 +26,11 @@ export const ActionBar = ({
 			</li>
 			{user.id && (
 				<li className={clsx(styles.item, styles.iconStar, styles.icon)}>
-					<button className={styles.btn} type="button">
+					<button
+						className={styles.btn}
+						type="button"
+						onClick={saveAsFavouriteHandler}
+					>
 						<p className={styles.text}>В избранное</p>
 					</button>
 				</li>
@@ -69,4 +73,5 @@ ActionBar.propTypes = {
 	downloadPDFHandler: PropTypes.func,
 	watchPDFHandler: PropTypes.func,
 	saveAsDraftHandler: PropTypes.func,
+	saveAsFavouriteHandler: PropTypes.func,
 };

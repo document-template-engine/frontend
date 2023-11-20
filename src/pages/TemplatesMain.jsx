@@ -21,12 +21,20 @@ const TemplatesMain = () => {
 	const isLoggedIn = useSelector((state) => state.user.id);
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data, isLoading, isError, error } = useGetTemplatesQuery();
+	const { data, refetch, isLoading, isError, error } = useGetTemplatesQuery();
 	const [fetchRecent, { data: recentData, isLoading: isLoadingRecentDoc }] =
 		useLazyGetRecentQuery();
+	// const [mainTemplates, setMaintemplates] = useState([])
+
+	// useEffect(() => {
+	// 	if (data) {
+	// 		setMaintemplates(data);
+	// 	}
+	// }, [data]);
 
 	useEffect(() => {
 		fetchRecent();
+		// refetch()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location.pathname]);
 

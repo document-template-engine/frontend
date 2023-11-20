@@ -1,6 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '../../utils/constants';
 
+const preHeaders = localStorage.getItem('token')
+	? {
+			'Content-Type': 'application/json',
+			Authorization: `Token ${localStorage.getItem('token')}`,
+	  }
+	: {
+			'Content-Type': 'application/json',
+	  };
+
 export const templatesApi = createApi({
 	reducerPath: 'templates/api',
 	baseQuery: fetchBaseQuery({
@@ -10,6 +19,7 @@ export const templatesApi = createApi({
 		getTemplates: build.query({
 			query: () => ({
 				url: 'templates/',
+				headers: preHeaders,
 			}),
 		}),
 		getTemplate: build.query({
@@ -17,6 +27,29 @@ export const templatesApi = createApi({
 				url: `templates/${id}/`,
 			}),
 		}),
+		
+		postFavorite: build.mutation({
+			query: (TemplateId) => ({
+				url: `templates/${TemplateId}/favorite/`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+			}),
+		}),
+
+		deleteFavorite: build.mutation({
+			query: (TemplateId) => ({
+				url: `templates/${TemplateId}/favorite/`,
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
+			}),
+		}),
+	
 		getDraftTemplate: build.query({
 			query: (id) => ({
 				url: `/documents/${id}/`,
@@ -26,11 +59,18 @@ export const templatesApi = createApi({
 				},
 			}),
 		}),
-		getFavorite: build.query({
-			query: (id) => ({
-				url: `/documents/${id}/favorite/`,
+
+		getFavoriteTemplates: build.query({
+			query: () => ({
+				url: 'templates/',
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${localStorage.getItem('token')}`,
+				},
 			}),
 		}),
+
 		postTemplate: build.query({
 			query: (data) => ({
 				url: `/documents/`,
@@ -148,6 +188,9 @@ export const {
 	useLazyWatchPDFAnonimQuery,
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
+	usePostFavoriteMutation,
+	useDeleteFavoriteMutation,
+	useGetFavoriteTemplatesQuery,
 	useLazyGetDraftTemplateQuery,
 	useChangeDraftMutation,
 	useLazyGetRecentQuery,

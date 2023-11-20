@@ -9,7 +9,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
-import { ActionBar } from '../ActionBar/ActionBar';
+import {ActionBar} from '../ActionBar/ActionBar';
 import {
 	useChangeDraftMutation,
 	useLazyGetDocQuery,
@@ -19,6 +19,7 @@ import {
 	useLazyGetTemplateQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
+	usePostFavoriteMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
@@ -106,6 +107,9 @@ export default function TemplateForm() {
 		fetchPDFForWatch,
 		{ isLoading: getPdfViewIsLoading, isError: isPdfViewFetchingError },
 	] = useLazyWatchPDFQuery();
+
+	// запрос на добавление в избранное
+	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
@@ -195,6 +199,12 @@ export default function TemplateForm() {
 			document_fields: [...formData],
 		});
 	};
+
+	// хендлер добавления в избранное
+	const saveAsFavouriteHandler = () => {
+		fetchFavorite(temp.id);
+	};
+
 	const watchPDFHandler = async () => {
 		if (user.id) {
 			fetchTemplate({
@@ -273,6 +283,7 @@ export default function TemplateForm() {
 					downloadPDFHandler={downloadPDFHandler}
 					saveAsDraftHandler={saveAsDraftHandler}
 					watchPDFHandler={watchPDFHandler}
+					saveAsFavouriteHandler={saveAsFavouriteHandler}
 					idDraft={id}
 				/>
 			</form>

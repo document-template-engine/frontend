@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './TemplateItem.module.sass';
 import zaglushka from '../../images/template-cross.svg';
 import CreationTime from '../СreationTime/CreationTime';
+import { usePostFavoriteMutation, useDeleteFavoriteMutation} from '../../store/templates-api/templates.api';
 
 // eslint-disable-next-line react/prop-types
-const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
+const TemplateItem = ({ title, link, image, isFav, dateOwn, id }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 
 	const [isFavorite, setIsFavorite] = useState(isFav);
+	const user = useSelector((state) => state.user);
+	const [fetchFavorite] = usePostFavoriteMutation();
+	const [deleteFavorite] = useDeleteFavoriteMutation();
+	const [isDeleted, setDeleted] = useState(false)
+
+	const handleFavoriteButtonClick = () => {
+		if (isFav) {
+			deleteFavorite(id)
+		} else {
+			fetchFavorite(id)
+		}
+
+		setIsFavorite(!isFavorite);
+
+		if (currentPath === '/favorite') {
+			setDeleted(true)
+		}
+	}
 
 	const description =
 		// eslint-disable-next-line react/prop-types
@@ -21,17 +41,15 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn }) => {
 
 	return (
 		// Это элемент списка шаблонов(квадратик с названием)
-		<li className={styles.item}>
+		<li className={`${styles.item} ${isDeleted && styles.deleted}`}>
 			<div className={styles.imgWrapper}>
 				<img src={image || zaglushka} alt={title} className={styles.img} />
 				{/* eslint-disable-next-line */}
-				<button
+				{user.id && <button
 					className={`${styles.favIcon} ${buttonStyle}`}
 					type="button"
-					onClick={() => {
-						setIsFavorite(!isFavorite);
-					}}
-				></button>
+					onClick={handleFavoriteButtonClick}
+				></button>}
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
