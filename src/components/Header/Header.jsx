@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,29 +6,26 @@ import styles from './Header.module.sass';
 import Modal from '../Modal/Modal';
 import profile from '../../images/profile.svg';
 import exitIcon from '../../images/arrow-bar-left.svg';
-import { signOut } from '../../store/auth/authSlice';
 import Logo from '../UI/Logo/Logo';
 import { useLogoutMutation } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 
 export default function Header() {
-	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	const userData = useSelector((state) => state.userReducer);
-	const email = localStorage.getItem('email') || userData.email;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
 	const [isEntranceButtonLoading, setIsEntranceButtonLoading] = useState(false);
 	const { changeSearchQuery } = useActions();
+	const user = useSelector((state) => state.user);
+	const { setUser, logout } = useActions();
 
 	useEffect(() => {
 		changeSearchQuery('');
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [changeSearchQuery]);
 
 	const toggleUserButtonState = (e) => {
 		e.stopPropagation();
-		if (isLoggedIn) {
+		if (user.id) {
 			setIsUserMenuVisible(!isUserMenuVisible);
 		} else {
 			setIsEntranceButtonLoading((prevState) => !prevState);
@@ -46,10 +43,8 @@ export default function Header() {
 	const handleExit = () => {
 		const token = localStorage.getItem('token');
 		fetchRepos(token);
-		dispatch(signOut());
+		setUser({ email: '', id: '' });
 		setIsUserMenuVisible(false);
-		navigate('/templates');
-		// localStorage.removeItem('token');
 		localStorage.clear();
 		setIsEntranceButtonLoading(false);
 	};
@@ -80,14 +75,14 @@ export default function Header() {
 					</fieldset>
 				</form>
 				<div>
-					{isLoggedIn ? (
+					{user.id ? (
 						<button
 							type="button"
 							className={styles['header__user-button']}
 							aria-label="Save"
 							onClick={toggleUserButtonState}
 						>
-							{email?.charAt(0).toUpperCase()}
+							{user.email?.charAt(0).toUpperCase()}
 						</button>
 					) : (
 						<button
@@ -103,7 +98,7 @@ export default function Header() {
 						</button>
 					)}
 				</div>
-				{isLoggedIn && isUserMenuVisible && (
+				{user.id && isUserMenuVisible && (
 					<Modal
 						extraClass={styles['header__modal-container']}
 						handleClose={handleClick}
@@ -115,7 +110,7 @@ export default function Header() {
 								src={profile}
 								alt="email"
 							/>
-							<p className={styles['header__modal-info']}>{email}</p>
+							<p className={styles['header__modal-info']}>{user.email}</p>
 						</div>
 						<div className={styles['header__modal-divider']} />
 						<div className={styles.container}>

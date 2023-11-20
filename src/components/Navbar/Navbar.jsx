@@ -9,7 +9,7 @@ import { ReactComponent as Star } from '../../images/actionBarStart.svg';
 
 export default function Navbar(props) {
 	const navigate = useNavigate();
-	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const user = useSelector((state) => state.user);
 
 	function goToTemplates() {
 		navigate('/templates', { replace: true });
@@ -24,9 +24,7 @@ export default function Navbar(props) {
 	}
 
 	return (
-		<nav
-			className={clsx(styles.navbar, { [styles.navbar_noLogin]: !isLoggedIn })}
-		>
+		<nav className={clsx(styles.navbar, { [styles.navbar_noLogin]: !user.id })}>
 			<div className={styles.container}>
 				<button
 					className={clsx(
@@ -38,7 +36,7 @@ export default function Navbar(props) {
 					<Template className={styles.item_template} />
 					Шаблоны
 				</button>
-				{isLoggedIn && (
+				{user.id && (
 					<button
 						className={clsx(
 							styles.item,
@@ -51,7 +49,7 @@ export default function Navbar(props) {
 						Избранное
 					</button>
 				)}
-				{isLoggedIn && (
+				{user.id && (
 					<button
 						className={clsx(
 							styles.item,

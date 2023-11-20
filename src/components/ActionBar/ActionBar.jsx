@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import styles from './ActionBar.module.sass';
 
 export const ActionBar = ({
@@ -12,10 +13,9 @@ export const ActionBar = ({
 	saveAsDraftHandler,
 	idDraft,
 }) => {
-	const token = localStorage.getItem('token');
-
 	const location = useLocation();
 	const currentPath = location.pathname;
+	const user = useSelector((state) => state.user);
 
 	return (
 		<ul className={styles.main}>
@@ -24,7 +24,7 @@ export const ActionBar = ({
 					<p className={styles.text}>Посмотреть</p>
 				</button>
 			</li>
-			{token && (
+			{user.id && (
 				<li className={clsx(styles.item, styles.iconStar, styles.icon)}>
 					<button className={styles.btn} type="button">
 						<p className={styles.text}>В избранное</p>
@@ -49,7 +49,7 @@ export const ActionBar = ({
 					<p className={styles.text}>Сохранить в PDF</p>
 				</button>
 			</li>
-			{token && currentPath !== `/drafts/${idDraft}` && (
+			{user.id && currentPath !== `/drafts/${idDraft}` && (
 				<li className={clsx(styles.item, styles.iconFolder, styles.icon)}>
 					<button
 						className={styles.btn}

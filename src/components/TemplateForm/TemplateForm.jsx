@@ -97,6 +97,7 @@ export default function TemplateForm() {
 		fetchPreview,
 		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
 	] = useLazyGetPreviewQuery();
+	const user = useSelector((state) => state.user);
 
 	const [
 		fetchPDFForWatch,
@@ -105,7 +106,6 @@ export default function TemplateForm() {
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
-	const token = localStorage.getItem('token');
 
 	const isLoading = {
 		templateIsLoading,
@@ -140,7 +140,7 @@ export default function TemplateForm() {
 	};
 
 	const downloadDocHandler = () => {
-		if (token) {
+		if (user.id) {
 			if (currentPath === `/drafts/${id}`) {
 				changesDraft(dataReq)
 					.then((response) => {
@@ -169,7 +169,7 @@ export default function TemplateForm() {
 		}
 	};
 	const downloadPDFHandler = () => {
-		if (token) {
+		if (user.id) {
 			fetchTemplate({
 				description: temp?.description,
 				template: temp?.id,

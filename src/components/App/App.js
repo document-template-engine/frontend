@@ -2,7 +2,7 @@
 import './App.css';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import DraftsTemplates from '../../pages/DraftsTemplates';
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
@@ -16,34 +16,31 @@ import NotFound from '../../pages/NotFound';
 import LookPdfFile from '../../pages/LookPdfFile';
 import FormPage from '../../pages/FormPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
-import { signIn } from '../../store/auth/authSlice';
 import { useActions } from '../../hooks/useActions';
 
 function App() {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const user = useSelector((state) => state.user);
 
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
+	const { setUser } = useActions();
 
 	const checkToken = () => {
 		const token = localStorage.getItem('token'); // берём токен из localStorage
 		const authToken = fetchUserMe(token); // запрашиваем данным о пользователе передавая токен в запросе
 		if (authToken && token) {
-			dispatch(signIn()); // пользователь авторизован
+			setUser(userMe); // пользователь авторизован
 			navigate('/templates');
 		} else {
 			navigate('/');
 		}
 	};
-	const { verifyToken } = useActions();
 
 	useEffect(() => {
 		checkToken();
 	}, []);
-	useEffect(() => {
-		verifyToken(userMe);
-	}, [userMe]);
+	useEffect(() => {}, [user]);
 	return (
 		<Routes>
 			<Route element={<TemplatesMain />} path="/templates">
