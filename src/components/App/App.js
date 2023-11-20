@@ -17,6 +17,7 @@ import LookPdfFile from '../../pages/LookPdfFile';
 import FormPage from '../../pages/FormPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { signIn } from '../../store/auth/authSlice';
+import { useActions } from '../../hooks/useActions';
 
 function App() {
 	const dispatch = useDispatch();
@@ -35,11 +36,14 @@ function App() {
 			navigate('/');
 		}
 	};
+	const { verifyToken } = useActions();
 
 	useEffect(() => {
 		checkToken();
 	}, []);
-
+	useEffect(() => {
+		verifyToken(userMe);
+	}, [userMe]);
 	return (
 		<Routes>
 			<Route element={<TemplatesMain />} path="/templates">
