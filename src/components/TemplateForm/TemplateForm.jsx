@@ -184,6 +184,7 @@ export default function TemplateForm() {
 			console.log('Пока нет такой возможности у анонимного пользователя');
 		}
 	};
+
 	const saveAsDraftHandler = () => {
 		fetchTemplate({
 			description: temp?.name,
