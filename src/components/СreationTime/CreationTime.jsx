@@ -45,12 +45,35 @@ const CreationTime = ({ creationTime }) => {
 		minute: '2-digit',
 	};
 
-	// Если документ был создан вчера
+	// Если документ был создан более 60 минут назад
 
+	// Определяем дату создания, без времени
+	const createdDate = new Date(
+		created.getFullYear(),
+		created.getMonth(),
+		created.getDate()
+	);
+
+	if (createdDate.getTime() === today.getTime()) {
+		// Если документ был создан сегодня
+		return (
+			<div className="CreationTime">
+				<p className="CreationTime__text">сегодня</p>
+				<p className="CreationTime__text">
+					{created.toLocaleTimeString([], {
+						hour: '2-digit',
+						minute: '2-digit',
+					})}
+				</p>
+			</div>
+		);
+	}
+
+	// Если документ был создан вчера
 	const yesterday = new Date(today);
 	yesterday.setDate(yesterday.getDate() - 1);
 
-	if (created >= yesterday.getTime() && created < today.getTime()) {
+	if (createdDate.getTime() === yesterday.getTime()) {
 		return (
 			<div className="CreationTime">
 				<p className="CreationTime__text">вчера</p>
@@ -76,25 +99,13 @@ const CreationTime = ({ creationTime }) => {
 		year: 'numeric',
 	};
 
-	if (created >= tomorrow.getTime()) {
-		return (
-			<div className="CreationTime">
-				<p className="CreationTime__text">
-					{created.toLocaleDateString('ru-RU', optionsDate)}
-				</p>
-				<p className="CreationTime__text">
-					{created.toLocaleTimeString([], optionsTime)}
-				</p>
-			</div>
-		);
-	}
-
-	// Если документ был создан сегодня
 	return (
 		<div className="CreationTime">
-			<p className="CreationTime__text">сегодня</p>
 			<p className="CreationTime__text">
-				{created.toLocaleString([], optionsTime)}
+				{created.toLocaleDateString('ru-RU', optionsDate)}
+			</p>
+			<p className="CreationTime__text">
+				{created.toLocaleTimeString([], optionsTime)}
 			</p>
 		</div>
 	);
