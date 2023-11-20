@@ -25,7 +25,7 @@ import Preloader from '../UI/Preloader/Preloader';
 import { useActions } from '../../hooks/useActions';
 
 export default function TemplateForm() {
-	const { changePdfViewFile } = useActions();
+	const { changePdfViewFile, resetForm } = useActions();
 
 	const location = useLocation();
 	const currentPath = location.pathname;
@@ -78,6 +78,9 @@ export default function TemplateForm() {
 		} else {
 			fetchTemplateClassic(id);
 		}
+		return () => {
+			resetForm();
+		};
 	}, []);
 
 	const [
