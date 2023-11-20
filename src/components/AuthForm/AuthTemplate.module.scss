@@ -2,7 +2,10 @@
 	width: 589px;
 	padding: 80px 32px;
 	box-sizing: border-box;
-	@media (max-width: 768px) {
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	@media (max-width: 1298px) {
 		padding: 40px 20px;
 	}
 	@media (max-width: 600px) {
@@ -14,8 +17,15 @@
 
 .title {
 	margin: 16px 0 20px 0;
+	color: #000;
+	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 34px;
 	@media (max-width: 600px) {
 		margin: 24px 0 24px 0;
+		font-weight: 500;
 	}
 }
 

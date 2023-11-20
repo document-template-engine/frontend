@@ -5,11 +5,11 @@
 	background: rgba(255, 255, 255, 1);
 	border-radius: 32px;
 	position: absolute;
-	// @media (max-width: 600px) {
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	border-radius: 0;
-	// }
+	@media (max-width: 600px) {
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+	}
 }
 
 .modalWithOverlay {
@@ -31,4 +31,8 @@
 	position: absolute;
 	top: 35px;
 	right: 32px;
+
+	@media (max-width: 600px) {
+		top: 17px;	
+	}
 }
