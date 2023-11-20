@@ -11,7 +11,6 @@ const actions = {
 	...formActions,
 	...searchQueryActions,
 	...userActions,
-	...changeEmail,
 	...pdfViewActions,
 };
 

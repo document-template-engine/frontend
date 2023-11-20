@@ -193,7 +193,7 @@ export default function TemplateForm() {
 		});
 	};
 	const watchPDFHandler = async () => {
-		if (token) {
+		if (user.id) {
 			fetchTemplate({
 				description: template.description,
 				template: template.id,
