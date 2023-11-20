@@ -20,8 +20,6 @@ import { useActions } from '../../hooks/useActions';
 
 function App() {
 	const navigate = useNavigate();
-	const user = useSelector((state) => state.user);
-
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 	const { setUser } = useActions();
@@ -43,7 +41,6 @@ function App() {
 	useEffect(() => {
 		setUser(userMe);
 	}, [userMe]);
-	useEffect(() => {}, [user]);
 	return (
 		<Routes>
 			<Route element={<TemplatesMain />} path="/templates">
