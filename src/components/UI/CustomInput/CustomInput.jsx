@@ -43,8 +43,12 @@ export const CustomInput = ({ data }) => {
 				</div>
 				<input
 					value={
-						(formData.find((fieldData) => fieldData.field === data.id) || {})
-							.value || ''
+						(
+							formData.find((fieldData) => fieldData.field === data.id) || {
+								field: data.id,
+								value: data.value,
+							}
+						).value || ''
 					}
 					type={type}
 					placeholder=""
