@@ -33,7 +33,7 @@ const DraftsTemplates = () => {
 								/>
 							</div>
 						) : (
-							<TemplateList data={data} />
+							<TemplateList data={data} isTemplate={false} />
 						)}{' '}
 					</div>
 				</main>

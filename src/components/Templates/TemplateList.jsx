@@ -5,7 +5,7 @@ import styles from './TemplateList.module.sass';
 import TemplateItem from './TemplateItem';
 
 // eslint-disable-next-line react/prop-types
-const TemplateList = ({ data }) => {
+const TemplateList = ({ data, isTemplate }) => {
 	const search = useSelector((state) => state.search.search);
 
 	const filteredDocumentList = useMemo(() => {
@@ -40,6 +40,7 @@ const TemplateList = ({ data }) => {
 						dateOwn={item.updated}
 						id={item.id}
 						key={item.id}
+						isTemplate={isTemplate}
 					/>
 				))}
 		</ul>

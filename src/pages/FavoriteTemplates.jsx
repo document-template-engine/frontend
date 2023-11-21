@@ -9,6 +9,7 @@ import TemplateList from '../components/Templates/TemplateList';
 import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
 
 const FavoriteTemplates = () => {
+
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const { data, refetch, isFetching} = useGetTemplatesQuery();
@@ -53,7 +54,7 @@ const FavoriteTemplates = () => {
 								/>
 							</div>
 						) : (
-							<TemplateList data={arrayFavoriteTemplates} />
+							<TemplateList data={arrayFavoriteTemplates} isTemplate/>
 						)}
 					</div>
 				</main>

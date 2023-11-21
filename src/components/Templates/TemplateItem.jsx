@@ -10,7 +10,7 @@ import {
 } from '../../store/templates-api/templates.api';
 
 // eslint-disable-next-line react/prop-types
-const TemplateItem = ({ title, link, image, isFav, dateOwn, id }) => {
+const TemplateItem = ({ title, link, image, isFav, dateOwn, id, isTemplate}) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 
@@ -18,21 +18,29 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn, id }) => {
 	const user = useSelector((state) => state.user);
 	const [fetchFavorite] = usePostFavoriteMutation();
 	const [deleteFavorite] = useDeleteFavoriteMutation();
-	const [isDeleted, setDeleted] = useState(false);
+	const [isDeleted, setDeleted] = useState(false)
+	const [isFavoriteButtonEnabled, setFavoriteButtonEnabled] = useState(true)
 
-	const handleFavoriteButtonClick = () => {
-		if (isFav) {
-			deleteFavorite(id);
-		} else {
-			fetchFavorite(id);
-		}
-
-		setIsFavorite(!isFavorite);
-
-		if (currentPath === '/favorite') {
-			setDeleted(true);
-		}
-	};
+    const handleFavoriteButtonClick = () => {
+        if (!isFavoriteButtonEnabled) {
+            return
+        }
+        setFavoriteButtonEnabled(false)
+        if (isFavorite) {
+            deleteFavorite(id)
+                .then(() => {
+                    setIsFavorite(false)
+                    if (currentPath === '/favorite') {
+                        setDeleted(true)
+                    }
+                })
+                .finally(setFavoriteButtonEnabled(true))
+        } else {
+            fetchFavorite(id)
+                .then(() => setIsFavorite(true))
+                .finally(setFavoriteButtonEnabled(true))
+        }
+    }
 
 	const description =
 		title.length < 50 ? title : title.slice(0, 50).concat('...');
@@ -43,13 +51,13 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn, id }) => {
 		<li className={`${styles.item} ${isDeleted && styles.deleted}`}>
 			<div className={styles.imgWrapper}>
 				<img src={image || zaglushka} alt={title} className={styles.img} />
-				{user.id && (
-					<button
-						className={`${styles.favIcon} ${buttonStyle}`}
-						type="button"
-						onClick={handleFavoriteButtonClick}
-					/>
-				)}
+                {/* eslint-disable-next-line */}
+                {user.id  && isTemplate && <button
+                    disabled={!isFavoriteButtonEnabled}
+                    className={`${styles.favIcon} ${buttonStyle}`}
+                    type="button"
+                    onClick={handleFavoriteButtonClick}
+                ></button>}
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
