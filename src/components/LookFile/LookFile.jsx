@@ -5,14 +5,14 @@ import styles from './LookFile.module.scss';
 
 // eslint-disable-next-line react/prop-types
 function LookFile() {
-	const pdfFile = useSelector((state) => state.pdfFile.pdfFile);
-
+	const pdfFile = useSelector((state) => state.pdfFile);
+	console.log(pdfFile);
 	return (
 		<div className={styles.container}>
-			{pdfFile.data && (
+			{pdfFile.pdfFile && (
 				<Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
 					<div className={styles.blockView}>
-						<Viewer fileUrl={pdfFile.data} />
+						<Viewer fileUrl={pdfFile.pdfFile} />
 					</div>
 				</Worker>
 			)}

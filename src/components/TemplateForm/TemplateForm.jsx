@@ -17,6 +17,7 @@ import {
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
 	useLazyGetTemplateQuery,
+	useLazyGetUrlPdfQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
 	usePostFavoriteMutation,
@@ -99,7 +100,7 @@ export default function TemplateForm() {
 
 	// запрос на добавление в избранное
 	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
-
+	const [getUrlPdf, responseUrlPdf] = useLazyGetUrlPdfQuery();
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const [currentDocId, setCurrentDocId] = useState(null);
@@ -217,31 +218,24 @@ export default function TemplateForm() {
 	};
 
 	const watchPDFHandler = async () => {
-		if (!user.id) {
-			return console.log(
-				'Пока нет такой возможности у анонимного пользователя'
-			);
+		// Если страничка с шаблонами
+		if (currentPath === `/templates/${id}`)
+			return getUrlPdf({
+				document_fields: [...formData],
+				id,
+			}).then((res) => {
+				changePdfViewFile(res.data);
+				navigate('/look-file');
+			});
+		if (currentPath === `/drafts/${id}`) {
+			return getUrlPdf({
+				document_fields: [...formData],
+				id: temp.template.id,
+			}).then((res) => {
+				changePdfViewFile(res.data);
+				navigate('/look-file');
+			});
 		}
-		if (user.id) {
-			return console.log('В разработке');
-		}
-		// if (user.id) {
-		// 	fetchTemplate({
-		// 		description: template.description,
-		// 		template: template.id,
-		// 		completed: true,
-		// 		document_fields: [...formData],
-		// 	})
-		// 		.then(async (response) => {
-		// 			changePdfViewFile(await fetchPDFForWatch(response.data.id));
-		// 			navigate('/look-file');
-		// 		})
-		// 		.catch((err) => {
-		// 			console.error('Ошибка:', err);
-		// 		});
-		// } else {
-		// 	console.log('Пока нет такой возможности у анонимного пользователя');
-		// }
 	};
 
 	useEffect(() => {
