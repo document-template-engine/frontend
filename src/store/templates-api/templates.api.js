@@ -5,9 +5,11 @@ const preHeaders = localStorage.getItem('token')
 	? {
 			'Content-Type': 'application/json',
 			Authorization: `Token ${localStorage.getItem('token')}`,
+			// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  }
 	: {
 			'Content-Type': 'application/json',
+			// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  };
 
 export const templatesApi = createApi({
@@ -27,7 +29,7 @@ export const templatesApi = createApi({
 				url: `templates/${id}/`,
 			}),
 		}),
-		
+
 		postFavorite: build.mutation({
 			query: (TemplateId) => ({
 				url: `templates/${TemplateId}/favorite/`,
@@ -49,7 +51,7 @@ export const templatesApi = createApi({
 				},
 			}),
 		}),
-	
+
 		getDraftTemplate: build.query({
 			query: (id) => ({
 				url: `/documents/${id}/`,
@@ -185,12 +187,10 @@ export const {
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
 	useLazyWatchPDFQuery,
-	useLazyWatchPDFAnonimQuery,
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
 	usePostFavoriteMutation,
 	useDeleteFavoriteMutation,
-	useGetFavoriteTemplatesQuery,
 	useLazyGetDraftTemplateQuery,
 	useChangeDraftMutation,
 	useLazyGetRecentQuery,
