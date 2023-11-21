@@ -155,6 +155,7 @@ export const templatesApi = createApi({
 					Authorization: `Token ${localStorage.getItem('token')}`,
 				},
 			}),
+			transformResponse: (response) => response.reverse(),
 		}),
 		changeDraft: build.mutation({
 			query: (data) => ({
@@ -176,6 +177,7 @@ export const templatesApi = createApi({
 					owner: `${localStorage.getItem('email')}`,
 				},
 			}),
+			transformResponse: (response) => response.reverse(),
 		}),
 		getUrlPdf: build.query({
 			query: (data) => ({
