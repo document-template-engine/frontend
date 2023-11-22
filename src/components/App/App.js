@@ -15,6 +15,7 @@ import FavoriteTemplates from '../../pages/FavoriteTemplates';
 import NotFound from '../../pages/NotFound';
 import LookPdfFile from '../../pages/LookPdfFile';
 import FormPage from '../../pages/FormPage';
+import PolicyPage from '../../pages/PolicyPage/PolicyPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 
@@ -59,6 +60,7 @@ function App() {
 			<Route element={<CheckAccountPage />} path="/check-account" exact />
 			<Route element={<ForgotPwPage />} path="/forgot-password" exact />
 			<Route element={<ChangePassword />} path="/change-password" exact />
+			<Route element={<PolicyPage />} path="/policy" exact />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);

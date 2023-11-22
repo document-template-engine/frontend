@@ -19,6 +19,9 @@ $red: rgba(235, 27, 27, 1);
 	font-size: 20px;
 	font-weight: 500;
 	line-height: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	z-index: 1;
 
 	&:hover {
 		border-color: rgba(122, 122, 122, 1);
@@ -71,20 +74,15 @@ $red: rgba(235, 27, 27, 1);
 }
 
 .eye {
+	margin: 0;
+	padding: 0;
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	border: 0;
 	background-color: inherit;
-	padding: 0;
 	right: 20px;
 	top: 20px;
+	border: none;
 	cursor: pointer;
+	z-index: 2;
 }
-
-/* .error {
-	color: $red;
-	font-size: 16px;
-	line-height: 22px;
-	margin: 4px 0 0 14px;
-} */

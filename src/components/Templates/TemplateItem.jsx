@@ -49,7 +49,7 @@ const TemplateItem = ({ title, link, image, isFav, dateOwn, id }) => {
 					className={`${styles.favIcon} ${buttonStyle}`}
 					type="button"
 					onClick={handleFavoriteButtonClick}
-				></button>}
+				/>}
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
