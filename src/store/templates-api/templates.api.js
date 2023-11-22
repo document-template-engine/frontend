@@ -193,6 +193,30 @@ export const templatesApi = createApi({
 				},
 			}),
 		}),
+		downloadTemplatePdf: build.query({
+			query: (data) => ({
+				url: `/templates/${data.id}/download_preview/?pdf=true`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ document_fields: data.document_fields }),
+				responseHandler: async (response) => {
+					const blob = await response.blob();
+
+					// Создаем ссылку для скачивания
+					const url = window.URL.createObjectURL(blob);
+
+					// Скачиваем файл
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = 'Заявление_на_отпуск.pdf';
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+				},
+			}),
+		}),
 	}),
 });
 
@@ -211,4 +235,5 @@ export const {
 	useChangeDraftMutation,
 	useLazyGetRecentQuery,
 	useLazyGetUrlPdfQuery,
+	useLazyDownloadTemplatePdfQuery,
 } = templatesApi;
