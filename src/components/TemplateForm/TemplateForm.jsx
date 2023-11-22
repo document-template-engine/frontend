@@ -7,12 +7,12 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useSelector } from 'react-redux';
-import { classNames } from '@react-pdf-viewer/core';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
 import { ActionBar } from '../ActionBar/ActionBar';
 import {
 	useChangeDraftMutation,
+	useDeleteFavoriteMutation,
 	useLazyGetDocQuery,
 	useLazyGetDraftTemplateQuery,
 	useLazyGetPDFQuery,
@@ -22,7 +22,6 @@ import {
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
 	usePostFavoriteMutation,
-	useDeleteFavoriteMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
@@ -71,7 +70,9 @@ export default function TemplateForm() {
 	] = useChangeDraftMutation();
 
 	const temp = draftTemplate || template || draftNew;
-	const [isFavorited, setIsFavorited] = useState(temp ? temp.is_favorited : false)
+	const [isFavorited, setIsFavorited] = useState(
+		temp ? temp.is_favorited : false
+	);
 
 	const loading = templateIsLoading || draftIsLoading || draftChangeIsLoading;
 
@@ -220,11 +221,9 @@ export default function TemplateForm() {
 	// хендлер добавления в избранное
 	const saveAsFavouriteHandler = () => {
 		if (!isFavorited) {
-			fetchFavorite(temp.id)
-			.then(setIsFavorited(true))
+			fetchFavorite(temp.id).then(setIsFavorited(true));
 		} else {
-			deleteFavorite(temp.id)
-			.then(setIsFavorited(false))
+			deleteFavorite(temp.id).then(setIsFavorited(false));
 		}
 	};
 
@@ -250,7 +249,7 @@ export default function TemplateForm() {
 	};
 
 	useEffect(() => {
-		if (currentPath === `/drafts/${id}`) {
+		if (currentPath === `/drafts/${id}` || currentPath === `/docs/${id}`) {
 			fetchDraft(id);
 			setCurrentDocId(id);
 		} else {

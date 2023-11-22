@@ -2,7 +2,6 @@
 import './App.css';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
-import { useSelector } from 'react-redux';
 import DraftsTemplates from '../../pages/DraftsTemplates';
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
@@ -17,6 +16,7 @@ import LookPdfFile from '../../pages/LookPdfFile';
 import FormPage from '../../pages/FormPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
+import DocsPage from '../../pages/DocsPage';
 
 function App() {
 	const navigate = useNavigate();
@@ -50,6 +50,9 @@ function App() {
 				<Route path=":id" element={<FormPage />} />
 			</Route>
 			<Route element={<DraftsTemplates />} path="drafts">
+				<Route path=":id" element={<FormPage />} />
+			</Route>
+			<Route element={<DocsPage />} path="docs">
 				<Route path=":id" element={<FormPage />} />
 			</Route>
 			<Route element={<LookPdfFile />} path="/look-file" />
