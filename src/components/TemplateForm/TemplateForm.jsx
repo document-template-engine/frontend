@@ -166,10 +166,10 @@ export default function TemplateForm() {
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
 			changesDraft({
 				description: temp?.description,
-				template: temp.id,
+				template: id,
 				completed: true,
 				document_fields: [...formData],
-				id,
+				id: currentDocId,
 			}).then((res) => {
 				fetchDoc(res.data.id);
 			});
@@ -204,7 +204,7 @@ export default function TemplateForm() {
 		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
 			return fetchTemplate({
 				description: temp?.description,
-				template: temp?.id,
+				template: id,
 				completed: true,
 				document_fields: [...formData],
 			})
@@ -218,7 +218,13 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			return changesDraft(dataReq).finally(() => {
+			return changesDraft({
+				description: temp?.description,
+				template: id,
+				completed: true,
+				document_fields: [...formData],
+				id: currentDocId,
+			}).finally(() => {
 				fetchPDF(currentDocId);
 			});
 		}
