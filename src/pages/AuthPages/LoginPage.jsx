@@ -53,6 +53,7 @@ export default function LoginPage() {
 							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
 							setUser({ ...res.data });
 							navigate('/templates');
+							console.log('auth')
 						});
 				} else {
 					// сообщаем пользователю об ошибке

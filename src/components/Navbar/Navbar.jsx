@@ -46,7 +46,7 @@ export default function Navbar(props) {
 						onClick={goToSelected}
 					>
 						<Folder className={styles.item_template} />
-						Избранное
+						Избранные шаблоны
 					</button>
 				)}
 				{user.id && (
@@ -59,7 +59,7 @@ export default function Navbar(props) {
 						onClick={goToDrafts}
 					>
 						<Star className={styles.item_template} />
-						Черновики
+						Черновики документов
 					</button>
 				)}
 			</div>
