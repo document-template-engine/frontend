@@ -1,9 +1,8 @@
-import { Viewer, Worker } from '@react-pdf-viewer/core';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Viewer, Worker} from '@react-pdf-viewer/core';
+import {useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import styles from './LookFile.module.scss';
-import { ActionBar } from '../ActionBar/ActionBar';
 
 // eslint-disable-next-line react/prop-types
 function LookFile() {
@@ -23,7 +22,7 @@ function LookFile() {
 					</div>
 				</Worker>
 			)}
-			<ActionBar />
+			{/* <ActionBar /> */}
 		</div>
 	);
 }
