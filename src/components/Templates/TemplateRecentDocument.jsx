@@ -43,7 +43,7 @@ function TemplateRecentDocument({ recentData }) {
 							<TemplateItem
 								title={item.name || item.description}
 								isFav={item.is_favorited}
-								link={item.template.toString()}
+								link={`/docs/${item.id}`}
 							/>
 						</SwiperSlide>
 					))}
