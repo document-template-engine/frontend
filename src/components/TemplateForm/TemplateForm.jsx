@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
@@ -13,9 +13,8 @@ import {
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
 	useLazyGetTemplateQuery,
-	useLazyGetUrlPdfQuery,
 	useLazyPostTemplateQuery,
-	useLazyWatchPDFQuery,
+	useLazyWatchPreviewQuery,
 	usePostFavoriteMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
@@ -23,124 +22,73 @@ import Preloader from '../UI/Preloader/Preloader';
 import { useActions } from '../../hooks/useActions';
 
 export default function TemplateForm() {
-	const { changePdfViewFile, resetForm, setFormData } = useActions();
+	const { resetForm, setFormData } = useActions();
 
 	const location = useLocation();
 	const currentPath = location.pathname;
 
 	const { id } = useParams();
-	const navigate = useNavigate();
 
 	// форма обычных шаблонов
-	const [
-		fetchTemplateClassic,
-		{
-			data: template,
-			isLoading: templateIsLoading,
-			isError: isTemplateFetchingError,
-			error: templateError,
-		},
-	] = useLazyGetTemplateQuery();
+	const [fetchTemplateClassic, resFetchTemplateClassic] =
+		useLazyGetTemplateQuery();
 
 	// запрос формы черновика
-	const [
-		fetchDraft,
-		{
-			data: draftTemplate,
-			isLoading: draftIsLoading,
-			isError: isDraftFetchingError,
-			error: drafError,
-		},
-	] = useLazyGetDraftTemplateQuery();
-
+	const [fetchDraft, resFetchDraft] = useLazyGetDraftTemplateQuery();
 	// запрос на изменение черновика
-	const [
-		changesDraft,
-		{
-			data: draftNew,
-			isLoading: draftChangeIsLoading,
-			isError: isDraftChangeError,
-			error: drafChangeError,
-		},
-	] = useChangeDraftMutation();
-
-	const temp = draftTemplate || template || draftNew;
+	const [changesDraft, resChangesDraft] = useChangeDraftMutation();
+	const temp =
+		resFetchDraft.data || resFetchTemplateClassic.data || resChangesDraft.data;
 	const [isFavorited, setIsFavorited] = useState(
 		temp ? temp.is_favorited : false
 	);
-
-	const loading = templateIsLoading || draftIsLoading || draftChangeIsLoading;
-
-	// const data = currentPath === "/drafts" ? draftTemplate : template
-
-	const [
-		fetchTemplate,
-		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
-	] = useLazyPostTemplateQuery();
-
-	const [
-		fetchDoc,
-		{ isLoading: getDockIsLoading, isError: isGetDocFetchingError },
-	] = useLazyGetDocQuery();
-	const [
-		fetchPDF,
-		{ isLoading: getPDFIsLoading, isError: isGetPDFFetchingError },
-	] = useLazyGetPDFQuery();
-	const [
-		fetchPreview,
-		{ isLoading: getPreviewIsLoading, isError: isGetPreviewFetchingError },
-	] = useLazyGetPreviewQuery();
+	const loading =
+		resFetchTemplateClassic.isFetching ||
+		resFetchDraft.isFetching ||
+		resChangesDraft.isFetching;
+	const [fetchTemplate, resFetchData] = useLazyPostTemplateQuery();
+	const [fetchDoc, resFetchDoc] = useLazyGetDocQuery();
+	const [fetchPDF, resFetchPdf] = useLazyGetPDFQuery();
+	const [fetchPreview, resFetchPreview] = useLazyGetPreviewQuery();
 	const user = useSelector((state) => state.user);
-
-	const [
-		fetchPDFForWatch,
-		{ isLoading: getPdfViewIsLoading, isError: isPdfViewFetchingError },
-	] = useLazyWatchPDFQuery();
-
 	// запрос на добавление в избранное
 	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
-	const [getUrlPdf, resGetUrlPdf] = useLazyGetUrlPdfQuery();
 	const [deleteFavorite] = useDeleteFavoriteMutation();
 	const [downloadPdfAnonim, resPdfAnonim] = useLazyDownloadTemplatePdfQuery();
-
+	const [watchPreview, resWatchPreview] = useLazyWatchPreviewQuery();
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const [currentDocId, setCurrentDocId] = useState(null);
-
 	const isLoading = {
-		templateIsLoading,
-		draftIsLoading,
-		draftChangeIsLoading,
+		resFetchTemplateClassicIsLoading: resFetchTemplateClassic.isFetching,
+		resFetchDraftIsLoading: resFetchDraft.isFetching,
+		resChangesDraftIsLoading: resChangesDraft.isFetching,
 		isFetching: [
-			resGetUrlPdf.isFetching,
+			resWatchPreview.isFetching,
 			resPdfAnonim.isFetching,
-			documentIsLoading,
-			getDockIsLoading,
-			getPDFIsLoading,
-			getPreviewIsLoading,
-			getPdfViewIsLoading,
+			resFetchData.isFetching,
+			resFetchDoc.isFetching,
+			resFetchPdf.isFetching,
+			resFetchPreview.isFetching,
 		],
 	};
 	const isError = {
-		isTemplateFetchingError,
-		isDraftFetchingError,
-		isDraftChangeError,
+		resFetchTemplateClassicIsError: resFetchTemplateClassic.isError,
+		resFetchDraftIsError: resFetchDraft.isError,
+		resChangesDraftIsError: resChangesDraft.isError,
 		isError: [
-			isDocumentFetchingError,
-			isGetDocFetchingError,
-			isGetPDFFetchingError,
-			isGetPreviewFetchingError,
-			isPdfViewFetchingError,
+			resFetchData.isError,
+			resFetchDoc.isError,
+			resFetchPdf.isError,
+			resFetchPreview.isError,
 		],
 	};
-
 	const dataReq = {
 		description: temp?.description,
 		completed: true,
 		document_fields: [...formData],
 		id,
 	};
-
 	const downloadDocHandler = () => {
 		console.log(currentPath);
 		// Если аноним
@@ -150,7 +98,6 @@ export default function TemplateForm() {
 				document_fields: [...formData],
 			});
 		}
-
 		if (
 			user.id &&
 			!currentDocId &&
@@ -301,34 +248,7 @@ export default function TemplateForm() {
 	};
 
 	const watchPDFHandler = () => {
-		// Если страничка с шаблонами
-		if (currentPath === `/templates/${id}` || currentPath === `/favorite/${id}`)
-			return getUrlPdf({
-				document_fields: [...formData],
-				id,
-			}).then((res) => {
-				changePdfViewFile(res.data);
-				navigate('/look-file');
-			});
-		if (currentPath === `/drafts/${id}`) {
-			return getUrlPdf({
-				document_fields: [...formData],
-				id: temp.template.id,
-			}).then((res) => {
-				changePdfViewFile(res.data);
-				navigate('/look-file');
-			});
-		}
-		if (currentPath === `/docs/${id}`) {
-			return getUrlPdf({
-				document_fields: [...formData],
-				id: temp.template.id,
-			}).then((res) => {
-				changePdfViewFile(res.data);
-				navigate('/look-file');
-			});
-		}
-		return null;
+		watchPreview({ document_fields: [...formData], id });
 	};
 	useEffect(() => {
 		setFormData([]);
@@ -359,7 +279,13 @@ export default function TemplateForm() {
 		return <Preloader />;
 	}
 	if (isError.isTemplateFetchingError) {
-		return <h1>{templateError || drafError || drafChangeError}</h1>;
+		return (
+			<h1>
+				{resFetchTemplateClassic.isError ||
+					resFetchDraft.isError ||
+					resChangesDraft.isError}
+			</h1>
+		);
 	}
 
 	return (
