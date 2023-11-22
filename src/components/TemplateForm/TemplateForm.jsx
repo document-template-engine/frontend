@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-/* eslint-disable dot-notation */
-/* eslint-disable camelcase */
-/* eslint-disable no-undef */
-/* eslint-disable consistent-return */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
@@ -176,6 +170,15 @@ export default function TemplateForm() {
 				})
 				.catch(console.log);
 		}
+		// Если нажатие на страничке /docs/${id}
+		if (currentPath === `/docs/${id}`) {
+			return changesDraft(dataReq)
+				.then((response) => {
+					fetchDoc(response.data.id);
+				})
+				.catch(console.log);
+		}
+		return null;
 	};
 	const downloadPDFHandler = () => {
 		// Если аноним
@@ -208,14 +211,26 @@ export default function TemplateForm() {
 				fetchPDF(response.data.id);
 			});
 		}
+		if (currentPath === `/docs/${id}`) {
+			return changesDraft(dataReq).then((response) => {
+				fetchPDF(response.data.id);
+			});
+		}
+		return null;
 	};
 	const saveAsDraftHandler = () => {
-		fetchTemplate({
-			description: temp?.name,
-			template: temp?.id,
-			completed: false,
-			document_fields: [...formData],
-		});
+		if (currentPath === `/templates/${id}`) {
+			return fetchTemplate({
+				description: temp?.name,
+				template: temp?.id,
+				completed: false,
+				document_fields: [...formData],
+			});
+		}
+		if (currentPath === `/docs/${id}`) {
+			return changesDraft(dataReq);
+		}
+		return null;
 	};
 
 	// хендлер добавления в избранное
@@ -227,7 +242,7 @@ export default function TemplateForm() {
 		}
 	};
 
-	const watchPDFHandler = async () => {
+	const watchPDFHandler = () => {
 		// Если страничка с шаблонами
 		if (currentPath === `/templates/${id}`)
 			return getUrlPdf({
@@ -246,6 +261,16 @@ export default function TemplateForm() {
 				navigate('/look-file');
 			});
 		}
+		if (currentPath === `/docs/${id}`) {
+			return getUrlPdf({
+				document_fields: [...formData],
+				id: temp.template.id,
+			}).then((res) => {
+				changePdfViewFile(res.data);
+				navigate('/look-file');
+			});
+		}
+		return null;
 	};
 
 	useEffect(() => {
