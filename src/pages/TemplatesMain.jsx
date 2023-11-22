@@ -24,6 +24,7 @@ const TemplatesMain = () => {
 	const { data, refetch, isLoading, isError, error } = useGetTemplatesQuery();
 	const [fetchRecent, { data: recentData, isLoading: isLoadingRecentDoc }] =
 		useLazyGetRecentQuery();
+	const user = useSelector((state) => state.user);
 
 	// const [mainTemplates, setMaintemplates] = useState([])
 
@@ -34,9 +35,13 @@ const TemplatesMain = () => {
 	// }, [data]);
 
 	useEffect(() => {
-		// TODO: У авторизованного и не авторизованного пользователя вроде как разная логика, тут ошибка в консоли
-		fetchRecent();
-		refetch();
+		if (location.pathname === '/templates') {
+			refetch();
+			if (user.id) {
+				fetchRecent();
+			}
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location.pathname, refetch, fetchRecent]);
 
