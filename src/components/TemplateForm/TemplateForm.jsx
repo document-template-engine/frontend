@@ -242,12 +242,23 @@ export default function TemplateForm() {
 		return null;
 	};
 	const saveAsDraftHandler = () => {
-		if (currentPath === `/templates/${id}`) {
+		if (currentPath === `/templates/${id}` && currentDocId) {
+			changesDraft({
+				description: temp?.name,
+				template: temp?.id,
+				completed: false,
+				document_fields: [...formData],
+				id: currentDocId,
+			});
+		}
+		if (currentPath === `/templates/${id}` && !currentDocId) {
 			return fetchTemplate({
 				description: temp?.name,
 				template: temp?.id,
 				completed: false,
 				document_fields: [...formData],
+			}).then((res) => {
+				setCurrentDocId(res.data.id);
 			});
 		}
 		if (currentPath === `/docs/${id}`) {
