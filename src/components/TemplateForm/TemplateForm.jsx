@@ -252,12 +252,11 @@ export default function TemplateForm() {
 
 	// хендлер добавления в избранное
 	const saveAsFavouriteHandler = () => {
-		console.log(formData);
-		// if (!isFavorited) {
-		// 	fetchFavorite(temp.id).then(setIsFavorited(true));
-		// } else {
-		// 	deleteFavorite(temp.id).then(setIsFavorited(false));
-		// }
+		if (!isFavorited) {
+			fetchFavorite(temp.id).then(setIsFavorited(true));
+		} else {
+			deleteFavorite(temp.id).then(setIsFavorited(false));
+		}
 	};
 
 	const watchPDFHandler = () => {
