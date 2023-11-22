@@ -34,6 +34,7 @@ const TemplatesMain = () => {
 	// }, [data]);
 
 	useEffect(() => {
+		// TODO: У авторизованного и не авторизованного пользователя вроде как разная логика, тут ошибка в консоли
 		fetchRecent();
 		refetch();
 		// eslint-disable-next-line react-hooks/exhaustive-deps

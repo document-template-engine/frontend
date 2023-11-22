@@ -7,6 +7,7 @@ import { ActionBar } from '../ActionBar/ActionBar';
 import {
 	useChangeDraftMutation,
 	useDeleteFavoriteMutation,
+	useLazyDownloadTemplatePdfQuery,
 	useLazyGetDocQuery,
 	useLazyGetDraftTemplateQuery,
 	useLazyGetPDFQuery,
@@ -98,17 +99,21 @@ export default function TemplateForm() {
 
 	// запрос на добавление в избранное
 	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
-	const [getUrlPdf, responseUrlPdf] = useLazyGetUrlPdfQuery();
+	const [getUrlPdf, resGetUrlPdf] = useLazyGetUrlPdfQuery();
 	const [deleteFavorite] = useDeleteFavoriteMutation();
+	const [downloadPdfAnonim, resPdfAnonim] = useLazyDownloadTemplatePdfQuery();
 
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const [currentDocId, setCurrentDocId] = useState(null);
+
 	const isLoading = {
 		templateIsLoading,
 		draftIsLoading,
 		draftChangeIsLoading,
 		isFetching: [
+			resGetUrlPdf.isFetching,
+			resPdfAnonim.isFetching,
 			documentIsLoading,
 			getDockIsLoading,
 			getPDFIsLoading,
@@ -144,19 +149,35 @@ export default function TemplateForm() {
 				document_fields: [...formData],
 			});
 		}
-		// Если пользователь и это первое нажатие на страничке /templates/${id}
-		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
+		// Если пользователь на /look-file и есть док
+		if (user.id && currentPath === '/look-file' && currentDocId) {
+			fetchDoc(id);
+		}
+		// Если пользователь на /look-file и нет дока
+
+		if (user.id && currentPath === '/look-file' && !currentDocId) {
 			fetchTemplate({
 				description: temp?.description,
 				template: temp?.id,
 				completed: true,
 				document_fields: [...formData],
-			})
-				.then((response) => {
-					fetchDoc(response.data.id);
-					setCurrentDocId(response.data.id);
-				})
-				.catch(console.log);
+			}).then((response) => {
+				fetchDoc(response.data.id);
+				setCurrentDocId(response.data.id);
+			});
+		}
+
+		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
+			// Если пользователь и это первое нажатие на страничке /templates/${id}
+			fetchTemplate({
+				description: temp?.description,
+				template: temp?.id,
+				completed: true,
+				document_fields: [...formData],
+			}).then((response) => {
+				fetchDoc(response.data.id);
+				setCurrentDocId(response.data.id);
+			});
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
@@ -183,7 +204,10 @@ export default function TemplateForm() {
 	const downloadPDFHandler = () => {
 		// Если аноним
 		if (!user.id) {
-			return console.log('Пока у анонима нет такой возможности');
+			return downloadPdfAnonim({
+				id,
+				document_fields: [...formData],
+			});
 		}
 		// Если пользователь и это первое нажатие на страничке /templates/${id}
 		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
@@ -203,7 +227,7 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			return fetchPDF(id);
+			return fetchPDF(currentDocId);
 		}
 		// Если нажатие на страничке /drafts/${id}
 		if (currentPath === `/drafts/${id}`) {
