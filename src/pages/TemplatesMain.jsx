@@ -24,6 +24,7 @@ const TemplatesMain = () => {
 	const { data, refetch, isLoading, isError, error } = useGetTemplatesQuery();
 	const [fetchRecent, { data: recentData, isLoading: isLoadingRecentDoc }] =
 		useLazyGetRecentQuery();
+
 	// const [mainTemplates, setMaintemplates] = useState([])
 
 	// useEffect(() => {
@@ -34,9 +35,9 @@ const TemplatesMain = () => {
 
 	useEffect(() => {
 		fetchRecent();
-		// refetch()
+		refetch();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [location.pathname]);
+	}, [location.pathname, refetch, fetchRecent]);
 
 	if (isLoading && isLoadingRecentDoc) {
 		return (
@@ -90,12 +91,12 @@ const TemplatesMain = () => {
 								)}
 								onClick={hideRecentDoc}
 							>
-								Недавние шаблоны
+								Недавние документы
 							</h2>
 						)}
 						{recentPopup && <TemplateRecentDocument recentData={recentData} />}
 						<h1 className={styles.title}>Шаблоны</h1>
-						<TemplateList data={data} />
+						<TemplateList data={data} isTemplate />
 					</div>
 				</main>
 			</>

@@ -7,6 +7,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useSelector } from 'react-redux';
+import { classNames } from '@react-pdf-viewer/core';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
 import { ActionBar } from '../ActionBar/ActionBar';
@@ -21,6 +22,7 @@ import {
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
 	usePostFavoriteMutation,
+	useDeleteFavoriteMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import Preloader from '../UI/Preloader/Preloader';
@@ -69,6 +71,7 @@ export default function TemplateForm() {
 	] = useChangeDraftMutation();
 
 	const temp = draftTemplate || template || draftNew;
+	const [isFavorited, setIsFavorited] = useState(temp ? temp.is_favorited : false)
 
 	const loading = templateIsLoading || draftIsLoading || draftChangeIsLoading;
 
@@ -101,6 +104,8 @@ export default function TemplateForm() {
 	// запрос на добавление в избранное
 	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
 	const [getUrlPdf, responseUrlPdf] = useLazyGetUrlPdfQuery();
+	const [deleteFavorite] = useDeleteFavoriteMutation();
+
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
 	const [currentDocId, setCurrentDocId] = useState(null);
@@ -214,7 +219,13 @@ export default function TemplateForm() {
 
 	// хендлер добавления в избранное
 	const saveAsFavouriteHandler = () => {
-		fetchFavorite(temp.id);
+		if (!isFavorited) {
+			fetchFavorite(temp.id)
+			.then(setIsFavorited(true))
+		} else {
+			deleteFavorite(temp.id)
+			.then(setIsFavorited(false))
+		}
 	};
 
 	const watchPDFHandler = async () => {
@@ -263,7 +274,7 @@ export default function TemplateForm() {
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
-					// downloadDocHandler();
+					downloadDocHandler();
 				}}
 				noValidate
 			>
@@ -309,6 +320,7 @@ export default function TemplateForm() {
 					saveAsDraftHandler={saveAsDraftHandler}
 					watchPDFHandler={watchPDFHandler}
 					saveAsFavouriteHandler={saveAsFavouriteHandler}
+					isFavorited={isFavorited}
 					idDraft={id}
 				/>
 			</form>

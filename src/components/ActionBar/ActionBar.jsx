@@ -12,6 +12,7 @@ export const ActionBar = ({
 	saveAsDraftHandler,
 	saveAsFavouriteHandler,
 	idDraft,
+	isFavorited,
 }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
@@ -31,7 +32,7 @@ export const ActionBar = ({
 						type="button"
 						onClick={saveAsFavouriteHandler}
 					>
-						<p className={styles.text}>В избранное</p>
+						<p className={styles.text}>{isFavorited ? "Удалить из избранного" : "В избранное"}</p>
 					</button>
 				</li>
 			)}
