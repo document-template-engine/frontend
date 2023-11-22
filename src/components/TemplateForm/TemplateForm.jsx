@@ -149,23 +149,6 @@ export default function TemplateForm() {
 				document_fields: [...formData],
 			});
 		}
-		// Если пользователь на /look-file и есть док
-		if (user.id && currentPath === '/look-file' && currentDocId) {
-			fetchDoc(id);
-		}
-		// Если пользователь на /look-file и нет дока
-
-		if (user.id && currentPath === '/look-file' && !currentDocId) {
-			fetchTemplate({
-				description: temp?.description,
-				template: temp?.id,
-				completed: true,
-				document_fields: [...formData],
-			}).then((response) => {
-				fetchDoc(response.data.id);
-				setCurrentDocId(response.data.id);
-			});
-		}
 
 		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
 			// Если пользователь и это первое нажатие на страничке /templates/${id}
@@ -181,7 +164,9 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			fetchDoc(id);
+			changesDraft(dataReq).finally(() => {
+				fetchDoc(id);
+			});
 		}
 		// Если нажатие на страничке /drafts/${id}
 		if (currentPath === `/drafts/${id}`) {
@@ -227,7 +212,9 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			return fetchPDF(currentDocId);
+			return changesDraft(dataReq).finally(() => {
+				fetchPDF(currentDocId);
+			});
 		}
 		// Если нажатие на страничке /drafts/${id}
 		if (currentPath === `/drafts/${id}`) {
