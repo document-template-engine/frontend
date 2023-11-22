@@ -264,6 +264,9 @@ export default function TemplateForm() {
 		if (currentPath === `/docs/${id}`) {
 			return changesDraft(dataReq);
 		}
+		if (currentPath === `/drafts/${id}`) {
+			return changesDraft(dataReq);
+		}
 		return null;
 	};
 
