@@ -29,7 +29,6 @@ function App() {
 		const authToken = fetchUserMe(token); // запрашиваем данным о пользователе передавая токен в запросе
 		if (authToken && token) {
 			setUser(userMe); // пользователь авторизован
-			navigate('/templates');
 		} else {
 			navigate('/');
 		}
