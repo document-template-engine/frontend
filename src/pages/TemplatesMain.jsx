@@ -35,7 +35,7 @@ const TemplatesMain = () => {
 
 	useEffect(() => {
 		fetchRecent();
-		refetch()
+		refetch();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location.pathname, refetch, fetchRecent]);
 
