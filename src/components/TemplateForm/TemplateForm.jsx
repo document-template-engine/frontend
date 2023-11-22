@@ -154,7 +154,7 @@ export default function TemplateForm() {
 			// Если пользователь и это первое нажатие на страничке /templates/${id}
 			fetchTemplate({
 				description: temp?.description,
-				template: temp?.id,
+				template: id,
 				completed: true,
 				document_fields: [...formData],
 			}).then((response) => {
@@ -164,8 +164,14 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			changesDraft(dataReq).finally(() => {
-				fetchDoc(id);
+			changesDraft({
+				description: temp?.description,
+				template: temp.id,
+				completed: true,
+				document_fields: [...formData],
+				id,
+			}).then((res) => {
+				fetchDoc(res.data.id);
 			});
 		}
 		// Если нажатие на страничке /drafts/${id}
