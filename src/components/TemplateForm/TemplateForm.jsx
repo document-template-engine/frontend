@@ -142,6 +142,7 @@ export default function TemplateForm() {
 	};
 
 	const downloadDocHandler = () => {
+		console.log(currentPath);
 		// Если аноним
 		if (!user.id) {
 			return fetchPreview({
@@ -150,7 +151,11 @@ export default function TemplateForm() {
 			});
 		}
 
-		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
+		if (
+			user.id &&
+			!currentDocId &&
+			(currentPath === `/templates/${id}` || currentPath === `/favorite/${id}`)
+		) {
 			// Если пользователь и это первое нажатие на страничке /templates/${id}
 			fetchTemplate({
 				description: temp?.description,
@@ -163,7 +168,11 @@ export default function TemplateForm() {
 			});
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
-		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
+		if (
+			user.id &&
+			currentDocId &&
+			(currentPath === `/templates/${id}` || currentPath === `/favorite/${id}`)
+		) {
 			changesDraft({
 				description: temp?.description,
 				template: id,
@@ -201,7 +210,11 @@ export default function TemplateForm() {
 			});
 		}
 		// Если пользователь и это первое нажатие на страничке /templates/${id}
-		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
+		if (
+			user.id &&
+			!currentDocId &&
+			(currentPath === `/templates/${id}` || currentPath === `/favorite/${id}`)
+		) {
 			return fetchTemplate({
 				description: temp?.description,
 				template: id,
@@ -217,7 +230,11 @@ export default function TemplateForm() {
 				});
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
-		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
+		if (
+			user.id &&
+			currentDocId &&
+			(currentPath === `/templates/${id}` || currentPath === `/favorite/${id}`)
+		) {
 			return changesDraft({
 				description: temp?.description,
 				template: id,
@@ -242,7 +259,11 @@ export default function TemplateForm() {
 		return null;
 	};
 	const saveAsDraftHandler = () => {
-		if (currentPath === `/templates/${id}` && currentDocId) {
+		if (
+			(currentPath === `/templates/${id}` ||
+				currentPath === `/favorite/${id}`) &&
+			currentDocId
+		) {
 			changesDraft({
 				description: temp?.name,
 				template: temp?.id,
@@ -281,7 +302,7 @@ export default function TemplateForm() {
 
 	const watchPDFHandler = () => {
 		// Если страничка с шаблонами
-		if (currentPath === `/templates/${id}`)
+		if (currentPath === `/templates/${id}` || currentPath === `/favorite/${id}`)
 			return getUrlPdf({
 				document_fields: [...formData],
 				id,
