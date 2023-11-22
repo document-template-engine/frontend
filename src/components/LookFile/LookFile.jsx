@@ -1,12 +1,19 @@
 import { Viewer, Worker } from '@react-pdf-viewer/core';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ActionBar } from '../ActionBar/ActionBar';
 import styles from './LookFile.module.scss';
 
 // eslint-disable-next-line react/prop-types
 function LookFile() {
+	const navigate = useNavigate();
 	const pdfFile = useSelector((state) => state.pdfFile);
-	console.log(pdfFile);
+
+	useEffect(() => {
+		if (!pdfFile.pdfFile.length) navigate(-1);
+	}, []);
+
 	return (
 		<div className={styles.container}>
 			{pdfFile.pdfFile && (
