@@ -9,7 +9,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './TemplateForm.module.sass';
 import FormInputsList from './FormInputsList/FormInputsList';
-import {ActionBar} from '../ActionBar/ActionBar';
+import { ActionBar } from '../ActionBar/ActionBar';
 import {
 	useChangeDraftMutation,
 	useLazyGetDocQuery,
@@ -17,6 +17,7 @@ import {
 	useLazyGetPDFQuery,
 	useLazyGetPreviewQuery,
 	useLazyGetTemplateQuery,
+	useLazyGetUrlPdfQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPDFQuery,
 	usePostFavoriteMutation,
@@ -73,17 +74,6 @@ export default function TemplateForm() {
 
 	// const data = currentPath === "/drafts" ? draftTemplate : template
 
-	useEffect(() => {
-		if (currentPath === `/drafts/${id}`) {
-			fetchDraft(id);
-		} else {
-			fetchTemplateClassic(id);
-		}
-		return () => {
-			resetForm();
-		};
-	}, []);
-
 	const [
 		fetchTemplate,
 		{ isLoading: documentIsLoading, isError: isDocumentFetchingError },
@@ -110,10 +100,10 @@ export default function TemplateForm() {
 
 	// запрос на добавление в избранное
 	const [fetchFavorite, dataFavorite] = usePostFavoriteMutation();
-
+	const [getUrlPdf, responseUrlPdf] = useLazyGetUrlPdfQuery();
 	const { formData } = useSelector((state) => state.form);
 	const [isChecked, setIsChecked] = useState(false);
-
+	const [currentDocId, setCurrentDocId] = useState(null);
 	const isLoading = {
 		templateIsLoading,
 		draftIsLoading,
@@ -147,48 +137,70 @@ export default function TemplateForm() {
 	};
 
 	const downloadDocHandler = () => {
-		if (user.id) {
-			if (currentPath === `/drafts/${id}`) {
-				changesDraft(dataReq)
-					.then((response) => {
-						fetchDoc(response.data.id);
-					})
-					.catch((err) => {
-						console.error('Упс:', err);
-					});
-			} else {
-				fetchTemplate({
-					description: temp?.description,
-					template: temp?.id,
-					completed: true,
-					document_fields: [...formData],
-				})
-					.then((response) => fetchDoc(response.data.id))
-					.catch((err) => {
-						console.error('Упс:', err);
-					});
-			}
-		} else {
-			fetchPreview({
+		// Если аноним
+		if (!user.id) {
+			return fetchPreview({
 				id,
 				document_fields: [...formData],
 			});
 		}
-	};
-	const downloadPDFHandler = () => {
-		if (user.id) {
+		// Если пользователь и это первое нажатие на страничке /templates/${id}
+		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
 			fetchTemplate({
 				description: temp?.description,
 				template: temp?.id,
 				completed: true,
 				document_fields: [...formData],
 			})
-				.then((response) => fetchPDF(response.data?.id))
+				.then((response) => {
+					fetchDoc(response.data.id);
+					setCurrentDocId(response.data.id);
+				})
+				.catch(console.log);
+		}
+		// Если пользовать и это второе нажатие на страничке /templates/${id}
+		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
+			fetchDoc(id);
+		}
+		// Если нажатие на страничке /drafts/${id}
+		if (currentPath === `/drafts/${id}`) {
+			return changesDraft(dataReq)
+				.then((response) => {
+					fetchDoc(response.data.id);
+				})
+				.catch(console.log);
+		}
+	};
+	const downloadPDFHandler = () => {
+		// Если аноним
+		if (!user.id) {
+			return console.log('Пока у анонима нет такой возможности');
+		}
+		// Если пользователь и это первое нажатие на страничке /templates/${id}
+		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
+			return fetchTemplate({
+				description: temp?.description,
+				template: temp?.id,
+				completed: true,
+				document_fields: [...formData],
+			})
+				.then((response) => {
+					fetchPDF(response.data?.id);
+					setCurrentDocId(response.data?.id);
+				})
 				.catch((err) => {
 					console.error('Ошибка:', err);
 				});
-		} else {
-			console.log('Пока нет такой возможности у анонимного пользователя');
+		}
+		// Если пользовать и это второе нажатие на страничке /templates/${id}
+		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
+			return fetchPDF(id);
+		}
+		// Если нажатие на страничке /drafts/${id}
+		if (currentPath === `/drafts/${id}`) {
+			return changesDraft(dataReq).then((response) => {
+				fetchPDF(response.data.id);
+			});
 		}
 	};
 	const saveAsDraftHandler = () => {
@@ -206,25 +218,38 @@ export default function TemplateForm() {
 	};
 
 	const watchPDFHandler = async () => {
-		if (user.id) {
-			fetchTemplate({
-				description: template.description,
-				template: template.id,
-				completed: true,
+		// Если страничка с шаблонами
+		if (currentPath === `/templates/${id}`)
+			return getUrlPdf({
 				document_fields: [...formData],
-			})
-				.then(async (response) => {
-					changePdfViewFile(await fetchPDFForWatch(response.data.id));
-					navigate('/look-file');
-				})
-				.catch((err) => {
-					console.error('Ошибка:', err);
-				});
-		} else {
-			console.log('Пока нет такой возможности у анонимного пользователя');
+				id,
+			}).then((res) => {
+				changePdfViewFile(res.data);
+				navigate('/look-file');
+			});
+		if (currentPath === `/drafts/${id}`) {
+			return getUrlPdf({
+				document_fields: [...formData],
+				id: temp.template.id,
+			}).then((res) => {
+				changePdfViewFile(res.data);
+				navigate('/look-file');
+			});
 		}
 	};
 
+	useEffect(() => {
+		if (currentPath === `/drafts/${id}`) {
+			fetchDraft(id);
+			setCurrentDocId(id);
+		} else {
+			fetchTemplateClassic(id);
+		}
+		return () => {
+			resetForm();
+			setCurrentDocId(null);
+		};
+	}, []);
 	if (isLoading.templateIsLoading) {
 		return <Preloader />;
 	}
@@ -238,7 +263,7 @@ export default function TemplateForm() {
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
-					downloadDocHandler();
+					// downloadDocHandler();
 				}}
 				noValidate
 			>

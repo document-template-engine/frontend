@@ -8,11 +8,13 @@ import windowWidth from './window-width/windowWidthSlice';
 import { formReducer } from './form/form.slice';
 import { searchQueryReducer } from './search-query/search-query.slice';
 import { pdfViewReducer } from './pdf-view/pdf-view.slice';
+import { documentsApi } from './documents-api/documents.api';
 
 export const store = configureStore({
 	reducer: {
 		[authApi.reducerPath]: authApi.reducer,
 		[templatesApi.reducerPath]: templatesApi.reducer,
+		[documentsApi.reducerPath]: documentsApi.reducer,
 		user: userReducer,
 		popup: popupReducer,
 		windowWidth,
@@ -23,7 +25,8 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()
 			.concat(authApi.middleware)
-			.concat(templatesApi.middleware),
+			.concat(templatesApi.middleware)
+			.concat(documentsApi.middleware),
 });
 
 setupListeners(store.dispatch);

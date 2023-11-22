@@ -5,9 +5,11 @@ const preHeaders = localStorage.getItem('token')
 	? {
 			'Content-Type': 'application/json',
 			Authorization: `Token ${localStorage.getItem('token')}`,
+			// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  }
 	: {
 			'Content-Type': 'application/json',
+			// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  };
 
 export const templatesApi = createApi({
@@ -27,7 +29,7 @@ export const templatesApi = createApi({
 				url: `templates/${id}/`,
 			}),
 		}),
-		
+
 		postFavorite: build.mutation({
 			query: (TemplateId) => ({
 				url: `templates/${TemplateId}/favorite/`,
@@ -49,7 +51,7 @@ export const templatesApi = createApi({
 				},
 			}),
 		}),
-	
+
 		getDraftTemplate: build.query({
 			query: (id) => ({
 				url: `/documents/${id}/`,
@@ -153,6 +155,7 @@ export const templatesApi = createApi({
 					Authorization: `Token ${localStorage.getItem('token')}`,
 				},
 			}),
+			transformResponse: (response) => response.reverse(),
 		}),
 		changeDraft: build.mutation({
 			query: (data) => ({
@@ -174,6 +177,21 @@ export const templatesApi = createApi({
 					owner: `${localStorage.getItem('email')}`,
 				},
 			}),
+			transformResponse: (response) => response.reverse(),
+		}),
+		getUrlPdf: build.query({
+			query: (data) => ({
+				url: `/templates/${data.id}/download_preview/?pdf=true`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ document_fields: data.document_fields }),
+				responseHandler: async (response) => {
+					const url = await response.blob();
+					return URL.createObjectURL(url);
+				},
+			}),
 		}),
 	}),
 });
@@ -185,13 +203,12 @@ export const {
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
 	useLazyWatchPDFQuery,
-	useLazyWatchPDFAnonimQuery,
 	useLazyGetPreviewQuery,
 	useGetDraftsQuery,
 	usePostFavoriteMutation,
 	useDeleteFavoriteMutation,
-	useGetFavoriteTemplatesQuery,
 	useLazyGetDraftTemplateQuery,
 	useChangeDraftMutation,
 	useLazyGetRecentQuery,
+	useLazyGetUrlPdfQuery,
 } = templatesApi;
