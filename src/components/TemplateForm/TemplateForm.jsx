@@ -23,7 +23,7 @@ import Preloader from '../UI/Preloader/Preloader';
 import { useActions } from '../../hooks/useActions';
 
 export default function TemplateForm() {
-	const { changePdfViewFile, resetForm } = useActions();
+	const { changePdfViewFile, resetForm, setFormData } = useActions();
 
 	const location = useLocation();
 	const currentPath = location.pathname;
@@ -154,7 +154,7 @@ export default function TemplateForm() {
 			// Если пользователь и это первое нажатие на страничке /templates/${id}
 			fetchTemplate({
 				description: temp?.description,
-				template: temp?.id,
+				template: id,
 				completed: true,
 				document_fields: [...formData],
 			}).then((response) => {
@@ -164,8 +164,14 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			changesDraft(dataReq).finally(() => {
-				fetchDoc(id);
+			changesDraft({
+				description: temp?.description,
+				template: id,
+				completed: true,
+				document_fields: [...formData],
+				id: currentDocId,
+			}).then((res) => {
+				fetchDoc(res.data.id);
 			});
 		}
 		// Если нажатие на страничке /drafts/${id}
@@ -198,7 +204,7 @@ export default function TemplateForm() {
 		if (user.id && !currentDocId && currentPath === `/templates/${id}`) {
 			return fetchTemplate({
 				description: temp?.description,
-				template: temp?.id,
+				template: id,
 				completed: true,
 				document_fields: [...formData],
 			})
@@ -212,7 +218,13 @@ export default function TemplateForm() {
 		}
 		// Если пользовать и это второе нажатие на страничке /templates/${id}
 		if (user.id && currentDocId && currentPath === `/templates/${id}`) {
-			return changesDraft(dataReq).finally(() => {
+			return changesDraft({
+				description: temp?.description,
+				template: id,
+				completed: true,
+				document_fields: [...formData],
+				id: currentDocId,
+			}).finally(() => {
 				fetchPDF(currentDocId);
 			});
 		}
@@ -283,6 +295,18 @@ export default function TemplateForm() {
 		}
 		return null;
 	};
+	useEffect(() => {
+		setFormData([]);
+		const result = [];
+
+		temp?.grouped_fields?.forEach((item) =>
+			item.fields.forEach(
+				(field) =>
+					field.value && result.push({ field: field.id, value: field.value })
+			)
+		);
+		setFormData([...formData, ...result]);
+	}, [temp]);
 
 	useEffect(() => {
 		if (currentPath === `/drafts/${id}` || currentPath === `/docs/${id}`) {
