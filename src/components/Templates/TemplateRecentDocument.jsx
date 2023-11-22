@@ -5,7 +5,7 @@ import 'swiper/css';
 // eslint-disable-next-line import/no-unresolved
 // import 'swiper/css/navigation';
 // eslint-disable-next-line import/no-unresolved
-import { Navigation } from 'swiper/modules';
+import { Navigation, Mousewheel } from 'swiper/modules';
 import TemplateItem from './TemplateItem';
 import './TemplateRecentDocument.sass';
 
@@ -29,6 +29,7 @@ function TemplateRecentDocument({ recentData }) {
 				<Swiper
 					grabCursor
 					breakpoints={breackPoints}
+					mousewheel
 					className="swiper"
 					spaceBetween={16}
 					navigation={{
@@ -36,7 +37,7 @@ function TemplateRecentDocument({ recentData }) {
 						prevEl: '.swiper-button-prev',
 						clickable: true,
 					}}
-					modules={[Navigation]}
+					modules={[Navigation, Mousewheel]}
 				>
 					{recentData.map((item) => (
 						<SwiperSlide key={item.id}>
