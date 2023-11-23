@@ -63,7 +63,10 @@ export default function Header() {
 				<Logo variant="Default" />
 			</Link>
 			<div className={styles.content}>
-				<form className={styles.header__form}>
+				<form
+					className={styles.header__form}
+					onSubmit={(e) => e.preventDefault()}
+				>
 					<fieldset className={styles['header__search-form']}>
 						<input
 							className={styles.header__input}
