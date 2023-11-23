@@ -24,18 +24,14 @@ export default function Header() {
 	}, [changeSearchQuery]);
 
 	const toggleUserButtonState = (e) => {
-		e.stopPropagation();
 		if (user.id) {
 			setIsUserMenuVisible(!isUserMenuVisible);
 		} else {
 			setIsEntranceButtonLoading((prevState) => !prevState);
-			setTimeout(() => {
-				navigate('/signin');
-				setIsEntranceButtonLoading(false);
-			}, 300);
+			navigate('/signin');
+			setIsEntranceButtonLoading(false);
 		}
 	};
-
 	// выход из учётной записи
 
 	const [fetchRepos, { error, data: repos }] = useLogoutMutation();

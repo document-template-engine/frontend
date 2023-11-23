@@ -52,7 +52,7 @@ export default function LoginPage() {
 							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
 							setUser({ ...res.data });
 							navigate('/templates');
-							console.log('auth')
+							console.log('auth');
 						});
 				} else {
 					// сообщаем пользователю об ошибке
@@ -86,7 +86,7 @@ export default function LoginPage() {
 
 	return (
 		visible && (
-			<Modal hasOverlay handleClose={handleClose}>
+			<Modal handleClose={handleClose}>
 				<AuthForm title="Вход">
 					<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 						<InputForm
@@ -146,6 +146,11 @@ export default function LoginPage() {
 							Регистрация
 						</Link>
 					</form>
+					<button
+						onClick={handleClose}
+						className={styles.button}
+						aria-label="Close"
+					/>
 				</AuthForm>
 			</Modal>
 		)
