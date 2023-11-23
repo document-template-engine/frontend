@@ -44,7 +44,7 @@ $color-link-l: rgba(0, 25, 255, 1);
 .checkbox {
 	width: 24px;
 	height: 24px;
-	border: 1px solid black;
+	border: 1px solid #550fda;
 	border-radius: 4px;
 	margin-right: 9px;
 	background-color: inherit;
@@ -52,7 +52,10 @@ $color-link-l: rgba(0, 25, 255, 1);
 	cursor: pointer;
 	text-align: center;
 	&Checked {
-		background-color: rgba(0, 0, 0, 1);
+		background-color: #550fda;
+	}
+	&:hover {
+		border: 2px solid #550fda;
 	}
 }
 
