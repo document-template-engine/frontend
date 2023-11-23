@@ -31,6 +31,7 @@ $red: rgba(235, 27, 27, 1);
 
 	&_error {
 		border-color: $red;
+		outline: 1px solid $red !important;
 	}
 }
 
