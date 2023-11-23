@@ -1,65 +1,38 @@
 import PropTypes from 'prop-types';
-import { createPortal } from 'react-dom';
-import { useCallback, useEffect, useRef } from 'react';
-import { modalRoot } from '../../utils/constants';
-import ModalOverlay from '../ModalOverlay/ModalOverlay';
+import { useCallback, useEffect } from 'react';
 import styles from './Modal.module.scss';
 
-export default function Modal({
-	handleClose,
-	hasOverlay,
-	children,
-	extraClass,
-}) {
-	const ref = useRef(null);
+export default function Modal({ handleClose, children }) {
+	const handleKeydown = useCallback(
+		(e) => {
+			if (e.key === 'Escape') return handleClose();
+			return undefined;
+		},
+		[handleClose]
+	);
 
 	const handleClick = useCallback(
 		(e) => {
-			if (e.target !== ref?.current && !hasOverlay) return handleClose();
+			if (e.target.classList.contains(styles.modal)) handleClose();
 			return undefined;
 		},
-		[hasOverlay, handleClose]
+		[handleClose]
 	);
 
 	useEffect(() => {
+		document.addEventListener('keydown', handleKeydown);
 		document.addEventListener('click', handleClick);
 
 		return () => {
+			document.removeEventListener('keydown', handleKeydown);
 			document.removeEventListener('click', handleClick);
 		};
-	}, [handleClick]);
+	}, [handleClick, handleKeydown]);
 
-	return createPortal(
-		<>
-			{hasOverlay && <ModalOverlay handleClose={handleClose} />}
-			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-			<div
-				className={`${styles.modal} ${
-					hasOverlay && styles.modalWithOverlay
-				} ${extraClass}`}
-				ref={ref}
-			>
-				{hasOverlay && (
-					<button
-						onClick={handleClose}
-						className={styles.button}
-						aria-label="Close"
-					/>
-				)}
-				{children}
-			</div>
-		</>,
-		modalRoot
-	);
+	return <div className={styles.modal}>{children}</div>;
 }
 
 Modal.propTypes = {
 	handleClose: PropTypes.func.isRequired,
-	hasOverlay: PropTypes.bool,
 	children: PropTypes.node.isRequired,
-	extraClass: PropTypes.string,
-};
-
-Modal.defaultProps = {
-	hasOverlay: false,
 };

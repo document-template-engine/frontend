@@ -155,6 +155,11 @@ export default function LogupPage() {
 							Вход
 						</Link>
 					</form>
+					<button
+						onClick={handleClose}
+						className={styles.button}
+						aria-label="Close"
+					/>
 				</AuthForm>
 			</Modal>
 		)
