@@ -28,12 +28,13 @@ $red: rgba(235, 27, 27, 1);
 	}
 
 	&:focus {
-		outline: 2px solid rgba(0, 25, 255, 1);
+		outline: 2px solid #550fda;
 		border: none;
 	}
 
 	&_error {
 		border-color: $red;
+		outline: 1px solid $red !important;
 	}
 }
 

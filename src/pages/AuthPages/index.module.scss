@@ -50,9 +50,7 @@ $color-link-l: rgba(0, 25, 255, 1);
 	padding: 0;
 	width: 24px;
 	height: 24px;
-	padding-block: 0;
-	padding-inline: 0;
-	border: 1px solid var(--primary-colors-accent, #550fda);
+	border: 1px solid #550fda;
 	border-radius: 4px;
 	margin-right: 9px;
 	background-color: inherit;
@@ -60,6 +58,10 @@ $color-link-l: rgba(0, 25, 255, 1);
 	text-align: center;
 	&Checked {
 		background-color: #550fda;
+
+	}
+	&:hover {
+		border: 2px solid #550fda;
 	}
 }
 
