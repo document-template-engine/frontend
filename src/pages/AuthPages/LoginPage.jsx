@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -124,13 +125,16 @@ export default function LoginPage() {
 							>
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
+							<div className={`${styles.checkbox__text}`}>
 							<p className={styles.password}>Запомнить пароль</p>
 							<Link
 								to={{ pathname: '/forgot-password' }}
-								className={styles.link}
+								className={styles.link_password}
 							>
 								Я не помню пароль
 							</Link>
+							</div>
+							
 						</div>
 						<Button
 							type="submit"

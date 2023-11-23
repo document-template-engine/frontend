@@ -134,12 +134,12 @@ export default function LogupPage() {
 							>
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
-							<p style={{ margin: 0 }}>
-								{/* временная загушка пока не появится текст согласия */}Я
-								согласен с политикой конфиденциальности&nbsp;
-								{/* <Link to={{ pathname: '/' }} className={styles.link}>
-									с политикой конфиденциальности
-								</Link> */}
+							<p className={styles.policy}>
+								Я согласен&nbsp;
+								<Link to={{ pathname: '/policy' }} className={styles.link}>
+									с Политикой конфиденциальности
+								</Link>
+								&nbsp; и даю согласие на обработку персональных данных
 							</p>
 						</div>
 						<ErrorPopup errors={errors} />

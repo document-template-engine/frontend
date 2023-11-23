@@ -38,36 +38,66 @@ $color-link-l: rgba(0, 25, 255, 1);
 .checkboxContainer {
 	margin: 0;
 	display: flex;
-	align-items: center;
+	align-items: start;
+	justify-content: left;
 }
 
 .checkbox {
+	appearance: none;
+	-webkit-appearance: none; /* Для поддержки вебкит-браузерами */
+	-moz-appearance: none; /* Для поддержки Firefox */
+	margin: 0;
+	padding: 0;
 	width: 24px;
 	height: 24px;
 	border: 1px solid #550fda;
 	border-radius: 4px;
 	margin-right: 9px;
 	background-color: inherit;
-	padding: 0;
 	cursor: pointer;
 	text-align: center;
 	&Checked {
 		background-color: #550fda;
+
 	}
 	&:hover {
 		border: 2px solid #550fda;
 	}
 }
 
+.checkbox__text {
+	margin: auto 0;
+	padding: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .link {
-	color: $color-link;
+	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	color: #6000ed;
 	font-size: 14px;
 	line-height: 19px;
 	text-decoration: none;
-	margin-left: auto;
 }
+
+.policy {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	color: #000;
+	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
 .password {
 	margin: 0;
+	padding: 0;
+	text-align: left;
 	font-size: 14px;
 }
 
@@ -86,6 +116,19 @@ $color-link-l: rgba(0, 25, 255, 1);
 	text-decoration: none;
 	text-align: center;
 	margin: 14px 0 18px 0;
+}
+
+.link_password {
+	margin: 0;
+	padding: 0;
+	color: #0415af;
+	text-align: right;
+	text-decoration: none;
+	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
 }
 
 .orPar {

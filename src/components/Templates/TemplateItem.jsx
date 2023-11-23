@@ -62,6 +62,7 @@ const TemplateItem = ({
 			<div className={styles.imgWrapper}>
 				<img src={image || zaglushka} alt={title} className={styles.img} />
 				{/* eslint-disable-next-line */}
+
 				{user.id && isTemplate && (
 					<button
 						disabled={!isFavoriteButtonEnabled}
@@ -70,6 +71,7 @@ const TemplateItem = ({
 						onClick={handleFavoriteButtonClick}
 					/>
 				)}
+
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
