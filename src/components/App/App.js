@@ -18,6 +18,7 @@ import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 import DocsPage from '../../pages/DocsPage';
 import ErrorsPage from '../../pages/ErrorsPage';
+import { token } from '../../utils/constants';
 
 function App() {
 	const navigate = useNavigate();
@@ -26,21 +27,13 @@ function App() {
 	const { setUser } = useActions();
 
 	const checkToken = () => {
-		const token = localStorage.getItem('token'); // берём токен из localStorage
-		const authToken = fetchUserMe(token); // запрашиваем данным о пользователе передавая токен в запросе
-		if (authToken && token) {
-			setUser(userMe); // пользователь авторизован
-		} else {
-			navigate('/');
-		}
+		fetchUserMe(token).then(setUser);
 	};
 
 	useEffect(() => {
 		checkToken();
 	}, []);
-	useEffect(() => {
-		setUser(userMe);
-	}, [userMe]);
+
 	return (
 		<Routes>
 			<Route element={<TemplatesMain />} path="/templates">
