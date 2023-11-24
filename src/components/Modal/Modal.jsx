@@ -14,9 +14,7 @@ export default function Modal({ handleClose, children, extraClass }) {
 
 	const handleClick = useCallback(
 		(e) => {
-			if (e.target.classList.contains(styles.modal)) {
-				handleClose();
-			}
+			if (e.target.classList.contains(styles.modal)) handleClose();
 			return undefined;
 		},
 		[handleClose]
@@ -24,9 +22,11 @@ export default function Modal({ handleClose, children, extraClass }) {
 
 	useEffect(() => {
 		document.addEventListener('keydown', handleKeydown);
+		document.addEventListener('keydown', handleKeydown);
 		document.addEventListener('click', handleClick);
 
 		return () => {
+			document.removeEventListener('keydown', handleKeydown);
 			document.removeEventListener('keydown', handleKeydown);
 			document.removeEventListener('click', handleClick);
 		};
