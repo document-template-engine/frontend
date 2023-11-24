@@ -132,7 +132,7 @@ export const DocsForm = () => {
 					downloadPDFHandler={handleDownloadPdf}
 					saveAsDraftHandler={saveAsDraftHandler}
 					watchPDFHandler={watchPDFHandler}
-					idDraft={id}
+					isDocPage
 				/>
 			</form>
 		)
