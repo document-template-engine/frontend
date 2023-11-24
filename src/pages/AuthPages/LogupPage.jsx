@@ -1,8 +1,7 @@
 /* eslint-disable no-return-assign */
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 // import Input from '../../stories/Input/Input';
@@ -12,7 +11,6 @@ import Button from '../../components/UI/AuthButton/Button';
 import InputForm from '../../components/UI/AuthInputForm/InputForm';
 import { useRegisterMutation } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
-import Preloader from '../../components/UI/Preloader/Preloader';
 import ErrorPopup from '../../components/UI/ErrorPopup/ErrorPopup';
 
 export default function LogupPage() {
@@ -96,24 +94,25 @@ export default function LogupPage() {
 							name="email"
 							errors={errors}
 							label="Электронная почта"
+							error={errMsg}
 						/>
 						<InputForm
 							type="password"
 							{...register('password', {
 								required: 'Придумайте пароль',
 								/* 								minLength: {
-									value: 8,
-									message: 'Минимум восемь символов',
-								},
-								maxLength: {
-									value: 40,
-									message: 'Пароль - не более сорок символов',
-								}, */
+                                    value: 8,
+                                    message: 'Минимум восемь символов',
+                                },
+                                maxLength: {
+                                    value: 40,
+                                    message: 'Пароль - не более сорок символов',
+                                }, */
 								pattern: {
 									value:
 										/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g,
 									/* message:
-										'латинские буквы, 1 заглавная, 8 символов, 1 спецсимвол, 1 цифра', */
+                                        'латинские буквы, 1 заглавная, 8 символов, 1 спецсимвол, 1 цифра', */
 								},
 							})}
 							name="password"
@@ -121,7 +120,6 @@ export default function LogupPage() {
 							errors={errors}
 							autoComplete="on"
 							label="Пароль"
-							error={errMsg}
 						/>
 						<div className={styles.checkboxContainer}>
 							<button
