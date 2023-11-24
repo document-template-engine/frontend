@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './CustomInput.module.sass';
-import {useActions} from '../../../hooks/useActions';
+import { useActions } from '../../../hooks/useActions';
 /* eslint-disable */
 
 export const CustomInput = ({ data }) => {
@@ -60,6 +60,7 @@ export const CustomInput = ({ data }) => {
 						className={clsx(getInputStyle(length))}
 						{...(mask && { pattern: mask })}
 						max={'3000-01-01'}
+						required
 					/>
 				</label>
 			</div>
@@ -89,6 +90,7 @@ export const CustomInput = ({ data }) => {
 					name={name.toString()}
 					className={clsx(getInputStyle(length))}
 					{...(mask && { pattern: mask })}
+					required
 				/>
 			</label>
 		</div>
