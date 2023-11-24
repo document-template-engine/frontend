@@ -27,14 +27,6 @@ const TemplatesMain = () => {
 		useLazyGetRecentQuery();
 	const user = useSelector((state) => state.user);
 
-	// const [mainTemplates, setMaintemplates] = useState([])
-
-	// useEffect(() => {
-	// 	if (data) {
-	// 		setMaintemplates(data);
-	// 	}
-	// }, [data]);
-
 	useEffect(() => {
 		if (location.pathname === '/templates') {
 			refetch();
@@ -42,9 +34,7 @@ const TemplatesMain = () => {
 				fetchRecent();
 			}
 		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [location.pathname, refetch, fetchRecent]);
+	}, [location.pathname, refetch, fetchRecent, user.id]);
 
 	if (isLoading && isLoadingRecentDoc) {
 		return (
