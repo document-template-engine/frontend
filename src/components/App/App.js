@@ -11,13 +11,13 @@ import ForgotPwPage from '../../pages/AuthPages/ForgotPwPage';
 import ChangePassword from '../../pages/AuthPages/ChangePassword';
 import TemplatesMain from '../../pages/TemplatesMain';
 import FavoriteTemplates from '../../pages/FavoriteTemplates';
-import NotFound from '../../pages/NotFound';
 import LookPdfFile from '../../pages/LookPdfFile';
 import FormPage from '../../pages/FormPage';
 import PolicyPage from '../../pages/PolicyPage/PolicyPage';
 import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 import DocsPage from '../../pages/DocsPage';
+import ErrorsPage from '../../pages/ErrorsPage';
 
 function App() {
 	const navigate = useNavigate();
@@ -63,7 +63,9 @@ function App() {
 			<Route element={<ForgotPwPage />} path="/forgot-password" exact />
 			<Route element={<ChangePassword />} path="/change-password" exact />
 			<Route element={<PolicyPage />} path="/policy" exact />
-			<Route path="*" element={<NotFound />} />
+			<Route path="*" element={<ErrorsPage error={404} />} />
+			<Route path="401" element={<ErrorsPage error={401} />} />
+			<Route path="500" element={<ErrorsPage error={500} />} />
 		</Routes>
 	);
 }

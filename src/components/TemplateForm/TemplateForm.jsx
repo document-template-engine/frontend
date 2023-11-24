@@ -275,8 +275,12 @@ export default function TemplateForm() {
 			setCurrentDocId(null);
 		};
 	}, []);
-	if (isLoading.templateIsLoading) {
-		return <Preloader />;
+	if (loading) {
+		return (
+			<div className={styles.wrapperLoading}>
+				<Preloader />
+			</div>
+		);
 	}
 	if (isError.isTemplateFetchingError) {
 		return (
