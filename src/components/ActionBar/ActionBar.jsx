@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import styles from './ActionBar.module.sass';
@@ -11,17 +10,17 @@ export const ActionBar = ({
 	watchPDFHandler,
 	saveAsDraftHandler,
 	saveAsFavouriteHandler,
-	idDraft,
 	isFavorited,
 }) => {
-	const location = useLocation();
-	const currentPath = location.pathname;
 	const user = useSelector((state) => state.user);
+	const mainFrameStyles = user.id
+		? styles.main
+		: clsx(styles.main, styles.main_notUser);
 
 	useEffect(() => {}, [isFavorited]);
 
 	return (
-		<ul className={styles.main}>
+		<ul className={mainFrameStyles}>
 			<li className={clsx(styles.item, styles.iconEye, styles.icon)}>
 				<button className={styles.btn} onClick={watchPDFHandler} type="button">
 					<p className={styles.text}>Посмотреть</p>
