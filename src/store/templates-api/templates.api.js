@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BASE_URL } from '../../utils/constants';
+import { BASE_URL, token } from '../../utils/constants';
 
 const preHeaders = localStorage.getItem('token')
 	? {
 			'Content-Type': 'application/json',
-			Authorization: `Token ${localStorage.getItem('token')}`,
+			Authorization: `Token ${token}`,
 			// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  }
 	: {

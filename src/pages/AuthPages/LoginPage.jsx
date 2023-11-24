@@ -50,10 +50,12 @@ export default function LoginPage() {
 				if (respons.data) {
 					fetchUserMe(respons.data.auth_token) // запрос данных о пользователе
 						.then((res) => {
-							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
 							setUser({ ...res.data });
 							navigate('/templates');
-							console.log('auth');
+							if (checked) {
+								return localStorage.setItem('token', respons.data.auth_token);
+							}
+							return sessionStorage.setItem('token', respons.data.auth_token);
 						});
 				} else {
 					// сообщаем пользователю об ошибке
@@ -126,15 +128,14 @@ export default function LoginPage() {
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
 							<div className={`${styles.checkbox__text}`}>
-							<p className={styles.password}>Запомнить пароль</p>
-							<Link
-								to={{ pathname: '/forgot-password' }}
-								className={styles.link_password}
-							>
-								Я не помню пароль
-							</Link>
+								<p className={styles.password}>Запомнить пароль</p>
+								<Link
+									to={{ pathname: '/forgot-password' }}
+									className={styles.link_password}
+								>
+									Я не помню пароль
+								</Link>
 							</div>
-							
 						</div>
 						<Button
 							type="submit"
