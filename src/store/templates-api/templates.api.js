@@ -250,4 +250,5 @@ export const {
 	useLazyGetUrlPdfQuery,
 	useLazyDownloadTemplatePdfQuery,
 	useLazyWatchPreviewQuery,
+	useGetTemplateQuery,
 } = templatesApi;
