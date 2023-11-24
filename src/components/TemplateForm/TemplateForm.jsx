@@ -39,9 +39,7 @@ export default function TemplateForm() {
 	const [changesDraft, resChangesDraft] = useChangeDraftMutation();
 	const temp =
 		resFetchDraft.data || resFetchTemplateClassic.data || resChangesDraft.data;
-	const [isFavorited, setIsFavorited] = useState(
-		temp ? temp.is_favorited : false
-	);
+	const [isFavorited, setIsFavorited] = useState(null);
 	const loading =
 		resFetchTemplateClassic.isFetching ||
 		resFetchDraft.isFetching ||
@@ -267,6 +265,7 @@ export default function TemplateForm() {
 		watchPreview({ document_fields: [...formData], id });
 	};
 	useEffect(() => {
+		setIsFavorited(temp?.is_favorited);
 		setFormData([]);
 		const result = [];
 

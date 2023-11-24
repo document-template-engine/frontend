@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
@@ -17,6 +17,8 @@ export const ActionBar = ({
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const user = useSelector((state) => state.user);
+
+	useEffect(() => {}, [isFavorited]);
 
 	return (
 		<ul className={styles.main}>
