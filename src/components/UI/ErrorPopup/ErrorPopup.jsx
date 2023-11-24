@@ -9,15 +9,15 @@ const ErrorPopup = ({ errors }) => {
 		>
 			<div className="ErrorPopup__container">
 				<div className="ErrorPopup__container__triangle" />
-				<div className="ErrorPopup__text-container">
-					<p className="ErrorPopup__text">Только латинские буквы</p>
-					<p className="ErrorPopup__text">Минимум 8 символов</p>
-					<p className="ErrorPopup__text">
+				<ul className="ErrorPopup__text-container">
+					<li className="ErrorPopup__text">Только латинские буквы</li>
+					<li className="ErrorPopup__text">Минимум 8 символов</li>
+					<li className="ErrorPopup__text">
 						Минимум одна заглавная, одна строчная буква
-					</p>
-					<p className="ErrorPopup__text">Минимум одна цифра</p>
-					<p className="ErrorPopup__text">Один специальный символ</p>
-				</div>
+					</li>
+					<li className="ErrorPopup__text">Минимум одна цифра</li>
+					<li className="ErrorPopup__text">Один специальный символ !@#$%^&*</li>
+				</ul>
 			</div>
 		</div>
 	);

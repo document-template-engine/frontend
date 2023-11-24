@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,10 +11,9 @@ import InputForm from '../../components/UI/AuthInputForm/InputForm';
 import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../components/UI/AuthButton/Button';
-import { signIn } from '../../store/auth/authSlice';
 import {
-	useLazyLoginQuery,
 	useLazyGetUserDataQuery,
+	useLazyLoginQuery,
 } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 
@@ -23,13 +23,14 @@ export default function LoginPage() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchRepos, { error, isLoading, data: repos }] = useLazyLoginQuery();
+	const [fetchRepos, { error, isLoading /* data: repos */ }] =
+		useLazyLoginQuery();
 
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 
 	// сохраняем почту зарегестрированного пользователя
-	const { changeEmail } = useActions();
+	const { setUser } = useActions();
 
 	const {
 		register,
@@ -40,8 +41,32 @@ export default function LoginPage() {
 		mode: 'onChange',
 	});
 
+	// обработка ошибок с сервера
+	const [errMsg, setErrMsg] = useState('');
+
 	const onSubmit = (data) => {
-		fetchRepos(data);
+		fetchRepos(data)
+			.then((respons) => {
+				if (respons.data) {
+					fetchUserMe(respons.data.auth_token) // запрос данных о пользователе
+						.then((res) => {
+							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
+							setUser({ ...res.data });
+							navigate('/templates');
+							console.log('auth');
+						});
+				} else {
+					// сообщаем пользователю об ошибке
+					const keys = respons.error
+						? Object.values(respons.error.data).join()
+						: 'упс... что-то пошло не так, попробуйте позже';
+					setErrMsg(keys);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				setErrMsg('Произошло что-то странное, попробуйте позже');
+			});
 	};
 
 	useEffect(() => {
@@ -50,29 +75,6 @@ export default function LoginPage() {
 			password: '',
 		});
 	}, [reset]);
-
-	// обработка ошибок с сервера
-	const [errMsg, setErrMsg] = useState('');
-
-	/* 	const dataUser = () => {
-		changeEmail(userMe)
-	} */
-
-	useEffect(() => {
-		if (repos) {
-			dispatch(signIn()); // пользователь авторизован
-			localStorage.setItem('token', repos.auth_token); // записываем токен в localStorage
-			fetchUserMe(repos.auth_token); // запрос данных о пользователе
-			navigate('/templates');
-			/* dataUser() */
-		}
-		if (error) {
-			const keys = error.data
-				? Object.values(error.data).join()
-				: 'упс... что-то пошло не так, попробуйте позже';
-			setErrMsg(keys);
-		}
-	}, [repos, error, dispatch, navigate, fetchUserMe /* dataUser */]);
 
 	const handleClose = () => {
 		setVisible(false);
@@ -85,7 +87,7 @@ export default function LoginPage() {
 
 	return (
 		visible && (
-			<Modal hasOverlay handleClose={handleClose}>
+			<Modal handleClose={handleClose}>
 				<AuthForm title="Вход">
 					<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 						<InputForm
@@ -94,7 +96,7 @@ export default function LoginPage() {
 								required: 'Напишите ваш email',
 								pattern: {
 									value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-									message: 'Напишите правильный адрес электронной почты',
+									message: 'Некорректный формат почты',
 								},
 							})}
 							name="email"
@@ -123,13 +125,16 @@ export default function LoginPage() {
 							>
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
+							<div className={`${styles.checkbox__text}`}>
 							<p className={styles.password}>Запомнить пароль</p>
 							<Link
 								to={{ pathname: '/forgot-password' }}
-								className={styles.link}
+								className={styles.link_password}
 							>
 								Я не помню пароль
 							</Link>
+							</div>
+							
 						</div>
 						<Button
 							type="submit"
@@ -145,6 +150,11 @@ export default function LoginPage() {
 							Регистрация
 						</Link>
 					</form>
+					<button
+						onClick={handleClose}
+						className={styles.button}
+						aria-label="Close"
+					/>
 				</AuthForm>
 			</Modal>
 		)

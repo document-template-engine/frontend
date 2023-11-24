@@ -1,3 +1,10 @@
+@keyframes preloader-spin
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
+  
 .header
   position: fixed
   z-index: 1
@@ -7,16 +14,16 @@
   min-height: 80px
   display: flex
   align-items: center
-  gap: 195px
+  gap: 205px
   box-shadow: 0 4px 26px 0 rgba(180, 187, 215, 0.10)
   max-width: 1880px
   margin: 0 auto
   padding: 0 20px
   background-color: #fff
   
-  @media screen and (max-width: 1920px)
+  @media screen and (max-width: 1366px)
     min-height: 60px
-    gap: 125px
+    gap: 128px
 
 
 //.header__icon
@@ -72,13 +79,12 @@
   position: relative
   color: #BABABA
   outline: none
-
   &::placeholder
     color: #BABABA
 
   &:hover
     color: #7A7A7A
-
+    border: 2px solid #B4BBD7
   &:focus
     color: #262626
     border: 2px solid #550FDA
@@ -127,6 +133,9 @@
   font-size: clamp(14px, 1.5vw, 20px)
   font-weight: 500
   cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
 
   &:hover
     border: 2px solid #A48DD3
@@ -136,23 +145,25 @@
     background: #A48DD3
     color: white
 
-// ETO IS_LOADING
-//&:focus
-//  background-color: black
-//  color: transparent
-//  background-image: url(../../images/load_icon.svg)
-//  background-repeat: no-repeat
-//  background-position: center
-// ETO IS_LOADING
-
 div.header__modal-container
+  display: flex
+  flex-direction: column
+  gap: 12px
+  position: absolute
+  right: 20px
+  top: 85px
   padding: 20px 16px
   border: 0.5px solid #7B85AC
   box-shadow: 0 4px 26px 0 rgba(180, 187, 215, 0.10)
   border-radius: 12px
-  right: 20px
-  top: 85px
-  gap: 12px
+  height: auto
+  background: #fff
+  &::before
+    content: ''
+    width: 0
+    height: 0
+  @media (max-width:600px) 
+    width: 284px
 
 .container
   width: 255px
@@ -184,3 +195,11 @@ div.header__modal-container
   height: 1px
   background-color: #EAEAEA
 
+.preloader 
+  width: 35px
+  height: 28px
+  background-image: url('../../images/preloader.svg')
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  animation: preloader-spin 1.5s linear infinite

@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import styles from './CustomInput.module.sass';
-import { useActions } from '../../../hooks/useActions';
+import {useActions} from '../../../hooks/useActions';
 /* eslint-disable */
 
 export const CustomInput = ({ data }) => {
@@ -34,6 +34,38 @@ export const CustomInput = ({ data }) => {
 		setFormData(updatedFormData);
 	};
 
+	if (type === 'date') {
+		console.log('trigged');
+		return (
+			<div className={styles.graph}>
+				<label htmlFor={id} className={styles.label}>
+					<div className={styles.textWrapper}>
+						<p className={styles.title}>{name}</p>
+						{hint && <p className={styles.notation}>{hint}</p>}
+					</div>
+					<input
+						value={
+							(
+								formData.find((fieldData) => fieldData.field === data.id) || {
+									field: data.id,
+									value: data.value,
+								}
+							).value || ''
+						}
+						type={type}
+						placeholder=""
+						onChange={handleChange}
+						id={id}
+						name={name.toString()}
+						className={clsx(getInputStyle(length))}
+						{...(mask && { pattern: mask })}
+						max={'3000-01-01'}
+					/>
+				</label>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.graph}>
 			<label htmlFor={id} className={styles.label}>
@@ -43,8 +75,12 @@ export const CustomInput = ({ data }) => {
 				</div>
 				<input
 					value={
-						(formData.find((fieldData) => fieldData.field === data.id) || {})
-							.value || ''
+						(
+							formData.find((fieldData) => fieldData.field === data.id) || {
+								field: data.id,
+								value: data.value,
+							}
+						).value || ''
 					}
 					type={type}
 					placeholder=""

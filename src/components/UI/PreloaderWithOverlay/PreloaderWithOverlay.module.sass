@@ -1,0 +1,60 @@
+.overlay
+  position: fixed
+
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 3
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+  background: rgba(217, 217, 217, 0.30)
+
+  backdrop-filter: blur(15px)
+
+.mainWrapper
+  border-radius: 32px
+  background: #FFF
+  width: 435px
+  height: 352px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  gap: 24px
+  @media screen and (max-width: 768px)
+    width: 100%
+    height: 100%
+    border-radius: 0
+
+.textWrapper
+  display: flex
+  flex-direction: column
+  gap: 12px
+
+.title
+  margin: 0
+
+  color: #000
+
+  text-align: center
+
+  font-family: Inter, sans-serif
+  font-size: 35px
+  font-style: normal
+  font-weight: 600
+  line-height: 42px
+
+.subtitle
+  margin: 0
+
+  color: #000
+
+  text-align: center
+  font-family: Inter, sans-serif
+  font-size: 28px
+  font-style: normal
+  font-weight: 400
+  line-height: 34px

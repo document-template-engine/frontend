@@ -1,13 +1,14 @@
 .Logo
     cursor: pointer
     transition: all 0.5s ease
-    &:hover
-        opacity:.8
+
     
 .Default
     width: 163px
     height: 65px
     background-image: url(../../../images/DokyLogo-Big.svg)
+    &:hover
+     opacity:.8
 
     @media screen and (max-width: 1920px)
         width: 112px
@@ -23,10 +24,12 @@
 .Mini
     width: 107px
     height: 107px
+    cursor: default
     background-image: url(../../../images/Logo-Big.svg)
     margin: auto
     @media (max-width:600px) 
         width: 40px
         height: 40px
+        background-size: cover
         margin: 0
         
