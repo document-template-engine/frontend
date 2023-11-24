@@ -40,26 +40,26 @@ export default function Navbar(props) {
 					<button
 						className={clsx(
 							styles.item,
-							styles.item_favorite,
+							styles.item_drafts,
 							props.isFavoriteTamplatesPage && styles.itemActive
 						)}
 						onClick={goToSelected}
 					>
 						<Folder className={styles.item_template} />
-						Избранные шаблоны
+						Избранное
 					</button>
 				)}
 				{user.id && (
 					<button
 						className={clsx(
 							styles.item,
-							styles.item_drafts,
+							styles.item_favorite,
 							props.isDraftsPage && styles.itemActive
 						)}
 						onClick={goToDrafts}
 					>
 						<Star className={styles.item_template} />
-						Черновики документов
+						Черновики
 					</button>
 				)}
 			</div>
