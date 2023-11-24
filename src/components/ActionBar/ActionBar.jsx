@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from './ActionBar.module.sass';
 
 export const ActionBar = ({
+	isDocPage,
 	downloadDocHandler,
 	downloadPDFHandler,
 	watchPDFHandler,
@@ -18,6 +19,50 @@ export const ActionBar = ({
 		: clsx(styles.main, styles.main_notUser);
 
 	useEffect(() => {}, [isFavorited]);
+	if (isDocPage) {
+		return (
+			<ul className={mainFrameStyles}>
+				<li className={clsx(styles.item, styles.iconEye, styles.icon)}>
+					<button
+						className={styles.btn}
+						onClick={watchPDFHandler}
+						type="button"
+					>
+						<p className={styles.text}>Посмотреть</p>
+					</button>
+				</li>
+
+				<li className={clsx(styles.item, styles.iconDoc, styles.icon)}>
+					<button
+						className={styles.btn}
+						type="button"
+						onClick={downloadDocHandler}
+					>
+						<p className={styles.text}>Сохранить в DOC</p>
+					</button>
+				</li>
+				<li className={clsx(styles.item, styles.iconPDF, styles.icon)}>
+					<button
+						className={styles.btn}
+						type="button"
+						onClick={downloadPDFHandler}
+					>
+						<p className={styles.text}>Сохранить в PDF</p>
+					</button>
+				</li>
+
+				<li className={clsx(styles.item, styles.iconFolder, styles.icon)}>
+					<button
+						className={styles.btn}
+						onClick={saveAsDraftHandler}
+						type="button"
+					>
+						<p className={styles.text}>Сохранить как черновик</p>
+					</button>
+				</li>
+			</ul>
+		);
+	}
 
 	return (
 		<ul className={mainFrameStyles}>

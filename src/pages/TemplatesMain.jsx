@@ -19,13 +19,12 @@ import TemplateRecentDocument from '../components/Templates/TemplateRecentDocume
 
 const TemplatesMain = () => {
 	const [recentPopup, setRecentPopup] = useState(true);
-	const isLoggedIn = useSelector((state) => state.user.id);
+	const user = useSelector((state) => state.user);
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const { data, refetch, isLoading, isError, error } = useGetTemplatesQuery();
 	const [fetchRecent, { data: recentData, isLoading: isLoadingRecentDoc }] =
 		useLazyGetRecentQuery();
-	const user = useSelector((state) => state.user);
 
 	useEffect(() => {
 		if (location.pathname === '/templates') {
@@ -34,7 +33,7 @@ const TemplatesMain = () => {
 				fetchRecent();
 			}
 		}
-	}, [location.pathname, refetch, fetchRecent, user.id]);
+	}, [location.pathname, user.id]);
 
 	if (isLoading && isLoadingRecentDoc) {
 		return (
@@ -79,7 +78,7 @@ const TemplatesMain = () => {
 				<main className={styles.templates_wrapper}>
 					<Navbar isTemplatePage />
 					<div className={styles.templates}>
-						{isLoggedIn && (
+						{user.id && (
 							<h2
 								className={clsx(
 									styles.title,
@@ -91,7 +90,9 @@ const TemplatesMain = () => {
 								Недавние документы
 							</h2>
 						)}
-						{recentPopup && <TemplateRecentDocument recentData={recentData} />}
+						{user.id && recentPopup && (
+							<TemplateRecentDocument recentData={recentData} />
+						)}
 						<h1 className={styles.title}>Шаблоны</h1>
 						<TemplateList data={data} isTemplate />
 					</div>

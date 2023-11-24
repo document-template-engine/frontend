@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './CustomInput.module.sass';
-import {useActions} from '../../../hooks/useActions';
+import { useActions } from '../../../hooks/useActions';
 /* eslint-disable */
 
 export const CustomInput = ({ data }) => {
@@ -35,7 +35,6 @@ export const CustomInput = ({ data }) => {
 	};
 
 	if (type === 'date') {
-		console.log('trigged');
 		return (
 			<div className={styles.graph}>
 				<label htmlFor={id} className={styles.label}>

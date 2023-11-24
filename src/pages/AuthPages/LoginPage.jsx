@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
@@ -23,10 +23,9 @@ export default function LoginPage() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [fetchRepos, { error, isLoading /* data: repos */ }] =
-		useLazyLoginQuery();
-
-	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
+	const [login, { error, isLoading /* data: repos */ }] = useLazyLoginQuery();
+	const user = useSelector((state) => state.user);
+	const [getMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 
 	// сохраняем почту зарегестрированного пользователя
@@ -45,27 +44,17 @@ export default function LoginPage() {
 	const [errMsg, setErrMsg] = useState('');
 
 	const onSubmit = (data) => {
-		fetchRepos(data)
-			.then((respons) => {
-				if (respons.data) {
-					fetchUserMe(respons.data.auth_token) // запрос данных о пользователе
-						.then((res) => {
-							localStorage.setItem('token', respons.data.auth_token); // записываем токен в localStorage
-							setUser({ ...res.data });
-							navigate('/templates');
-							console.log('auth');
-						});
-				} else {
-					// сообщаем пользователю об ошибке
-					const keys = respons.error
-						? Object.values(respons.error.data).join()
-						: 'упс... что-то пошло не так, попробуйте позже';
-					setErrMsg(keys);
+		login(data)
+			.then((res) => {
+				if (checked) {
+					setUser({ ...user, isLoggedIn: true });
+					return localStorage.setItem('token', res.data.auth_token);
 				}
+				setUser({ ...user, isLoggedIn: true });
+				return sessionStorage.setItem('token', res.data.auth_token);
 			})
-			.catch((err) => {
-				console.log(err);
-				setErrMsg('Произошло что-то странное, попробуйте позже');
+			.then(() => {
+				navigate('/templates');
 			});
 	};
 
@@ -126,15 +115,14 @@ export default function LoginPage() {
 								{checked && <img src={checkmark} alt="checkmark" />}
 							</button>
 							<div className={`${styles.checkbox__text}`}>
-							<p className={styles.password}>Запомнить пароль</p>
-							<Link
-								to={{ pathname: '/forgot-password' }}
-								className={styles.link_password}
-							>
-								Я не помню пароль
-							</Link>
+								<p className={styles.password}>Запомнить пароль</p>
+								<Link
+									to={{ pathname: '/forgot-password' }}
+									className={styles.link_password}
+								>
+									Я не помню пароль
+								</Link>
 							</div>
-							
 						</div>
 						<Button
 							type="submit"
