@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '../../utils/constants';
+import { preHeaders } from '../templates-api/templates.api';
 
 export const authApi = createApi({
 	reducerPath: 'auth/api',
@@ -11,49 +12,30 @@ export const authApi = createApi({
 			query: (data) => ({
 				url: `auth/token/login/`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: preHeaders(),
 				body: JSON.stringify(data),
 			}),
 		}),
 		logout: build.mutation({
-			query: (token) => ({
+			query: () => ({
 				url: `auth/token/logout/`,
 				method: 'POST',
-				headers: {
-					/* 'Accept': 'application/json', */
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 			}),
 		}),
 		register: build.mutation({
 			query: (data) => ({
 				url: `users/`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: preHeaders(),
 				body: JSON.stringify(data),
 			}),
 		}),
 		getUserData: build.query({
-			query: (token) => ({
+			query: () => ({
 				url: `users/me/`,
 				method: 'GET',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
-				// eslint-disable-next-line consistent-return
-				responseHandler: async (response) => {
-					if (!response.ok) {
-						localStorage.clear();
-					}
-					return response.json();
-				},
+				headers: preHeaders(),
 			}),
 		}),
 	}),
