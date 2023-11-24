@@ -230,10 +230,26 @@ export default function TemplateForm() {
 			});
 		}
 		if (currentPath === `/docs/${id}`) {
-			return changesDraft(dataReq);
+			return changesDraft({
+				description: temp?.name,
+				template: temp?.template.id,
+				completed: false,
+				document_fields: [...formData],
+				id,
+			}).then((res) => {
+				setCurrentDocId(res.data.id);
+			});
 		}
 		if (currentPath === `/drafts/${id}`) {
-			return changesDraft(dataReq);
+			return changesDraft({
+				description: temp?.name,
+				template: temp?.template.id,
+				completed: false,
+				document_fields: [...formData],
+				id,
+			}).then((res) => {
+				setCurrentDocId(res.data.id);
+			});
 		}
 		return null;
 	};
