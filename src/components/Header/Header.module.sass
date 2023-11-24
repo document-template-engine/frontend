@@ -146,13 +146,24 @@
     color: white
 
 div.header__modal-container
+  display: flex
+  flex-direction: column
+  gap: 12px
+  position: absolute
+  right: 20px
+  top: 85px
   padding: 20px 16px
   border: 0.5px solid #7B85AC
   box-shadow: 0 4px 26px 0 rgba(180, 187, 215, 0.10)
   border-radius: 12px
-  right: 20px
-  top: 85px
-  gap: 12px
+  height: auto
+  background: #fff
+  &::before
+    content: ''
+    width: 0
+    height: 0
+  @media (max-width:600px) 
+    width: 284px
 
 .container
   width: 255px

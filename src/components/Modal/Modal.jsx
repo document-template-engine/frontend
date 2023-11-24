@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { useCallback, useEffect } from 'react';
+import clsx from 'clsx';
 import styles from './Modal.module.scss';
 
-export default function Modal({ handleClose, children }) {
+export default function Modal({ handleClose, children, extraClass }) {
 	const handleKeydown = useCallback(
 		(e) => {
 			if (e.key === 'Escape') return handleClose();
@@ -13,7 +14,9 @@ export default function Modal({ handleClose, children }) {
 
 	const handleClick = useCallback(
 		(e) => {
-			if (e.target.classList.contains(styles.modal)) handleClose();
+			if (e.target.classList.contains(styles.modal)) {
+				handleClose();
+			}
 			return undefined;
 		},
 		[handleClose]
@@ -29,7 +32,7 @@ export default function Modal({ handleClose, children }) {
 		};
 	}, [handleClick, handleKeydown]);
 
-	return <div className={styles.modal}>{children}</div>;
+	return <div className={clsx(styles.modal, extraClass)}>{children}</div>;
 }
 
 Modal.propTypes = {
