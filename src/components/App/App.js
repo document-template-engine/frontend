@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
+import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
+import { useSelector } from 'react-redux';
 import DraftsTemplates from '../../pages/DraftsTemplates';
 import LoginPage from '../../pages/AuthPages/LoginPage';
 import LogupPage from '../../pages/AuthPages/LogupPage';
@@ -18,21 +19,28 @@ import { useLazyGetUserDataQuery } from '../../store/auth-api/auth.api';
 import { useActions } from '../../hooks/useActions';
 import DocsPage from '../../pages/DocsPage';
 import ErrorsPage from '../../pages/ErrorsPage';
-import { token } from '../../utils/constants';
 
 function App() {
-	const navigate = useNavigate();
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 	const { setUser } = useActions();
-
+	const user = useSelector((state) => state.user);
 	const checkToken = () => {
-		fetchUserMe(token).then(setUser);
+		fetchUserMe()
+			.then((res) => setUser(res.data))
+			.catch(console.log);
 	};
 
 	useEffect(() => {
-		checkToken();
-	}, []);
+		if (
+			user.isLoggedIn ||
+			localStorage.getItem('token') ||
+			sessionStorage.getItem('token')
+		) {
+			checkToken();
+		}
+	}, [user.isLoggedIn]);
+	useEffect(() => {}, [user]);
 
 	return (
 		<Routes>

@@ -1,16 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BASE_URL, token } from '../../utils/constants';
+import { BASE_URL, getToken } from '../../utils/constants';
 
-const preHeaders = token
-	? {
-			'Content-Type': 'application/json',
-			Authorization: `Token ${token}`,
-			// eslint-disable-next-line no-mixed-spaces-and-tabs
-	  }
-	: {
-			'Content-Type': 'application/json',
-			// eslint-disable-next-line no-mixed-spaces-and-tabs
-	  };
+export const preHeaders = () => {
+	const tokenA = getToken();
+	return tokenA
+		? {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${tokenA}`,
+				// eslint-disable-next-line no-mixed-spaces-and-tabs
+		  }
+		: {
+				'Content-Type': 'application/json',
+				// eslint-disable-next-line no-mixed-spaces-and-tabs
+		  };
+};
 
 export const templatesApi = createApi({
 	reducerPath: 'templates/api',
@@ -21,13 +24,13 @@ export const templatesApi = createApi({
 		getTemplates: build.query({
 			query: () => ({
 				url: 'templates/',
-				headers: preHeaders,
+				headers: preHeaders(),
 			}),
 		}),
 		getTemplate: build.query({
 			query: (id) => ({
 				url: `templates/${id}/`,
-				headers: preHeaders,
+				headers: preHeaders(),
 			}),
 		}),
 
@@ -35,10 +38,7 @@ export const templatesApi = createApi({
 			query: (TemplateId) => ({
 				url: `templates/${TemplateId}/favorite/`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 			}),
 		}),
 
@@ -46,20 +46,14 @@ export const templatesApi = createApi({
 			query: (TemplateId) => ({
 				url: `templates/${TemplateId}/favorite/`,
 				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 			}),
 		}),
 
 		getDraftTemplate: build.query({
 			query: (id) => ({
 				url: `/documents/${id}/`,
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 			}),
 		}),
 
@@ -67,10 +61,7 @@ export const templatesApi = createApi({
 			query: () => ({
 				url: 'templates/',
 				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 			}),
 		}),
 
@@ -78,10 +69,7 @@ export const templatesApi = createApi({
 			query: (data) => ({
 				url: `/documents/`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 				body: JSON.stringify(data),
 			}),
 		}),
@@ -89,9 +77,7 @@ export const templatesApi = createApi({
 			query: (id) => ({
 				url: `/documents/${id}/download_document/`,
 				method: 'GET',
-				headers: {
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 				responseHandler: async (response) =>
 					window.location.assign(
 						window.URL.createObjectURL(await response.blob())
@@ -102,9 +88,7 @@ export const templatesApi = createApi({
 			query: (id) => ({
 				url: `/documents/${id}/download_pdf/`,
 				method: 'GET',
-				headers: {
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 				responseHandler: async (response) => {
 					const blob = await response.blob();
 
@@ -125,9 +109,7 @@ export const templatesApi = createApi({
 			query: (id) => ({
 				url: `/documents/${id}/download_pdf/`,
 				method: 'GET',
-				headers: {
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 				responseHandler: async (response) => {
 					const url = await response.blob();
 					return URL.createObjectURL(url);
@@ -138,9 +120,7 @@ export const templatesApi = createApi({
 			query: (args) => ({
 				url: `/templates/${args.id}/download_preview/`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: preHeaders(),
 				body: JSON.stringify({ document_fields: args.document_fields }),
 				responseHandler: async (response) =>
 					window.location.assign(
@@ -152,9 +132,7 @@ export const templatesApi = createApi({
 			query: () => ({
 				url: `/documents/draft/`,
 				method: 'GET',
-				headers: {
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 			}),
 			transformResponse: (response) => response.reverse(),
 		}),
@@ -162,10 +140,7 @@ export const templatesApi = createApi({
 			query: (data) => ({
 				url: `/documents/${data.id}/`,
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Token ${token}`,
-				},
+				headers: preHeaders(),
 				body: JSON.stringify(data),
 			}),
 		}),
@@ -173,10 +148,7 @@ export const templatesApi = createApi({
 			query: () => ({
 				url: `/documents/`,
 				method: 'GET',
-				headers: {
-					Authorization: `Token ${token}`,
-					owner: `${localStorage.getItem('email')}`,
-				},
+				headers: preHeaders(),
 			}),
 			transformResponse: (response) => response.reverse(),
 		}),
@@ -184,9 +156,7 @@ export const templatesApi = createApi({
 			query: (data) => ({
 				url: `/templates/${data.id}/download_preview/?pdf=true`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: preHeaders(),
 				body: JSON.stringify({ document_fields: data.document_fields }),
 				responseHandler: async (response) => {
 					const url = await response.blob();
@@ -198,9 +168,7 @@ export const templatesApi = createApi({
 			query: (data) => ({
 				url: `/templates/${data.id}/download_preview/?pdf=true`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: preHeaders(),
 				body: JSON.stringify({ document_fields: data.document_fields }),
 				responseHandler: async (response) => {
 					const blob = await response.blob();
@@ -222,9 +190,7 @@ export const templatesApi = createApi({
 			query: (data) => ({
 				url: `/templates/${data.id}/download_preview/?pdf=true`,
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: preHeaders(),
 				body: JSON.stringify({ document_fields: data.document_fields }),
 				responseHandler: async (response) =>
 					window.open(window.URL.createObjectURL(await response.blob())),

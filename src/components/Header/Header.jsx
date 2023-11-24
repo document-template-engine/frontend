@@ -34,15 +34,17 @@ export default function Header() {
 	};
 	// выход из учётной записи
 
-	const [fetchRepos, { error, data: repos }] = useLogoutMutation();
+	const [initLogout, { error, data: repos }] = useLogoutMutation();
 
 	const handleExit = () => {
-		const token = localStorage.getItem('token');
-		fetchRepos(token);
-		setUser({ email: '', id: '' });
-		setIsUserMenuVisible(false);
-		localStorage.clear();
-		setIsEntranceButtonLoading(false);
+		initLogout().then(() => {
+			setUser({ id: null, email: null, isLoggedIn: false });
+			setIsUserMenuVisible(false);
+			setIsEntranceButtonLoading(false);
+			localStorage.removeItem('token');
+			sessionStorage.removeItem('token');
+			navigate('/templates');
+		});
 	};
 
 	const handleClick = () => {
@@ -74,7 +76,7 @@ export default function Header() {
 					</fieldset>
 				</form>
 				<div>
-					{user.id ? (
+					{user.email ? (
 						<button
 							type="button"
 							className={styles['header__user-button']}
