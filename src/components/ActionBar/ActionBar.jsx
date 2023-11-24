@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import styles from './ActionBar.module.sass';
@@ -11,11 +10,8 @@ export const ActionBar = ({
 	watchPDFHandler,
 	saveAsDraftHandler,
 	saveAsFavouriteHandler,
-	idDraft,
 	isFavorited,
 }) => {
-	const location = useLocation();
-	const currentPath = location.pathname;
 	const user = useSelector((state) => state.user);
 
 	useEffect(() => {}, [isFavorited]);
