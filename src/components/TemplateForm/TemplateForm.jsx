@@ -217,7 +217,11 @@ export default function TemplateForm() {
 				id: currentDocId,
 			});
 		}
-		if (currentPath === `/templates/${id}` && !currentDocId) {
+		if (
+			(currentPath === `/templates/${id}` ||
+				currentPath === `/favorite/${id}`) &&
+			!currentDocId
+		) {
 			return fetchTemplate({
 				description: temp?.name,
 				template: temp?.id,
