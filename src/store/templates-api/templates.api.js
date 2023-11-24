@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL, token } from '../../utils/constants';
 
-const preHeaders = localStorage.getItem('token')
+const preHeaders = token
 	? {
 			'Content-Type': 'application/json',
 			Authorization: `Token ${token}`,
@@ -37,7 +37,7 @@ export const templatesApi = createApi({
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 			}),
 		}),
@@ -48,7 +48,7 @@ export const templatesApi = createApi({
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 			}),
 		}),
@@ -58,7 +58,7 @@ export const templatesApi = createApi({
 				url: `/documents/${id}/`,
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 			}),
 		}),
@@ -69,7 +69,7 @@ export const templatesApi = createApi({
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 			}),
 		}),
@@ -80,7 +80,7 @@ export const templatesApi = createApi({
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 				body: JSON.stringify(data),
 			}),
@@ -90,7 +90,7 @@ export const templatesApi = createApi({
 				url: `/documents/${id}/download_document/`,
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 				responseHandler: async (response) =>
 					window.location.assign(
@@ -103,7 +103,7 @@ export const templatesApi = createApi({
 				url: `/documents/${id}/download_pdf/`,
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 				responseHandler: async (response) => {
 					const blob = await response.blob();
@@ -126,7 +126,7 @@ export const templatesApi = createApi({
 				url: `/documents/${id}/download_pdf/`,
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 				responseHandler: async (response) => {
 					const url = await response.blob();
@@ -153,7 +153,7 @@ export const templatesApi = createApi({
 				url: `/documents/draft/`,
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 			}),
 			transformResponse: (response) => response.reverse(),
@@ -164,7 +164,7 @@ export const templatesApi = createApi({
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 				},
 				body: JSON.stringify(data),
 			}),
@@ -174,7 +174,7 @@ export const templatesApi = createApi({
 				url: `/documents/`,
 				method: 'GET',
 				headers: {
-					Authorization: `Token ${localStorage.getItem('token')}`,
+					Authorization: `Token ${token}`,
 					owner: `${localStorage.getItem('email')}`,
 				},
 			}),
