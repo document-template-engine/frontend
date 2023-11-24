@@ -9,8 +9,10 @@ import {
 	useChangeDraftMutation,
 	useDeleteFavoriteMutation,
 	useGetTemplateQuery,
+	useLazyDownloadTemplatePdfQuery,
 	useLazyGetDocQuery,
 	useLazyGetPDFQuery,
+	useLazyGetPreviewQuery,
 	useLazyPostTemplateQuery,
 	useLazyWatchPreviewQuery,
 	usePostFavoriteMutation,
@@ -32,6 +34,11 @@ export default function TemplateForm() {
 	const [postFavorite, dataPostFavorite] = usePostFavoriteMutation();
 	const [deleteFavorite, dataDeleteFavorite] = useDeleteFavoriteMutation();
 	const { formData } = useSelector((state) => state.form);
+	const user = useSelector((state) => state.user);
+
+	const [downloadPdfAnonim, resPdfAnonim] = useLazyDownloadTemplatePdfQuery();
+	const [downloadDocAnonim, resDownloadDocAnonim] = useLazyGetPreviewQuery();
+
 	const allFetchingStatus = [
 		resGetDoc.isFetching,
 		resGetPdf.isFetching,
@@ -40,8 +47,16 @@ export default function TemplateForm() {
 		resWatchPreview.isFetching,
 		dataPostFavorite.isFetching,
 		dataDeleteFavorite.isFetching,
+		resPdfAnonim.isFetching,
+		resDownloadDocAnonim.isFetching,
 	];
 	const handleDownloadDoc = () => {
+		if (!user.id) {
+			return downloadDocAnonim({
+				id,
+				document_fields: [...formData],
+			});
+		}
 		if (currentDocId) {
 			return patchDoc({
 				description: data?.description,
@@ -68,6 +83,12 @@ export default function TemplateForm() {
 	};
 
 	const handleDownloadPdf = () => {
+		if (!user.id) {
+			return downloadPdfAnonim({
+				id,
+				document_fields: [...formData],
+			});
+		}
 		if (currentDocId) {
 			return patchDoc({
 				description: data?.description,
