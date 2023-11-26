@@ -157,6 +157,7 @@ export default function TemplateForm() {
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
+					handleDownloadDoc();
 				}}
 				noValidate
 			>
