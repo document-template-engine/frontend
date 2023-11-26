@@ -46,12 +46,15 @@ export default function LoginPage() {
 	const onSubmit = (data) => {
 		login(data)
 			.then((res) => {
-				if (checked) {
-					setUser({ ...user, isLoggedIn: true });
-					return localStorage.setItem('token', res.data.auth_token);
-				}
 				setUser({ ...user, isLoggedIn: true });
-				return sessionStorage.setItem('token', res.data.auth_token);
+				return localStorage.setItem('token', res.data.auth_token);
+
+				// if (checked) { //код с seccionStorage
+				// 	setUser({ ...user, isLoggedIn: true });
+				// 	return localStorage.setItem('token', res.data.auth_token);
+				// }
+				// setUser({ ...user, isLoggedIn: true });
+				// return sessionStorage.setItem('token', res.data.auth_token);
 			})
 			.then(() => {
 				navigate('/templates');

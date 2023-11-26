@@ -21,6 +21,34 @@ import DocsPage from '../../pages/DocsPage';
 import ErrorsPage from '../../pages/ErrorsPage';
 
 function App() {
+	// const sessionStorageTransfer = (event) => {
+	// 	if(!event) { event = window.event; } // ie suq
+	// 	if(!event.newValue) return;          // do nothing if no value to work with
+	// 	if (event.key === 'getSessionStorage') {
+	// 		// another tab asked for the sessionStorage -> send it
+	// 		localStorage.setItem('sessionStorage', JSON.stringify(sessionStorage));
+	// 		// the other tab should now have it, so we're done with it.
+	// 		localStorage.removeItem('sessionStorage'); // <- could do short timeout as well.
+	// 	} else if (event.key === 'sessionStorage' && !sessionStorage.length) {
+	// 		// another tab sent data <- get it
+	// 		const data = JSON.parse(event.newValue);
+	// 			sessionStorage.setItem("token", data.token);//это неправильный код
+	// 		}
+	// 	}
+
+	// // listen for changes to localStorage
+	// if(window.addEventListener) {
+	// 	window.addEventListener("storage", sessionStorageTransfer, false);
+	// } else {
+	// 	window.attachEvent("onstorage", sessionStorageTransfer);
+	// }
+
+	// // Ask other tabs for session storage (this is ONLY to trigger event)
+	// if (!sessionStorage.length) {
+	// 	localStorage.setItem('getSessionStorage', 'foobar');
+	// 	localStorage.removeItem('getSessionStorage', 'foobar');
+	// }
+
 	const [fetchUserMe, { errorMe, isLoadingMe, data: userMe }] =
 		useLazyGetUserDataQuery();
 	const { setUser } = useActions();
@@ -32,10 +60,30 @@ function App() {
 	};
 
 	useEffect(() => {
+		const handleStorageChange = (e) => {
+			if (e.key === 'token') {
+				// Token was changed or removed
+				// Trigger re-render or perform necessary actions
+				// For example, if you need to update state or fetch data again
+				// setToken(getToken()); // You might use setToken here if it's a state setter function
+				window.location.reload(); // Reload the page to reflect the changes
+			}
+		};
+
+		// Add event listener for storage changes
+		window.addEventListener('storage', handleStorageChange);
+
+		// Clean up the event listener when the component unmounts
+		return () => {
+			window.removeEventListener('storage', handleStorageChange);
+		};
+	}, []);
+
+	useEffect(() => {
 		if (
 			user.isLoggedIn ||
-			localStorage.getItem('token') ||
-			sessionStorage.getItem('token')
+			localStorage.getItem('token')
+			// || sessionStorage.getItem('token')
 		) {
 			checkToken();
 		}
