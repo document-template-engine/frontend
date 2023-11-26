@@ -1,7 +1,7 @@
-import {Viewer, Worker} from '@react-pdf-viewer/core';
-import {useSelector} from 'react-redux';
-import {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import { Viewer, Worker } from '@react-pdf-viewer/core';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './LookFile.module.scss';
 
 // eslint-disable-next-line react/prop-types
