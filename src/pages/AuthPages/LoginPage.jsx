@@ -46,15 +46,21 @@ export default function LoginPage() {
 	const onSubmit = (data) => {
 		login(data)
 			.then((res) => {
-				if (checked) {
-					setUser({ ...user, isLoggedIn: true });
-					return localStorage.setItem('token', res.data.auth_token);
+				if (res.data) {
+					if (checked) {
+						setUser({ ...user, email: data.email });
+						localStorage.setItem('token', res.data.auth_token);
+						return navigate('/templates');
+					}
+					setUser({ ...user, email: data.email });
+					sessionStorage.setItem('token', res.data.auth_token);
+					return navigate('/templates');
 				}
-				setUser({ ...user, isLoggedIn: true });
-				return sessionStorage.setItem('token', res.data.auth_token);
+				return Promise.reject(res.error);
 			})
-			.then(() => {
-				navigate('/templates');
+			// eslint-disable-next-line no-shadow
+			.catch((error) => {
+				setErrMsg(error.data.non_field_errors);
 			});
 	};
 
@@ -64,6 +70,8 @@ export default function LoginPage() {
 			password: '',
 		});
 	}, [reset]);
+
+	useEffect(() => {}, [user]);
 
 	const handleClose = () => {
 		setVisible(false);

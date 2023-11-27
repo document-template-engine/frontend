@@ -14,11 +14,18 @@ export const preHeaders = () => {
 				// eslint-disable-next-line no-mixed-spaces-and-tabs
 		  };
 };
-
 export const templatesApi = createApi({
 	reducerPath: 'templates/api',
 	baseQuery: fetchBaseQuery({
 		baseUrl: BASE_URL,
+		validateStatus: (res) => {
+			if (res.status === 401) {
+				localStorage.clear();
+				sessionStorage.clear();
+				window.location.href = '/401';
+			}
+			return res;
+		},
 	}),
 	endpoints: (build) => ({
 		getTemplates: build.query({
@@ -150,7 +157,8 @@ export const templatesApi = createApi({
 				method: 'GET',
 				headers: preHeaders(),
 			}),
-			transformResponse: (response) => response.reverse(),
+			transformResponse: (response) =>
+				response.reverse().filter((item) => item.completed),
 		}),
 		getUrlPdf: build.query({
 			query: (data) => ({
