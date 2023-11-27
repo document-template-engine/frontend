@@ -157,7 +157,8 @@ export const templatesApi = createApi({
 				method: 'GET',
 				headers: preHeaders(),
 			}),
-			transformResponse: (response) => response.reverse(),
+			transformResponse: (response) =>
+				response.reverse().filter((item) => item.completed),
 		}),
 		getUrlPdf: build.query({
 			query: (data) => ({
