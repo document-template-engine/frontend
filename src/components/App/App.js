@@ -27,25 +27,25 @@ function App() {
 	const user = useSelector((state) => state.user);
 	const navigate = useNavigate();
 	const checkToken = () => {
-		fetchUserMe().then((res) => {
-			if (res.data) {
-				return setUser({ ...res.data, isLoggedIn: true });
-			}
-			localStorage.clear();
-			sessionStorage.clear();
-			return setUser(null);
-		});
+		fetchUserMe()
+			.then((res) => {
+				if (res.status === 'rejected') {
+					return Promise.reject(res.error);
+				}
+				if (res.data.email) {
+					return setUser({ ...res.data });
+				}
+				localStorage.clear();
+				sessionStorage.clear();
+				setUser({ email: '', id: '' });
+				return res;
+			})
+			.catch(console.log);
 	};
 
 	useEffect(() => {
-		if (
-			(user.isLoggedIn && localStorage.getItem('token')) ||
-			sessionStorage.getItem('token')
-		) {
-			checkToken();
-		}
-	}, [user.isLoggedIn]);
-	useEffect(() => {}, [user]);
+		checkToken();
+	}, [user.email]);
 
 	return (
 		<Routes>

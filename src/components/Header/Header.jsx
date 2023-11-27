@@ -24,7 +24,7 @@ export default function Header() {
 	}, [changeSearchQuery]);
 
 	const toggleUserButtonState = (e) => {
-		if (user.id) {
+		if (user.email) {
 			setIsUserMenuVisible(!isUserMenuVisible);
 		} else {
 			setIsEntranceButtonLoading((prevState) => !prevState);
@@ -38,7 +38,7 @@ export default function Header() {
 
 	const handleExit = () => {
 		initLogout().then(() => {
-			setUser({ id: null, email: null, isLoggedIn: false });
+			setUser({ id: '', email: '' });
 			setIsUserMenuVisible(false);
 			setIsEntranceButtonLoading(false);
 			localStorage.removeItem('token');
@@ -99,7 +99,7 @@ export default function Header() {
 						</button>
 					)}
 				</div>
-				{user.id && isUserMenuVisible && (
+				{user.email && isUserMenuVisible && (
 					<Modal
 						extraClass={styles['header__modal-container']}
 						handleClose={handleClick}
