@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
-import { Route, Routes } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
+import { Route, Routes, useNavigate } from 'react-router-dom'; // Импортируйте Outlet для вложенных маршрутов
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import DraftsTemplates from '../../pages/DraftsTemplates';
@@ -25,22 +25,27 @@ function App() {
 		useLazyGetUserDataQuery();
 	const { setUser } = useActions();
 	const user = useSelector((state) => state.user);
+	const navigate = useNavigate();
 	const checkToken = () => {
 		fetchUserMe()
-			.then((res) => setUser(res.data))
+			.then((res) => {
+				if (res.status === 'rejected') {
+					return Promise.reject(res.error);
+				}
+				if (res.data.email) {
+					return setUser({ ...res.data });
+				}
+				localStorage.clear();
+				sessionStorage.clear();
+				setUser({ email: '', id: '' });
+				return res;
+			})
 			.catch(console.log);
 	};
 
 	useEffect(() => {
-		if (
-			user.isLoggedIn ||
-			localStorage.getItem('token') ||
-			sessionStorage.getItem('token')
-		) {
-			checkToken();
-		}
-	}, [user.isLoggedIn]);
-	useEffect(() => {}, [user]);
+		checkToken();
+	}, [user.email]);
 
 	return (
 		<Routes>

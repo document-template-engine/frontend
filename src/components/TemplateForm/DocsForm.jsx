@@ -88,6 +88,7 @@ export const DocsForm = () => {
 				className={styles.form}
 				onSubmit={(e) => {
 					e.preventDefault();
+					handleDownloadDoc();
 				}}
 				noValidate
 			>

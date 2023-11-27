@@ -6,7 +6,7 @@ import { useActions } from '../../../hooks/useActions';
 /* eslint-disable */
 
 export const CustomInput = ({ data }) => {
-	const { name, hint, type, length, mask, id } = data;
+	const { name, hint, type, length, id } = data;
 	const { setFormData } = useActions();
 	const getInputStyle = (symbols) => {
 		if (!symbols) return styles.input;
@@ -57,8 +57,8 @@ export const CustomInput = ({ data }) => {
 						id={id}
 						name={name.toString()}
 						className={clsx(getInputStyle(length))}
-						{...(mask && { pattern: mask })}
 						max={'3000-01-01'}
+						required
 					/>
 				</label>
 			</div>
@@ -87,7 +87,7 @@ export const CustomInput = ({ data }) => {
 					id={id}
 					name={name.toString()}
 					className={clsx(getInputStyle(length))}
-					{...(mask && { pattern: mask })}
+					required
 				/>
 			</label>
 		</div>

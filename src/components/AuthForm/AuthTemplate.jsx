@@ -6,7 +6,7 @@ import styles from './AuthTemplate.module.scss';
 export default function AuthForm({ title, children }) {
 	return (
 		<div className={styles.container}>
-				<Logo variant="Mini" />
+			<Logo variant="Mini" />
 			<h1 className={styles.title}>{title}</h1>
 			{children}
 		</div>

@@ -9,10 +9,9 @@ import TemplateList from '../components/Templates/TemplateList';
 import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
 
 const FavoriteTemplates = () => {
-
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data, refetch, isFetching} = useGetTemplatesQuery();
+	const { data, refetch, isFetching } = useGetTemplatesQuery();
 	const [arrayFavoriteTemplates, setArrayFavoriteTemplates] = useState([]);
 
 	useEffect(() => {
@@ -29,14 +28,15 @@ const FavoriteTemplates = () => {
 	// Если страничка главная - то он показывает список
 	if (isFetching) {
 		return (
-		<>	
-			<Header/>
-			<main className={styles.templates_wrapper}>
-				<Navbar isFavoriteTamplatesPage />
-				<Preloader/>
-			</main>
-		</>
-	)} 
+			<>
+				<Header />
+				<main className={styles.templates_wrapper}>
+					<Navbar isFavoriteTamplatesPage />
+					<Preloader />
+				</main>
+			</>
+		);
+	}
 
 	if (currentPath === '/favorite') {
 		return (
@@ -54,7 +54,7 @@ const FavoriteTemplates = () => {
 								/>
 							</div>
 						) : (
-							<TemplateList data={arrayFavoriteTemplates} isTemplate/>
+							<TemplateList data={arrayFavoriteTemplates} isTemplate />
 						)}
 					</div>
 				</main>

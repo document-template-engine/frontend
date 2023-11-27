@@ -17,10 +17,13 @@
 - ### Скачать исходный файла шаблона (без заполненных полей) в формате docx/pdf
 
 #### DOCX
+
 ```
    GET /api/templates/{template_id}/download_draft/
 ```
+
 #### PDF
+
 ```
    GET /api/templates/{template_id}/download_draft/?pdf=true
 ```
@@ -28,13 +31,17 @@
 - ### Скачать шаблон (с заполненными полями) для неавторизованного пользователя в формате docx/pdf
 
 #### DOCX
+
 ```
    POST /api/templates/{template_id}/download_preview/
 ```
+
 #### PDF
+
 ```
    POST /api/templates/{template_id}/download_preview/?pdf=true
 ```
+
 #### В теле запроса необходимо передать валидную информацию по заполненным полям
 
 - document_fields : массив объектов полей
@@ -46,7 +53,6 @@
 	"document_fields": "{value:string, field:number}[]"
 }
 ```
-
 
 - ### Создание документа/черновика для авторизованных пользователей
 
@@ -233,12 +239,12 @@ GET /api/documents/history/
 
 #### Body должен быть пуст
 
-
-### Удаление документа или черновика  пользователя (авторизованного)
+### Удаление документа или черновика пользователя (авторизованного)
 
 ```
 DELETE /api/documents/{id}/
 ```
+
 id - айди документа
 
 ##### Headers
@@ -251,5 +257,3 @@ id - айди документа
 ```
 
 #### Body должен быть пуст
-
-

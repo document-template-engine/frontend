@@ -34,8 +34,8 @@
 		&__login-button {
 			margin: 0;
 			padding: 0;
-            height: clamp(36px, 5vw, 52px);
-            width: clamp(73px, 10vw, 117px);
+			height: clamp(36px, 5vw, 52px);
+			width: clamp(73px, 10vw, 117px);
 			padding: 0;
 			border-radius: 16px;
 			border: 1px solid #a48dd3;
@@ -51,7 +51,7 @@
 			font-style: normal;
 			font-weight: 500;
 			line-height: 24px;
-            color: #000;
+			color: #000;
 			text-decoration: none;
 
 			&:hover {
@@ -133,22 +133,21 @@
 		text-decoration-line: underline;
 	}
 
-    &__table-str {
-        width: 100%;
-    }
+	&__table-str {
+		width: 100%;
+	}
 
-    &__table-item_1 {
-        margin: 0;
-        padding: 0;
-        width: 180px;
-        border: 1px solid #000;
-    }
+	&__table-item_1 {
+		margin: 0;
+		padding: 0;
+		width: 180px;
+		border: 1px solid #000;
+	}
 
-    &__table-item_2 {
-        margin: 0;
-        padding: 0;
-        width: 580px;
-        border: 1px solid #000;
-    }
-
+	&__table-item_2 {
+		margin: 0;
+		padding: 0;
+		width: 580px;
+		border: 1px solid #000;
+	}
 }
