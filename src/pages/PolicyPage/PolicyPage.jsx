@@ -325,7 +325,7 @@ const PolicyPage = () => (
 		<h3 className="PolicyPage__paragraph">
 			6. Цели обработки персональных данных
 		</h3>
-		
+
 		<Table />
 
 		<h3 className="PolicyPage__paragraph">

@@ -169,33 +169,35 @@ export default function TemplateForm() {
 
 					{allFetchingStatus.some((item) => item) && <PreloaderWithOverlay />}
 					<FormInputsList form={data?.name} data={data} />
-					<div className={styles.extraWrapper}>
-						<label htmlFor={data.name} className={styles.checkBoxWrapper}>
-							<input
-								type="checkbox"
-								className={styles.checkbox}
-								value={isChecked}
-								onChange={() => setIsChecked(!isChecked)}
-							/>
-							<p className={styles.notation}>
-								Я обязуюсь внимательно изучить созданный документ и принимаю на
-								себя ответственность за его содержание перед подписанием
-							</p>
-						</label>
-						<button
-							className={styles.btn}
-							disabled={
-								!isChecked || resPatchDoc.isFetching || resPostDoc.isFetching
-							}
-							type="submit"
-						>
-							{!resPatchDoc.isFetching || !resPostDoc.isFetching ? (
-								<p className={styles.btnText}>Создать документ</p>
-							) : (
-								<div className={styles.btnIsloading} />
-							)}
-						</button>
-					</div>
+					{user.id && (
+						<div className={styles.extraWrapper}>
+							<label htmlFor={data.name} className={styles.checkBoxWrapper}>
+								<input
+									type="checkbox"
+									className={styles.checkbox}
+									value={isChecked}
+									onChange={() => setIsChecked(!isChecked)}
+								/>
+								<p className={styles.notation}>
+									Я обязуюсь внимательно изучить созданный документ и принимаю
+									на себя ответственность за его содержание перед подписанием
+								</p>
+							</label>
+							<button
+								className={styles.btn}
+								disabled={
+									!isChecked || resPatchDoc.isFetching || resPostDoc.isFetching
+								}
+								type="submit"
+							>
+								{!resPatchDoc.isFetching || !resPostDoc.isFetching ? (
+									<p className={styles.btnText}>Создать документ</p>
+								) : (
+									<div className={styles.btnIsloading} />
+								)}
+							</button>
+						</div>
+					)}
 				</div>
 				<ActionBar
 					downloadDocHandler={handleDownloadDoc}

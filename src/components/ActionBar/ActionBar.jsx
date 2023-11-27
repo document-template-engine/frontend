@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import styles from './ActionBar.module.sass';
+// import { MessageHandler } from 'pdfjs-dist/types/src/shared/message_handler';
 
 export const ActionBar = ({
 	isDocPage,
@@ -115,12 +116,4 @@ export const ActionBar = ({
 			)}
 		</ul>
 	);
-};
-
-ActionBar.propTypes = {
-	downloadDocHandler: PropTypes.func,
-	downloadPDFHandler: PropTypes.func,
-	watchPDFHandler: PropTypes.func,
-	saveAsDraftHandler: PropTypes.func,
-	saveAsFavouriteHandler: PropTypes.func,
 };

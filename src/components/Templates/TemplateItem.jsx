@@ -71,7 +71,6 @@ const TemplateItem = ({
 						onClick={handleFavoriteButtonClick}
 					/>
 				)}
-
 			</div>
 			<div className={styles.linkWrapper}>
 				<Link className={styles.link} to={link}>
