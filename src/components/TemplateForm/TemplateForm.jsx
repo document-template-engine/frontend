@@ -18,6 +18,7 @@ import {
 	usePostFavoriteMutation,
 } from '../../store/templates-api/templates.api';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
+import Preloader from '../UI/Preloader/Preloader';
 
 export default function TemplateForm() {
 	const { id } = useParams();
@@ -150,7 +151,13 @@ export default function TemplateForm() {
 		setIsChecked(false);
 		setIsFavorite(data?.is_favorited);
 	}, [data]);
-
+	if (isLoading) {
+		return (
+			<div className={styles.wrapperLoading}>
+				<Preloader />
+			</div>
+		);
+	}
 	return (
 		data && (
 			<form

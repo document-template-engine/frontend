@@ -1,18 +1,15 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {Outlet, useLocation} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import clsx from 'clsx';
 import TemplateList from '../components/Templates/TemplateList';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
-import {
-	useGetTemplatesQuery,
-	useLazyGetRecentQuery,
-} from '../store/templates-api/templates.api';
+import {useGetTemplatesQuery, useLazyGetRecentQuery,} from '../store/templates-api/templates.api';
 import Preloader from '../components/UI/Preloader/Preloader';
 import errorImg from '../images/error.jpeg';
 import TemplateRecentDocument from '../components/Templates/TemplateRecentDocument';
@@ -23,8 +20,10 @@ const TemplatesMain = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const { data, refetch, isLoading, isError, error } = useGetTemplatesQuery();
-	const [fetchRecent, { data: recentData, isLoading: isLoadingRecentDoc }] =
-		useLazyGetRecentQuery();
+	const [
+		fetchRecent,
+		{ data: recentData, isLoading: isLoadingRecentDoc, isFetching },
+	] = useLazyGetRecentQuery();
 
 	useEffect(() => {
 		if (location.pathname === '/templates') {
@@ -35,17 +34,11 @@ const TemplatesMain = () => {
 		}
 	}, [location.pathname, user.id]);
 
-	if (isLoading && isLoadingRecentDoc) {
+	if (isLoading || isFetching) {
 		return (
-			<>
-				<Header />
-				<main className={styles.templates_wrapper}>
-					<Navbar isTemplatePage />
-					<div className={styles.templates}>
-						<Preloader />
-					</div>
-				</main>
-			</>
+			<div className={styles.wrapperLoading}>
+				<Preloader />
+			</div>
 		);
 	}
 	if (isError) {

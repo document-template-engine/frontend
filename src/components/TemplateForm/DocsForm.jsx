@@ -14,6 +14,7 @@ import styles from './TemplateForm.module.sass';
 import PreloaderWithOverlay from '../UI/PreloaderWithOverlay/PreloaderWithOverlay';
 import FormInputsList from './FormInputsList/FormInputsList';
 import { ActionBar } from '../ActionBar/ActionBar';
+import Preloader from '../UI/Preloader/Preloader';
 
 export const DocsForm = () => {
 	const { id } = useParams();
@@ -81,7 +82,13 @@ export const DocsForm = () => {
 		);
 		setFormData([...formData, ...result]);
 	}, [data]);
-
+	if (isLoading) {
+		return (
+			<div className={styles.wrapperLoading}>
+				<Preloader />
+			</div>
+		);
+	}
 	return (
 		data && (
 			<form
