@@ -28,13 +28,9 @@ const FavoriteTemplates = () => {
 	// Если страничка главная - то он показывает список
 	if (isFetching) {
 		return (
-			<>
-				<Header />
-				<main className={styles.templates_wrapper}>
-					<Navbar isFavoriteTamplatesPage />
-					<Preloader />
-				</main>
-			</>
+			<div className={styles.wrapperLoading}>
+				<Preloader />
+			</div>
 		);
 	}
 
