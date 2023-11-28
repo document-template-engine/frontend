@@ -6,15 +6,24 @@ import TemplateList from '../components/Templates/TemplateList';
 import EmptyPageState from '../components/UI/EmptyPageState/EmptyPageState';
 import styles from '../components/Templates/TemplateList.module.sass';
 import { useGetDraftsQuery } from '../store/templates-api/templates.api';
+import Preloader from '../components/UI/Preloader/Preloader';
 
 const DraftsTemplates = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data, refetch } = useGetDraftsQuery();
+	const { data, refetch, isLoading } = useGetDraftsQuery();
 
 	useEffect(() => {
 		refetch();
 	}, [location.pathname, refetch]);
+
+	if (isLoading) {
+		return (
+			<div className={styles.wrapperLoading}>
+					<Preloader />
+				</div>
+		);
+	}
 
 	// Если страничка главная - то он показывает список
 	if (currentPath === '/drafts') {

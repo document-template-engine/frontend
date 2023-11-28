@@ -1,7 +1,8 @@
 /* eslint-disable no-return-assign */
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import {useSelector} from 'react-redux';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 // import Input from '../../stories/Input/Input';
@@ -9,8 +10,8 @@ import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../components/UI/AuthButton/Button';
 import InputForm from '../../components/UI/AuthInputForm/InputForm';
-import { useRegisterMutation } from '../../store/auth-api/auth.api';
-import { useActions } from '../../hooks/useActions';
+import {useRegisterMutation} from '../../store/auth-api/auth.api';
+import {useActions} from '../../hooks/useActions';
 import ErrorPopup from '../../components/UI/ErrorPopup/ErrorPopup';
 
 export default function LogupPage() {
@@ -31,7 +32,8 @@ export default function LogupPage() {
 	const [fetchRepos, { error, isLoading, data: repos }] = useRegisterMutation();
 
 	// сохраняем почту в actions
-	const { addEmail } = useActions();
+	const { setUser } = useActions();
+	const user = useSelector((state) => state.user);
 
 	const onSubmit = (data) => {
 		fetchRepos(data);
@@ -50,7 +52,9 @@ export default function LogupPage() {
 	useEffect(() => {
 		if (repos) {
 			navigate('/check-account');
-			addEmail(repos.email);
+			// navigate('/templates');
+			// addEmail(repos.email);
+			setUser({ ...user, email: repos.email });
 		}
 		if (error) {
 			const keys = error.data
@@ -59,7 +63,7 @@ export default function LogupPage() {
 
 			setErrMsg(keys);
 		}
-	}, [repos, error, navigate, addEmail]);
+	}, [repos, error]);
 
 	const handleClose = () => {
 		setVisible(false);
