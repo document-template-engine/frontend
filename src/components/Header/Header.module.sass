@@ -4,7 +4,7 @@
 
   100%
     transform: rotate(360deg)
-  
+
 .header
   position: fixed
   z-index: 1
@@ -20,7 +20,7 @@
   margin: 0 auto
   padding: 0 20px
   background-color: #fff
-  
+
   @media screen and (max-width: 1366px)
     min-height: 60px
     gap: 128px
@@ -79,12 +79,14 @@
   position: relative
   color: #BABABA
   outline: none
+
   &::placeholder
     color: #BABABA
 
   &:hover
     color: #7A7A7A
     border: 2px solid #B4BBD7
+
   &:focus
     color: #262626
     border: 2px solid #550FDA
@@ -158,11 +160,13 @@ div.header__modal-container
   border-radius: 12px
   height: auto
   background: #fff
+
   &::before
     content: ''
     width: 0
     height: 0
-  @media (max-width:600px) 
+
+  @media (max-width: 600px)
     width: 284px
 
 .container
@@ -195,7 +199,7 @@ div.header__modal-container
   height: 1px
   background-color: #EAEAEA
 
-.preloader 
+.preloader
   width: 35px
   height: 28px
   background-image: url('../../images/preloader.svg')
