@@ -18,7 +18,6 @@ const FormInputsListItem = ({ group }) => {
 
 	function checkValidity(e) {
 		setIsValid(e.currentTarget.checkValidity());
-		console.log(e.currentTarget, e.currentTarget.checkValidity());
 	}
 
 	return (
