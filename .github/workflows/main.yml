@@ -41,6 +41,7 @@ jobs:
           password: ${{ secrets.PASSWORD}}
           source: "docker-compose.production.yml"
           target: "documents_templates"
+          strip_components: 1
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
