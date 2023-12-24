@@ -1,8 +1,8 @@
 /* eslint-disable no-return-assign */
-import {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import {useSelector} from 'react-redux';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import Modal from '../../components/Modal/Modal';
 import AuthForm from '../../components/AuthForm/AuthTemplate';
 // import Input from '../../stories/Input/Input';
@@ -10,8 +10,8 @@ import checkmark from '../../images/checkmark.svg';
 import styles from './index.module.scss';
 import Button from '../../components/UI/AuthButton/Button';
 import InputForm from '../../components/UI/AuthInputForm/InputForm';
-import {useRegisterMutation} from '../../store/auth-api/auth.api';
-import {useActions} from '../../hooks/useActions';
+import { useRegisterMutation } from '../../store/auth-api/auth.api';
+import { useActions } from '../../hooks/useActions';
 import ErrorPopup from '../../components/UI/ErrorPopup/ErrorPopup';
 
 export default function LogupPage() {

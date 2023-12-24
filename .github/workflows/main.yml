@@ -38,8 +38,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          password: ${{ secrets.PASSWORD}}
           source: 'docker-compose.production.yml'
           target: 'documents_templates'
       - name: Executing remote ssh commands to deploy
@@ -47,14 +46,12 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          password: ${{ secrets.PASSWORD}}
           script: |
             cd documents_templates
             sudo docker compose -f docker-compose.production.yml pull
             sudo docker compose -f docker-compose.production.yml down
             sudo docker compose -f docker-compose.production.yml up -d
-            sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
             sudo docker system prune -af
 
   send_message:

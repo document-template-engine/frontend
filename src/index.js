@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.module.scss';
 import { Provider } from 'react-redux';
-import App from './components/App/App';
+// @ts-ignore
+import App from './app/App';
+// @ts-ignore
 import { store } from './store';
 
+// @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>

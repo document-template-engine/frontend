@@ -1,15 +1,18 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, {useEffect, useState} from 'react';
-import {Outlet, useLocation} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import TemplateList from '../components/Templates/TemplateList';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../components/Templates/TemplateList.module.sass';
-import {useGetTemplatesQuery, useLazyGetRecentQuery,} from '../store/templates-api/templates.api';
+import {
+	useGetTemplatesQuery,
+	useLazyGetRecentQuery,
+} from '../store/templates-api/templates.api';
 import Preloader from '../components/UI/Preloader/Preloader';
 import errorImg from '../images/error.jpeg';
 import TemplateRecentDocument from '../components/Templates/TemplateRecentDocument';

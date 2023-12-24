@@ -20,8 +20,8 @@ const DraftsTemplates = () => {
 	if (isLoading) {
 		return (
 			<div className={styles.wrapperLoading}>
-					<Preloader />
-				</div>
+				<Preloader />
+			</div>
 		);
 	}
 
