@@ -1,5 +1,5 @@
 # build env
-FROM node:18-bullseye as build
+FROM node:19.5.0-alpine as build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
