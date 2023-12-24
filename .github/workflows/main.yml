@@ -39,20 +39,22 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD}}
-          source: 'docker-compose.production.yml'
-          target: 'documents_templates'
+          source: "docker-compose.production.yml"
+          target: "documents_templates"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD}}
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd documents_templates
             sudo docker compose -f docker-compose.production.yml pull
             sudo docker compose -f docker-compose.production.yml down
             sudo docker compose -f docker-compose.production.yml up -d
             sudo docker system prune -af
+
+
 
   send_message:
     runs-on: ubuntu-latest
