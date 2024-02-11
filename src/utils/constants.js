@@ -1,5 +1,5 @@
 export const modalRoot = document.getElementById('react-modals');
-export const BASE_URL = 'https://doky.pro/api/';
+export const BASE_URL = 'https://doky.pro/api/v2';
 
 // eslint-disable-next-line no-nested-ternary
 export const token = localStorage.getItem('token')
