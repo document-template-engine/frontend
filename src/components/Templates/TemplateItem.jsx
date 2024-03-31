@@ -58,27 +58,27 @@ const TemplateItem = ({
 
 	return (
 		// Это элемент списка шаблонов(квадратик с названием)
-		<li className={`${styles.item} ${isDeleted && styles.deleted}`}>
-			<div className={styles.imgWrapper}>
-				<img src={image || zaglushka} alt={title} className={styles.img} />
-				{/* eslint-disable-next-line */}
+		<Link to={link} className={styles.link}>
+			<li className={`${styles.item} ${isDeleted && styles.deleted}`}>
+				<div className={styles.imgWrapper}>
+					<img src={image || zaglushka} alt={title} className={styles.img} />
+					{/* eslint-disable-next-line */}
 
-				{user.id && isTemplate && (
-					<button
-						disabled={!isFavoriteButtonEnabled}
-						className={`${styles.favIcon} ${buttonStyle}`}
-						type="button"
-						onClick={handleFavoriteButtonClick}
-					/>
-				)}
-			</div>
-			<div className={styles.linkWrapper}>
-				<Link className={styles.link} to={link}>
+					{user.id && isTemplate && (
+						<button
+							disabled={!isFavoriteButtonEnabled}
+							className={`${styles.favIcon} ${buttonStyle}`}
+							type="button"
+							onClick={handleFavoriteButtonClick}
+						/>
+					)}
+				</div>
+				<div className={styles.linkWrapper}>
 					{description}
-				</Link>
-				{currentPath === `/drafts` && <CreationTime creationTime={dateOwn} />}
-			</div>
-		</li>
+					{currentPath === `/drafts` && <CreationTime creationTime={dateOwn} />}
+				</div>
+			</li>
+		</Link>
 	);
 };
 
