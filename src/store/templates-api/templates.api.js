@@ -34,6 +34,7 @@ export const templatesApi = createApi({
 				headers: preHeaders(),
 			}),
 		}),
+
 		getTemplate: build.query({
 			query: (id) => ({
 				url: `templates/${id}/`,
